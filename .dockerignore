@@ -1,0 +1,15 @@
+.git
+.venv
+venv
+node_modules
+.next
+__pycache__
+results
+demos
+.env
+.env.local
+*.log
+.DS_Store
+CLAUDE.md
+TODOS.md
+docs

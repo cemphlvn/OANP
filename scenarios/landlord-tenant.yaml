@@ -1,0 +1,112 @@
+name: "Landlord-Tenant Lease Renewal Dispute"
+description: "Tenant wants to renew but disputes rent increase and maintenance. Classic multi-issue dispute with integrative potential."
+architecture: mediated
+
+parties:
+  - id: tenant
+    name: "Jordan (Tenant)"
+    role: tenant
+    interests:
+      - description: "Keep monthly housing costs affordable on current income"
+        type: need
+        priority: 0.9
+        related_issues: [rent_adjustment]
+      - description: "Stability — avoid the stress and cost of moving"
+        type: need
+        priority: 0.8
+        related_issues: [lease_duration]
+      - description: "Have a pet (emotional support dog)"
+        type: desire
+        priority: 0.7
+        related_issues: [pet_policy]
+      - description: "Landlord takes responsibility for appliance and plumbing repairs"
+        type: concern
+        priority: 0.6
+        related_issues: [maintenance_responsibility]
+      - description: "Fear of arbitrary rent hikes in future years"
+        type: fear
+        priority: 0.5
+        related_issues: [rent_adjustment, lease_duration]
+    batna:
+      description: "Move to a comparable apartment 20 min further from work at $1,650/mo"
+      utility: 0.35
+      confidence: 0.6
+      components:
+        rent_adjustment: "0"
+        lease_duration: "12_months"
+        pet_policy: "small_pets"
+
+  - id: landlord
+    name: "Pat (Landlord)"
+    role: landlord
+    interests:
+      - description: "Maximize rental income to cover increased property taxes and insurance"
+        type: need
+        priority: 0.9
+        related_issues: [rent_adjustment]
+      - description: "Long-term reliable tenant to avoid vacancy costs"
+        type: desire
+        priority: 0.8
+        related_issues: [lease_duration]
+      - description: "Minimize property damage risk"
+        type: concern
+        priority: 0.6
+        related_issues: [pet_policy, maintenance_responsibility]
+      - description: "Avoid legal disputes or tenant complaints to housing authority"
+        type: fear
+        priority: 0.5
+        related_issues: [maintenance_responsibility]
+      - description: "Reduce maintenance burden — tenant handles minor repairs"
+        type: desire
+        priority: 0.4
+        related_issues: [maintenance_responsibility]
+    batna:
+      description: "List the unit on the market — expect 1 month vacancy, then new tenant at market rate $2,100"
+      utility: 0.5
+      confidence: 0.4
+      components:
+        rent_adjustment: "300"
+        lease_duration: "12_months"
+        pet_policy: "no_pets"
+
+issues:
+  - id: rent_adjustment
+    name: "Monthly Rent Adjustment"
+    description: "Change to monthly rent from current $1,800"
+    type: monetary
+    range: [-100, 400]
+    divisible: true
+  - id: lease_duration
+    name: "Lease Duration"
+    type: categorical
+    options: [6_months, 12_months, 18_months, 24_months]
+  - id: maintenance_responsibility
+    name: "Maintenance Responsibility"
+    type: categorical
+    options: [landlord_full, shared_split, tenant_minor_landlord_major]
+  - id: pet_policy
+    name: "Pet Policy"
+    type: categorical
+    options: [no_pets, small_pets_no_deposit, small_pets_with_deposit, any_pets_with_deposit]
+
+criteria:
+  - name: "Local Rent Comparables"
+    source: market_data
+    applies_to: [rent_adjustment]
+    reference_value: "Comparable units in the area rent for $1,900-$2,100/mo"
+  - name: "State Rent Increase Guidelines"
+    source: regulation
+    applies_to: [rent_adjustment]
+    reference_value: "State allows up to 5% annual increase without special justification"
+  - name: "Standard Lease Terms"
+    source: industry_norm
+    applies_to: [lease_duration]
+    reference_value: "12-month leases are standard; longer leases typically get rent discounts"
+  - name: "Fair Housing Pet Policy"
+    source: regulation
+    applies_to: [pet_policy]
+    reference_value: "Emotional support animals must be accommodated under Fair Housing Act"
+
+protocol:
+  max_rounds: 15
+  disclosure_policy: reciprocal

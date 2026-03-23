@@ -1,0 +1,145 @@
+name: "$50M Startup Acquisition — Founder vs Big Tech"
+description: "A solo founder built an AI dev tools company to $8M ARR. BigTech Corp wants to acquire for $50M. The founder cares about team, product vision, and not becoming a cog. BigTech wants the tech and the team but on their terms. Classic acqui-hire tension — can agents find a deal that preserves the founder's legacy while satisfying corporate M&A?"
+architecture: mediated
+
+parties:
+  - id: founder
+    name: "Maya Chen (Founder/CEO)"
+    role: "Solo founder of DevFlow AI, $8M ARR developer tools startup"
+    interests:
+      - description: "Fair valuation that reflects 3 years of bootstrapped growth — $8M ARR growing fast deserves premium pricing"
+        type: need
+        priority: 0.95
+        related_issues: [acquisition_price, earnout_structure]
+      - description: "Team gets good outcomes — 23 engineers trusted me, they need retention packages and growth paths"
+        type: need
+        priority: 0.9
+        related_issues: [team_retention]
+      - description: "Product keeps its identity for at least a transition period — don't kill the brand on day one"
+        type: desire
+        priority: 0.75
+        related_issues: [product_roadmap, role_autonomy]
+      - description: "Meaningful role post-acquisition, not a VP title with no real authority"
+        type: desire
+        priority: 0.7
+        related_issues: [role_autonomy]
+      - description: "Concern about earnout being structured so aggressively that it's basically indentured servitude"
+        type: concern
+        priority: 0.65
+        related_issues: [earnout_structure]
+    batna:
+      description: "Continue independent — have 12 months runway, but fundraising market is tough and two competitors just raised Series B"
+      utility: 0.5
+      confidence: 0.6
+      components:
+        acquisition_price: "0"
+        team_retention: "all_stay"
+        product_roadmap: "fully_independent"
+        earnout_structure: "none"
+        role_autonomy: "full_control"
+
+  - id: acquirer
+    name: "BigTech Corp (VP of M&A)"
+    role: "Fortune 500 tech company acquiring AI startups to build developer platform"
+    interests:
+      - description: "Integrate DevFlow's technology into our developer platform within 12 months"
+        type: need
+        priority: 0.95
+        related_issues: [product_roadmap, team_retention]
+      - description: "Retain the engineering team — they're the real asset, not just the code"
+        type: need
+        priority: 0.9
+        related_issues: [team_retention, earnout_structure]
+      - description: "Keep total deal cost within board-approved budget — ideally under $65M but can go to $75M with strong justification"
+        type: desire
+        priority: 0.8
+        related_issues: [acquisition_price]
+      - description: "Founder stays at least 2 years to ensure knowledge transfer and team stability"
+        type: desire
+        priority: 0.8
+        related_issues: [earnout_structure, role_autonomy]
+      - description: "Concern about founder going rogue — starting a competitor if they leave early"
+        type: concern
+        priority: 0.7
+        related_issues: [earnout_structure]
+    batna:
+      description: "Acquire competitor startup FlowDev ($5M ARR, weaker tech but willing team) for $30M, or build in-house over 18 months"
+      utility: 0.5
+      confidence: 0.6
+      components:
+        acquisition_price: "30000000"
+        team_retention: "partial"
+        product_roadmap: "full_integration"
+        earnout_structure: "standard_4yr"
+        role_autonomy: "standard_vp"
+
+issues:
+  - id: acquisition_price
+    name: "Acquisition Price"
+    description: "Total deal value including cash and equity"
+    type: monetary
+    range: [30000000, 80000000]
+
+  - id: team_retention
+    name: "Team Retention Package"
+    description: "How the 23-person engineering team is retained"
+    type: categorical
+    options:
+      - "standard_bigtech_offers"
+      - "matched_plus_20pct_retention_bonus"
+      - "custom_packages_founder_designs"
+      - "independent_unit_same_comp"
+
+  - id: product_roadmap
+    name: "Product Roadmap Control"
+    description: "What happens to DevFlow as a product"
+    type: categorical
+    options:
+      - "full_integration_rebrand"
+      - "independent_brand_2yr_then_integrate"
+      - "permanent_independent_subsidiary"
+      - "open_source_core_commercial_platform"
+
+  - id: earnout_structure
+    name: "Earnout & Vesting"
+    description: "Founder's compensation tied to continued involvement"
+    type: categorical
+    options:
+      - "all_cash_no_earnout"
+      - "70_cash_30_earnout_2yr"
+      - "50_cash_50_earnout_4yr"
+      - "40_cash_60_earnout_4yr_milestones"
+
+  - id: role_autonomy
+    name: "Founder's Role & Autonomy"
+    description: "What Maya does post-acquisition"
+    type: categorical
+    options:
+      - "standard_vp_engineering"
+      - "gm_independent_unit"
+      - "chief_architect_advisory"
+      - "cto_developer_platform"
+
+criteria:
+  - name: "Comparable AI startup acquisitions 2023-2024"
+    source: market_data
+    applies_to: [acquisition_price]
+    reference_value: "5-10x ARR for AI developer tools ($40M-$80M range)"
+
+  - name: "Retention bonus industry standard"
+    source: industry_norm
+    applies_to: [team_retention]
+    reference_value: "1-2 year retention bonuses at 25-50% of base salary"
+
+  - name: "Successful acquisition integration studies"
+    source: expert_opinion
+    applies_to: [product_roadmap, role_autonomy]
+    reference_value: "Acquired products that maintain independence for 18+ months have 3x better retention"
+
+mediator:
+  mode: facilitative
+  knowledge: caucus_only
+  intervention: every_round
+
+protocol:
+  max_rounds: 18

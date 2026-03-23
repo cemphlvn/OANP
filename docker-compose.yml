@@ -1,0 +1,29 @@
+services:
+  oanp:
+    build: .
+    container_name: oanp
+    env_file:
+      - .env
+    ports:
+      - "3000:3000"   # Frontend
+      - "8123:8123"   # Backend API + WebSocket
+    restart: unless-stopped
+    volumes:
+      - ./results:/app/results
+      - ./scenarios:/app/scenarios
+
+  # Optional: Neo4j for knowledge graph memory
+  # Uncomment to enable Graphiti integration
+  # neo4j:
+  #   image: neo4j:5-community
+  #   container_name: oanp-neo4j
+  #   ports:
+  #     - "7474:7474"   # Browser
+  #     - "7687:7687"   # Bolt
+  #   environment:
+  #     NEO4J_AUTH: neo4j/password
+  #   volumes:
+  #     - neo4j_data:/data
+
+# volumes:
+#   neo4j_data:

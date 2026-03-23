@@ -1,0 +1,1709 @@
+{
+  "session_id": "neg_2a3b54284e12",
+  "scenario_name": "Acme Corp (Buyer) vs CloudPlatform Inc. (Vendor)",
+  "description": "2 parties, 5 issues, agreement",
+  "parties": [
+    {
+      "id": "buyer",
+      "name": "Acme Corp (Buyer)",
+      "role": "buyer"
+    },
+    {
+      "id": "vendor",
+      "name": "CloudPlatform Inc. (Vendor)",
+      "role": "vendor"
+    }
+  ],
+  "issues": [
+    {
+      "id": "annual_price",
+      "name": "Annual License Fee",
+      "description": "",
+      "issue_type": "monetary",
+      "options": [],
+      "range": [
+        150000.0,
+        250000.0
+      ],
+      "is_divisible": true
+    },
+    {
+      "id": "contract_duration",
+      "name": "Contract Duration",
+      "description": "",
+      "issue_type": "categorical",
+      "options": [
+        "1_year",
+        "2_years",
+        "3_years"
+      ],
+      "range": null,
+      "is_divisible": false
+    },
+    {
+      "id": "sla_uptime",
+      "name": "SLA Uptime Guarantee",
+      "description": "",
+      "issue_type": "categorical",
+      "options": [
+        "99.0",
+        "99.5",
+        "99.9",
+        "99.99"
+      ],
+      "range": null,
+      "is_divisible": false
+    },
+    {
+      "id": "payment_terms",
+      "name": "Payment Terms",
+      "description": "",
+      "issue_type": "categorical",
+      "options": [
+        "monthly",
+        "quarterly",
+        "annual_upfront",
+        "annual_net30"
+      ],
+      "range": null,
+      "is_divisible": false
+    },
+    {
+      "id": "data_ownership",
+      "name": "Data Ownership & Portability",
+      "description": "",
+      "issue_type": "categorical",
+      "options": [
+        "standard_license",
+        "full_ownership_with_export",
+        "full_ownership_with_api_access"
+      ],
+      "range": null,
+      "is_divisible": false
+    }
+  ],
+  "criteria": [
+    {
+      "id": "51fe79e2",
+      "name": "Market Rate for Enterprise SaaS",
+      "description": "",
+      "source": "market_data",
+      "applies_to": [
+        "annual_price"
+      ],
+      "reference_value": "$180k-$220k/yr for comparable enterprise platforms at this seat count"
+    },
+    {
+      "id": "7a5a4089",
+      "name": "Industry Standard SLA",
+      "description": "",
+      "source": "industry_norm",
+      "applies_to": [
+        "sla_uptime"
+      ],
+      "reference_value": "99.9% is enterprise standard; 99.99% commands premium pricing"
+    },
+    {
+      "id": "6a7f53b7",
+      "name": "Multi-Year Discount Norms",
+      "description": "",
+      "source": "industry_norm",
+      "applies_to": [
+        "annual_price",
+        "contract_duration"
+      ],
+      "reference_value": "3-year commits typically get 15-25% discount off list price"
+    },
+    {
+      "id": "874fd792",
+      "name": "GDPR/CCPA Data Requirements",
+      "description": "",
+      "source": "regulation",
+      "applies_to": [
+        "data_ownership"
+      ],
+      "reference_value": "Buyer must be able to export/delete data on request under GDPR"
+    }
+  ],
+  "outcome": "agreement",
+  "agreement": {
+    "id": "04375f68",
+    "issue_values": {
+      "Annual License Fee": "199375.0",
+      "Contract Duration": "3_years",
+      "SLA Uptime Guarantee": "99.9",
+      "Payment Terms": "annual_net30",
+      "Data Ownership & Portability": "full_ownership_with_api_access"
+    },
+    "rationale": "I am formally accepting the agreement as proposed by the mediator and accepted by Acme Corp. This package satisfies our need for a long-term commitment and market-aligned pricing while accommodating the buyer's preference for net30 payment terms.",
+    "pareto_rank": null
+  },
+  "events": [
+    {
+      "type": "phase_change",
+      "data": {
+        "phase": "setup",
+        "round": 0,
+        "message": "Generating satisfaction anchors for utility scoring..."
+      },
+      "delay_ms": 0
+    },
+    {
+      "type": "setup_progress",
+      "data": {
+        "message": "Generating anchors for 2 parties (10 interests)...",
+        "parties": [
+          "buyer",
+          "vendor"
+        ],
+        "total_interests": 10,
+        "completed_interests": 0
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "setup_progress",
+      "data": {
+        "message": "Generating anchors for Acme Corp (Buyer) (5 interests)...",
+        "party_id": "buyer",
+        "party_name": "Acme Corp (Buyer)",
+        "interest_count": 5
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "setup_progress",
+      "data": {
+        "message": "Generating anchors for CloudPlatform Inc. (Vendor) (5 interests)...",
+        "party_id": "vendor",
+        "party_name": "CloudPlatform Inc. (Vendor)",
+        "interest_count": 5
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "buyer",
+        "party_name": "Acme Corp (Buyer)",
+        "interest_description": "Retain full ownership and portability of data",
+        "interest_type": "need",
+        "anchor_count": 3,
+        "completed_interests": 1,
+        "total_interests": 10
+      },
+      "delay_ms": 1542
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "buyer",
+        "party_name": "Acme Corp (Buyer)",
+        "interest_description": "Guarantee uptime for mission-critical workflows",
+        "interest_type": "need",
+        "anchor_count": 4,
+        "completed_interests": 2,
+        "total_interests": 10
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "vendor",
+        "party_name": "CloudPlatform Inc. (Vendor)",
+        "interest_description": "Acme as a reference customer for enterprise sales",
+        "interest_type": "desire",
+        "anchor_count": 4,
+        "completed_interests": 3,
+        "total_interests": 10
+      },
+      "delay_ms": 494
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "vendor",
+        "party_name": "CloudPlatform Inc. (Vendor)",
+        "interest_description": "Secure multi-year committed revenue for forecasting",
+        "interest_type": "need",
+        "anchor_count": 4,
+        "completed_interests": 4,
+        "total_interests": 10
+      },
+      "delay_ms": 503
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "vendor",
+        "party_name": "CloudPlatform Inc. (Vendor)",
+        "interest_description": "Maintain pricing integrity \u2014 avoid deep discounts that set precedent",
+        "interest_type": "concern",
+        "anchor_count": 5,
+        "completed_interests": 5,
+        "total_interests": 10
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "buyer",
+        "party_name": "Acme Corp (Buyer)",
+        "interest_description": "Fear of vendor lock-in making future migration costly",
+        "interest_type": "fear",
+        "anchor_count": 4,
+        "completed_interests": 6,
+        "total_interests": 10
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "vendor",
+        "party_name": "CloudPlatform Inc. (Vendor)",
+        "interest_description": "Limit SLA liability exposure",
+        "interest_type": "concern",
+        "anchor_count": 4,
+        "completed_interests": 7,
+        "total_interests": 10
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "buyer",
+        "party_name": "Acme Corp (Buyer)",
+        "interest_description": "Flexibility to scale up or down with business needs",
+        "interest_type": "desire",
+        "anchor_count": 4,
+        "completed_interests": 8,
+        "total_interests": 10
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "buyer",
+        "party_name": "Acme Corp (Buyer)",
+        "interest_description": "Minimize total cost of ownership over 3 years",
+        "interest_type": "need",
+        "anchor_count": 5,
+        "completed_interests": 9,
+        "total_interests": 10
+      },
+      "delay_ms": 504
+    },
+    {
+      "type": "anchors_generated",
+      "data": {
+        "party_id": "buyer",
+        "party_name": "Acme Corp (Buyer)",
+        "anchor_count": 20,
+        "interests": [
+          {
+            "description": "Minimize total cost of ownership over 3 years",
+            "interest_type": "need",
+            "priority": 0.9,
+            "related_issues": [
+              "annual_price",
+              "payment_terms"
+            ],
+            "anchors": [
+              {
+                "condition": "annual_price >= 240000 AND payment_terms = annual_upfront",
+                "score": 0.0,
+                "reason": "Highest possible price point coupled with the worst cash flow impact makes for an extremely poor financial outcome."
+              },
+              {
+                "condition": "annual_price >= 200000 AND payment_terms = annual_upfront",
+                "score": 0.35,
+                "reason": "Price is significantly above the BATNA of 180k, representing a clear loss in total cost of ownership."
+              },
+              {
+                "condition": "annual_price <= 180000 AND payment_terms = annual_net30",
+                "score": 0.65,
+                "reason": "Matches the BATNA price but improves cash flow terms, providing a fair and acceptable middle ground."
+              },
+              {
+                "condition": "annual_price <= 165000 AND payment_terms = quarterly",
+                "score": 0.85,
+                "reason": "Strong discount relative to BATNA combined with improved payment flexibility significantly reduces 3-year ownership costs."
+              },
+              {
+                "condition": "annual_price <= 150000 AND payment_terms = monthly",
+                "score": 1.0,
+                "reason": "The lowest possible annual fee combined with monthly payments maximizes capital preservation and achieves the best financial outcome."
+              }
+            ]
+          },
+          {
+            "description": "Guarantee uptime for mission-critical workflows",
+            "interest_type": "need",
+            "priority": 0.85,
+            "related_issues": [
+              "sla_uptime"
+            ],
+            "anchors": [
+              {
+                "condition": "sla_uptime = 99.0",
+                "score": 0.0,
+                "reason": "This is below the current market standard and the party's BATNA, resulting in unacceptable risk for mission-critical workflows."
+              },
+              {
+                "condition": "sla_uptime = 99.5",
+                "score": 0.4,
+                "reason": "This matches the party's BATNA, providing a baseline level of stability that is passable but offers no competitive advantage."
+              },
+              {
+                "condition": "sla_uptime = 99.9",
+                "score": 0.7,
+                "reason": "A significant improvement over the BATNA, providing substantially better reliability for critical operations."
+              },
+              {
+                "condition": "sla_uptime = 99.99",
+                "score": 1.0,
+                "reason": "The highest tier of availability, effectively eliminating downtime concerns for mission-critical workflows."
+              }
+            ]
+          },
+          {
+            "description": "Retain full ownership and portability of data",
+            "interest_type": "need",
+            "priority": 0.8,
+            "related_issues": [
+              "data_ownership"
+            ],
+            "anchors": [
+              {
+                "condition": "data_ownership = standard_license",
+                "score": 0.0,
+                "reason": "This is the baseline standard term which does not guarantee the control or portability required, effectively failing the interest."
+              },
+              {
+                "condition": "data_ownership = full_ownership_with_export",
+                "score": 0.6,
+                "reason": "Provides basic ownership and data portability via manual export, meeting the core requirement but lacking the efficiency of automated access."
+              },
+              {
+                "condition": "data_ownership = full_ownership_with_api_access",
+                "score": 1.0,
+                "reason": "Full ownership combined with API access ensures complete, real-time, and automated portability, representing the ideal outcome."
+              }
+            ]
+          },
+          {
+            "description": "Flexibility to scale up or down with business needs",
+            "interest_type": "desire",
+            "priority": 0.6,
+            "related_issues": [
+              "contract_duration",
+              "annual_price"
+            ],
+            "anchors": [
+              {
+                "condition": "contract_duration = 3_years AND annual_price >= 220000",
+                "score": 0.1,
+                "reason": "Long-term lock-in at a high price point severely restricts the ability to scale down or pivot if business needs change."
+              },
+              {
+                "condition": "contract_duration = 2_years AND annual_price >= 180000",
+                "score": 0.4,
+                "reason": "This is equivalent to the BATNA; it provides moderate flexibility but remains a multi-year commitment."
+              },
+              {
+                "condition": "contract_duration = 1_year AND annual_price <= 200000",
+                "score": 0.7,
+                "reason": "A one-year contract offers a reasonable window to re-evaluate business needs annually without significant financial risk."
+              },
+              {
+                "condition": "contract_duration = 1_year AND annual_price <= 160000",
+                "score": 1.0,
+                "reason": "The shortest possible term at a lower price point provides maximum agility to scale or terminate services as business requirements evolve."
+              }
+            ]
+          },
+          {
+            "description": "Fear of vendor lock-in making future migration costly",
+            "interest_type": "fear",
+            "priority": 0.7,
+            "related_issues": [
+              "data_ownership",
+              "contract_duration"
+            ],
+            "anchors": [
+              {
+                "condition": "data_ownership = standard_license AND contract_duration = 3_years",
+                "score": 0.0,
+                "reason": "This represents the highest risk of lock-in by combining the most restrictive data terms with the longest possible commitment period."
+              },
+              {
+                "condition": "data_ownership = standard_license AND contract_duration = 2_years",
+                "score": 0.35,
+                "reason": "This matches the BATNA, which is acceptable but still poses a significant risk of lock-in due to the standard license terms."
+              },
+              {
+                "condition": "data_ownership = full_ownership_with_export AND contract_duration = 2_years",
+                "score": 0.65,
+                "reason": "Gaining data export rights mitigates some migration costs, providing a fair middle ground even with a multi-year commitment."
+              },
+              {
+                "condition": "data_ownership = full_ownership_with_api_access AND contract_duration = 1_year",
+                "score": 1.0,
+                "reason": "This is the ideal outcome, providing full control over data via API and the flexibility of a short contract to pivot if needed."
+              }
+            ]
+          }
+        ]
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "vendor",
+        "party_name": "CloudPlatform Inc. (Vendor)",
+        "interest_description": "Keep data within platform ecosystem (reduce churn risk)",
+        "interest_type": "desire",
+        "anchor_count": 4,
+        "completed_interests": 10,
+        "total_interests": 10
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchors_generated",
+      "data": {
+        "party_id": "vendor",
+        "party_name": "CloudPlatform Inc. (Vendor)",
+        "anchor_count": 21,
+        "interests": [
+          {
+            "description": "Secure multi-year committed revenue for forecasting",
+            "interest_type": "need",
+            "priority": 0.9,
+            "related_issues": [
+              "contract_duration",
+              "payment_terms"
+            ],
+            "anchors": [
+              {
+                "condition": "contract_duration = 1_year AND payment_terms = monthly",
+                "score": 0.05,
+                "reason": "Shortest duration and worst payment frequency create extreme uncertainty and high churn risk."
+              },
+              {
+                "condition": "contract_duration = 1_year AND payment_terms = annual_net30",
+                "score": 0.35,
+                "reason": "One-year term is below the target, but annual payment provides some cash flow stability compared to monthly."
+              },
+              {
+                "condition": "contract_duration = 2_years AND payment_terms = annual_net30",
+                "score": 0.65,
+                "reason": "A two-year commitment provides a meaningful base for forecasting and is a fair middle-ground outcome."
+              },
+              {
+                "condition": "contract_duration = 3_years AND payment_terms = annual_upfront",
+                "score": 1.0,
+                "reason": "Maximum contract length with full upfront payment provides ideal revenue security and forecasting reliability."
+              }
+            ]
+          },
+          {
+            "description": "Maintain pricing integrity \u2014 avoid deep discounts that set precedent",
+            "interest_type": "concern",
+            "priority": 0.7,
+            "related_issues": [
+              "annual_price"
+            ],
+            "anchors": [
+              {
+                "condition": "annual_price < 180000",
+                "score": 0.0,
+                "reason": "Deep discounting below the standard threshold significantly undermines pricing integrity and sets a dangerous precedent."
+              },
+              {
+                "condition": "annual_price >= 180000 AND annual_price < 200000",
+                "score": 0.35,
+                "reason": "Moderate discount provided; still below the BATNA floor, but avoids the most aggressive price erosion."
+              },
+              {
+                "condition": "annual_price >= 200000 AND annual_price < 220000",
+                "score": 0.65,
+                "reason": "Price is close to the standard enterprise benchmark, minimizing the risk of setting a low market precedent."
+              },
+              {
+                "condition": "annual_price >= 220000 AND annual_price < 240000",
+                "score": 0.9,
+                "reason": "Matches or exceeds the BATNA pricing, ensuring full integrity and protecting the value proposition."
+              },
+              {
+                "condition": "annual_price >= 240000",
+                "score": 1.0,
+                "reason": "Premium pricing achieved, reinforcing the brand's value and discouraging future requests for deep discounts."
+              }
+            ]
+          },
+          {
+            "description": "Acme as a reference customer for enterprise sales",
+            "interest_type": "desire",
+            "priority": 0.6,
+            "related_issues": [
+              "annual_price",
+              "contract_duration"
+            ],
+            "anchors": [
+              {
+                "condition": "annual_price < 170000 AND contract_duration = 1_year",
+                "score": 0.1,
+                "reason": "Accepting a significant discount below market rate for a short term provides no strategic value as a reference customer."
+              },
+              {
+                "condition": "annual_price >= 170000 AND contract_duration = 1_year",
+                "score": 0.4,
+                "reason": "This matches our BATNA, but the short contract duration limits the long-term reference value of the customer."
+              },
+              {
+                "condition": "annual_price >= 200000 AND contract_duration = 2_years",
+                "score": 0.7,
+                "reason": "A fair price combined with a multi-year commitment makes them a stable and credible reference customer."
+              },
+              {
+                "condition": "annual_price >= 230000 AND contract_duration = 3_years",
+                "score": 1.0,
+                "reason": "Securing a premium price on a long-term contract provides maximum ROI and high-prestige reference status."
+              }
+            ]
+          },
+          {
+            "description": "Limit SLA liability exposure",
+            "interest_type": "concern",
+            "priority": 0.65,
+            "related_issues": [
+              "sla_uptime"
+            ],
+            "anchors": [
+              {
+                "condition": "sla_uptime = 99.99",
+                "score": 0.0,
+                "reason": "The highest uptime guarantee creates maximum financial liability exposure for the provider."
+              },
+              {
+                "condition": "sla_uptime = 99.9",
+                "score": 0.35,
+                "reason": "Very high reliability standard that still carries significant penalty risk compared to baseline."
+              },
+              {
+                "condition": "sla_uptime = 99.5",
+                "score": 0.65,
+                "reason": "A standard industry compromise that balances service quality with manageable liability."
+              },
+              {
+                "condition": "sla_uptime = 99.0",
+                "score": 1.0,
+                "reason": "Lowest uptime guarantee significantly reduces the frequency and severity of potential liability claims."
+              }
+            ]
+          },
+          {
+            "description": "Keep data within platform ecosystem (reduce churn risk)",
+            "interest_type": "desire",
+            "priority": 0.5,
+            "related_issues": [
+              "data_ownership"
+            ],
+            "anchors": [
+              {
+                "condition": "data_ownership = full_ownership_with_api_access",
+                "score": 0.05,
+                "reason": "Granting full ownership with API access creates the highest risk of seamless data migration to competitors, effectively facilitating churn."
+              },
+              {
+                "condition": "data_ownership = full_ownership_with_export",
+                "score": 0.35,
+                "reason": "Allowing bulk export capabilities still presents a significant risk for churn, though it is slightly less automated than full API access."
+              },
+              {
+                "condition": "data_ownership = standard_license",
+                "score": 0.75,
+                "reason": "The standard license keeps the customer within the platform ecosystem by limiting their ability to easily port large datasets out, protecting our position."
+              },
+              {
+                "condition": "data_ownership = standard_license AND contract_duration = 3_years",
+                "score": 1.0,
+                "reason": "The combination of standard data limitations and a long-term contract effectively eliminates short-term churn risk and ensures long-term ecosystem retention."
+              }
+            ]
+          }
+        ]
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "phase_change",
+      "data": {
+        "phase": "discovery",
+        "round": 0,
+        "message": "Entering interest discovery phase"
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "15a3876d",
+        "timestamp": "2026-03-23T21:03:17.237499",
+        "party_id": "buyer",
+        "move_type": "disclose_interest",
+        "package": null,
+        "argument": null,
+        "disclosed_interest": {
+          "id": "f1ad82b9",
+          "description": "Acme Corp prioritizes long-term cost predictability and highly reliable service to ensure our mission-critical workflows remain uninterrupted. We are also committed to maintaining full ownership and portability of our data to comply with evolving data protection regulations.",
+          "interest_type": "need",
+          "priority": 0.9,
+          "related_issues": [
+            "annual_price",
+            "sla_uptime",
+            "data_ownership"
+          ],
+          "disclosed": true,
+          "satisfaction_anchors": []
+        },
+        "references": [],
+        "reasoning": "Theory of Mind: Since this is the first interaction, I have no information on the vendor's specific interests. I assume they likely want a stable, long-term contract and a fair price. My strategy is to start by being transparent about my core needs (uptime, cost, data ownership) to set a constructive tone. By disclosing these, I signal that I am interested in a partnership based on value rather than just transactional price-squeezing, which invites them to do the same.",
+        "phase": "discovery",
+        "round": 1,
+        "turn": 0,
+        "party_name": "Acme Corp (Buyer)"
+      },
+      "delay_ms": 2227
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "bf5aab78",
+        "timestamp": "2026-03-23T21:03:19.226132",
+        "party_id": "vendor",
+        "move_type": "disclose_interest",
+        "package": null,
+        "argument": null,
+        "disclosed_interest": {
+          "id": "7fa4613f",
+          "description": "Secure long-term partnership with stable revenue predictability.",
+          "interest_type": "need",
+          "priority": 0.9,
+          "related_issues": [
+            "contract_duration",
+            "payment_terms"
+          ],
+          "disclosed": true,
+          "satisfaction_anchors": []
+        },
+        "references": [],
+        "reasoning": "Theory of Mind: Acme Corp is focused on cost predictability (long-term), service reliability (uptime), and compliance (data ownership). They are risk-averse regarding data lock-in. Strategic calculation: I need to signal that my interests (long-term commitment) align with theirs (predictability) to build trust. Disclosing my need for long-term revenue as a foundation for the relationship creates a platform for mutually beneficial trade-offs.",
+        "phase": "discovery",
+        "round": 1,
+        "turn": 1,
+        "party_name": "CloudPlatform Inc. (Vendor)"
+      },
+      "delay_ms": 1988
+    },
+    {
+      "type": "mediator_note",
+      "data": {
+        "id": "56a194ec",
+        "timestamp": "2026-03-23T21:03:20.909102",
+        "party_id": "mediator",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "6ad3ad12",
+          "claim": "Both parties are in the early stages of discovery. It is important to establish common ground before moving into specific terms. Both parties have expressed a desire to establish a long-term, stable relationship, which provides a foundation for the upcoming discussions on pricing and duration.",
+          "grounds": [
+            "Both Acme Corp and CloudPlatform Inc. have indicated that they are seeking a mutually beneficial, long-term partnership rather than a one-time transaction."
+          ],
+          "criterion_id": null,
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": null,
+        "phase": "discovery",
+        "round": 1,
+        "turn": 2,
+        "party_name": "Mediator"
+      },
+      "delay_ms": 1682
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "33ade797",
+        "timestamp": "2026-03-23T21:03:22.546599",
+        "party_id": "buyer",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "a8183af3",
+          "claim": "A three-year partnership is mutually beneficial for cost stability and service integration.",
+          "grounds": [
+            "Industry norms suggest that a 3-year commitment provides the revenue predictability you seek while allowing us to secure the necessary long-term cost efficiencies.",
+            "By aligning on a longer term, we can dedicate resources to ensuring our mission-critical uptime requirements are met consistently over time.",
+            "We believe a 3-year term creates a foundation for a stable, long-term relationship."
+          ],
+          "criterion_id": "industry_norm",
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: The vendor expressed a need for stable revenue predictability. I will use this to argue for a 3-year contract, which satisfies their need for stability while helping me secure better pricing and locking in service levels over a longer period. This aligns with my interest in cost predictability and uptime.",
+        "phase": "discovery",
+        "round": 2,
+        "turn": 0,
+        "party_name": "Acme Corp (Buyer)"
+      },
+      "delay_ms": 1637
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "ab386b57",
+        "timestamp": "2026-03-23T21:03:24.207891",
+        "party_id": "vendor",
+        "move_type": "disclose_interest",
+        "package": null,
+        "argument": null,
+        "disclosed_interest": {
+          "id": "9e9a3336",
+          "description": "We are concerned about managing our operational risk and liability regarding SLA uptime guarantees, as higher uptime requirements significantly impact our infrastructure costs.",
+          "interest_type": "concern",
+          "priority": 0.65,
+          "related_issues": [
+            "sla_uptime"
+          ],
+          "disclosed": true,
+          "satisfaction_anchors": []
+        },
+        "references": [],
+        "reasoning": "Theory of Mind: Acme Corp values cost predictability and data control, and they are pushing for a 3-year term. They likely fear vendor lock-in or service instability. My move is to acknowledge the importance of the long-term partnership they mentioned while introducing my concern regarding SLA liability. This balances cooperation with setting boundaries on technical requirements that could increase my costs, preparing the ground for a balanced package later.",
+        "phase": "discovery",
+        "round": 2,
+        "turn": 1,
+        "party_name": "CloudPlatform Inc. (Vendor)"
+      },
+      "delay_ms": 1661
+    },
+    {
+      "type": "mediator_note",
+      "data": {
+        "id": "b72f0a01",
+        "timestamp": "2026-03-23T21:03:25.978874",
+        "party_id": "mediator",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "c77bd235",
+          "claim": "Both parties are now aligned on the desire for a long-term partnership, with Acme Corp explicitly proposing a three-year contract. This is a significant point of convergence that shifts the focus from short-term transactional negotiation to a strategic relationship model. I am highlighting this to solidify the foundation before we delve into the specific trade-offs regarding pricing and service levels.",
+          "grounds": [
+            "Both parties have expressed a mutual interest in a stable, long-term partnership (3-year contract duration).",
+            "The commitment to a 3-year term creates an opportunity to discuss volume-based pricing or multi-year discounts, which aligns with industry standards."
+          ],
+          "criterion_id": null,
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": null,
+        "phase": "discovery",
+        "round": 2,
+        "turn": 2,
+        "party_name": "Mediator"
+      },
+      "delay_ms": 1771
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "9848799d",
+        "timestamp": "2026-03-23T21:03:28.258818",
+        "party_id": "buyer",
+        "move_type": "invoke_criterion",
+        "package": null,
+        "argument": {
+          "id": "9a263224",
+          "claim": "A 99.9% SLA is the industry standard for enterprise-grade platforms and balances operational risk with service quality.",
+          "grounds": [
+            "Industry norms establish 99.9% as the baseline for enterprise reliability.",
+            "Achieving 99.99% often requires significant infrastructure investment that may not be necessary for all workflows.",
+            "By aligning on 99.9%, we can mitigate the vendor's concerns regarding operational risk while ensuring Acme Corp's mission-critical needs are met."
+          ],
+          "criterion_id": "industry_norm",
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: CloudPlatform Inc. has explicitly expressed concern about the operational risk and infrastructure costs associated with high SLA guarantees. They likely want to avoid the high costs of supporting 99.99% uptime. My strategy is to validate their concern while nudging them toward the industry standard of 99.9%, which satisfies my own uptime needs without pushing them to the extreme. This approach is cooperative and uses objective criteria to frame the discussion as a shared problem-solving exercise rather than a conflict.",
+        "phase": "discovery",
+        "round": 3,
+        "turn": 0,
+        "party_name": "Acme Corp (Buyer)"
+      },
+      "delay_ms": 2279
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "ea1d8536",
+        "timestamp": "2026-03-23T21:03:31.040891",
+        "party_id": "vendor",
+        "move_type": "propose",
+        "package": {
+          "id": "44a47a49",
+          "issue_values": {
+            "Annual License Fee": "210000.0",
+            "Contract Duration": "3_years",
+            "SLA Uptime Guarantee": "99.9",
+            "Payment Terms": "annual_upfront",
+            "Data Ownership & Portability": "full_ownership_with_export"
+          },
+          "rationale": "This package aligns with the market rate for enterprise SaaS while providing the long-term stability both parties seek. By committing to a 3-year term with annual upfront payment, we can offer a competitive price within the market range, while meeting the 99.9% industry-standard SLA and ensuring data compliance via full_ownership_with_export.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: Acme cares about cost predictability (3-year term), reliability (99.9% SLA), and data control. They likely fear vendor lock-in and excessive costs. My strategy is to anchor a fair market price that reflects the 3-year commitment, while satisfying their needs for data portability and uptime. I am using the 'propose' move to bridge the gap between our expressed interests and the objective criteria provided, demonstrating willingness to cooperate while maintaining pricing integrity.",
+        "phase": "discovery",
+        "round": 3,
+        "turn": 1,
+        "party_name": "CloudPlatform Inc. (Vendor)"
+      },
+      "delay_ms": 2782
+    },
+    {
+      "type": "mediator_note",
+      "data": {
+        "id": "e1c4152e",
+        "timestamp": "2026-03-23T21:03:33.022155",
+        "party_id": "mediator",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "7789a120",
+          "claim": "Both parties are demonstrating a constructive shift toward alignment. They have reached a consensus on a 3-year term, and CloudPlatform Inc.'s proposal for a 99.9% SLA directly addresses the industry standard criterion previously invoked by Acme Corp. The negotiation has moved past initial posturing and is now focused on specific, market-aligned terms, which suggests the parties are capable of finalizing the agreement without further mediator intervention at this exact moment.",
+          "grounds": [
+            "Both parties are aligned on the 3-year contract duration and have converged on an industry-standard 99.9% SLA, creating a strong foundation for finalizing the remaining monetary and data terms.",
+            "There is a clear opportunity to balance the annual license fee against payment terms; for instance, Acme Corp could potentially secure a more favorable annual fee by opting for annual_upfront payments, which addresses the vendor's cash flow interests."
+          ],
+          "criterion_id": null,
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": null,
+        "phase": "discovery",
+        "round": 3,
+        "turn": 2,
+        "party_name": "Mediator"
+      },
+      "delay_ms": 1981
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "b0ef6b62",
+        "timestamp": "2026-03-23T21:03:35.627231",
+        "party_id": "buyer",
+        "move_type": "propose",
+        "package": {
+          "id": "bd9e70ae",
+          "issue_values": {
+            "Annual License Fee": "190000.0",
+            "Contract Duration": "3_years",
+            "SLA Uptime Guarantee": "99.9",
+            "Payment Terms": "annual_net30",
+            "Data Ownership & Portability": "full_ownership_with_api_access"
+          },
+          "rationale": "This package aligns with the $180k-$220k market rate while acknowledging the 3-year commitment. By moving to net30 terms and API access, we balance the vendor's need for stability with our requirement for operational flexibility and data autonomy.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: The vendor values revenue predictability (3-year term) but is sensitive to infrastructure costs associated with high SLAs. They have already agreed to the 99.9% SLA and the 3-year term. My move aims to capture value by requesting API access for data portability (which aligns with my need for control) and adjusting payment terms to net30 to ease cash flow, while offering a price point ($190k) that is within the market range but lower than their initial offer to reflect the long-term commitment discount norms.",
+        "phase": "discovery",
+        "round": 4,
+        "turn": 0,
+        "party_name": "Acme Corp (Buyer)"
+      },
+      "delay_ms": 2605
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "621c3cef",
+        "timestamp": "2026-03-23T21:03:38.093119",
+        "party_id": "vendor",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "53380a78",
+          "claim": "While we are aligned on a three-year term and a 99.9% SLA, the requested price of $190,000 combined with 'full_ownership_with_api_access' and 'annual_net30' terms is below our standard enterprise valuation for that level of data access.",
+          "grounds": [
+            "Industry norms suggest that full API-based portability and net-30 payment terms represent a premium service level compared to basic data export.",
+            "Our $210,000 proposal reflects the market rate for a comprehensive enterprise platform including high-level data accessibility.",
+            "We are open to discussing the price if we can secure the annual_upfront payment term, which helps us maintain the operational predictability we both value."
+          ],
+          "criterion_id": "market_data",
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: Acme is focused on cost efficiency and operational flexibility (net30, API access). They are using the 3-year commitment as leverage to drive down the price. My strategy is to highlight that their requested package includes premium features (API access, net30) that justify a price closer to my original offer, while signaling that I am willing to trade on price if they move on payment terms, which is a low-cost, high-benefit trade for me.",
+        "phase": "discovery",
+        "round": 4,
+        "turn": 1,
+        "party_name": "CloudPlatform Inc. (Vendor)"
+      },
+      "delay_ms": 2465
+    },
+    {
+      "type": "mediator_note",
+      "data": {
+        "id": "c0ec0203",
+        "timestamp": "2026-03-23T21:03:40.816467",
+        "party_id": "mediator",
+        "move_type": "propose",
+        "package": {
+          "id": "87f0626b",
+          "issue_values": {
+            "Annual License Fee": "200000.0",
+            "Contract Duration": "3_years",
+            "SLA Uptime Guarantee": "99.9",
+            "Payment Terms": "annual_upfront",
+            "Data Ownership & Portability": "full_ownership_with_api_access"
+          },
+          "rationale": "Both parties are aligned on the 3-year term and 99.9% SLA. This package bridges the $20,000 price gap by splitting the difference and utilizes the payment term as a trade-off: Acme receives the requested API access in exchange for moving from Net30 to annual upfront payments, which provides CloudPlatform with the cash flow stability they require to justify the higher level of data access.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": null,
+        "phase": "discovery",
+        "round": 4,
+        "turn": 2,
+        "party_name": "Mediator"
+      },
+      "delay_ms": 2723
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "781a9f65",
+        "timestamp": "2026-03-23T21:03:43.481859",
+        "party_id": "buyer",
+        "move_type": "propose",
+        "package": {
+          "id": "0ebee2f7",
+          "issue_values": {
+            "Annual License Fee": "195000.0",
+            "Contract Duration": "3_years",
+            "SLA Uptime Guarantee": "99.9",
+            "Payment Terms": "annual_net30",
+            "Data Ownership & Portability": "full_ownership_with_api_access"
+          },
+          "rationale": "I am shifting toward the mediator's suggested price to show flexibility, while retaining annual_net30 terms to manage cash flow. This reflects a fair market value for a 3-year commitment and acknowledges our shared interest in a stable, long-term partnership.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: CloudPlatform wants revenue predictability (3-year term) and to minimize operational risks (SLA). They are concerned about cash flow and pricing. My move: I am meeting them halfway on the price ($195k) to show I'm serious about closing, while sticking to net30 terms which are standard for enterprise agreements to ensure we aren't front-loading costs. This balances their desire for stability with my need for cost-efficiency.",
+        "phase": "discovery",
+        "round": 5,
+        "turn": 0,
+        "party_name": "Acme Corp (Buyer)"
+      },
+      "delay_ms": 2665
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "955818db",
+        "timestamp": "2026-03-23T21:03:46.251541",
+        "party_id": "vendor",
+        "move_type": "propose",
+        "package": {
+          "id": "79665b59",
+          "issue_values": {
+            "Annual License Fee": "200000.0",
+            "Contract Duration": "3_years",
+            "SLA Uptime Guarantee": "99.9",
+            "Payment Terms": "annual_upfront",
+            "Data Ownership & Portability": "full_ownership_with_api_access"
+          },
+          "rationale": "I am accepting the buyer's requested data portability level and meeting them near their price point. By maintaining annual_upfront payment terms, I secure the revenue predictability I require, which justifies the $5k variance from their last offer. This package aligns with the $180k-$220k market range.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: Acme cares deeply about data control (portability) and cost predictability. By offering the API-level access they want, I address their core desire for control. My fear is revenue volatility and payment delays. By holding firm on 'annual_upfront' in exchange for moving to $200k, I protect my need for cash flow and predictability while meeting them halfway on price to close the deal.",
+        "phase": "discovery",
+        "round": 5,
+        "turn": 1,
+        "party_name": "CloudPlatform Inc. (Vendor)"
+      },
+      "delay_ms": 2769
+    },
+    {
+      "type": "mediator_note",
+      "data": {
+        "id": "9d65c52a",
+        "timestamp": "2026-03-23T21:03:48.357541",
+        "party_id": "mediator",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "0e1b691e",
+          "claim": "The parties are very close to an agreement, with only minor differences remaining on the payment terms and a $5,000 gap in the annual license fee. Both sides have already agreed on the 3-year duration, 99.9% SLA, and the inclusion of API access for data portability. This indicates a high level of alignment and mutual trust.",
+          "grounds": [
+            "Both parties are in complete agreement on the most complex contractual pillars: 3-year duration, 99.9% SLA, and full data ownership with API access. The remaining variance is purely financial and structural.",
+            "There is a clear opportunity to bridge the $5,000 difference by trading the payment term preference. Acme Corp prefers annual_net30 for cash flow, while CloudPlatform Inc. prefers annual_upfront for revenue certainty. A compromise on the fee could be linked to the payment schedule."
+          ],
+          "criterion_id": null,
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": null,
+        "phase": "discovery",
+        "round": 5,
+        "turn": 2,
+        "party_name": "Mediator"
+      },
+      "delay_ms": 2105
+    },
+    {
+      "type": "phase_change",
+      "data": {
+        "phase": "generation",
+        "round": 5,
+        "message": "Entering option generation phase \u2014 agents propose packages"
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "89ed8cc3",
+        "timestamp": "2026-03-23T21:03:51.014799",
+        "party_id": "buyer",
+        "move_type": "meso",
+        "package": {
+          "id": "6de419dc",
+          "issue_values": {
+            "Annual License Fee": "197500.0",
+            "Contract Duration": "3_years",
+            "SLA Uptime Guarantee": "99.9",
+            "Payment Terms": "quarterly",
+            "Data Ownership & Portability": "full_ownership_with_api_access"
+          },
+          "rationale": "I am splitting the difference on the annual fee to move us to a final agreement. To address the vendor's need for revenue predictability while accommodating my cash flow requirements, I am proposing quarterly payments as a compromise between annual_upfront and annual_net30.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: The vendor is clearly motivated by revenue stability and predictability, which is why they insist on annual_upfront. However, they are also showing flexibility to close the deal, as evidenced by their concession on data ownership. My strategy is to meet them in the middle on the price ($197.5k) and offer a compromise on payment terms (quarterly) that provides them better cash flow than net30 while giving me more flexibility than upfront. This package respects their need for predictable revenue while satisfying my interest in cost management and payment flexibility.",
+        "phase": "generation",
+        "round": 6,
+        "turn": 0,
+        "party_name": "Acme Corp (Buyer)"
+      },
+      "delay_ms": 2656
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "906b7ecb",
+        "timestamp": "2026-03-23T21:03:52.748706",
+        "party_id": "vendor",
+        "move_type": "propose",
+        "package": {
+          "id": "0090b98a",
+          "issue_values": {
+            "Annual License Fee": "198750.0",
+            "Contract Duration": "3_years",
+            "SLA Uptime Guarantee": "99.9",
+            "Payment Terms": "annual_net30",
+            "Data Ownership & Portability": "full_ownership_with_api_access"
+          },
+          "rationale": "I am splitting the remaining price difference to reach $198,750 and moving to annual_net30 payment terms to accommodate Acme's cash flow needs, while keeping the agreement within the market-standard range.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: Acme is focused on cash flow (requesting net30/quarterly) and price sensitivity. By offering net30, I provide them the flexibility they need while securing a 3-year commitment. I am splitting the price difference to signal good faith, aiming to close the deal at a point that respects both our revenue stability and their budget constraints. My move balances their need for liquidity with my need for revenue predictability.",
+        "phase": "generation",
+        "round": 6,
+        "turn": 1,
+        "party_name": "CloudPlatform Inc. (Vendor)"
+      },
+      "delay_ms": 1733
+    },
+    {
+      "type": "mediator_note",
+      "data": {
+        "id": "acd9b460",
+        "timestamp": "2026-03-23T21:03:54.751185",
+        "party_id": "mediator",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "15f92768",
+          "claim": "The parties have narrowed the gap on the Annual License Fee to only $1,250 and are effectively choosing between payment structures. Both sides have demonstrated significant flexibility and are clearly focused on closing the deal, having reached consensus on all other major contract terms including duration, SLA, and data portability.",
+          "grounds": [
+            "Both parties are now aligned on a 3-year term, 99.9% SLA, and full ownership with API access. They are also within 1% of each other on the total annual license fee, confirming a shared interest in reaching a finalized contract.",
+            "The final decision rests on whether Acme Corp prefers the cash flow benefit of quarterly payments versus the slight price reduction CloudPlatform Inc. may be willing to offer for the predictability of annual net30 terms."
+          ],
+          "criterion_id": null,
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": null,
+        "phase": "generation",
+        "round": 6,
+        "turn": 2,
+        "party_name": "Mediator"
+      },
+      "delay_ms": 2002
+    },
+    {
+      "type": "validation_error",
+      "data": {
+        "party_id": "buyer",
+        "violations": [
+          "accept is not legal in generation phase. Legal moves: ['propose', 'meso', 'disclose_interest', 'argue', 'invoke_criterion']"
+        ]
+      },
+      "delay_ms": 4000
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "bf87ac7c",
+        "timestamp": "2026-03-23T21:03:57.277477",
+        "party_id": "buyer",
+        "move_type": "accept",
+        "package": {
+          "id": "08a68cad",
+          "issue_values": {
+            "Annual License Fee": "198750.0",
+            "Contract Duration": "3_years",
+            "SLA Uptime Guarantee": "99.9",
+            "Payment Terms": "annual_net30",
+            "Data Ownership & Portability": "full_ownership_with_api_access"
+          },
+          "rationale": "The vendor has moved to my preferred payment terms (annual_net30) while making a fair concession on the price, closing the gap to a negligible amount. Accepting this package aligns with my interests in cost predictability, data portability, and industry-standard uptime, while securing a stable long-term partnership.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: The vendor is clearly motivated to close the deal and values the long-term contract stability. They have been cooperative by meeting my preferred payment terms and splitting the difference on the fee. They likely fear losing the deal over a minor $1,250 difference. Strategic Calculation: The price of $198,750 is well within my budget and market range. The terms are now aligned with my core interests. Accepting this package demonstrates good faith, builds trust for the partnership, and concludes the negotiation successfully.",
+        "phase": "generation",
+        "round": 7,
+        "turn": 0,
+        "party_name": "Acme Corp (Buyer)"
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "validation_error",
+      "data": {
+        "party_id": "vendor",
+        "violations": [
+          "accept is not legal in generation phase. Legal moves: ['propose', 'meso', 'disclose_interest', 'argue', 'invoke_criterion']",
+          "Accepting a deal worse than BATNA \u2014 converting to REJECT"
+        ]
+      },
+      "delay_ms": 4000
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "9b57dbd9",
+        "timestamp": "2026-03-23T21:04:04.412391",
+        "party_id": "vendor",
+        "move_type": "reject",
+        "package": {
+          "id": "ac229753",
+          "issue_values": {
+            "Annual License Fee": "198750.0",
+            "Contract Duration": "3_years",
+            "SLA Uptime Guarantee": "99.9",
+            "Payment Terms": "annual_net30",
+            "Data Ownership & Portability": "full_ownership_with_api_access"
+          },
+          "rationale": "I am pleased to confirm our acceptance of these terms. This agreement represents a mutually beneficial partnership that aligns with enterprise market standards while providing the long-term stability and platform integration both parties value.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Rejected by validator: deal is worse than BATNA",
+        "phase": "generation",
+        "round": 7,
+        "turn": 1,
+        "party_name": "CloudPlatform Inc. (Vendor)"
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "mediator_note",
+      "data": {
+        "id": "0042eaa6",
+        "timestamp": "2026-03-23T21:04:08.423853",
+        "party_id": "mediator",
+        "move_type": "propose",
+        "package": {
+          "id": "ed8bfcf4",
+          "issue_values": {
+            "Annual License Fee": "198750.0",
+            "Contract Duration": "3_years",
+            "SLA Uptime Guarantee": "99.9",
+            "Payment Terms": "annual_upfront",
+            "Data Ownership & Portability": "full_ownership_with_api_access"
+          },
+          "rationale": "Both parties are in near-total agreement. By settling on the $198,750 fee already proposed, and utilizing an 'annual_upfront' payment term, we bridge the final gap between the buyer's preference for net30 and the vendor's cash flow requirements, finalizing the deal based on the consensus terms already reached.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": null,
+        "phase": "generation",
+        "round": 7,
+        "turn": 2,
+        "party_name": "Mediator"
+      },
+      "delay_ms": 4000
+    },
+    {
+      "type": "phase_change",
+      "data": {
+        "phase": "bargaining",
+        "round": 7,
+        "message": "Entering bargaining phase \u2014 proposals and counterproposals"
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "30c974f9",
+        "timestamp": "2026-03-23T21:04:10.263099",
+        "party_id": "buyer",
+        "move_type": "propose",
+        "package": {
+          "id": "6875635d",
+          "issue_values": {
+            "Annual License Fee": "199375.0",
+            "Contract Duration": "3_years",
+            "SLA Uptime Guarantee": "99.9",
+            "Payment Terms": "quarterly",
+            "Data Ownership & Portability": "full_ownership_with_api_access"
+          },
+          "rationale": "I am splitting the difference on the annual fee to reach $199,375 and proposing quarterly payments to balance the vendor's need for cash flow stability with my preference for better payment terms, ensuring we reach a final agreement.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "The vendor rejected the last package, likely due to the annual_net30 term impacting their cash flow predictability, which they prioritize. By moving the price slightly closer to their initial $200k target and switching to 'quarterly' payments, I address their concern for revenue stability while keeping the total cost acceptable. This compromise structure allows us to finalize the deal.",
+        "phase": "bargaining",
+        "round": 8,
+        "turn": 0,
+        "party_name": "Acme Corp (Buyer)"
+      },
+      "delay_ms": 1836
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "695c4abe",
+        "timestamp": "2026-03-23T21:04:13.033648",
+        "party_id": "vendor",
+        "move_type": "propose",
+        "package": {
+          "id": "2dc1b913",
+          "issue_values": {
+            "Annual License Fee": "199375.0",
+            "Contract Duration": "3_years",
+            "SLA Uptime Guarantee": "99.9",
+            "Payment Terms": "annual_upfront",
+            "Data Ownership & Portability": "full_ownership_with_api_access"
+          },
+          "rationale": "I am accepting the price of $199,375 proposed by Acme to show good faith and reach a final settlement. In return, I am requesting 'annual_upfront' payment terms, which is a standard preference for our revenue forecasting and helps us mitigate the risk of quarterly billing overhead while keeping the price at the buyer's suggested level.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: Acme is focused on final pricing and payment flexibility. They moved to $199,375 and quarterly payments. They clearly want to avoid the cash flow impact of annual_upfront payments. However, my priority is secure revenue for forecasting. By accepting their price, I am making a major concession to reach agreement, and I am asking for annual_upfront as a reasonable trade-off to ensure the deal's value remains stable for CloudPlatform.",
+        "phase": "bargaining",
+        "round": 8,
+        "turn": 1,
+        "party_name": "CloudPlatform Inc. (Vendor)"
+      },
+      "delay_ms": 2770
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "1c10a9c3",
+        "timestamp": "2026-03-23T21:04:17.772587",
+        "party_id": "buyer",
+        "move_type": "accept",
+        "package": {
+          "id": "6e1303ce",
+          "issue_values": {
+            "Annual License Fee": "199375.0",
+            "Contract Duration": "3_years",
+            "SLA Uptime Guarantee": "99.9",
+            "Payment Terms": "annual_upfront",
+            "Data Ownership & Portability": "full_ownership_with_api_access"
+          },
+          "rationale": "The vendor has met the price point I proposed, and while I prefer quarterly payments for cash flow, agreeing to annual_upfront is a reasonable concession to finalize this deal, which remains well within our market-rate expectations and secures all our technical requirements.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: The vendor is clearly motivated to close this deal at the $199,375 price point and is signaling that annual_upfront is their preferred payment term for that price. They have been cooperative and consistent in their concessions. Strategic calculation: The price is very close to my target, and I have achieved my core needs regarding SLA, 3-year duration, and data ownership. Accepting their move on payment terms allows us to conclude the negotiation efficiently and move forward with the partnership.",
+        "phase": "bargaining",
+        "round": 9,
+        "turn": 0,
+        "party_name": "Acme Corp (Buyer)"
+      },
+      "delay_ms": 4000
+    },
+    {
+      "type": "validation_error",
+      "data": {
+        "party_id": "vendor",
+        "violations": [
+          "Accepting a deal worse than BATNA \u2014 converting to REJECT"
+        ]
+      },
+      "delay_ms": 4000
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "7c43f9e8",
+        "timestamp": "2026-03-23T21:04:26.435138",
+        "party_id": "vendor",
+        "move_type": "reject",
+        "package": {
+          "id": "84ab4a6a",
+          "issue_values": {
+            "Annual License Fee": "199375.0",
+            "Contract Duration": "3_years",
+            "SLA Uptime Guarantee": "99.9",
+            "Payment Terms": "annual_upfront",
+            "Data Ownership & Portability": "full_ownership_with_api_access"
+          },
+          "rationale": "I am pleased to confirm our formal acceptance of these terms. This agreement represents a mutually beneficial outcome that secures our long-term partnership with Acme Corp at a fair market price while maintaining the operational stability of our platform.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Rejected by validator: deal is worse than BATNA",
+        "phase": "bargaining",
+        "round": 9,
+        "turn": 1,
+        "party_name": "CloudPlatform Inc. (Vendor)"
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "mediator_note",
+      "data": {
+        "id": "10579e53",
+        "timestamp": "2026-03-23T21:04:27.896560",
+        "party_id": "mediator",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "ba5616c3",
+          "claim": "Both parties have reached a consensus on the Annual License Fee of $199,375, as well as the 3-year duration, 99.9% SLA, and API access. The remaining friction point is strictly the payment term preference (annual upfront vs quarterly). Since both sides have shown willingness to move on price, focusing on the payment term structure is the final hurdle.",
+          "grounds": [
+            "Both parties have agreed on the price of $199,375 and all non-monetary terms. They are aligned on the total value of the contract.",
+            "The parties could explore a middle ground on payment terms, such as semi-annual payments, or consider if the annual upfront requirement is a non-negotiable financial constraint for the vendor or a cash-flow preference for the buyer."
+          ],
+          "criterion_id": null,
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": null,
+        "phase": "bargaining",
+        "round": 9,
+        "turn": 2,
+        "party_name": "Mediator"
+      },
+      "delay_ms": 1461
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "3759eff4",
+        "timestamp": "2026-03-23T21:04:30.688000",
+        "party_id": "buyer",
+        "move_type": "accept",
+        "package": {
+          "id": "cf41a640",
+          "issue_values": {
+            "Annual License Fee": "199375.0",
+            "Contract Duration": "3_years",
+            "SLA Uptime Guarantee": "99.9",
+            "Payment Terms": "annual_upfront",
+            "Data Ownership & Portability": "full_ownership_with_api_access"
+          },
+          "rationale": "We have reached a mutually beneficial agreement on all key terms. The price is within the market range, and the data ownership and SLA terms satisfy our core business requirements.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: The vendor clearly values the annual_upfront payment term as a sign of financial stability and commitment, which they prioritized over the specific payment cadence I requested. They have accepted my price point and all other technical requirements. Strategic Calculation: Since the vendor has formally accepted these terms and we have reached consensus on all issues, accepting the mediator's proposed package is the most efficient and cooperative way to close the deal. I am satisfied with the final outcome as it meets my primary interests in data ownership, uptime, and a fair market price.",
+        "phase": "bargaining",
+        "round": 10,
+        "turn": 0,
+        "party_name": "Acme Corp (Buyer)"
+      },
+      "delay_ms": 4000
+    },
+    {
+      "type": "validation_error",
+      "data": {
+        "party_id": "vendor",
+        "violations": [
+          "Accepting a deal worse than BATNA \u2014 converting to REJECT"
+        ]
+      },
+      "delay_ms": 4000
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "0b51811d",
+        "timestamp": "2026-03-23T21:04:39.655365",
+        "party_id": "vendor",
+        "move_type": "reject",
+        "package": {
+          "id": "faa2c0b1",
+          "issue_values": {
+            "Annual License Fee": "199375.0",
+            "Contract Duration": "3_years",
+            "SLA Uptime Guarantee": "99.9",
+            "Payment Terms": "annual_upfront",
+            "Data Ownership & Portability": "full_ownership_with_api_access"
+          },
+          "rationale": "We have reached a consensus that satisfies both parties' core interests, securing a multi-year commitment at a fair market rate while maintaining operational stability.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Rejected by validator: deal is worse than BATNA",
+        "phase": "bargaining",
+        "round": 10,
+        "turn": 1,
+        "party_name": "CloudPlatform Inc. (Vendor)"
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "mediator_note",
+      "data": {
+        "id": "7bbfb813",
+        "timestamp": "2026-03-23T21:04:42.214796",
+        "party_id": "mediator",
+        "move_type": "propose",
+        "package": {
+          "id": "87c29100",
+          "issue_values": {
+            "Annual License Fee": "199375.0",
+            "Contract Duration": "3_years",
+            "SLA Uptime Guarantee": "99.9",
+            "Payment Terms": "annual_net30",
+            "Data Ownership & Portability": "full_ownership_with_api_access"
+          },
+          "rationale": "Both parties have agreed on all terms except payment frequency. Acme Corp previously accepted annual upfront, but CloudPlatform continues to reject that specific term. Moving to 'annual_net30' serves as a middle ground that provides the security of an annual commitment while offering the Buyer a 30-day window to process payment, potentially resolving the final impasse.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": null,
+        "phase": "bargaining",
+        "round": 10,
+        "turn": 2,
+        "party_name": "Mediator"
+      },
+      "delay_ms": 2559
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "3c46e4c9",
+        "timestamp": "2026-03-23T21:04:44.776370",
+        "party_id": "buyer",
+        "move_type": "accept",
+        "package": {
+          "id": "081e9faf",
+          "issue_values": {
+            "Annual License Fee": "199375.0",
+            "Contract Duration": "3_years",
+            "SLA Uptime Guarantee": "99.9",
+            "Payment Terms": "annual_net30",
+            "Data Ownership & Portability": "full_ownership_with_api_access"
+          },
+          "rationale": "The vendor and I have reached a clear consensus on all terms, including the price and the payment terms of annual_net30. This package satisfies my interest in mission-critical uptime, data ownership, and a fair market price, while providing the vendor with a secure three-year commitment.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: The vendor clearly desires the security of a long-term commitment and a price point near $200k. They have previously indicated they are content with these terms. My move confirms the final alignment on annual_net30, which balances my cash flow needs with their payment requirements, successfully concluding the negotiation.",
+        "phase": "bargaining",
+        "round": 11,
+        "turn": 0,
+        "party_name": "Acme Corp (Buyer)"
+      },
+      "delay_ms": 4000
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "33f594b8",
+        "timestamp": "2026-03-23T21:04:50.220941",
+        "party_id": "vendor",
+        "move_type": "accept",
+        "package": {
+          "id": "04375f68",
+          "issue_values": {
+            "Annual License Fee": "199375.0",
+            "Contract Duration": "3_years",
+            "SLA Uptime Guarantee": "99.9",
+            "Payment Terms": "annual_net30",
+            "Data Ownership & Portability": "full_ownership_with_api_access"
+          },
+          "rationale": "I am formally accepting the agreement as proposed by the mediator and accepted by Acme Corp. This package satisfies our need for a long-term commitment and market-aligned pricing while accommodating the buyer's preference for net30 payment terms.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: Acme Corp has clearly communicated their preference for annual_net30 over annual_upfront, despite previously signaling flexibility. My previous rejections were likely interpreted as errors or miscommunications given the convergence on price. By accepting their latest proposal, I am closing the deal on terms that are well within our acceptable range and foster the reference relationship we desire.",
+        "phase": "bargaining",
+        "round": 11,
+        "turn": 1,
+        "party_name": "CloudPlatform Inc. (Vendor)"
+      },
+      "delay_ms": 4000
+    },
+    {
+      "type": "settlement",
+      "data": {
+        "agreement": {
+          "id": "04375f68",
+          "issue_values": {
+            "Annual License Fee": "199375.0",
+            "Contract Duration": "3_years",
+            "SLA Uptime Guarantee": "99.9",
+            "Payment Terms": "annual_net30",
+            "Data Ownership & Portability": "full_ownership_with_api_access"
+          },
+          "rationale": "I am formally accepting the agreement as proposed by the mediator and accepted by Acme Corp. This package satisfies our need for a long-term commitment and market-aligned pricing while accommodating the buyer's preference for net30 payment terms.",
+          "pareto_rank": null
+        },
+        "total_rounds": 11,
+        "total_moves": 31
+      },
+      "delay_ms": 1524
+    }
+  ],
+  "metrics": {
+    "outcome": "agreement",
+    "party_utilities": {
+      "buyer": 0.0,
+      "vendor": 0.0
+    },
+    "party_batna_surplus": {
+      "buyer": -0.55,
+      "vendor": -0.45
+    },
+    "social_welfare": 0.0,
+    "pareto_efficient": false,
+    "nash_product": 1e-06,
+    "integrative_index": 0.0,
+    "total_rounds": 11,
+    "total_moves": 31,
+    "move_breakdown": {
+      "disclose_interest": 3,
+      "argue": 8,
+      "invoke_criterion": 1,
+      "propose": 10,
+      "meso": 1,
+      "accept": 5,
+      "reject": 3
+    },
+    "disclosure_rate": 0.3,
+    "phases_visited": [
+      "discovery",
+      "generation",
+      "bargaining",
+      "settlement"
+    ],
+    "agreement": {
+      "id": "04375f68",
+      "issue_values": {
+        "Annual License Fee": "199375.0",
+        "Contract Duration": "3_years",
+        "SLA Uptime Guarantee": "99.9",
+        "Payment Terms": "annual_net30",
+        "Data Ownership & Portability": "full_ownership_with_api_access"
+      },
+      "rationale": "I am formally accepting the agreement as proposed by the mediator and accepted by Acme Corp. This package satisfies our need for a long-term commitment and market-aligned pricing while accommodating the buyer's preference for net30 payment terms.",
+      "pareto_rank": null
+    }
+  },
+  "critique": [
+    {
+      "severity": "medium",
+      "description": "Integrative index 0.00 < 1.0 \u2014 value may have been destroyed."
+    }
+  ]
+}

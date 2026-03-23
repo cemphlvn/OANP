@@ -1,0 +1,115 @@
+name: "B2B SaaS Contract Negotiation"
+description: "Enterprise buyer negotiating a 3-year SaaS platform contract. Multi-issue with volume discounts, SLA, and data terms. Demonstrates commercial use case."
+architecture: mediated
+
+parties:
+  - id: buyer
+    name: "Acme Corp (Buyer)"
+    role: buyer
+    interests:
+      - description: "Minimize total cost of ownership over 3 years"
+        type: need
+        priority: 0.9
+        related_issues: [annual_price, payment_terms]
+      - description: "Guarantee uptime for mission-critical workflows"
+        type: need
+        priority: 0.85
+        related_issues: [sla_uptime]
+      - description: "Retain full ownership and portability of data"
+        type: need
+        priority: 0.8
+        related_issues: [data_ownership]
+      - description: "Flexibility to scale up or down with business needs"
+        type: desire
+        priority: 0.6
+        related_issues: [contract_duration, annual_price]
+      - description: "Fear of vendor lock-in making future migration costly"
+        type: fear
+        priority: 0.7
+        related_issues: [data_ownership, contract_duration]
+    batna:
+      description: "Competitor platform at $180k/yr, 99.5% SLA, standard data terms"
+      utility: 0.55
+      confidence: 0.7
+      components:
+        annual_price: "180000"
+        sla_uptime: "99.5"
+        data_ownership: "standard_license"
+        contract_duration: "2_years"
+
+  - id: vendor
+    name: "CloudPlatform Inc. (Vendor)"
+    role: vendor
+    interests:
+      - description: "Secure multi-year committed revenue for forecasting"
+        type: need
+        priority: 0.9
+        related_issues: [contract_duration, payment_terms]
+      - description: "Maintain pricing integrity — avoid deep discounts that set precedent"
+        type: concern
+        priority: 0.7
+        related_issues: [annual_price]
+      - description: "Acme as a reference customer for enterprise sales"
+        type: desire
+        priority: 0.6
+        related_issues: [annual_price, contract_duration]
+      - description: "Limit SLA liability exposure"
+        type: concern
+        priority: 0.65
+        related_issues: [sla_uptime]
+      - description: "Keep data within platform ecosystem (reduce churn risk)"
+        type: desire
+        priority: 0.5
+        related_issues: [data_ownership]
+    batna:
+      description: "Pipeline has 3 other enterprise prospects at standard pricing"
+      utility: 0.45
+      confidence: 0.5
+      components:
+        annual_price: "220000"
+        contract_duration: "1_year"
+
+issues:
+  - id: annual_price
+    name: "Annual License Fee"
+    type: monetary
+    range: [150000, 250000]
+    divisible: true
+  - id: contract_duration
+    name: "Contract Duration"
+    type: categorical
+    options: [1_year, 2_years, 3_years]
+  - id: sla_uptime
+    name: "SLA Uptime Guarantee"
+    type: categorical
+    options: ["99.0", "99.5", "99.9", "99.99"]
+  - id: payment_terms
+    name: "Payment Terms"
+    type: categorical
+    options: [monthly, quarterly, annual_upfront, annual_net30]
+  - id: data_ownership
+    name: "Data Ownership & Portability"
+    type: categorical
+    options: [standard_license, full_ownership_with_export, full_ownership_with_api_access]
+
+criteria:
+  - name: "Market Rate for Enterprise SaaS"
+    source: market_data
+    applies_to: [annual_price]
+    reference_value: "$180k-$220k/yr for comparable enterprise platforms at this seat count"
+  - name: "Industry Standard SLA"
+    source: industry_norm
+    applies_to: [sla_uptime]
+    reference_value: "99.9% is enterprise standard; 99.99% commands premium pricing"
+  - name: "Multi-Year Discount Norms"
+    source: industry_norm
+    applies_to: [annual_price, contract_duration]
+    reference_value: "3-year commits typically get 15-25% discount off list price"
+  - name: "GDPR/CCPA Data Requirements"
+    source: regulation
+    applies_to: [data_ownership]
+    reference_value: "Buyer must be able to export/delete data on request under GDPR"
+
+protocol:
+  max_rounds: 15
+  disclosure_policy: gradual

@@ -1,0 +1,1427 @@
+{
+  "session_id": "neg_b22c94308e2c",
+  "scenario_name": "Maya Chen (Founder/CEO) vs BigTech Corp (VP of M&A)",
+  "description": "2 parties, 5 issues, agreement",
+  "parties": [
+    {
+      "id": "founder",
+      "name": "Maya Chen (Founder/CEO)",
+      "role": "Solo founder of DevFlow AI, $8M ARR developer tools startup"
+    },
+    {
+      "id": "acquirer",
+      "name": "BigTech Corp (VP of M&A)",
+      "role": "Fortune 500 tech company acquiring AI startups to build developer platform"
+    }
+  ],
+  "issues": [
+    {
+      "id": "acquisition_price",
+      "name": "Acquisition Price",
+      "description": "Total deal value including cash and equity",
+      "issue_type": "monetary",
+      "options": [],
+      "range": [
+        30000000.0,
+        80000000.0
+      ],
+      "is_divisible": false
+    },
+    {
+      "id": "team_retention",
+      "name": "Team Retention Package",
+      "description": "How the 23-person engineering team is retained",
+      "issue_type": "categorical",
+      "options": [
+        "standard_bigtech_offers",
+        "matched_plus_20pct_retention_bonus",
+        "custom_packages_founder_designs",
+        "independent_unit_same_comp"
+      ],
+      "range": null,
+      "is_divisible": false
+    },
+    {
+      "id": "product_roadmap",
+      "name": "Product Roadmap Control",
+      "description": "What happens to DevFlow as a product",
+      "issue_type": "categorical",
+      "options": [
+        "full_integration_rebrand",
+        "independent_brand_2yr_then_integrate",
+        "permanent_independent_subsidiary",
+        "open_source_core_commercial_platform"
+      ],
+      "range": null,
+      "is_divisible": false
+    },
+    {
+      "id": "earnout_structure",
+      "name": "Earnout & Vesting",
+      "description": "Founder's compensation tied to continued involvement",
+      "issue_type": "categorical",
+      "options": [
+        "all_cash_no_earnout",
+        "70_cash_30_earnout_2yr",
+        "50_cash_50_earnout_4yr",
+        "40_cash_60_earnout_4yr_milestones"
+      ],
+      "range": null,
+      "is_divisible": false
+    },
+    {
+      "id": "role_autonomy",
+      "name": "Founder's Role & Autonomy",
+      "description": "What Maya does post-acquisition",
+      "issue_type": "categorical",
+      "options": [
+        "standard_vp_engineering",
+        "gm_independent_unit",
+        "chief_architect_advisory",
+        "cto_developer_platform"
+      ],
+      "range": null,
+      "is_divisible": false
+    }
+  ],
+  "criteria": [
+    {
+      "id": "cc8459d1",
+      "name": "Comparable AI startup acquisitions 2023-2024",
+      "description": "",
+      "source": "market_data",
+      "applies_to": [
+        "acquisition_price"
+      ],
+      "reference_value": "5-10x ARR for AI developer tools ($40M-$80M range)"
+    },
+    {
+      "id": "0a63b6e0",
+      "name": "Retention bonus industry standard",
+      "description": "",
+      "source": "industry_norm",
+      "applies_to": [
+        "team_retention"
+      ],
+      "reference_value": "1-2 year retention bonuses at 25-50% of base salary"
+    },
+    {
+      "id": "658f9ed4",
+      "name": "Successful acquisition integration studies",
+      "description": "",
+      "source": "expert_opinion",
+      "applies_to": [
+        "product_roadmap",
+        "role_autonomy"
+      ],
+      "reference_value": "Acquired products that maintain independence for 18+ months have 3x better retention"
+    }
+  ],
+  "outcome": "agreement",
+  "agreement": {
+    "id": "b2c27885",
+    "issue_values": {
+      "acquisition_price": "71000000",
+      "team_retention_package": "custom_packages_founder_designs",
+      "product_roadmap_control": "independent_brand_2yr_then_integrate",
+      "earnout_vesting": "70_cash_30_earnout_2yr",
+      "founder_role_autonomy": "gm_independent_unit"
+    },
+    "rationale": "I accept the final terms as they align with our interests: securing the technology and team at a fair market price ($71M) while ensuring the founder remains incentivized through the 70/30 earnout and empowered as a GM to maintain the team's momentum.",
+    "pareto_rank": null
+  },
+  "events": [
+    {
+      "type": "phase_change",
+      "data": {
+        "phase": "setup",
+        "round": 0,
+        "message": "Generating satisfaction anchors for utility scoring..."
+      },
+      "delay_ms": 0
+    },
+    {
+      "type": "setup_progress",
+      "data": {
+        "message": "Generating anchors for 2 parties (10 interests)...",
+        "parties": [
+          "founder",
+          "acquirer"
+        ],
+        "total_interests": 10,
+        "completed_interests": 0
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "setup_progress",
+      "data": {
+        "message": "Generating anchors for Maya Chen (Founder/CEO) (5 interests)...",
+        "party_id": "founder",
+        "party_name": "Maya Chen (Founder/CEO)",
+        "interest_count": 5
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "setup_progress",
+      "data": {
+        "message": "Generating anchors for BigTech Corp (VP of M&A) (5 interests)...",
+        "party_id": "acquirer",
+        "party_name": "BigTech Corp (VP of M&A)",
+        "interest_count": 5
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "acquirer",
+        "party_name": "BigTech Corp (VP of M&A)",
+        "interest_description": "Keep total deal cost within board-approved budget \u2014 ideally under $65M but can go to $75M with strong justification",
+        "interest_type": "desire",
+        "anchor_count": 5,
+        "completed_interests": 1,
+        "total_interests": 10
+      },
+      "delay_ms": 2130
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "acquirer",
+        "party_name": "BigTech Corp (VP of M&A)",
+        "interest_description": "Concern about founder going rogue \u2014 starting a competitor if they leave early",
+        "interest_type": "concern",
+        "anchor_count": 4,
+        "completed_interests": 2,
+        "total_interests": 10
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "founder",
+        "party_name": "Maya Chen (Founder/CEO)",
+        "interest_description": "Concern about earnout being structured so aggressively that it's basically indentured servitude",
+        "interest_type": "concern",
+        "anchor_count": 4,
+        "completed_interests": 3,
+        "total_interests": 10
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "founder",
+        "party_name": "Maya Chen (Founder/CEO)",
+        "interest_description": "Meaningful role post-acquisition, not a VP title with no real authority",
+        "interest_type": "desire",
+        "anchor_count": 4,
+        "completed_interests": 4,
+        "total_interests": 10
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "acquirer",
+        "party_name": "BigTech Corp (VP of M&A)",
+        "interest_description": "Integrate DevFlow's technology into our developer platform within 12 months",
+        "interest_type": "need",
+        "anchor_count": 4,
+        "completed_interests": 5,
+        "total_interests": 10
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "founder",
+        "party_name": "Maya Chen (Founder/CEO)",
+        "interest_description": "Team gets good outcomes \u2014 23 engineers trusted me, they need retention packages and growth paths",
+        "interest_type": "need",
+        "anchor_count": 4,
+        "completed_interests": 6,
+        "total_interests": 10
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "acquirer",
+        "party_name": "BigTech Corp (VP of M&A)",
+        "interest_description": "Founder stays at least 2 years to ensure knowledge transfer and team stability",
+        "interest_type": "desire",
+        "anchor_count": 4,
+        "completed_interests": 7,
+        "total_interests": 10
+      },
+      "delay_ms": 207
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "founder",
+        "party_name": "Maya Chen (Founder/CEO)",
+        "interest_description": "Product keeps its identity for at least a transition period \u2014 don't kill the brand on day one",
+        "interest_type": "desire",
+        "anchor_count": 5,
+        "completed_interests": 8,
+        "total_interests": 10
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "acquirer",
+        "party_name": "BigTech Corp (VP of M&A)",
+        "interest_description": "Retain the engineering team \u2014 they're the real asset, not just the code",
+        "interest_type": "need",
+        "anchor_count": 4,
+        "completed_interests": 9,
+        "total_interests": 10
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchors_generated",
+      "data": {
+        "party_id": "acquirer",
+        "party_name": "BigTech Corp (VP of M&A)",
+        "anchor_count": 21,
+        "interests": [
+          {
+            "description": "Integrate DevFlow's technology into our developer platform within 12 months",
+            "interest_type": "need",
+            "priority": 0.95,
+            "related_issues": [
+              "product_roadmap",
+              "team_retention"
+            ],
+            "anchors": [
+              {
+                "condition": "product_roadmap = permanent_independent_subsidiary",
+                "score": 0.0,
+                "reason": "Permanent independence prevents the integration of DevFlow's technology, failing the core objective entirely."
+              },
+              {
+                "condition": "product_roadmap = independent_brand_2yr_then_integrate",
+                "score": 0.35,
+                "reason": "A 2-year delay significantly exceeds the 12-month goal, making it a poor outcome for the integration timeline."
+              },
+              {
+                "condition": "product_roadmap = open_source_core_commercial_platform AND team_retention = matched_plus_20pct_retention_bonus",
+                "score": 0.65,
+                "reason": "Offers a middle ground where technical alignment is prioritized, though the integration path is more complex than a direct rebrand."
+              },
+              {
+                "condition": "product_roadmap = full_integration_rebrand AND team_retention = custom_packages_founder_designs",
+                "score": 0.95,
+                "reason": "Direct rebrand allows for immediate integration within 12 months, and custom retention packages ensure the key talent required to execute the integration remains."
+              }
+            ]
+          },
+          {
+            "description": "Retain the engineering team \u2014 they're the real asset, not just the code",
+            "interest_type": "need",
+            "priority": 0.9,
+            "related_issues": [
+              "team_retention",
+              "earnout_structure"
+            ],
+            "anchors": [
+              {
+                "condition": "team_retention = standard_bigtech_offers",
+                "score": 0.1,
+                "reason": "Standard big-tech offers are insufficient to prevent attrition in a specialized team, leading to high risk of losing key talent."
+              },
+              {
+                "condition": "team_retention = matched_plus_20pct_retention_bonus AND earnout_structure = 50_cash_50_earnout_4yr",
+                "score": 0.4,
+                "reason": "Provides a baseline incentive but the 4-year earnout is too long to keep the team engaged and motivated through transition uncertainty."
+              },
+              {
+                "condition": "team_retention = custom_packages_founder_designs AND earnout_structure = 70_cash_30_earnout_2yr",
+                "score": 0.7,
+                "reason": "Founder-designed packages show respect for the team's culture, and a shorter 2-year earnout aligns incentives without over-extending the team's patience."
+              },
+              {
+                "condition": "team_retention = independent_unit_same_comp AND earnout_structure = all_cash_no_earnout",
+                "score": 1.0,
+                "reason": "Total autonomy and cash-out remove all friction for the team, providing the highest possible probability of full retention."
+              }
+            ]
+          },
+          {
+            "description": "Keep total deal cost within board-approved budget \u2014 ideally under $65M but can go to $75M with strong justification",
+            "interest_type": "desire",
+            "priority": 0.8,
+            "related_issues": [
+              "acquisition_price"
+            ],
+            "anchors": [
+              {
+                "condition": "acquisition_price >= 75000000",
+                "score": 0.0,
+                "reason": "Exceeds the maximum threshold approved by the board, representing a failure of fiscal discipline."
+              },
+              {
+                "condition": "acquisition_price >= 70000000 AND acquisition_price < 75000000",
+                "score": 0.35,
+                "reason": "Pushes the limit of the budget and requires significant justification, leaving little room for error."
+              },
+              {
+                "condition": "acquisition_price >= 65000000 AND acquisition_price < 70000000",
+                "score": 0.65,
+                "reason": "Within the acceptable range between the ideal budget and the absolute maximum."
+              },
+              {
+                "condition": "acquisition_price >= 55000000 AND acquisition_price < 65000000",
+                "score": 0.85,
+                "reason": "Comfortably within the board-approved budget, providing a strong financial outcome."
+              },
+              {
+                "condition": "acquisition_price <= 50000000",
+                "score": 1.0,
+                "reason": "Excellent outcome significantly below the $65M target, providing high value for the investment."
+              }
+            ]
+          },
+          {
+            "description": "Founder stays at least 2 years to ensure knowledge transfer and team stability",
+            "interest_type": "desire",
+            "priority": 0.8,
+            "related_issues": [
+              "earnout_structure",
+              "role_autonomy"
+            ],
+            "anchors": [
+              {
+                "condition": "earnout_structure = all_cash_no_earnout OR role_autonomy = standard_vp_engineering",
+                "score": 0.0,
+                "reason": "Without an earnout or specific autonomy, there is no incentive or structure to keep the founder beyond the closing date, resulting in zero assurance of stability."
+              },
+              {
+                "condition": "earnout_structure = 50_cash_50_earnout_4yr AND role_autonomy = standard_vp_engineering",
+                "score": 0.35,
+                "reason": "While the 4-year earnout provides a financial tether, the lack of autonomy in a standard VP role makes it highly likely the founder will leave or disengage early."
+              },
+              {
+                "condition": "earnout_structure = 70_cash_30_earnout_2yr AND role_autonomy = gm_independent_unit",
+                "score": 0.65,
+                "reason": "This setup aligns the founder's financial interest with the 2-year horizon and provides sufficient autonomy to keep them motivated to lead their team."
+              },
+              {
+                "condition": "earnout_structure = 70_cash_30_earnout_2yr AND role_autonomy = cto_developer_platform",
+                "score": 0.95,
+                "reason": "This is the ideal outcome; the 2-year earnout strictly covers the required timeframe, and a high-level CTO role ensures the founder is deeply invested in the tech strategy."
+              }
+            ]
+          },
+          {
+            "description": "Concern about founder going rogue \u2014 starting a competitor if they leave early",
+            "interest_type": "concern",
+            "priority": 0.7,
+            "related_issues": [
+              "earnout_structure"
+            ],
+            "anchors": [
+              {
+                "condition": "earnout_structure = all_cash_no_earnout",
+                "score": 0.0,
+                "reason": "Total lack of earnout provides zero financial incentive for the founder to stay or remain aligned, creating the highest risk of rogue behavior."
+              },
+              {
+                "condition": "earnout_structure = 70_cash_30_earnout_2yr",
+                "score": 0.35,
+                "reason": "A short 2-year earnout is insufficient to prevent the founder from leaving to compete immediately after the payout period ends."
+              },
+              {
+                "condition": "earnout_structure = 50_cash_50_earnout_4yr",
+                "score": 0.65,
+                "reason": "A 4-year earnout aligns the founder's long-term financial success with the company's, significantly reducing the probability of them leaving to start a competitor."
+              },
+              {
+                "condition": "earnout_structure = 40_cash_60_earnout_4yr_milestones",
+                "score": 1.0,
+                "reason": "The highest earnout percentage spread over 4 years with milestone dependencies forces deep integration and makes starting a competitor economically irrational for the founder."
+              }
+            ]
+          }
+        ]
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "founder",
+        "party_name": "Maya Chen (Founder/CEO)",
+        "interest_description": "Fair valuation that reflects 3 years of bootstrapped growth \u2014 $8M ARR growing fast deserves premium pricing",
+        "interest_type": "need",
+        "anchor_count": 4,
+        "completed_interests": 10,
+        "total_interests": 10
+      },
+      "delay_ms": 892
+    },
+    {
+      "type": "anchors_generated",
+      "data": {
+        "party_id": "founder",
+        "party_name": "Maya Chen (Founder/CEO)",
+        "anchor_count": 21,
+        "interests": [
+          {
+            "description": "Fair valuation that reflects 3 years of bootstrapped growth \u2014 $8M ARR growing fast deserves premium pricing",
+            "interest_type": "need",
+            "priority": 0.95,
+            "related_issues": [
+              "acquisition_price",
+              "earnout_structure"
+            ],
+            "anchors": [
+              {
+                "condition": "acquisition_price < 35000000.0",
+                "score": 0.05,
+                "reason": "An acquisition price near the bottom of the range severely undervalues the $8M ARR and growth trajectory, failing to justify an exit over continuing independently."
+              },
+              {
+                "condition": "acquisition_price >= 35000000.0 AND acquisition_price < 50000000.0 AND earnout_structure = 50_cash_50_earnout_4yr",
+                "score": 0.35,
+                "reason": "This price is slightly better but heavily burdened by a 4-year earnout, which creates significant risk and fails to reflect the current value of the bootstrapped growth."
+              },
+              {
+                "condition": "acquisition_price >= 50000000.0 AND acquisition_price < 65000000.0 AND earnout_structure = 70_cash_30_earnout_2yr",
+                "score": 0.65,
+                "reason": "A mid-range valuation with a shorter, manageable earnout provides a fair exit that validates the bootstrapped success without excessive post-acquisition risk."
+              },
+              {
+                "condition": "acquisition_price >= 65000000.0 AND earnout_structure = all_cash_no_earnout",
+                "score": 0.95,
+                "reason": "Premium pricing at the high end of the range without any earnout requirements represents an excellent outcome that fully captures the value of the business."
+              }
+            ]
+          },
+          {
+            "description": "Team gets good outcomes \u2014 23 engineers trusted me, they need retention packages and growth paths",
+            "interest_type": "need",
+            "priority": 0.9,
+            "related_issues": [
+              "team_retention"
+            ],
+            "anchors": [
+              {
+                "condition": "team_retention = standard_bigtech_offers",
+                "score": 0.1,
+                "reason": "Standard offers do not provide the specific incentives needed to retain a specialized team, leading to high attrition and failure of the interest."
+              },
+              {
+                "condition": "team_retention = matched_plus_20pct_retention_bonus",
+                "score": 0.4,
+                "reason": "Provides a financial floor for retention, but lacks the structural growth paths or autonomy necessary for long-term team health."
+              },
+              {
+                "condition": "team_retention = custom_packages_founder_designs",
+                "score": 0.7,
+                "reason": "Allows the founder to tailor packages to individual team needs, significantly increasing the likelihood of high retention and morale."
+              },
+              {
+                "condition": "team_retention = independent_unit_same_comp AND role_autonomy = gm_independent_unit",
+                "score": 1.0,
+                "reason": "Preserves the team's culture and autonomy completely while keeping their compensation structures intact, representing the ideal outcome for the team."
+              }
+            ]
+          },
+          {
+            "description": "Product keeps its identity for at least a transition period \u2014 don't kill the brand on day one",
+            "interest_type": "desire",
+            "priority": 0.75,
+            "related_issues": [
+              "product_roadmap",
+              "role_autonomy"
+            ],
+            "anchors": [
+              {
+                "condition": "product_roadmap = full_integration_rebrand",
+                "score": 0.0,
+                "reason": "Immediate rebrand and integration destroys the product identity on day one, which is the worst possible outcome."
+              },
+              {
+                "condition": "product_roadmap = independent_brand_2yr_then_integrate AND role_autonomy = standard_vp_engineering",
+                "score": 0.35,
+                "reason": "Provides a short transition period, but limited autonomy makes it difficult to protect the brand identity effectively."
+              },
+              {
+                "condition": "product_roadmap = independent_brand_2yr_then_integrate AND role_autonomy = gm_independent_unit",
+                "score": 0.65,
+                "reason": "A decent compromise that allows for a 2-year runway for the brand and enough autonomy to maintain existing product standards."
+              },
+              {
+                "condition": "product_roadmap = permanent_independent_subsidiary AND role_autonomy = gm_independent_unit",
+                "score": 0.9,
+                "reason": "High satisfaction as the brand is preserved permanently and the founder maintains significant operational independence."
+              },
+              {
+                "condition": "product_roadmap = open_source_core_commercial_platform AND role_autonomy = cto_developer_platform",
+                "score": 1.0,
+                "reason": "The ideal outcome where the product identity is not only preserved but elevated as a core, independent platform."
+              }
+            ]
+          },
+          {
+            "description": "Meaningful role post-acquisition, not a VP title with no real authority",
+            "interest_type": "desire",
+            "priority": 0.7,
+            "related_issues": [
+              "role_autonomy"
+            ],
+            "anchors": [
+              {
+                "condition": "role_autonomy = standard_vp_engineering",
+                "score": 0.0,
+                "reason": "This is a symbolic title with no real authority, which is the specific scenario the party wants to avoid."
+              },
+              {
+                "condition": "role_autonomy = chief_architect_advisory",
+                "score": 0.35,
+                "reason": "Offers some technical influence but lacks operational authority and decision-making power over the team or product."
+              },
+              {
+                "condition": "role_autonomy = gm_independent_unit AND product_roadmap = independent_brand_2yr_then_integrate",
+                "score": 0.65,
+                "reason": "Provides meaningful operational control and team leadership for a defined period, which is a fair compromise."
+              },
+              {
+                "condition": "role_autonomy = cto_developer_platform AND product_roadmap = permanent_independent_subsidiary",
+                "score": 1.0,
+                "reason": "Matches the party's desire for high-level authority and long-term control over the product direction."
+              }
+            ]
+          },
+          {
+            "description": "Concern about earnout being structured so aggressively that it's basically indentured servitude",
+            "interest_type": "concern",
+            "priority": 0.65,
+            "related_issues": [
+              "earnout_structure"
+            ],
+            "anchors": [
+              {
+                "condition": "earnout_structure = 40_cash_60_earnout_4yr_milestones",
+                "score": 0.0,
+                "reason": "This structure represents the highest risk and longest duration, directly mirroring the 'indentured servitude' concern."
+              },
+              {
+                "condition": "earnout_structure = 50_cash_50_earnout_4yr",
+                "score": 0.35,
+                "reason": "A 4-year commitment is still extremely restrictive, though slightly less aggressive than the milestone-based 60% earnout."
+              },
+              {
+                "condition": "earnout_structure = 70_cash_30_earnout_2yr",
+                "score": 0.65,
+                "reason": "A 2-year window is a standard market duration that allows for transition without locking the founder into long-term servitude."
+              },
+              {
+                "condition": "earnout_structure = all_cash_no_earnout",
+                "score": 1.0,
+                "reason": "Complete elimination of earnout structures removes the risk of predatory performance milestones or forced retention."
+              }
+            ]
+          }
+        ]
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "phase_change",
+      "data": {
+        "phase": "discovery",
+        "round": 0,
+        "message": "Entering interest discovery phase"
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "80200607",
+        "timestamp": "2026-03-23T21:05:01.663528",
+        "party_id": "founder",
+        "move_type": "disclose_interest",
+        "package": null,
+        "argument": null,
+        "disclosed_interest": {
+          "id": "278b209c",
+          "description": "I need to ensure that the acquisition valuation accurately reflects the $8M ARR and the rapid growth trajectory of DevFlow AI, aligning with current market premiums for AI developer tools.",
+          "interest_type": "need",
+          "priority": 0.95,
+          "related_issues": [
+            "Acquisition Price",
+            "Earnout & Vesting"
+          ],
+          "disclosed": true,
+          "satisfaction_anchors": []
+        },
+        "references": [],
+        "reasoning": "Theory of Mind: BigTech Corp is likely motivated by acquiring top-tier AI talent and technology to bolster their developer platform, fearing that a poor integration will lead to brain drain and product decay. Strategic Calculation: By leading with my valuation interest, I establish the financial baseline. I am choosing 'disclose_interest' to set the stage for a collaborative discussion on valuation before jumping into specific, potentially contentious, numbers. This signals transparency and invites them to share their own valuation criteria.",
+        "phase": "discovery",
+        "round": 1,
+        "turn": 0,
+        "party_name": "Maya Chen (Founder/CEO)"
+      },
+      "delay_ms": 1525
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "5c128a55",
+        "timestamp": "2026-03-23T21:05:03.719500",
+        "party_id": "acquirer",
+        "move_type": "disclose_interest",
+        "package": null,
+        "argument": null,
+        "disclosed_interest": {
+          "id": "62b39633",
+          "description": "I need to ensure the engineering team remains intact and highly motivated post-acquisition, as they are the primary value driver for our platform integration.",
+          "interest_type": "need",
+          "priority": 0.9,
+          "related_issues": [
+            "team_retention",
+            "earnout_structure"
+          ],
+          "disclosed": true,
+          "satisfaction_anchors": []
+        },
+        "references": [],
+        "reasoning": "Theory of Mind: Maya is focused on valuation, likely concerned that an acquisition might stifle the growth or culture that got her to $8M ARR. She is anchoring on market premiums. Strategic calculation: I need to validate her concern about valuation while pivoting to the importance of the team. By disclosing my need for team retention, I am setting the stage to trade a higher valuation for long-term team commitment, which aligns with my interest in a 2-year founder stay and product integration.",
+        "phase": "discovery",
+        "round": 1,
+        "turn": 1,
+        "party_name": "BigTech Corp (VP of M&A)"
+      },
+      "delay_ms": 2055
+    },
+    {
+      "type": "mediator_note",
+      "data": {
+        "id": "5803dbeb",
+        "timestamp": "2026-03-23T21:05:05.664396",
+        "party_id": "mediator",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "c4d85621",
+          "claim": "Both parties have begun to share their underlying interests regarding the acquisition, moving beyond initial positions. It is the appropriate time to clarify these shared goals before moving into specific terms.",
+          "grounds": [
+            "Both the Founder and BigTech Corp have expressed a shared interest in ensuring the long-term success and stability of the product and the talent currently working on it.",
+            "There is a potential trade-off between the upfront acquisition price and the structure of the earnout/retention package, which could bridge the gap between risk mitigation for the buyer and liquidity for the seller."
+          ],
+          "criterion_id": null,
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": null,
+        "phase": "discovery",
+        "round": 1,
+        "turn": 2,
+        "party_name": "Mediator"
+      },
+      "delay_ms": 1944
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "cfb38f7e",
+        "timestamp": "2026-03-23T21:05:08.607184",
+        "party_id": "founder",
+        "move_type": "invoke_criterion",
+        "package": null,
+        "argument": {
+          "id": "7aa0ec4a",
+          "claim": "The acquisition valuation should fall within the $60M-$80M range to reflect the current market premium for high-growth AI developer tools.",
+          "grounds": [
+            "Comparable acquisitions in the 2023-2024 period for AI developer tools are trading at 5-10x ARR multiples.",
+            "DevFlow AI has reached $8M ARR with a rapid growth trajectory, which places us at the higher end of these industry benchmarks.",
+            "Ensuring a fair valuation is critical for the long-term morale of the team that BigTech Corp identifies as their primary value driver."
+          ],
+          "criterion_id": "market_data",
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: BigTech Corp is focused on the engineering team as their primary value driver. They likely fear a 'brain drain' if the acquisition is perceived as a poor outcome for the team or if the product's identity is stripped away. My move links my need for a fair valuation (which they haven't resisted yet) to the quality of the team, which is their stated priority. By invoking market data, I establish a professional, objective baseline for the price, which helps avoid emotional conflict and positions me as a cooperative but informed partner.",
+        "phase": "discovery",
+        "round": 2,
+        "turn": 0,
+        "party_name": "Maya Chen (Founder/CEO)"
+      },
+      "delay_ms": 2942
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "1592662f",
+        "timestamp": "2026-03-23T21:05:12.149871",
+        "party_id": "acquirer",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "b3851e6f",
+          "claim": "The acquisition valuation should be carefully balanced with long-term integration success and team stability to ensure the sustainability of the product roadmap.",
+          "grounds": [
+            "While market multiples for AI developer tools are high, sustainable value for BigTech Corp depends heavily on the engineering team's commitment and seamless integration.",
+            "Industry studies indicate that maintaining a level of product autonomy for 18+ months significantly increases the likelihood of long-term retention of key talent.",
+            "A valuation at the higher end of the range requires a structure that protects the investment against the risks of integration friction or team turnover."
+          ],
+          "criterion_id": "expert_opinion",
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: Maya is clearly anchoring on a high valuation ($60M-$80M) based on her ARR. She likely fears that a quick integration will destroy the culture/value of her startup or that she will lose control. She is signaling she wants a premium, which is common for a founder. Strategic calculation: I need to acknowledge her valuation interest while steering the conversation toward structural components like retention and autonomy, which are my top priorities. By citing the expert opinion on independence, I validate her desire for autonomy (which also helps my retention goal) while preparing to frame the price as part of a larger, stability-focused deal.",
+        "phase": "discovery",
+        "round": 2,
+        "turn": 1,
+        "party_name": "BigTech Corp (VP of M&A)"
+      },
+      "delay_ms": 3542
+    },
+    {
+      "type": "mediator_note",
+      "data": {
+        "id": "d2cfc7b1",
+        "timestamp": "2026-03-23T21:05:13.653455",
+        "party_id": "mediator",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "67173c14",
+          "claim": "Both parties are focused on the long-term viability of the product and the talent behind it. Maya is advocating for a valuation that reflects the company's growth, while BigTech Corp is emphasizing that the deal structure must support team stability and integration success. Both sides clearly view the human capital and product roadmap as critical components for a successful acquisition, providing a foundation to discuss how specific valuation and retention terms can serve these shared goals.",
+          "grounds": [
+            "Both parties are aligned in their desire to ensure the long-term sustainability and success of the product roadmap and the retention of the existing talent pool post-acquisition.",
+            "There is a potential trade-off between the upfront acquisition price and the structure of the earnout or retention packages, which could bridge the gap between Maya's valuation expectations and BigTech's focus on integration stability."
+          ],
+          "criterion_id": null,
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": null,
+        "phase": "discovery",
+        "round": 2,
+        "turn": 2,
+        "party_name": "Mediator"
+      },
+      "delay_ms": 1503
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "29ce005e",
+        "timestamp": "2026-03-23T21:05:15.080185",
+        "party_id": "founder",
+        "move_type": "disclose_interest",
+        "package": null,
+        "argument": null,
+        "disclosed_interest": {
+          "id": "5da71748",
+          "description": "My top priority is the long-term stability and motivation of my 23-person engineering team, which is why I am seeking a retention structure that goes beyond standard corporate packages.",
+          "interest_type": "need",
+          "priority": 0.9,
+          "related_issues": [
+            "team_retention"
+          ],
+          "disclosed": true,
+          "satisfaction_anchors": []
+        },
+        "references": [],
+        "reasoning": "Theory of Mind: BigTech Corp is clearly prioritizing the engineering team as their primary value driver. By disclosing my need for a robust retention package, I align my interests with theirs, positioning the team's success as a shared goal rather than a point of friction. This builds trust and sets the stage for a collaborative solution that protects my team while satisfying their need for talent continuity.",
+        "phase": "discovery",
+        "round": 3,
+        "turn": 0,
+        "party_name": "Maya Chen (Founder/CEO)"
+      },
+      "delay_ms": 1426
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "ec36442d",
+        "timestamp": "2026-03-23T21:05:18.156406",
+        "party_id": "acquirer",
+        "move_type": "propose",
+        "package": {
+          "id": "3d40e916",
+          "issue_values": {
+            "acquisition_price": "65000000",
+            "team_retention_package": "matched_plus_20pct_retention_bonus",
+            "product_roadmap_control": "independent_brand_2yr_then_integrate",
+            "earnout_vesting": "70_cash_30_earnout_2yr",
+            "founder_role_autonomy": "gm_independent_unit"
+          },
+          "rationale": "This proposal balances the $65M valuation within market norms for an $8M ARR company while prioritizing team stability through a generous retention bonus and maintaining your autonomy as a GM of an independent unit for 2 years. This structure supports your need for team motivation and our need for successful integration.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: Maya is clearly focused on her team's well-being and her own autonomy. She fears that a standard acquisition will dissolve the culture and impact of her startup. By offering an 'independent unit' status for two years and a premium retention package, I address her core fears while securing our interest in team retention and product integration. The $65M price point is within our budget and aligns with market data, providing a fair middle ground to move the negotiation toward closure.",
+        "phase": "discovery",
+        "round": 3,
+        "turn": 1,
+        "party_name": "BigTech Corp (VP of M&A)"
+      },
+      "delay_ms": 3076
+    },
+    {
+      "type": "mediator_note",
+      "data": {
+        "id": "d9059d92",
+        "timestamp": "2026-03-23T21:05:20.512699",
+        "party_id": "mediator",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "32ff6f0b",
+          "claim": "Both parties have now put concrete figures and structural preferences on the table. BigTech Corp's proposal addresses Maya's valuation range and her desire for autonomy, while Maya's interest in team stability aligns with the retention mechanisms proposed by BigTech. The negotiation has moved from abstract interests to actionable terms, making this an excellent moment to highlight the consensus on the importance of maintaining independence and team cohesion.",
+          "grounds": [
+            "Both parties are in agreement that the product should maintain a degree of independence for at least two years and that the team's retention is a critical success factor for the acquisition.",
+            "There is a potential trade-off between the cash-up-front valuation and the structure of the earnout, as BigTech Corp seeks to balance price with integration risk."
+          ],
+          "criterion_id": null,
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": null,
+        "phase": "discovery",
+        "round": 3,
+        "turn": 2,
+        "party_name": "Mediator"
+      },
+      "delay_ms": 2356
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "802d4313",
+        "timestamp": "2026-03-23T21:05:23.483073",
+        "party_id": "founder",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "5e16e9a2",
+          "claim": "While the $65M valuation and GM role are a solid starting point, the current earnout structure and long-term roadmap integration present significant risks to the value BigTech is trying to capture.",
+          "grounds": [
+            "An earnout of 30% over 2 years, combined with a roadmap that mandates integration after 24 months, creates a 'cliff' effect that risks talent attrition and product degradation.",
+            "Industry studies indicate that products maintaining independence for 18+ months see 3x better retention; forcing integration at 24 months may prematurely stifle the innovation that makes DevFlow valuable.",
+            "To ensure the team stays motivated and the product continues to grow, we should look for a structure that prioritizes long-term alignment over short-term integration deadlines."
+          ],
+          "criterion_id": "expert_opinion",
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: BigTech wants to capture DevFlow's value without losing the engineering talent. They are afraid of overpaying for a shell of a company if the team leaves after the earnout. They proposed a 2-year integration because they want to capture synergies quickly. My strategy is to highlight that their current roadmap/earnout plan actually works against their goal of team retention. By citing the 'expert_opinion' criterion, I am positioning myself as a partner in protecting the value of their acquisition. I am not rejecting the proposal yet, but I am setting the stage to push for 'permanent_independent_subsidiary' or a longer, less aggressive earnout to ensure long-term success.",
+        "phase": "discovery",
+        "round": 4,
+        "turn": 0,
+        "party_name": "Maya Chen (Founder/CEO)"
+      },
+      "delay_ms": 2970
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "59d40d92",
+        "timestamp": "2026-03-23T21:05:26.760590",
+        "party_id": "acquirer",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "4d99dbcc",
+          "claim": "The proposed 70/30 earnout structure over 2 years is designed to balance immediate liquidity for the founder with shared risk during the critical 12-month product integration window, while ensuring the engineering team's stability.",
+          "grounds": [
+            "The 70% immediate cash component provides significant liquidity at a $65M valuation, which aligns with the upper end of the 5-10x ARR market valuation for similar AI developer tools.",
+            "The 30% earnout serves as a performance-linked incentive that aligns the founder's interests with the successful integration of DevFlow's technology into our platform within the first year.",
+            "Maintaining a 2-year horizon for the earnout is consistent with the industry preference for retaining key talent during the transition, rather than locking them into longer, less flexible 4-year structures."
+          ],
+          "criterion_id": "industry_norm",
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: Maya is concerned about the earnout period and structure, likely fearing loss of autonomy or that the earnout is too 'risky' if tied to BigTech's internal metrics. She wants more upside or faster liquidity. My strategy is to defend the 2-year window as a benefit (speed of integration) rather than a constraint, while emphasizing that the earnout protects the investment we are making in her team. By arguing the merit of this structure, I maintain warmth while holding the line on the 2-year timeline, which is crucial for my goal of 12-month integration.",
+        "phase": "discovery",
+        "round": 4,
+        "turn": 1,
+        "party_name": "BigTech Corp (VP of M&A)"
+      },
+      "delay_ms": 3277
+    },
+    {
+      "type": "mediator_note",
+      "data": {
+        "id": "615d8665",
+        "timestamp": "2026-03-23T21:05:28.910956",
+        "party_id": "mediator",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "1a52833b",
+          "claim": "The parties are currently deadlocked on the earnout structure, with Maya concerned about risk and BigTech concerned about integration alignment. Both parties are fixated on the 'how' of the deal rather than the underlying objective, which is to ensure the product remains competitive and the team stays incentivized during the transition.",
+          "grounds": [
+            "Both parties share an interest in product continuity and team retention, but they disagree on the mechanism (earnout vs. autonomy) to achieve it.",
+            "There is potential to trade off the earnout duration/percentage for more robust independent roadmap control or a different retention incentive structure."
+          ],
+          "criterion_id": null,
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": null,
+        "phase": "discovery",
+        "round": 4,
+        "turn": 2,
+        "party_name": "Mediator"
+      },
+      "delay_ms": 2150
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "6354fe37",
+        "timestamp": "2026-03-23T21:05:30.913662",
+        "party_id": "founder",
+        "move_type": "propose",
+        "package": {
+          "id": "777a62bb",
+          "issue_values": {
+            "acquisition_price": "75000000",
+            "team_retention_package": "custom_packages_founder_designs",
+            "product_roadmap_control": "independent_brand_2yr_then_integrate",
+            "earnout_vesting": "all_cash_no_earnout",
+            "founder_role_autonomy": "gm_independent_unit"
+          },
+          "rationale": "To bridge the gap, I am proposing a $75M valuation, which sits squarely in the 5-10x ARR market range for high-growth AI tools. By moving to an all-cash structure, we eliminate the misalignment of interests and aggressive earnout risks, allowing me to focus entirely on integration. I am also requesting the ability to design custom retention packages, which I will tie directly to the key performance indicators that matter most to BigTech, ensuring my team stays motivated while maintaining the talent density that makes DevFlow valuable.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: BigTech Corp cares most about the engineering team's stability and successful integration. Their fear is that the team will leave or the product will stagnate post-acquisition. They proposed an earnout to hedge their risk. Strategic calculation: I want to move away from the earnout, which feels like indentured servitude, while pushing the price toward the higher end of the market range. By offering 'custom_packages_founder_designs', I offer them a solution to their 'team retention' need that is more effective than a generic package, while simultaneously securing the autonomy to keep my team happy. I am invoking the market data criterion to justify the $75M valuation.",
+        "phase": "discovery",
+        "round": 5,
+        "turn": 0,
+        "party_name": "Maya Chen (Founder/CEO)"
+      },
+      "delay_ms": 2002
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "7366ee3f",
+        "timestamp": "2026-03-23T21:05:34.589935",
+        "party_id": "acquirer",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "826c19e5",
+          "claim": "An all-cash deal without an earnout fails to align our interests and ignores standard practices for high-growth tech acquisitions.",
+          "grounds": [
+            "An earnout is a standard mechanism in M&A to bridge valuation gaps and ensure continued commitment to the product roadmap post-acquisition.",
+            "Without an earnout, the acquiring party bears all the risk of integration and team attrition while the founder is fully liquidated.",
+            "Our proposed 70/30 structure provides significant immediate liquidity while maintaining the necessary alignment for the 2-year transition period.",
+            "We are open to discussing the specific milestones of the earnout to ensure they are achievable and fair, rather than removing the mechanism entirely."
+          ],
+          "criterion_id": "successful_acquisition_integration_studies",
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: Maya is prioritizing immediate liquidity and autonomy, likely fearing that an earnout ties her to a corporate structure she cannot control. However, her demand for $75M all-cash is significantly above my risk tolerance for a startup integration. Strategy: I must push back on the 'all-cash' demand by framing the earnout as a partnership tool for alignment, not a penalty. I will argue that objective data suggests that retention and integration success require long-term incentives. By keeping the earnout on the table but expressing flexibility on the 'how' (milestones), I aim to steer her toward a compromise that preserves my need for team retention and founder commitment without forcing an immediate rejection of the deal.",
+        "phase": "discovery",
+        "round": 5,
+        "turn": 1,
+        "party_name": "BigTech Corp (VP of M&A)"
+      },
+      "delay_ms": 3676
+    },
+    {
+      "type": "mediator_note",
+      "data": {
+        "id": "c5a3d5a3",
+        "timestamp": "2026-03-23T21:05:37.734427",
+        "party_id": "mediator",
+        "move_type": "propose",
+        "package": {
+          "id": "9bff8f96",
+          "issue_values": {
+            "acquisition_price": "70000000",
+            "team_retention_package": "custom_packages_founder_designs",
+            "product_roadmap_control": "independent_brand_2yr_then_integrate",
+            "earnout_vesting": "50_cash_50_earnout_4yr",
+            "founder_role_autonomy": "gm_independent_unit"
+          },
+          "rationale": "This package bridges the valuation gap by landing at a midpoint of $70M, while addressing BigTech's need for risk mitigation through a 4-year earnout and Maya's need for autonomy and custom retention design to keep her team intact.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": null,
+        "phase": "discovery",
+        "round": 5,
+        "turn": 2,
+        "party_name": "Mediator"
+      },
+      "delay_ms": 3144
+    },
+    {
+      "type": "phase_change",
+      "data": {
+        "phase": "generation",
+        "round": 5,
+        "message": "Entering option generation phase \u2014 agents propose packages"
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "60522206",
+        "timestamp": "2026-03-23T21:05:39.560237",
+        "party_id": "founder",
+        "move_type": "propose",
+        "package": {
+          "id": "b1320125",
+          "issue_values": {
+            "acquisition_price": "72000000",
+            "team_retention_package": "custom_packages_founder_designs",
+            "product_roadmap_control": "independent_brand_2yr_then_integrate",
+            "earnout_vesting": "70_cash_30_earnout_2yr",
+            "founder_role_autonomy": "gm_independent_unit"
+          },
+          "rationale": "I am shifting to a $72M valuation to reflect the premium growth of DevFlow AI, while moving to a 70/30 earnout over 2 years to align our interests as BigTech requested. This package maintains the custom team retention and GM autonomy I need, providing a balanced path forward.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: BigTech Corp is risk-averse regarding integration and wants to ensure alignment via earnouts. They fear buying a 'hollowed-out' company. I fear indentured servitude and losing team morale. By accepting the 70/30 structure they initially proposed, I signal cooperation and reduce their integration risk, while pushing the price toward the higher end of the market range ($72M) to account for our $8M ARR and growth. This move balances their interest in risk-sharing with my interest in a fair valuation and team autonomy.",
+        "phase": "generation",
+        "round": 6,
+        "turn": 0,
+        "party_name": "Maya Chen (Founder/CEO)"
+      },
+      "delay_ms": 1824
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "1c4b796a",
+        "timestamp": "2026-03-23T21:05:42.066588",
+        "party_id": "acquirer",
+        "move_type": "propose",
+        "package": {
+          "id": "969674d3",
+          "issue_values": {
+            "acquisition_price": "70000000",
+            "team_retention_package": "custom_packages_founder_designs",
+            "product_roadmap_control": "independent_brand_2yr_then_integrate",
+            "earnout_vesting": "70_cash_30_earnout_2yr",
+            "founder_role_autonomy": "gm_independent_unit"
+          },
+          "rationale": "I am proposing a $70M valuation, which is a fair mid-point between our positions and aligns with the 8.75x ARR multiple, well within the 5-10x market standard. By keeping the 70/30 earnout, we ensure founder alignment while providing significant upfront liquidity, and I am agreeing to the custom retention packages to support the team's stability, which is our mutual priority.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: Maya is clearly focused on maximizing valuation and autonomy. Her shift to a 70/30 earnout suggests she is willing to accept some risk for a higher price, but she is highly protective of her team, hence the persistence on 'custom_packages_founder_designs'. I will offer the $70M valuation to stay within my $75M stretch budget while securing the 2-year earnout that protects BigTech from 'going rogue' risks. This package addresses her need for autonomy and team control while satisfying my requirement for a structured, risk-mitigated acquisition.",
+        "phase": "generation",
+        "round": 6,
+        "turn": 1,
+        "party_name": "BigTech Corp (VP of M&A)"
+      },
+      "delay_ms": 2506
+    },
+    {
+      "type": "mediator_note",
+      "data": {
+        "id": "ed6428c2",
+        "timestamp": "2026-03-23T21:05:44.575945",
+        "party_id": "mediator",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "13a8029b",
+          "claim": "Both parties are extremely close, having converged on the $70M-$72M valuation range, the autonomy of the GM role, the custom retention package, and the two-year independent brand integration path. The only remaining gap is the earnout structure (30% vs 50% vs 0%). Because the parties are so close to a consensus, I want to highlight the significant progress made to encourage them to bridge the final gap on risk-sharing.",
+          "grounds": [
+            "Both parties have reached a strong consensus on the product roadmap, the retention strategy for the team, and the operational autonomy for the founder. They are essentially within a 2% margin of each other on valuation, indicating a high degree of mutual interest in closing the deal.",
+            "The final bridge involves trading off the percentage of the earnout against the total acquisition price. A slight adjustment to the upfront cash component could satisfy the founder's desire for liquidity while meeting the corporate requirement for risk-sharing."
+          ],
+          "criterion_id": null,
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": null,
+        "phase": "generation",
+        "round": 6,
+        "turn": 2,
+        "party_name": "Mediator"
+      },
+      "delay_ms": 2509
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "2196305a",
+        "timestamp": "2026-03-23T21:05:47.750992",
+        "party_id": "founder",
+        "move_type": "propose",
+        "package": {
+          "id": "07803cfd",
+          "issue_values": {
+            "acquisition_price": "71000000",
+            "team_retention_package": "custom_packages_founder_designs",
+            "product_roadmap_control": "independent_brand_2yr_then_integrate",
+            "earnout_vesting": "70_cash_30_earnout_2yr",
+            "founder_role_autonomy": "gm_independent_unit"
+          },
+          "rationale": "I am proposing a $71M valuation as a fair compromise to bridge our final $2M gap. This recognizes the high growth trajectory of DevFlow AI while meeting BigTech's fiscal constraints. By keeping the 70/30 earnout and the custom retention packages, we ensure alignment and stability for the engineering team, which is the cornerstone of this acquisition's success.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: BigTech Corp is risk-averse regarding the earnout and valuation, likely needing to justify the expense to their internal stakeholders. They value the team (hence the acceptance of custom retention) and the autonomy structure. They are close to a deal and likely want to avoid further back-and-forth on the valuation. Strategic calculation: A $71M price is a clear, reasonable middle ground that signals my willingness to close while holding firm on the valuation I deserve. It maintains the structure that satisfies our core interests.",
+        "phase": "generation",
+        "round": 7,
+        "turn": 0,
+        "party_name": "Maya Chen (Founder/CEO)"
+      },
+      "delay_ms": 3175
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "7ab6264d",
+        "timestamp": "2026-03-23T21:05:50.207578",
+        "party_id": "acquirer",
+        "move_type": "propose",
+        "package": {
+          "id": "7a6bd234",
+          "issue_values": {
+            "acquisition_price": "71000000",
+            "team_retention_package": "custom_packages_founder_designs",
+            "product_roadmap_control": "independent_brand_2yr_then_integrate",
+            "earnout_vesting": "70_cash_30_earnout_2yr",
+            "founder_role_autonomy": "gm_independent_unit"
+          },
+          "rationale": "We accept the $71M valuation as a gesture of good faith to conclude negotiations, as it sits well within our approved budget and aligns with the 5-10x ARR market range for high-growth AI assets. By accepting your proposed structure, we are demonstrating our commitment to the partnership and the autonomy of your team.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Maya has consistently moved toward compromise and has demonstrated a willingness to accept the 70/30 earnout structure. Her proposal of $71M is within our $75M limit. By accepting this, I secure the team retention and technology integration needs (my top priorities) while maintaining the GM role and autonomy she values. This is a mutually beneficial 'win' that avoids the cost of further negotiation delays.",
+        "phase": "generation",
+        "round": 7,
+        "turn": 1,
+        "party_name": "BigTech Corp (VP of M&A)"
+      },
+      "delay_ms": 2456
+    },
+    {
+      "type": "mediator_note",
+      "data": {
+        "id": "097f44df",
+        "timestamp": "2026-03-23T21:05:51.948846",
+        "party_id": "mediator",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "e6373b87",
+          "claim": "The parties have reached a full consensus on all key terms, including the acquisition price of $71M, the custom retention package, the product roadmap integration timeline, the 70/30 earnout structure, and the GM role autonomy. The negotiation has successfully concluded with both parties agreeing to identical terms.",
+          "grounds": [
+            "Both parties have aligned their interests perfectly, agreeing on every structural and financial component of the acquisition, demonstrating a mutual commitment to the deal's success and the future of the product."
+          ],
+          "criterion_id": null,
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": null,
+        "phase": "generation",
+        "round": 7,
+        "turn": 2,
+        "party_name": "Mediator"
+      },
+      "delay_ms": 1741
+    },
+    {
+      "type": "phase_change",
+      "data": {
+        "phase": "bargaining",
+        "round": 7,
+        "message": "Entering bargaining phase \u2014 proposals and counterproposals"
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "0ad12c1f",
+        "timestamp": "2026-03-23T21:05:53.895489",
+        "party_id": "founder",
+        "move_type": "accept",
+        "package": {
+          "id": "7a6bd234",
+          "issue_values": {
+            "acquisition_price": "71000000",
+            "team_retention_package": "custom_packages_founder_designs",
+            "product_roadmap_control": "independent_brand_2yr_then_integrate",
+            "earnout_vesting": "70_cash_30_earnout_2yr",
+            "founder_role_autonomy": "gm_independent_unit"
+          },
+          "rationale": "We accept the $71M valuation as a gesture of good faith to conclude negotiations, as it sits well within our approved budget and aligns with the 5-10x ARR market range for high-growth AI assets. By accepting your proposed structure, we are demonstrating our commitment to the partnership and the autonomy of your team.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "BigTech Corp has accepted the compromise of $71M and the associated terms (custom retention, 2-year independent brand transition, 70/30 earnout, GM autonomy). My theory of mind is that BigTech Corp fears losing the DevFlow AI engineering team and the product momentum, which is why they agreed to the custom retention package and the independent roadmap control. They have demonstrated a willingness to meet in the middle to close the deal. Accepting this proposal satisfies my core needs for a fair valuation, team retention, and product autonomy, while aligning with the market data we discussed. This is a mutually beneficial outcome that secures the future of the team and the startup's vision within a larger platform, meeting my aspiration level and principles of cooperation and mutual gain. I am signaling acceptance to finalize the agreement.",
+        "phase": "bargaining",
+        "round": 8,
+        "turn": 0,
+        "party_name": "Maya Chen (Founder/CEO)"
+      },
+      "delay_ms": 4000
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "f6016d89",
+        "timestamp": "2026-03-23T21:05:59.835164",
+        "party_id": "acquirer",
+        "move_type": "accept",
+        "package": {
+          "id": "b2c27885",
+          "issue_values": {
+            "acquisition_price": "71000000",
+            "team_retention_package": "custom_packages_founder_designs",
+            "product_roadmap_control": "independent_brand_2yr_then_integrate",
+            "earnout_vesting": "70_cash_30_earnout_2yr",
+            "founder_role_autonomy": "gm_independent_unit"
+          },
+          "rationale": "I accept the final terms as they align with our interests: securing the technology and team at a fair market price ($71M) while ensuring the founder remains incentivized through the 70/30 earnout and empowered as a GM to maintain the team's momentum.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: Maya has consistently signaled that she values the autonomy of her team and the fair valuation of her company. By accepting the $71M price point and the structure she proposed, I am validating her leadership and ensuring the stability of the acquisition. Strategic calculation: This deal sits within our budget ($75M limit), meets our integration timeline (2 years), and retains the critical talent we need. Acceptance is the logical conclusion to finalize the partnership.",
+        "phase": "bargaining",
+        "round": 8,
+        "turn": 1,
+        "party_name": "BigTech Corp (VP of M&A)"
+      },
+      "delay_ms": 4000
+    },
+    {
+      "type": "settlement",
+      "data": {
+        "agreement": {
+          "id": "b2c27885",
+          "issue_values": {
+            "acquisition_price": "71000000",
+            "team_retention_package": "custom_packages_founder_designs",
+            "product_roadmap_control": "independent_brand_2yr_then_integrate",
+            "earnout_vesting": "70_cash_30_earnout_2yr",
+            "founder_role_autonomy": "gm_independent_unit"
+          },
+          "rationale": "I accept the final terms as they align with our interests: securing the technology and team at a fair market price ($71M) while ensuring the founder remains incentivized through the 70/30 earnout and empowered as a GM to maintain the team's momentum.",
+          "pareto_rank": null
+        },
+        "total_rounds": 8,
+        "total_moves": 23
+      },
+      "delay_ms": 1110
+    }
+  ],
+  "metrics": {
+    "outcome": "agreement",
+    "party_utilities": {
+      "founder": 0.16835443037974682,
+      "acquirer": 0.13493975903614455
+    },
+    "party_batna_surplus": {
+      "founder": -0.33164556962025316,
+      "acquirer": -0.3650602409638555
+    },
+    "social_welfare": 0.30329418941589137,
+    "pareto_efficient": false,
+    "nash_product": 1e-06,
+    "integrative_index": 0.30329418941589137,
+    "total_rounds": 8,
+    "total_moves": 23,
+    "move_breakdown": {
+      "disclose_interest": 3,
+      "argue": 10,
+      "invoke_criterion": 1,
+      "propose": 7,
+      "accept": 2
+    },
+    "disclosure_rate": 0.3,
+    "phases_visited": [
+      "discovery",
+      "generation",
+      "bargaining",
+      "settlement"
+    ],
+    "agreement": {
+      "id": "b2c27885",
+      "issue_values": {
+        "acquisition_price": "71000000",
+        "team_retention_package": "custom_packages_founder_designs",
+        "product_roadmap_control": "independent_brand_2yr_then_integrate",
+        "earnout_vesting": "70_cash_30_earnout_2yr",
+        "founder_role_autonomy": "gm_independent_unit"
+      },
+      "rationale": "I accept the final terms as they align with our interests: securing the technology and team at a fair market price ($71M) while ensuring the founder remains incentivized through the 70/30 earnout and empowered as a GM to maintain the team's momentum.",
+      "pareto_rank": null
+    }
+  },
+  "critique": [
+    {
+      "severity": "low",
+      "description": "No multi-option (MESO) packages were generated."
+    },
+    {
+      "severity": "medium",
+      "description": "Integrative index 0.30 < 1.0 \u2014 value may have been destroyed."
+    }
+  ]
+}

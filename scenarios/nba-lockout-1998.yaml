@@ -1,0 +1,145 @@
+name: "1998 NBA Lockout — Owners vs Players"
+description: "Based on the real 1998-99 NBA lockout. Team owners want a salary cap to control costs. Players want free market wages. $800M in lost revenue, a shortened season, and the sport's reputation on the line. The real negotiation took 6 months. In the actual case, the players ultimately accepted a hard salary cap in exchange for guaranteed minimum salaries and revenue sharing. Can AI agents reach a similar deal — or find a better one?"
+architecture: mediated
+
+parties:
+  - id: owners
+    name: "NBA Owners (Commissioner's Office)"
+    role: "Representing 29 NBA team owners seeking cost control"
+    interests:
+      - description: "Implement a hard salary cap — 13 of 29 teams are currently losing money"
+        type: need
+        priority: 0.95
+        related_issues: [salary_cap_structure, revenue_sharing]
+      - description: "Control the escalation of max contracts — superstar salaries are consuming 55% of team revenue"
+        type: need
+        priority: 0.9
+        related_issues: [salary_cap_structure, max_contract_terms]
+      - description: "Maintain competitive balance — small market teams can't compete for free agents"
+        type: desire
+        priority: 0.75
+        related_issues: [revenue_sharing, salary_cap_structure]
+      - description: "End the lockout before losing the full season — every month costs $100M+ in collective revenue"
+        type: concern
+        priority: 0.8
+        related_issues: [salary_cap_structure, max_contract_terms]
+      - description: "Fear that if they cave, player costs will bankrupt multiple franchises within 5 years"
+        type: fear
+        priority: 0.7
+        related_issues: [salary_cap_structure]
+    batna:
+      description: "Cancel the entire 1998-99 season. Owners can absorb losses better than players who have no income. Use replacement players next season if needed. Estimated loss: $500M but owners have other business income."
+      utility: 0.35
+      confidence: 0.6
+      components:
+        salary_cap_structure: "owner_imposed_cap"
+        max_contract_terms: "owner_dictated"
+        revenue_sharing: "none"
+        minimum_salary: "none"
+        free_agency: "restricted"
+
+  - id: players
+    name: "NBA Players Association (NBPA)"
+    role: "Union representing 400+ professional basketball players"
+    interests:
+      - description: "Preserve free agency rights — players should be compensated at market value for their talent"
+        type: need
+        priority: 0.95
+        related_issues: [free_agency, max_contract_terms]
+      - description: "Fair share of league revenue — players generate the product fans pay to see"
+        type: need
+        priority: 0.9
+        related_issues: [revenue_sharing, salary_cap_structure]
+      - description: "Protect mid-level and veteran players — not just superstars. Average career is 4.8 years."
+        type: need
+        priority: 0.85
+        related_issues: [minimum_salary, max_contract_terms]
+      - description: "Get back to playing — many players live paycheck to paycheck despite high salaries, agents and mortgages don't stop"
+        type: concern
+        priority: 0.75
+        related_issues: [salary_cap_structure]
+      - description: "Fear of setting a precedent where owners can lock players out whenever they want better terms"
+        type: fear
+        priority: 0.65
+        related_issues: [salary_cap_structure, revenue_sharing]
+    batna:
+      description: "Hold out for the full season, pursue antitrust litigation against the league. Players lose salary but some can play overseas. Union decertification as nuclear option. Estimated loss: $800M in player salaries."
+      utility: 0.25
+      confidence: 0.4
+      components:
+        salary_cap_structure: "no_cap"
+        max_contract_terms: "unlimited"
+        revenue_sharing: "status_quo"
+        minimum_salary: "current"
+        free_agency: "unrestricted"
+
+issues:
+  - id: salary_cap_structure
+    name: "Salary Cap Structure"
+    type: categorical
+    options:
+      - "Hard cap — no exceptions, $30M per team"
+      - "Soft cap with luxury tax — $34M cap, 100% tax on overages"
+      - "Soft cap with bird exceptions — $34M cap, teams can re-sign own players over cap"
+      - "No cap — pure free market"
+
+  - id: revenue_sharing
+    name: "Basketball-Related Income Split"
+    type: categorical
+    options:
+      - "Players get 57% of BRI (current)"
+      - "Players get 55% of BRI"
+      - "Players get 52% of BRI"
+      - "Players get 48% of BRI with guaranteed floor"
+
+  - id: max_contract_terms
+    name: "Maximum Contract Terms"
+    type: categorical
+    options:
+      - "No max — any contract size allowed"
+      - "7-year max, no salary limit"
+      - "6-year max, 25% of team cap"
+      - "5-year max, 25% of team cap for own players, 4-year for free agents"
+
+  - id: minimum_salary
+    name: "Minimum Player Salary"
+    type: categorical
+    options:
+      - "No minimum guarantee"
+      - "$250K minimum for rookies, scaled by experience"
+      - "$300K minimum for rookies, $1M for 10-year veterans"
+      - "Guaranteed minimum plus pension after 3 seasons"
+
+  - id: free_agency
+    name: "Free Agency Rules"
+    type: categorical
+    options:
+      - "Unrestricted free agency after 3 years"
+      - "Restricted free agency until 4 years, unrestricted after"
+      - "Restricted until 4 years, mid-level exception for capped teams"
+      - "Restricted until 7 years (current)"
+
+criteria:
+  - name: "MLB salary arbitration model"
+    source: precedent
+    applies_to: [salary_cap_structure, revenue_sharing]
+    reference_value: "MLB has no salary cap but has luxury tax and revenue sharing — competitive balance worse but player earnings higher"
+
+  - name: "NFL salary cap precedent"
+    source: precedent
+    applies_to: [salary_cap_structure, max_contract_terms]
+    reference_value: "NFL hard cap at 63% of revenue with guaranteed minimum spend — considered most owner-friendly major sports CBA"
+
+  - name: "Economic analysis of franchise profitability"
+    source: market_data
+    applies_to: [revenue_sharing, salary_cap_structure]
+    reference_value: "13 of 29 teams reported operating losses in 1997-98 season"
+
+mediator:
+  mode: evaluative
+  knowledge: caucus_only
+  intervention: every_round
+  evaluates_fairness: true
+
+protocol:
+  max_rounds: 20

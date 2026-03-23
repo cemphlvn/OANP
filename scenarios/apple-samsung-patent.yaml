@@ -1,0 +1,147 @@
+name: "Apple vs Samsung Patent War — CEO Summit"
+description: "Based on the real 2012 court-ordered mediation between Tim Cook and Samsung CEO Choi Gee-sung. Apple claimed Samsung copied the iPhone's design. Samsung said Apple was trying to monopolize rectangular phones. In reality, the CEOs met for two days and reached impasse — litigation continued for 7 more years costing $1B+. Can AI negotiators find a deal the real CEOs couldn't?"
+architecture: mediated
+
+parties:
+  - id: apple
+    name: "Apple Inc. (CEO Office)"
+    role: "Plaintiff alleging smartphone design patent infringement"
+    interests:
+      - description: "Protect the iPhone's iconic design — it's not just a product, it's the foundation of Apple's brand identity"
+        type: need
+        priority: 0.95
+        related_issues: [design_patents, licensing_terms]
+      - description: "Establish legal precedent that design patents matter — if Samsung copies freely, everyone will"
+        type: need
+        priority: 0.9
+        related_issues: [design_patents, injunction_scope]
+      - description: "Financial compensation for lost sales — estimated $2B+ in diverted revenue"
+        type: desire
+        priority: 0.8
+        related_issues: [damages_payment, licensing_terms]
+      - description: "Fear of being seen as weak — if Apple settles cheap, every Chinese manufacturer will copy next"
+        type: fear
+        priority: 0.75
+        related_issues: [damages_payment, design_patents]
+      - description: "End the litigation drain — Apple's legal team has spent 3 years and $100M+ on this case across 10 countries"
+        type: concern
+        priority: 0.65
+        related_issues: [damages_payment, cross_licensing]
+    batna:
+      description: "Continue litigation worldwide. Strong case in US courts (already won $1B jury verdict, though on appeal). Costs $50M/year in legal fees but sends market signal. Risk: appellate courts may reduce damages significantly."
+      utility: 0.55
+      confidence: 0.5
+      components:
+        damages_payment: "1050000000"
+        design_patents: "validated_by_court"
+        licensing_terms: "no_license"
+        cross_licensing: "none"
+        injunction_scope: "pending_appeal"
+
+  - id: samsung
+    name: "Samsung Electronics (CEO Office)"
+    role: "Defendant in design patent infringement case"
+    interests:
+      - description: "Avoid paying billions in damages that would set a devastating precedent for the Android ecosystem"
+        type: need
+        priority: 0.95
+        related_issues: [damages_payment, design_patents]
+      - description: "Maintain ability to compete in smartphone market — Samsung's Galaxy line is their fastest-growing business"
+        type: need
+        priority: 0.9
+        related_issues: [injunction_scope, design_patents]
+      - description: "Samsung holds 100K+ patents — want cross-licensing leverage recognized, not just treated as a copycat"
+        type: desire
+        priority: 0.8
+        related_issues: [cross_licensing, licensing_terms]
+      - description: "Resolve quickly — the legal uncertainty is depressing Samsung's stock and scaring enterprise customers"
+        type: desire
+        priority: 0.7
+        related_issues: [damages_payment, licensing_terms]
+      - description: "Fear that an injunction on Galaxy phones in the US would be catastrophic — 35% of Samsung mobile revenue"
+        type: fear
+        priority: 0.85
+        related_issues: [injunction_scope]
+    batna:
+      description: "Continue appealing the $1B verdict. Appeals court likely to reduce damages to $400-600M. Fight injunction. Meanwhile, redesign phone bezels and icons to work around patents. Takes 18 months but neutralizes future claims."
+      utility: 0.5
+      confidence: 0.55
+      components:
+        damages_payment: "500000000"
+        design_patents: "contested_on_appeal"
+        licensing_terms: "no_license"
+        cross_licensing: "counter_suit"
+        injunction_scope: "no_injunction"
+
+issues:
+  - id: damages_payment
+    name: "Financial Settlement"
+    type: monetary
+    range: [0, 2000000000]
+    divisible: true
+
+  - id: design_patents
+    name: "Design Patent Validity Acknowledgment"
+    type: categorical
+    options:
+      - "Samsung acknowledges infringement on all 7 patents"
+      - "Samsung acknowledges infringement on 3 core design patents, disputes 4"
+      - "No admission — settlement without admission of liability"
+      - "Both parties acknowledge the other's IP contributions"
+
+  - id: licensing_terms
+    name: "Patent Licensing Agreement"
+    type: categorical
+    options:
+      - "No licensing — Samsung must design around all Apple patents"
+      - "Limited license for existing products only, no future products"
+      - "Broad license at $15 per Samsung device sold"
+      - "Broad license at $5 per device with volume discount"
+
+  - id: cross_licensing
+    name: "Cross-Licensing Samsung's Patents"
+    type: categorical
+    options:
+      - "No cross-licensing — Apple keeps its own patents"
+      - "Samsung grants Apple license to wireless communication patents at $2/device"
+      - "Mutual cross-license — both portfolios available to both parties"
+      - "Mutual cross-license with royalty offset (net payment by larger user)"
+
+  - id: injunction_scope
+    name: "Product Injunction Terms"
+    type: categorical
+    options:
+      - "Samsung pulls all infringing products from US market immediately"
+      - "Samsung redesigns flagged features within 6 months, no pull"
+      - "No injunction — Samsung modifies future products only"
+      - "No injunction, both parties agree to 90-day design review process for future disputes"
+
+criteria:
+  - name: "Motorola-Microsoft patent settlement"
+    source: precedent
+    applies_to: [licensing_terms, damages_payment]
+    reference_value: "Settled at $1.8/device cross-licensing rate in 2013"
+
+  - name: "Federal Circuit design patent damages standard"
+    source: regulation
+    applies_to: [damages_payment, design_patents]
+    reference_value: "Disgorgement of infringer's total profit from infringing article (Samsung v Apple, SCOTUS 2016 reduced this)"
+
+  - name: "FRAND licensing rates for standard-essential patents"
+    source: industry_norm
+    applies_to: [cross_licensing, licensing_terms]
+    reference_value: "Fair, Reasonable, and Non-Discriminatory rates typically $1-5 per device for wireless patents"
+
+  - name: "Global smartphone litigation costs"
+    source: market_data
+    applies_to: [damages_payment]
+    reference_value: "Apple-Samsung litigation has cost an estimated $200M+ combined in legal fees across 50+ cases in 10 countries"
+
+mediator:
+  mode: evaluative
+  knowledge: caucus_only
+  intervention: every_round
+  evaluates_fairness: true
+
+protocol:
+  max_rounds: 18

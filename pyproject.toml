@@ -1,0 +1,45 @@
+[project]
+name = "oanp"
+version = "0.1.0"
+description = "Ontology-based Agentic Negotiation Protocol — simulation framework and backend"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.11,<3.14"
+dependencies = [
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.30.0",
+    "pydantic>=2.9.0",
+    "langgraph>=1.0.0",
+    "langchain-core>=0.3.0",
+    "langchain-openai>=0.3.0",
+    "langchain-anthropic>=0.3.0",
+    "pyyaml>=6.0",
+    "python-dotenv>=1.0.0",
+    "websockets>=13.0",
+    "langchain-google-genai>=4.2.1",
+]
+
+[project.optional-dependencies]
+graph = [
+    "graphiti-core>=0.5.0",
+    "neo4j>=5.25.0",
+]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.24",
+    "ruff>=0.8.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"

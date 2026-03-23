@@ -1,0 +1,40 @@
+# Dependencies
+node_modules/
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Build
+dist/
+build/
+.next/
+*.egg-info/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Research docs (private)
+docs/
+
+# Simulation results (generated, can be large)
+results/
+
+# Dev artifacts
+CLAUDE.md
+TODOS.md
+
+# Logs
+*.log

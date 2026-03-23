@@ -1,0 +1,141 @@
+name: "Pharma Patent Standoff — Dying Patients Waiting"
+description: "A biotech company holds the only patent for a rare disease treatment. A patient advocacy group demands affordable access. The company says they need revenue to fund R&D. Children are dying while they negotiate. Both sides have legitimate claims. Almost impossible to settle — fundamental value conflict between profit motive and right to life."
+architecture: mediated
+
+parties:
+  - id: pharma
+    name: "NovaCure Biotech"
+    role: "Patent holder for rare disease treatment"
+    interests:
+      - description: "Recoup $1.2B in R&D investment — shareholders and investors expect returns"
+        type: need
+        priority: 0.95
+        related_issues: [drug_price, licensing_terms]
+      - description: "Fund next-generation treatments — pipeline depends on this drug's revenue"
+        type: need
+        priority: 0.85
+        related_issues: [drug_price, research_fund]
+      - description: "Maintain patent integrity — if they give in here, every future drug faces the same pressure"
+        type: fear
+        priority: 0.9
+        related_issues: [licensing_terms, drug_price]
+      - description: "Reputation — being seen as 'the company that let children die' is also devastating"
+        type: concern
+        priority: 0.7
+        related_issues: [access_program, drug_price]
+      - description: "Regulatory risk — government could invoke compulsory licensing if they look unreasonable"
+        type: fear
+        priority: 0.75
+        related_issues: [drug_price, licensing_terms]
+    batna:
+      description: "Maintain current pricing ($340K/year per patient). Face public backlash, possible congressional investigation, but patent is legally protected for 7 more years. Stock may drop 15-20% from PR damage."
+      utility: 0.45
+      confidence: 0.6
+      components:
+        drug_price: "340000"
+        licensing_terms: "no_license"
+        access_program: "existing_minimal"
+
+  - id: advocacy
+    name: "Rare Disease Alliance"
+    role: "Coalition of patient families and advocacy organizations"
+    interests:
+      - description: "Immediate access — 847 diagnosed patients, 200+ children, some will die within months without treatment"
+        type: need
+        priority: 1.0
+        related_issues: [drug_price, access_program]
+      - description: "Affordability — most patients' insurance caps out, families going bankrupt"
+        type: need
+        priority: 0.95
+        related_issues: [drug_price, insurance_navigation]
+      - description: "Precedent — this case sets the standard for how rare disease drugs are priced"
+        type: desire
+        priority: 0.7
+        related_issues: [drug_price, licensing_terms]
+      - description: "Fear that compromise legitimizes the current pricing model"
+        type: fear
+        priority: 0.6
+        related_issues: [drug_price]
+      - description: "Fear of losing public sympathy if they seem unreasonable"
+        type: concern
+        priority: 0.5
+        related_issues: [drug_price, licensing_terms]
+      - description: "Long-term — ensure continued R&D investment so treatments keep improving"
+        type: desire
+        priority: 0.6
+        related_issues: [research_fund, licensing_terms]
+    batna:
+      description: "Public campaign, congressional pressure, possible compulsory licensing petition. Slow — takes 1-2 years. Some patients won't survive the process. May succeed politically but provides no immediate access."
+      utility: 0.2
+      confidence: 0.35
+      components:
+        drug_price: "unknown"
+        access_program: "none_immediate"
+
+issues:
+  - id: drug_price
+    name: "Annual Treatment Price Per Patient"
+    type: monetary
+    range: [50000, 340000]
+    divisible: true
+  - id: licensing_terms
+    name: "Patent Licensing"
+    type: categorical
+    options:
+      - "No licensing — NovaCure sole manufacturer"
+      - "Voluntary license to 1 generic manufacturer after 3 years"
+      - "Voluntary license to 2+ generics after 5 years with royalties"
+      - "Tiered licensing — generics for low-income countries, patent maintained for high-income"
+      - "Compulsory license petition (last resort)"
+  - id: access_program
+    name: "Patient Access Program"
+    type: categorical
+    options:
+      - "Existing compassionate use (5 patients/year)"
+      - "Expanded access for all uninsured at reduced price"
+      - "Income-based sliding scale (free for under $50K household income)"
+      - "Bridge program — free drug for all diagnosed patients for 12 months while pricing is finalized"
+  - id: research_fund
+    name: "R&D Commitment"
+    type: categorical
+    options:
+      - "No commitment — NovaCure decides independently"
+      - "Commit 15% of drug revenue to next-generation treatment R&D"
+      - "Joint research fund — NovaCure contributes matched by government/foundation grants"
+      - "Open research — share clinical data with academic researchers"
+  - id: insurance_navigation
+    name: "Insurance Coverage Support"
+    type: categorical
+    options:
+      - "No additional support"
+      - "Dedicated patient navigator team to help with insurance claims"
+      - "Co-pay assistance capping patient out-of-pocket at $5,000/year"
+      - "Full co-pay elimination for diagnosed patients"
+
+criteria:
+  - name: "ICER Cost-Effectiveness Threshold"
+    source: expert_opinion
+    applies_to: [drug_price]
+    reference_value: "ICER estimates cost-effective range at $85K-150K/year based on QALY analysis"
+  - name: "Orphan Drug Act"
+    source: regulation
+    applies_to: [drug_price, licensing_terms]
+    reference_value: "Grants 7-year market exclusivity for rare disease drugs. Does not cap pricing."
+  - name: "WHO Essential Medicines Pricing"
+    source: regulation
+    applies_to: [drug_price]
+    reference_value: "WHO recommends tiered pricing based on country income level"
+  - name: "Bayh-Dole March-In Rights"
+    source: regulation
+    applies_to: [licensing_terms]
+    reference_value: "Government can force licensing of publicly-funded inventions if not made available on reasonable terms. NovaCure received $180M in NIH grants."
+
+mediator:
+  mode: evaluative
+  knowledge: caucus_only
+  intervention: every_round
+  evaluates_fairness: false
+
+protocol:
+  max_rounds: 25
+  disclosure_policy: gradual

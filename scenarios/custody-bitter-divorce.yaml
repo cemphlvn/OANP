@@ -1,0 +1,143 @@
+name: "Bitter Custody Dispute — High-Conflict Divorce"
+description: "Parents with deep mutual distrust fighting over primary custody of two children. He alleges she's unstable, she alleges he's controlling. Both believe the other is a bad parent. Real cases like this often go to trial. Can agents find agreement where humans can't?"
+architecture: mediated
+
+parties:
+  - id: mother
+    name: "Sarah (Mother)"
+    role: "Primary caregiver seeking full custody"
+    interests:
+      - description: "Protect children from what she perceives as father's controlling and emotionally abusive behavior"
+        type: need
+        priority: 1.0
+        related_issues: [custody_arrangement, decision_making]
+      - description: "Maintain primary caregiver role — children's routine and stability depends on her"
+        type: need
+        priority: 0.95
+        related_issues: [custody_arrangement, residence]
+      - description: "Fear that he will use custody to continue controlling her life"
+        type: fear
+        priority: 0.9
+        related_issues: [custody_arrangement, decision_making]
+      - description: "Children's therapy and emotional wellbeing — she believes they need professional support"
+        type: need
+        priority: 0.8
+        related_issues: [child_support, decision_making]
+      - description: "Financial security — she earns less and needs the family home for stability"
+        type: need
+        priority: 0.75
+        related_issues: [residence, child_support]
+      - description: "Fear of being seen as the difficult one if she doesn't compromise"
+        type: fear
+        priority: 0.5
+        related_issues: [custody_arrangement]
+    batna:
+      description: "Go to trial — her lawyer says she has a 60% chance of primary custody given her caregiving history, but trial will cost $50K+, take 8 months, and traumatize the children"
+      utility: 0.4
+      confidence: 0.5
+      components:
+        custody_arrangement: "contested_trial"
+        child_support: "court_ordered"
+        residence: "uncertain"
+
+  - id: father
+    name: "Michael (Father)"
+    role: "Involved father seeking equal custody"
+    interests:
+      - description: "Equal time with children — he is a good father and deserves equal access"
+        type: need
+        priority: 1.0
+        related_issues: [custody_arrangement]
+      - description: "Protect children from what he perceives as mother's emotional instability and alienation tactics"
+        type: need
+        priority: 0.9
+        related_issues: [custody_arrangement, decision_making]
+      - description: "Fear of becoming a 'weekend dad' — losing meaningful relationship with children"
+        type: fear
+        priority: 0.95
+        related_issues: [custody_arrangement]
+      - description: "Not being bankrupted by child support and legal fees"
+        type: concern
+        priority: 0.7
+        related_issues: [child_support]
+      - description: "Being recognized as an equal parent, not a secondary one"
+        type: need
+        priority: 0.8
+        related_issues: [decision_making]
+      - description: "Fear that she will move away with the children"
+        type: fear
+        priority: 0.85
+        related_issues: [residence]
+    batna:
+      description: "Go to trial — his lawyer says 50/50 custody is increasingly standard, but judges in this jurisdiction still favor mothers. Trial will cost $40K+, and if he loses he gets every-other-weekend"
+      utility: 0.3
+      confidence: 0.4
+      components:
+        custody_arrangement: "contested_trial"
+        child_support: "court_ordered"
+        residence: "uncertain"
+
+issues:
+  - id: custody_arrangement
+    name: "Physical Custody Schedule"
+    type: categorical
+    options:
+      - "Mother primary (70/30) — father gets every other weekend + Wednesday evening"
+      - "Modified primary (60/40) — father gets Thursday-Sunday every other week"
+      - "Equal time (50/50) — week-on/week-off"
+      - "Equal time (50/50) — 2-2-3 rotation"
+      - "Father primary (60/40) — reverse of above"
+  - id: decision_making
+    name: "Legal Custody (Major Decisions)"
+    type: categorical
+    options:
+      - "Joint legal custody — both parents must agree on education, health, religion"
+      - "Joint legal with tiebreaker — mediator decides disputes"
+      - "Sole legal custody to mother"
+      - "Sole legal custody to father"
+      - "Split legal — each parent decides in certain domains"
+  - id: residence
+    name: "Family Home"
+    type: categorical
+    options:
+      - "Mother stays in home, father finds new residence"
+      - "Sell home, split proceeds 50/50"
+      - "Father buys out mother's share, children live with father in family home"
+      - "Neither — both find new residences, sell home"
+  - id: child_support
+    name: "Child Support"
+    type: monetary
+    range: [0, 3000]
+    divisible: true
+  - id: relocation
+    name: "Relocation Restrictions"
+    type: categorical
+    options:
+      - "Neither parent can move more than 25 miles without consent"
+      - "Neither parent can move more than 50 miles"
+      - "No restrictions on relocation"
+      - "Right of first refusal — if one parent moves, other gets primary custody"
+
+criteria:
+  - name: "Best Interest of the Child Standard"
+    source: regulation
+    applies_to: [custody_arrangement, decision_making]
+    reference_value: "Courts prioritize stability, each parent's involvement, child's wishes (if old enough), and absence of abuse/neglect"
+  - name: "State Child Support Guidelines"
+    source: regulation
+    applies_to: [child_support]
+    reference_value: "Based on income ratio — with combined income of $185K, guideline support is ~$1,800-2,200/month from higher earner"
+  - name: "Presumption of Joint Custody"
+    source: regulation
+    applies_to: [custody_arrangement, decision_making]
+    reference_value: "Most states now presume joint custody unless evidence of abuse or unfitness"
+
+mediator:
+  mode: facilitative
+  knowledge: caucus_only
+  intervention: every_round
+  evaluates_fairness: false
+
+protocol:
+  max_rounds: 25
+  disclosure_policy: gradual

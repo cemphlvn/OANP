@@ -1,0 +1,170 @@
+name: Startup Cofounder Equity Split & Exit Negotiation
+description: A departing cofounder negotiates equity buyout terms, vesting treatment,
+  and ongoing obligations with the remaining cofounder of an early-stage startup.
+architecture: bilateral
+parties:
+- id: departing_cofounder
+  name: Jordan Ellis (Departing Co-Founder)
+  role: Co-Founder & CTO departing the startup after 18 months
+  interests:
+  - description: Receive fair compensation for the technical work and IP already contributed
+      to the startup
+    type: need
+    priority: 0.95
+    related_issues:
+    - equity_retained
+    - buyout_payment
+  - description: Avoid being locked into a long non-compete that limits future employment
+      or startup opportunities
+    type: fear
+    priority: 0.88
+    related_issues:
+    - non_compete_duration
+    - transition_role
+  - description: Maintain a positive professional reputation and avoid public blame
+      for the departure
+    type: concern
+    priority: 0.75
+    related_issues:
+    - transition_role
+  - description: Retain some upside in the company in case it succeeds, given the
+      foundational work already done
+    type: desire
+    priority: 0.7
+    related_issues:
+    - equity_retained
+  - description: Complete a clean break quickly to move on to the next opportunity
+      without lingering obligations
+    type: need
+    priority: 0.8
+    related_issues:
+    - transition_role
+    - non_compete_duration
+  batna:
+    description: "Jordan has a job offer from a Series B startup as VP of Engineering\
+      \ at $195k/year. If no deal is reached, Jordan will consult an attorney to enforce\
+      \ vesting rights under the existing cofounder agreement, which could result\
+      \ in a costly and time-consuming legal dispute \u2014 but Jordan would retain\
+      \ all vested shares (~15%) and potentially more through litigation."
+    utility: 0.52
+    confidence: 0.72
+    components:
+      equity_retained: 15%
+      buyout_payment: $0
+      non_compete_duration: 0 months (disputed)
+      transition_role: none
+- id: remaining_cofounder
+  name: Sam Rivera (Remaining Co-Founder)
+  role: Co-Founder & CEO continuing to run the startup
+  interests:
+  - description: Minimize equity held by a non-active cofounder to keep the cap table
+      clean and attractive to future investors
+    type: need
+    priority: 0.95
+    related_issues:
+    - equity_retained
+  - description: Protect the company's core IP and competitive position by securing
+      a meaningful non-compete
+    type: need
+    priority: 0.85
+    related_issues:
+    - non_compete_duration
+  - description: Preserve runway by minimizing the cash buyout paid to the departing
+      cofounder
+    type: concern
+    priority: 0.82
+    related_issues:
+    - buyout_payment
+  - description: Ensure a smooth technical handoff so product development is not disrupted
+    type: desire
+    priority: 0.78
+    related_issues:
+    - transition_role
+  - description: Avoid a messy public dispute that could spook investors or damage
+      the company brand
+    type: fear
+    priority: 0.73
+    related_issues:
+    - equity_retained
+    - transition_role
+  batna:
+    description: Sam can refuse to negotiate and rely on the cliff/vesting schedule
+      in the existing cofounder agreement, which would return ~20% of Jordan's unvested
+      shares to the company option pool. However, this path risks litigation, investor
+      concern, and a prolonged technical knowledge gap. Sam has informal interest
+      from an angel investor contingent on a clean cap table.
+    utility: 0.48
+    confidence: 0.6
+    components:
+      equity_retained: 8% (only vested portion returned voluntarily)
+      buyout_payment: $0
+      non_compete_duration: 12 months (enforced via existing agreement)
+      transition_role: none
+issues:
+- id: equity_retained
+  name: Equity Retained by Departing Cofounder
+  type: monetary
+  range:
+  - 3
+  - 20
+  divisible: true
+- id: buyout_payment
+  name: Cash Buyout Payment
+  type: monetary
+  range:
+  - 0
+  - 75000
+  divisible: true
+- id: non_compete_duration
+  name: Non-Compete Duration (Months)
+  type: temporal
+  range:
+  - 0
+  - 24
+  divisible: false
+- id: transition_role
+  name: Post-Departure Transition Commitment
+  type: categorical
+  options:
+  - No transition support
+  - 2-week handoff only
+  - 3-month part-time advisory (paid)
+  - 6-month part-time advisory (paid)
+  - 6-month part-time advisory (unpaid)
+  divisible: false
+criteria:
+- name: Standard Vesting Cliff & Schedule
+  source: 'Y Combinator / NVCA standard cofounder vesting: 4-year vest, 1-year cliff
+    (~25% vested at cliff). At 18 months, ~37.5% of total equity is typically vested.'
+  applies_to:
+  - equity_retained
+  reference_value: 37.5% of original equity grant vested at 18 months
+- name: Reasonable Non-Compete Enforceability
+  source: Most U.S. state courts limit enforceable non-competes to 12 months or less
+    for startup employees/founders; some states (e.g., CA) void them entirely.
+  applies_to:
+  - non_compete_duration
+  reference_value: "6\u201312 months is the enforceable norm in most jurisdictions"
+- name: Early-Stage Startup Equity Buyout Norms
+  source: 'AngelList & Carta benchmarks: cash buyouts for pre-Series A cofounder exits
+    are rare and typically range from $0 to $50k, reflecting limited liquidity.'
+  applies_to:
+  - buyout_payment
+  reference_value: "$0\u2013$50,000 for pre-Series A exits"
+- name: Advisor Equity & Compensation Standards
+  source: "FAST Agreement (Founder Advisor Standard Template) by Founder Institute:\
+    \ standard advisor compensation is 0.25%\u20131% equity or equivalent cash for\
+    \ part-time advisory roles."
+  applies_to:
+  - transition_role
+  - equity_retained
+  reference_value: "0.25%\u20130.5% equity or $2,000\u2013$5,000/month cash for part-time\
+    \ advisory"
+mediator:
+  mode: facilitative
+  knowledge: caucus_only
+  intervention: every_round
+  evaluates_fairness: false
+protocol:
+  max_rounds: 20
+  disclosure_policy: gradual

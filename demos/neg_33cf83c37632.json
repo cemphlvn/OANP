@@ -1,0 +1,1433 @@
+{
+  "session_id": "neg_33cf83c37632",
+  "scenario_name": "NBA Owners (Commissioner's Office) vs NBA Players Association (NBPA)",
+  "description": "2 parties, 5 issues, agreement",
+  "parties": [
+    {
+      "id": "owners",
+      "name": "NBA Owners (Commissioner's Office)",
+      "role": "Representing 29 NBA team owners seeking cost control"
+    },
+    {
+      "id": "players",
+      "name": "NBA Players Association (NBPA)",
+      "role": "Union representing 400+ professional basketball players"
+    }
+  ],
+  "issues": [
+    {
+      "id": "salary_cap_structure",
+      "name": "Salary Cap Structure",
+      "description": "",
+      "issue_type": "categorical",
+      "options": [
+        "Hard cap \u2014 no exceptions, $30M per team",
+        "Soft cap with luxury tax \u2014 $34M cap, 100% tax on overages",
+        "Soft cap with bird exceptions \u2014 $34M cap, teams can re-sign own players over cap",
+        "No cap \u2014 pure free market"
+      ],
+      "range": null,
+      "is_divisible": false
+    },
+    {
+      "id": "revenue_sharing",
+      "name": "Basketball-Related Income Split",
+      "description": "",
+      "issue_type": "categorical",
+      "options": [
+        "Players get 57% of BRI (current)",
+        "Players get 55% of BRI",
+        "Players get 52% of BRI",
+        "Players get 48% of BRI with guaranteed floor"
+      ],
+      "range": null,
+      "is_divisible": false
+    },
+    {
+      "id": "max_contract_terms",
+      "name": "Maximum Contract Terms",
+      "description": "",
+      "issue_type": "categorical",
+      "options": [
+        "No max \u2014 any contract size allowed",
+        "7-year max, no salary limit",
+        "6-year max, 25% of team cap",
+        "5-year max, 25% of team cap for own players, 4-year for free agents"
+      ],
+      "range": null,
+      "is_divisible": false
+    },
+    {
+      "id": "minimum_salary",
+      "name": "Minimum Player Salary",
+      "description": "",
+      "issue_type": "categorical",
+      "options": [
+        "No minimum guarantee",
+        "$250K minimum for rookies, scaled by experience",
+        "$300K minimum for rookies, $1M for 10-year veterans",
+        "Guaranteed minimum plus pension after 3 seasons"
+      ],
+      "range": null,
+      "is_divisible": false
+    },
+    {
+      "id": "free_agency",
+      "name": "Free Agency Rules",
+      "description": "",
+      "issue_type": "categorical",
+      "options": [
+        "Unrestricted free agency after 3 years",
+        "Restricted free agency until 4 years, unrestricted after",
+        "Restricted until 4 years, mid-level exception for capped teams",
+        "Restricted until 7 years (current)"
+      ],
+      "range": null,
+      "is_divisible": false
+    }
+  ],
+  "criteria": [
+    {
+      "id": "41135da2",
+      "name": "MLB salary arbitration model",
+      "description": "",
+      "source": "precedent",
+      "applies_to": [
+        "salary_cap_structure",
+        "revenue_sharing"
+      ],
+      "reference_value": "MLB has no salary cap but has luxury tax and revenue sharing \u2014 competitive balance worse but player earnings higher"
+    },
+    {
+      "id": "569c63f2",
+      "name": "NFL salary cap precedent",
+      "description": "",
+      "source": "precedent",
+      "applies_to": [
+        "salary_cap_structure",
+        "max_contract_terms"
+      ],
+      "reference_value": "NFL hard cap at 63% of revenue with guaranteed minimum spend \u2014 considered most owner-friendly major sports CBA"
+    },
+    {
+      "id": "1942a25c",
+      "name": "Economic analysis of franchise profitability",
+      "description": "",
+      "source": "market_data",
+      "applies_to": [
+        "revenue_sharing",
+        "salary_cap_structure"
+      ],
+      "reference_value": "13 of 29 teams reported operating losses in 1997-98 season"
+    }
+  ],
+  "outcome": "agreement",
+  "agreement": {
+    "id": "15f04751",
+    "issue_values": {
+      "Salary Cap Structure": "Soft cap with luxury tax \u2014 $34M cap, 100% tax on overages",
+      "Basketball-Related Income Split": "Players get 54.25% of BRI",
+      "Maximum Contract Terms": "6-year max, 25% of team cap",
+      "Minimum Player Salary": "$300K minimum for rookies, $1M for 10-year veterans, plus pension",
+      "Free Agency Rules": "Restricted until 4 years, mid-level exception for capped teams"
+    },
+    "rationale": "We accept this agreement as it provides long-term stability for the league while ensuring fair compensation and protection for our players, particularly through the inclusion of pension benefits and a reasonable revenue share.",
+    "pareto_rank": null
+  },
+  "events": [
+    {
+      "type": "phase_change",
+      "data": {
+        "phase": "setup",
+        "round": 0,
+        "message": "Generating satisfaction anchors for utility scoring..."
+      },
+      "delay_ms": 0
+    },
+    {
+      "type": "setup_progress",
+      "data": {
+        "message": "Generating anchors for 2 parties (10 interests)...",
+        "parties": [
+          "owners",
+          "players"
+        ],
+        "total_interests": 10,
+        "completed_interests": 0
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "setup_progress",
+      "data": {
+        "message": "Generating anchors for NBA Owners (Commissioner's Office) (5 interests)...",
+        "party_id": "owners",
+        "party_name": "NBA Owners (Commissioner's Office)",
+        "interest_count": 5
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "setup_progress",
+      "data": {
+        "message": "Generating anchors for NBA Players Association (NBPA) (5 interests)...",
+        "party_id": "players",
+        "party_name": "NBA Players Association (NBPA)",
+        "interest_count": 5
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "players",
+        "party_name": "NBA Players Association (NBPA)",
+        "interest_description": "Preserve free agency rights \u2014 players should be compensated at market value for their talent",
+        "interest_type": "need",
+        "anchor_count": 4,
+        "completed_interests": 1,
+        "total_interests": 10
+      },
+      "delay_ms": 1851
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "owners",
+        "party_name": "NBA Owners (Commissioner's Office)",
+        "interest_description": "Fear that if they cave, player costs will bankrupt multiple franchises within 5 years",
+        "interest_type": "fear",
+        "anchor_count": 4,
+        "completed_interests": 2,
+        "total_interests": 10
+      },
+      "delay_ms": 297
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "owners",
+        "party_name": "NBA Owners (Commissioner's Office)",
+        "interest_description": "Maintain competitive balance \u2014 small market teams can't compete for free agents",
+        "interest_type": "desire",
+        "anchor_count": 4,
+        "completed_interests": 3,
+        "total_interests": 10
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "players",
+        "party_name": "NBA Players Association (NBPA)",
+        "interest_description": "Get back to playing \u2014 many players live paycheck to paycheck despite high salaries, agents and mortgages don't stop",
+        "interest_type": "concern",
+        "anchor_count": 4,
+        "completed_interests": 4,
+        "total_interests": 10
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "players",
+        "party_name": "NBA Players Association (NBPA)",
+        "interest_description": "Fair share of league revenue \u2014 players generate the product fans pay to see",
+        "interest_type": "need",
+        "anchor_count": 4,
+        "completed_interests": 5,
+        "total_interests": 10
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "owners",
+        "party_name": "NBA Owners (Commissioner's Office)",
+        "interest_description": "Control the escalation of max contracts \u2014 superstar salaries are consuming 55% of team revenue",
+        "interest_type": "need",
+        "anchor_count": 4,
+        "completed_interests": 6,
+        "total_interests": 10
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "players",
+        "party_name": "NBA Players Association (NBPA)",
+        "interest_description": "Protect mid-level and veteran players \u2014 not just superstars. Average career is 4.8 years.",
+        "interest_type": "need",
+        "anchor_count": 4,
+        "completed_interests": 7,
+        "total_interests": 10
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "owners",
+        "party_name": "NBA Owners (Commissioner's Office)",
+        "interest_description": "End the lockout before losing the full season \u2014 every month costs $100M+ in collective revenue",
+        "interest_type": "concern",
+        "anchor_count": 4,
+        "completed_interests": 8,
+        "total_interests": 10
+      },
+      "delay_ms": 381
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "players",
+        "party_name": "NBA Players Association (NBPA)",
+        "interest_description": "Fear of setting a precedent where owners can lock players out whenever they want better terms",
+        "interest_type": "fear",
+        "anchor_count": 4,
+        "completed_interests": 9,
+        "total_interests": 10
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchors_generated",
+      "data": {
+        "party_id": "players",
+        "party_name": "NBA Players Association (NBPA)",
+        "anchor_count": 20,
+        "interests": [
+          {
+            "description": "Preserve free agency rights \u2014 players should be compensated at market value for their talent",
+            "interest_type": "need",
+            "priority": 0.95,
+            "related_issues": [
+              "free_agency",
+              "max_contract_terms"
+            ],
+            "anchors": [
+              {
+                "condition": "free_agency = restricted_until_7_years AND max_contract_terms = 5-year_max_25_percent",
+                "score": 0.05,
+                "reason": "This represents the current status quo which the players are actively trying to change; it severely limits market mobility and earning potential."
+              },
+              {
+                "condition": "free_agency = restricted_until_4_years AND max_contract_terms = 6-year_max_25_percent",
+                "score": 0.35,
+                "reason": "Provides a slight improvement over the status quo, but still restricts free agency for too long and imposes arbitrary caps on talent compensation."
+              },
+              {
+                "condition": "free_agency = unrestricted_after_3_years AND max_contract_terms = 7-year_max",
+                "score": 0.65,
+                "reason": "This is a strong middle-ground that allows players to reach free agency significantly earlier while maintaining structured, long-term security."
+              },
+              {
+                "condition": "free_agency = unrestricted_after_3_years AND max_contract_terms = no_max",
+                "score": 0.95,
+                "reason": "Aligns perfectly with the core interest of market-based compensation and maximum mobility, effectively meeting the BATNA objectives."
+              }
+            ]
+          },
+          {
+            "description": "Fair share of league revenue \u2014 players generate the product fans pay to see",
+            "interest_type": "need",
+            "priority": 0.9,
+            "related_issues": [
+              "revenue_sharing",
+              "salary_cap_structure"
+            ],
+            "anchors": [
+              {
+                "condition": "revenue_sharing = \"Players get 48% of BRI with guaranteed floor\" AND salary_cap_structure = \"Hard cap \u2014 no exceptions, $30M per team\"",
+                "score": 0.05,
+                "reason": "This represents a significant reduction in revenue share coupled with the most restrictive salary cap, essentially gutting player earnings and leverage."
+              },
+              {
+                "condition": "revenue_sharing = \"Players get 52% of BRI\" AND salary_cap_structure = \"Soft cap with luxury tax \u2014 $34M cap, 100% tax on overages\"",
+                "score": 0.35,
+                "reason": "A 5% drop in revenue sharing is a hard hit, and the luxury tax cap structure limits team spending, falling well short of player goals."
+              },
+              {
+                "condition": "revenue_sharing = \"Players get 55% of BRI\" AND salary_cap_structure = \"Soft cap with bird exceptions \u2014 $34M cap, teams can re-sign own players over cap\"",
+                "score": 0.65,
+                "reason": "Acceptable compromise; while slightly below current levels, the bird exception structure allows for more flexibility and higher individual earnings than a strict cap."
+              },
+              {
+                "condition": "revenue_sharing = \"Players get 57% of BRI (current)\" AND salary_cap_structure = \"No cap \u2014 pure free market\"",
+                "score": 1.0,
+                "reason": "This maintains the current revenue split while removing all salary cap constraints, representing the absolute maximum financial outcome for players."
+              }
+            ]
+          },
+          {
+            "description": "Protect mid-level and veteran players \u2014 not just superstars. Average career is 4.8 years.",
+            "interest_type": "need",
+            "priority": 0.85,
+            "related_issues": [
+              "minimum_salary",
+              "max_contract_terms"
+            ],
+            "anchors": [
+              {
+                "condition": "minimum_salary = no_minimum_guarantee AND max_contract_terms = no_max",
+                "score": 0.05,
+                "reason": "Complete lack of protection for mid-level players; veterans are exposed to market volatility with no security."
+              },
+              {
+                "condition": "minimum_salary = $250K_minimum_for_rookies_scaled_by_experience AND max_contract_terms = 6-year_max_25%_of_team_cap",
+                "score": 0.35,
+                "reason": "Provides minimal baseline protection but fails to address the specific needs of veterans or longer-term career security."
+              },
+              {
+                "condition": "minimum_salary = $300K_minimum_for_rookies_$1M_for_10-year_veterans AND max_contract_terms = 5-year_max_25%_of_team_cap_for_own_players",
+                "score": 0.65,
+                "reason": "Creates a meaningful floor for veteran players and reasonable contract terms that provide stability for the average career length."
+              },
+              {
+                "condition": "minimum_salary = Guaranteed_minimum_plus_pension_after_3_seasons AND max_contract_terms = 5-year_max_25%_of_team_cap_for_own_players",
+                "score": 0.95,
+                "reason": "Provides comprehensive career-long protection via pension and guaranteed minimums, directly addressing the 4.8-year career average reality."
+              }
+            ]
+          },
+          {
+            "description": "Get back to playing \u2014 many players live paycheck to paycheck despite high salaries, agents and mortgages don't stop",
+            "interest_type": "concern",
+            "priority": 0.75,
+            "related_issues": [
+              "salary_cap_structure"
+            ],
+            "anchors": [
+              {
+                "condition": "salary_cap_structure = hard_cap AND revenue_sharing = 48_percent",
+                "score": 0.05,
+                "reason": "This represents a catastrophic financial outcome; a hard cap combined with a significant reduction in BRI share drastically reduces total player earnings and individual job security."
+              },
+              {
+                "condition": "salary_cap_structure = soft_cap_luxury_tax AND revenue_sharing = 52_percent",
+                "score": 0.35,
+                "reason": "A soft cap with luxury tax is restrictive, and a drop in BRI share puts pressure on player income, making it difficult for many to maintain their current standard of living."
+              },
+              {
+                "condition": "salary_cap_structure = soft_cap_bird_exceptions AND revenue_sharing = 55_percent AND minimum_salary = 300k_rookie_1m_veteran",
+                "score": 0.65,
+                "reason": "This is a fair middle ground; Bird exceptions protect veteran earnings, and while BRI share decreases slightly, the improved minimum salary floor provides necessary security for lower-income players."
+              },
+              {
+                "condition": "salary_cap_structure = no_cap AND revenue_sharing = 57_percent AND minimum_salary = guaranteed_minimum_plus_pension",
+                "score": 0.95,
+                "reason": "This is an excellent outcome; the absence of a cap and maintaining the current BRI share maximizes earning potential, while the pension and guaranteed minimum address the specific concern of long-term financial stability."
+              }
+            ]
+          },
+          {
+            "description": "Fear of setting a precedent where owners can lock players out whenever they want better terms",
+            "interest_type": "fear",
+            "priority": 0.65,
+            "related_issues": [
+              "salary_cap_structure",
+              "revenue_sharing"
+            ],
+            "anchors": [
+              {
+                "condition": "salary_cap_structure = 'Hard cap \u2014 no exceptions, $30M per team' AND revenue_sharing = 'Players get 48% of BRI with guaranteed floor'",
+                "score": 0.0,
+                "reason": "This represents a total surrender to ownership's financial control, setting a precedent that they can impose rigid structures and force drastic revenue cuts, which is exactly what the union fears."
+              },
+              {
+                "condition": "salary_cap_structure = 'Soft cap with luxury tax \u2014 $34M cap, 100% tax on overages' AND revenue_sharing = 'Players get 52% of BRI'",
+                "score": 0.35,
+                "reason": "A moderate concession on revenue and cap structure suggests the owners have leverage to dictate terms, leaving the players vulnerable to future lockouts if they don't comply."
+              },
+              {
+                "condition": "salary_cap_structure = 'Soft cap with bird exceptions \u2014 $34M cap, teams can re-sign own players over cap' AND revenue_sharing = 'Players get 55% of BRI'",
+                "score": 0.65,
+                "reason": "Protecting player retention via Bird exceptions and maintaining a higher revenue share suggests a negotiated balance that discourages owners from using lockouts as a tool for unilateral restructuring."
+              },
+              {
+                "condition": "salary_cap_structure = 'No cap \u2014 pure free market' AND revenue_sharing = 'Players get 57% of BRI (current)'",
+                "score": 1.0,
+                "reason": "Maintaining the status quo or moving toward a free market reinforces player autonomy and signals that the union has successfully resisted ownership's attempt to use lockouts to impose restrictive precedents."
+              }
+            ]
+          }
+        ]
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "owners",
+        "party_name": "NBA Owners (Commissioner's Office)",
+        "interest_description": "Implement a hard salary cap \u2014 13 of 29 teams are currently losing money",
+        "interest_type": "need",
+        "anchor_count": 4,
+        "completed_interests": 10,
+        "total_interests": 10
+      },
+      "delay_ms": 725
+    },
+    {
+      "type": "anchors_generated",
+      "data": {
+        "party_id": "owners",
+        "party_name": "NBA Owners (Commissioner's Office)",
+        "anchor_count": 20,
+        "interests": [
+          {
+            "description": "Implement a hard salary cap \u2014 13 of 29 teams are currently losing money",
+            "interest_type": "need",
+            "priority": 0.95,
+            "related_issues": [
+              "salary_cap_structure",
+              "revenue_sharing"
+            ],
+            "anchors": [
+              {
+                "condition": "salary_cap_structure = No cap \u2014 pure free market OR revenue_sharing = Players get 57% of BRI (current)",
+                "score": 0.0,
+                "reason": "This maintains the status quo or worsens the financial instability that the league is currently facing."
+              },
+              {
+                "condition": "salary_cap_structure = Soft cap with bird exceptions \u2014 $34M cap, teams can re-sign own players over cap AND revenue_sharing = Players get 55% of BRI",
+                "score": 0.35,
+                "reason": "A minor reduction in player share and a soft cap provides minimal relief, failing to solve the solvency issues for the 13 struggling teams."
+              },
+              {
+                "condition": "salary_cap_structure = Soft cap with luxury tax \u2014 $34M cap, 100% tax on overages AND revenue_sharing = Players get 52% of BRI",
+                "score": 0.65,
+                "reason": "The luxury tax acts as a deterrent and the revenue split shift provides a more sustainable financial baseline for the league."
+              },
+              {
+                "condition": "salary_cap_structure = Hard cap \u2014 no exceptions, $30M per team AND revenue_sharing = Players get 48% of BRI with guaranteed floor",
+                "score": 1.0,
+                "reason": "This is the ideal scenario, providing strict cost certainty and a significant reduction in player BRI share to ensure profitability for all teams."
+              }
+            ]
+          },
+          {
+            "description": "Control the escalation of max contracts \u2014 superstar salaries are consuming 55% of team revenue",
+            "interest_type": "need",
+            "priority": 0.9,
+            "related_issues": [
+              "salary_cap_structure",
+              "max_contract_terms"
+            ],
+            "anchors": [
+              {
+                "condition": "salary_cap_structure = No cap \u2014 pure free market OR max_contract_terms = No max \u2014 any contract size allowed",
+                "score": 0.0,
+                "reason": "This represents the worst-case scenario where superstar salaries continue to spiral without any structural restraint."
+              },
+              {
+                "condition": "salary_cap_structure = Soft cap with bird exceptions \u2014 $34M cap, teams can re-sign own players over cap AND max_contract_terms = 7-year max, no salary limit",
+                "score": 0.3,
+                "reason": "Retaining exceptions for bird rights and lack of salary limits on contracts still allows for massive salary inflation, failing to curb superstar dominance."
+              },
+              {
+                "condition": "salary_cap_structure = Soft cap with luxury tax \u2014 $34M cap, 100% tax on overages AND max_contract_terms = 6-year max, 25% of team cap",
+                "score": 0.65,
+                "reason": "A luxury tax acts as a soft deterrent, and capping individual contracts at 25% of the team cap provides a meaningful mechanism to prevent salary hoarding."
+              },
+              {
+                "condition": "salary_cap_structure = Hard cap \u2014 no exceptions, $30M per team AND max_contract_terms = 5-year max, 25% of team cap for own players, 4-year for free agents",
+                "score": 0.95,
+                "reason": "This is the ideal outcome, enforcing a strict hard cap that prevents overspending and limiting contract lengths to ensure competitive parity."
+              }
+            ]
+          },
+          {
+            "description": "Maintain competitive balance \u2014 small market teams can't compete for free agents",
+            "interest_type": "desire",
+            "priority": 0.75,
+            "related_issues": [
+              "revenue_sharing",
+              "salary_cap_structure"
+            ],
+            "anchors": [
+              {
+                "condition": "salary_cap_structure = 'No cap \u2014 pure free market' AND revenue_sharing = 'Players get 57% of BRI (current)'",
+                "score": 0.0,
+                "reason": "The complete absence of a cap and high revenue share would exacerbate the competitive imbalance to an unacceptable degree for small market teams."
+              },
+              {
+                "condition": "salary_cap_structure = 'Soft cap with bird exceptions \u2014 $34M cap, teams can re-sign own players over cap' AND revenue_sharing = 'Players get 55% of BRI'",
+                "score": 0.35,
+                "reason": "Bird exceptions allow large market teams to retain talent indefinitely, keeping the competitive gap wide despite a slight reduction in revenue share."
+              },
+              {
+                "condition": "salary_cap_structure = 'Soft cap with luxury tax \u2014 $34M cap, 100% tax on overages' AND revenue_sharing = 'Players get 52% of BRI'",
+                "score": 0.65,
+                "reason": "A luxury tax acts as a financial deterrent for high spending, and the reduction in BRI share provides more resources for small market teams to sustain operations."
+              },
+              {
+                "condition": "salary_cap_structure = 'Hard cap \u2014 no exceptions, $30M per team' AND revenue_sharing = 'Players get 48% of BRI with guaranteed floor'",
+                "score": 1.0,
+                "reason": "A hard cap creates a level playing field where all teams have identical spending limits, and the lower BRI share ensures maximum financial stability for all franchises."
+              }
+            ]
+          },
+          {
+            "description": "End the lockout before losing the full season \u2014 every month costs $100M+ in collective revenue",
+            "interest_type": "concern",
+            "priority": 0.8,
+            "related_issues": [
+              "salary_cap_structure",
+              "max_contract_terms"
+            ],
+            "anchors": [
+              {
+                "condition": "salary_cap_structure = Hard cap \u2014 no exceptions, $30M per team AND revenue_sharing = Players get 48% of BRI with guaranteed floor AND max_contract_terms = 5-year max, 25% of team cap for own players, 4-year for free agents",
+                "score": 1.0,
+                "reason": "This configuration maximizes owner control and financial stability, ensuring the season starts immediately with highly favorable economic terms that recover revenue losses."
+              },
+              {
+                "condition": "salary_cap_structure = Soft cap with luxury tax \u2014 $34M cap, 100% tax on overages AND revenue_sharing = Players get 52% of BRI",
+                "score": 0.7,
+                "reason": "Acceptable middle ground that allows the season to proceed while maintaining enough control over costs to mitigate the impact of the lockout."
+              },
+              {
+                "condition": "salary_cap_structure = Soft cap with bird exceptions \u2014 $34M cap, teams can re-sign own players over cap AND revenue_sharing = Players get 55% of BRI",
+                "score": 0.4,
+                "reason": "Mediocre outcome; while the season is saved, the financial concessions to players are high and limit the owners' ability to recoup losses quickly."
+              },
+              {
+                "condition": "salary_cap_structure = No cap \u2014 pure free market AND revenue_sharing = Players get 57% of BRI (current)",
+                "score": 0.0,
+                "reason": "This is a catastrophic outcome for owners; it maintains the status quo that led to the lockout and provides no financial relief for the revenue lost during the dispute."
+              }
+            ]
+          },
+          {
+            "description": "Fear that if they cave, player costs will bankrupt multiple franchises within 5 years",
+            "interest_type": "fear",
+            "priority": 0.7,
+            "related_issues": [
+              "salary_cap_structure"
+            ],
+            "anchors": [
+              {
+                "condition": "salary_cap_structure = No cap \u2014 pure free market",
+                "score": 0.0,
+                "reason": "A pure free market with no cap is the primary driver of the bankruptcy fear, as it creates uncontrolled spending spirals."
+              },
+              {
+                "condition": "salary_cap_structure = Soft cap with luxury tax \u2014 $34M cap, 100% tax on overages",
+                "score": 0.35,
+                "reason": "While better than no cap, a soft cap still allows wealthy teams to outspend, failing to fully secure the long-term viability of smaller franchises."
+              },
+              {
+                "condition": "salary_cap_structure = Soft cap with bird exceptions \u2014 $34M cap, teams can re-sign own players over cap",
+                "score": 0.65,
+                "reason": "This structure provides more control over spending while allowing teams to retain their talent, offering a balanced approach to cost management."
+              },
+              {
+                "condition": "salary_cap_structure = Hard cap \u2014 no exceptions, $30M per team",
+                "score": 1.0,
+                "reason": "A hard cap is the most effective mechanism to guarantee cost certainty and prevent the catastrophic financial failure of franchises."
+              }
+            ]
+          }
+        ]
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "phase_change",
+      "data": {
+        "phase": "discovery",
+        "round": 0,
+        "message": "Entering interest discovery phase"
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "6a471c77",
+        "timestamp": "2026-03-23T21:08:53.443792",
+        "party_id": "owners",
+        "move_type": "disclose_interest",
+        "package": null,
+        "argument": null,
+        "disclosed_interest": {
+          "id": "63d84a6d",
+          "description": "Financial sustainability of all 29 franchises, noting that 13 teams reported operating losses last season.",
+          "interest_type": "need",
+          "priority": 0.95,
+          "related_issues": [
+            "Salary Cap Structure",
+            "Basketball-Related Income Split"
+          ],
+          "disclosed": true,
+          "satisfaction_anchors": []
+        },
+        "references": [],
+        "reasoning": "Theory of Mind: The players are likely focused on maximizing their individual earnings and career security, fearing that any 'cap' will artificially suppress their market value. They are likely suspicious of owner claims about losses, viewing them as bargaining leverage. Strategic calculation: I need to build credibility by sharing transparent data (the 13 teams losing money) before diving into hard bargaining. This establishes an objective basis for cost control. By disclosing this 'need' first, I frame the conversation around the survival of the league, which is a shared interest\u2014without a healthy league, there are no player salaries. This move invites them to engage with the economic reality of the business.",
+        "phase": "discovery",
+        "round": 1,
+        "turn": 0,
+        "party_name": "NBA Owners (Commissioner's Office)"
+      },
+      "delay_ms": 2012
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "d66c892a",
+        "timestamp": "2026-03-23T21:08:55.390881",
+        "party_id": "players",
+        "move_type": "disclose_interest",
+        "package": null,
+        "argument": null,
+        "disclosed_interest": {
+          "id": "33f98765",
+          "description": "The players are committed to ensuring the long-term viability of the league, but this must be balanced with our need to preserve fair market value for players through unrestricted free agency and a fair share of the revenue we generate.",
+          "interest_type": "need",
+          "priority": 0.95,
+          "related_issues": [
+            "free_agency",
+            "revenue_sharing"
+          ],
+          "disclosed": true,
+          "satisfaction_anchors": []
+        },
+        "references": [],
+        "reasoning": "Theory of Mind: The owners are clearly focused on cost control due to reported operating losses. They fear financial instability. My strategy is to validate their concern for sustainability while firmly establishing that player compensation is not the sole driver of those losses. By disclosing my need for market-based free agency and fair revenue sharing early, I signal that while I am open to discussing sustainability, I will not accept a deal that suppresses player value. This balances cooperation with clear boundaries.",
+        "phase": "discovery",
+        "round": 1,
+        "turn": 1,
+        "party_name": "NBA Players Association (NBPA)"
+      },
+      "delay_ms": 1947
+    },
+    {
+      "type": "mediator_note",
+      "data": {
+        "id": "d1f8a8f1",
+        "timestamp": "2026-03-23T21:08:56.681561",
+        "party_id": "mediator",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "c4de4040",
+          "claim": "Both the NBA Owners and the NBPA have expressed an interest in the long-term financial health and sustainability of the league. While they disagree on the specific mechanisms of the salary cap and revenue distribution, there is a shared recognition that the 1997-98 economic data showing operating losses for nearly half the league is a problem that needs to be addressed for the benefit of both players and owners.",
+          "grounds": [
+            "Both parties are aligned on the need to ensure the long-term economic viability of the league to protect the integrity of the game and player career security.",
+            "There is potential to trade off salary cap flexibility for guaranteed revenue floors, linking player compensation security to the overall profitability of the league."
+          ],
+          "criterion_id": null,
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": null,
+        "phase": "discovery",
+        "round": 1,
+        "turn": 2,
+        "party_name": "Mediator"
+      },
+      "delay_ms": 1290
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "b2e01058",
+        "timestamp": "2026-03-23T21:08:58.825722",
+        "party_id": "owners",
+        "move_type": "invoke_criterion",
+        "package": null,
+        "argument": {
+          "id": "0baa3538",
+          "claim": "The current economic model is unsustainable, as evidenced by widespread operating losses, and requires structural adjustments to the salary cap to ensure the league's survival.",
+          "grounds": [
+            "13 of 29 NBA franchises reported operating losses during the 1997-98 season, signaling a systemic issue with the current cost structure.",
+            "The NFL salary cap precedent demonstrates that a structured cap system can facilitate long-term league stability and competitive balance, providing a standard for professional sports leagues."
+          ],
+          "criterion_id": "economic_analysis_of_franchise_profitability",
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "The NBPA has acknowledged the need for long-term viability, which creates common ground. My theory of mind suggests they fear a 'hard cap' because it limits their individual earnings, whereas owners fear bankruptcy. By invoking the profitability data, I am centering the conversation on objective financial reality rather than just positional demands. This moves us toward a solution where players get paid, but within a framework that keeps teams solvent, aligning with my need for cost control.",
+        "phase": "discovery",
+        "round": 2,
+        "turn": 0,
+        "party_name": "NBA Owners (Commissioner's Office)"
+      },
+      "delay_ms": 2144
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "c3096a50",
+        "timestamp": "2026-03-23T21:09:01.698044",
+        "party_id": "players",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "22951e82",
+          "claim": "The sustainability of the league must be measured by total growth and competitive balance, not just the operating losses of individual franchises.",
+          "grounds": [
+            "League revenue has consistently grown over the last decade, indicating that the product remains highly valuable to fans and media partners.",
+            "Focusing solely on individual team operating losses ignores the substantial appreciation in overall franchise values and capital gains realized by owners.",
+            "A fair revenue split ensures that players, who are the primary drivers of this growth, are properly incentivized, which in turn fuels the league's continued commercial success."
+          ],
+          "criterion_id": "market_data",
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: The owners are clearly prioritizing cost control and mitigating losses. They fear financial instability and are using the 1997-98 loss data to justify a shift toward a more restrictive cap model. My goal is to pivot from their defensive 'loss prevention' framing to a 'growth and value' framing. By arguing that revenue growth and franchise value appreciation matter more than annual operating losses, I protect our interests in a fair revenue split and free agency. I am staying warm and cooperative by acknowledging the league's health as a shared priority while firmly countering their limited focus on operating losses.",
+        "phase": "discovery",
+        "round": 2,
+        "turn": 1,
+        "party_name": "NBA Players Association (NBPA)"
+      },
+      "delay_ms": 2872
+    },
+    {
+      "type": "mediator_note",
+      "data": {
+        "id": "f43c919d",
+        "timestamp": "2026-03-23T21:09:03.029366",
+        "party_id": "mediator",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "3daa3be9",
+          "claim": "The parties are currently deadlocked on the definition of 'sustainability.' The owners define it as mitigating immediate operating losses through a stricter cap, while the players define it as long-term revenue growth and competitive integrity. My role is to bridge this gap by shifting the focus from the definition of the problem to the shared goal of a profitable, growing league.",
+          "grounds": [
+            "Both parties share an underlying interest in the long-term viability and growth of the league; they simply disagree on the mechanism to achieve it.",
+            "There is potential to trade off salary cap rigidity (which owners want) for revenue sharing or guaranteed floors (which players may value to ensure stability even if the cap is structured differently)."
+          ],
+          "criterion_id": null,
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": null,
+        "phase": "discovery",
+        "round": 2,
+        "turn": 2,
+        "party_name": "Mediator"
+      },
+      "delay_ms": 1331
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "ab4e4b25",
+        "timestamp": "2026-03-23T21:09:05.211660",
+        "party_id": "owners",
+        "move_type": "disclose_interest",
+        "package": null,
+        "argument": null,
+        "disclosed_interest": {
+          "id": "ac041a32",
+          "description": "We are deeply concerned that the current escalation of max contracts is unsustainable, as these individual salaries are consuming 55% of total team revenue, leaving little room for operational viability or equitable distribution.",
+          "interest_type": "concern",
+          "priority": 0.9,
+          "related_issues": [
+            "max_contract_terms"
+          ],
+          "disclosed": true,
+          "satisfaction_anchors": []
+        },
+        "references": [],
+        "reasoning": "Theory of Mind: The NBPA is focused on 'fair market value' and revenue share, likely fearing that any restriction on contracts directly reduces the earning potential of their superstar members. They equate league health with total growth rather than individual team profitability. Strategic Calculation: I need to shift the conversation from a philosophical debate about 'sustainability' to the specific mechanic of max contracts. By highlighting the 55% revenue drain, I am framing the issue around objective economic data rather than just owner preference. This opens the door for a future trade-off where we might offer revenue sharing or better minimums in exchange for caps on top-tier salaries.",
+        "phase": "discovery",
+        "round": 3,
+        "turn": 0,
+        "party_name": "NBA Owners (Commissioner's Office)"
+      },
+      "delay_ms": 2182
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "d6bddf50",
+        "timestamp": "2026-03-23T21:09:07.125613",
+        "party_id": "players",
+        "move_type": "disclose_interest",
+        "package": null,
+        "argument": null,
+        "disclosed_interest": {
+          "id": "a3c0f0f4",
+          "description": "We are deeply concerned about the career longevity of the average player and the need to protect mid-level and veteran players, ensuring that the league's success is shared beyond just the top superstars.",
+          "interest_type": "need",
+          "priority": 0.85,
+          "related_issues": [
+            "minimum_salary",
+            "max_contract_terms"
+          ],
+          "disclosed": true,
+          "satisfaction_anchors": []
+        },
+        "references": [],
+        "reasoning": "Theory of Mind: The owners are focused on cost control and franchise profitability, specifically fearing that max contracts are 'eating up' the revenue pie. They want to shift the distribution of wealth. My move acknowledges their concern about salary distribution while steering the conversation toward the protection of the broader player base (mid-level/veterans). By framing this as a desire for a balanced league, I am signaling that we are open to discussing the structure of contracts if it ensures stability for the average player, not just the superstars. This attempts to move the discussion from 'cutting costs' to 'structuring for longevity,' which is a more cooperative framing.",
+        "phase": "discovery",
+        "round": 3,
+        "turn": 1,
+        "party_name": "NBA Players Association (NBPA)"
+      },
+      "delay_ms": 1913
+    },
+    {
+      "type": "mediator_note",
+      "data": {
+        "id": "2c86b4b0",
+        "timestamp": "2026-03-23T21:09:09.547346",
+        "party_id": "mediator",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "f518f3aa",
+          "claim": "Both parties have now disclosed their interests, and while they remain far apart on specific mechanisms, both have confirmed that their primary objective is the long-term viability of the league. The Owners are focused on cost control to address profitability, while the Players are focused on ensuring that the league's growth does not come at the expense of their earning potential or competitive freedom. By acknowledging that both sides need a healthy, growing business to achieve their goals, we can move away from positional bickering toward a collaborative search for a model that balances cost management with revenue growth.",
+          "grounds": [
+            "Both the NBA Owners and the NBPA have explicitly identified 'long-term league health and growth' as their primary shared interest, even if they disagree on the best fiscal path to reach it.",
+            "There is a potential trade-off between the salary cap structure and revenue splits; if players move closer to the owners' preference for a more restrictive cap to address operating losses, owners might consider a higher revenue percentage or more flexible free agency rules to maintain competitive balance and player earnings."
+          ],
+          "criterion_id": null,
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": null,
+        "phase": "discovery",
+        "round": 3,
+        "turn": 2,
+        "party_name": "Mediator"
+      },
+      "delay_ms": 2421
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "84fda017",
+        "timestamp": "2026-03-23T21:09:11.471245",
+        "party_id": "owners",
+        "move_type": "invoke_criterion",
+        "package": null,
+        "argument": {
+          "id": "be1dc96b",
+          "claim": "The NFL's hard cap model provides a proven framework for ensuring both long-term franchise viability and competitive balance, which addresses the financial distress currently facing nearly half of our teams.",
+          "grounds": [
+            "Economic analysis shows 13 of 29 teams are operating at a loss, necessitating a more controlled cost structure.",
+            "The NFL's hard cap at 63% of revenue has successfully stabilized team costs while maintaining league-wide competitiveness.",
+            "This approach directly addresses the owners' core interest in fiscal solvency while providing a predictable revenue-sharing environment that benefits all stakeholders."
+          ],
+          "criterion_id": "NFL salary cap precedent",
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: The NBPA is concerned about career longevity and fair distribution for non-superstars. They fear a hard cap will restrict the market, but they are clearly interested in 'league success.' I need to pivot from the 'salary cap' as a punitive measure to a 'growth and stability' tool. By invoking the NFL precedent, I am framing the hard cap not as a way to cut costs, but as a way to ensure the league's survival so that players can continue to have a viable career path. This move bridges the gap between owner financial concerns and player interest in a growing, sustainable league.",
+        "phase": "discovery",
+        "round": 4,
+        "turn": 0,
+        "party_name": "NBA Owners (Commissioner's Office)"
+      },
+      "delay_ms": 1923
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "b9253353",
+        "timestamp": "2026-03-23T21:09:13.984887",
+        "party_id": "players",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "8bb61a61",
+          "claim": "The NFL hard cap model is inappropriate for the NBA, as it ignores the unique star-driven nature of our game and the competitive balance that a soft cap with Bird exceptions facilitates.",
+          "grounds": [
+            "The NBA has a much smaller roster size than the NFL, meaning individual player impact is significantly higher; restricting this through a hard cap would suppress market value for top talent unfairly.",
+            "The Bird exception model has historically allowed teams to retain their own talent, which fosters team loyalty and builds fan bases, driving the very BRI that ensures league profitability.",
+            "A hard cap would likely lead to a 'race to the bottom' for veteran salaries, directly contradicting the need to protect mid-level and veteran players which is a core interest for our membership."
+          ],
+          "criterion_id": "MLB salary arbitration model",
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: The owners are clearly pushing for cost certainty and control, fearing the 'escalation' of salaries. They use the NFL model because it is the gold standard for owner-controlled costs. My strategy is to pivot away from the NFL model by highlighting the differences in our sport (star-driven) and the benefits of our existing soft cap model. I need to keep the discussion on 'competitive balance' and 'market value' to counter their 'financial sustainability' narrative. I will argue against the hard cap while referencing the MLB model as a counter-precedent that supports higher player earnings and growth.",
+        "phase": "discovery",
+        "round": 4,
+        "turn": 1,
+        "party_name": "NBA Players Association (NBPA)"
+      },
+      "delay_ms": 2513
+    },
+    {
+      "type": "mediator_note",
+      "data": {
+        "id": "60bbf16d",
+        "timestamp": "2026-03-23T21:09:16.955868",
+        "party_id": "mediator",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "fac31600",
+          "claim": "The parties are currently engaged in a debate over which external model (NFL vs. NBA history) should dictate the rules, rather than focusing on the specific mechanics that could resolve their differences. They are stuck on the 'hard cap vs. soft cap' dichotomy. I need to move them toward identifying the underlying interests\u2014cost certainty for owners and player mobility/earning potential for the NBPA\u2014to see if a hybrid structure can satisfy both.",
+          "grounds": [
+            "Both parties are deeply invested in the long-term success of the league, and both acknowledge that the current financial state is problematic. They agree that the league needs a structure that supports both franchise health and player prosperity, even if they disagree on the mechanism.",
+            "There is a potential trade-off between the flexibility of a soft cap (Players' interest in mobility) and the cost-certainty mechanisms like luxury taxes (Owners' interest in profitability). A system that uses a soft cap but includes a meaningful tax or revenue-sharing component might bridge the gap."
+          ],
+          "criterion_id": null,
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": null,
+        "phase": "discovery",
+        "round": 4,
+        "turn": 2,
+        "party_name": "Mediator"
+      },
+      "delay_ms": 2970
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "13e0b10f",
+        "timestamp": "2026-03-23T21:09:19.617688",
+        "party_id": "owners",
+        "move_type": "propose",
+        "package": {
+          "id": "91566d8f",
+          "issue_values": {
+            "Salary Cap Structure": "Soft cap with luxury tax \u2014 $34M cap, 100% tax on overages",
+            "Basketball-Related Income Split": "Players get 52% of BRI",
+            "Maximum Contract Terms": "5-year max, 25% of team cap for own players, 4-year for free agents",
+            "Minimum Player Salary": "$300K minimum for rookies, $1M for 10-year veterans",
+            "Free Agency Rules": "Restricted until 4 years, mid-level exception for capped teams"
+          },
+          "rationale": "This package creates a balanced, sustainable structure. By moving to a soft cap with a luxury tax, we protect the competitive balance and team profitability while moving away from a rigid hard cap. Lowering the BRI split to 52% addresses the owners' need for cost control, while the inclusion of a mid-level exception and structured minimums protects the career longevity and earnings of mid-level and veteran players, directly addressing the NBPA's concerns.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: The NBPA fears that a hard cap will destroy individual earning potential and reduce player leverage. They value career longevity and fair compensation for non-superstars. My move shifts from the rigid NFL-style hard cap (which they rejected) to a soft cap with luxury tax, which maintains some flexibility for them. I am proposing a 52% BRI split (a compromise from the current 57%) to address the owners' financial losses while offering a more moderate reduction than the initial hard-line stance. This package balances cost control with the players' desire for a career-long earnings structure.",
+        "phase": "discovery",
+        "round": 5,
+        "turn": 0,
+        "party_name": "NBA Owners (Commissioner's Office)"
+      },
+      "delay_ms": 2661
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "0fe3475e",
+        "timestamp": "2026-03-23T21:09:21.751754",
+        "party_id": "players",
+        "move_type": "propose",
+        "package": {
+          "id": "3577ac9b",
+          "issue_values": {
+            "Salary Cap Structure": "Soft cap with bird exceptions \u2014 $34M cap, teams can re-sign own players over cap",
+            "Basketball-Related Income Split": "Players get 57% of BRI (current)",
+            "Maximum Contract Terms": "7-year max, no salary limit",
+            "Minimum Player Salary": "Guaranteed minimum plus pension after 3 seasons",
+            "Free Agency Rules": "Unrestricted free agency after 3 years"
+          },
+          "rationale": "This proposal centers on maintaining the current revenue share and free agency rights which are essential to player equity. By using the 'Soft cap with bird exceptions' model, we provide owners with the cost control of a cap while allowing teams to retain their own talent, which fosters star-driven team identity and fan engagement, ultimately driving the very revenue the owners seek to protect.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: The owners are clearly afraid of rising costs and are pushing for an NFL-style hard cap to ensure profitability for their struggling franchises. They care about predictability. However, they also need stars to keep the league marketable. My move counters their restrictive proposal by offering a 'Soft cap with bird exceptions' which addresses their need for a cap while protecting player agency and the star-driven nature of the NBA. I am pushing for the current BRI split because it is the standard that has fueled the league's growth, and I am prioritizing the 7-year max contract to protect the market value of our stars, which is a major point of contention for them but vital for our members.",
+        "phase": "discovery",
+        "round": 5,
+        "turn": 1,
+        "party_name": "NBA Players Association (NBPA)"
+      },
+      "delay_ms": 2134
+    },
+    {
+      "type": "mediator_note",
+      "data": {
+        "id": "4aa8cd7a",
+        "timestamp": "2026-03-23T21:09:23.771605",
+        "party_id": "mediator",
+        "move_type": "propose",
+        "package": {
+          "id": "233aeaef",
+          "issue_values": {
+            "Salary Cap Structure": "Soft cap with bird exceptions \u2014 $34M cap, teams can re-sign own players over cap",
+            "Basketball-Related Income Split": "Players get 54.5% of BRI",
+            "Maximum Contract Terms": "6-year max, 25% of team cap",
+            "Minimum Player Salary": "$300K minimum for rookies, $1M for 10-year veterans, plus pension",
+            "Free Agency Rules": "Restricted until 4 years, mid-level exception for capped teams"
+          },
+          "rationale": "This package synthesizes the parties' competing interests: it maintains the 'Bird exception' structure the players value for roster continuity, while establishing a compromise BRI split that acknowledges the owners' profitability concerns. The contract and free agency terms reflect a middle ground between the owners' desire for cost control and the players' desire for career longevity and market mobility.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": null,
+        "phase": "discovery",
+        "round": 5,
+        "turn": 2,
+        "party_name": "Mediator"
+      },
+      "delay_ms": 2019
+    },
+    {
+      "type": "phase_change",
+      "data": {
+        "phase": "generation",
+        "round": 5,
+        "message": "Entering option generation phase \u2014 agents propose packages"
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "5e784e19",
+        "timestamp": "2026-03-23T21:09:26.569191",
+        "party_id": "owners",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "e3868fbb",
+          "claim": "The mediator's proposed BRI split and Bird exception structure do not adequately address the financial distress facing nearly half of our franchises.",
+          "grounds": [
+            "Thirteen of twenty-nine teams reported operating losses last season, proving that the current revenue sharing and salary structures are insufficient to maintain league-wide viability.",
+            "Maintaining a 57% or even 54.5% BRI split leaves insufficient capital for teams to cover fixed operational costs and invest in the long-term growth of the game.",
+            "The Bird exception, while beneficial for player continuity, often accelerates the 'superstar salary' inflation that is currently consuming 55% of team revenues.",
+            "We are open to discussing the mediator's proposed minimum salary and pension improvements as a way to protect veteran and mid-level players, but this must be balanced against systemic cost controls."
+          ],
+          "criterion_id": "market_data",
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: The NBPA is focused on preserving historical revenue shares and maximum player mobility (unrestricted free agency). They fear that any 'hard' restriction will reduce their lifetime earnings and bargaining power. My strategy is to acknowledge their concern for veteran/mid-level players (by accepting the mediator's pension/minimums) while firmly rejecting the unsustainable BRI split and the unrestricted free agency proposal, which would exacerbate the competitive imbalance between large and small markets. I am using an 'argue' move to ground our position in the objective market data of team losses, moving away from simple positional bargaining.",
+        "phase": "generation",
+        "round": 6,
+        "turn": 0,
+        "party_name": "NBA Owners (Commissioner's Office)"
+      },
+      "delay_ms": 2795
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "bb1c3932",
+        "timestamp": "2026-03-23T21:09:30.593568",
+        "party_id": "players",
+        "move_type": "meso",
+        "package": {
+          "id": "dabe6f7b",
+          "issue_values": {
+            "Salary Cap Structure": "Soft cap with luxury tax \u2014 $34M cap, 100% tax on overages",
+            "Basketball-Related Income Split": "Players get 55% of BRI",
+            "Maximum Contract Terms": "6-year max, 25% of team cap",
+            "Minimum Player Salary": "$300K minimum for rookies, $1M for 10-year veterans, plus pension",
+            "Free Agency Rules": "Restricted until 4 years, mid-level exception for capped teams"
+          },
+          "rationale": "This package represents a significant move toward the owners' financial sustainability concerns while protecting player interests. By accepting the luxury tax and a moderate BRI adjustment, we provide the owners with the cost control they demand, while the 6-year max and standardized minimums/pension ensure security for the broader player base.",
+          "pareto_rank": null
+        },
+        "argument": {
+          "id": "3cd1ffc0",
+          "claim": "We are willing to move toward a luxury tax model to address owner profitability concerns, provided that the BRI split remains at a level that recognizes the players' primary role in generating league revenue.",
+          "grounds": [
+            "The owners have expressed consistent concerns regarding operating losses, and a luxury tax model offers a mechanism to curb excessive spending while avoiding the rigid, star-stifling nature of a hard cap.",
+            "A 55% BRI split represents a fair compromise between the current 57% and the owners' lower requests, maintaining the league's competitive balance.",
+            "The inclusion of pension benefits and modernized minimums provides essential security for veteran players, which is a core interest for the NBPA."
+          ],
+          "criterion_id": null,
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: The owners are focused on cost control and franchise profitability. They rejected the Bird exception because it allows high-revenue teams to bypass spending limits, which they fear hurts league-wide parity and their bottom line. They are likely afraid of a 'runaway' salary market. Strategy: I am moving away from my initial 'ideal' position to show cooperative intent. By conceding on the soft cap/luxury tax and moving on BRI, I am addressing their primary fear (uncontrolled spending) while securing structural protections for our players. This is a deliberate step to break the deadlock.",
+        "phase": "generation",
+        "round": 6,
+        "turn": 1,
+        "party_name": "NBA Players Association (NBPA)"
+      },
+      "delay_ms": 4000
+    },
+    {
+      "type": "mediator_note",
+      "data": {
+        "id": "30203814",
+        "timestamp": "2026-03-23T21:09:33.544451",
+        "party_id": "mediator",
+        "move_type": "propose",
+        "package": {
+          "id": "b775ceef",
+          "issue_values": {
+            "Salary Cap Structure": "Soft cap with luxury tax \u2014 $34M cap, 100% tax on overages",
+            "Basketball-Related Income Split": "Players get 54.5% of BRI",
+            "Maximum Contract Terms": "6-year max, 25% of team cap",
+            "Minimum Player Salary": "$300K minimum for rookies, $1M for 10-year veterans, plus pension",
+            "Free Agency Rules": "Restricted until 4 years, mid-level exception for capped teams"
+          },
+          "rationale": "This package bridges the gap by adopting the Players' willingness to explore a luxury tax model to address owner profitability, while setting the BRI split at a midpoint that recognizes both the revenue growth interests of the players and the cost-control requirements of the owners.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": null,
+        "phase": "generation",
+        "round": 6,
+        "turn": 2,
+        "party_name": "Mediator"
+      },
+      "delay_ms": 2950
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "d7a8aac5",
+        "timestamp": "2026-03-23T21:09:36.020398",
+        "party_id": "owners",
+        "move_type": "propose",
+        "package": {
+          "id": "ebc92520",
+          "issue_values": {
+            "Salary Cap Structure": "Soft cap with luxury tax \u2014 $34M cap, 100% tax on overages",
+            "Basketball-Related Income Split": "Players get 54% of BRI",
+            "Maximum Contract Terms": "6-year max, 25% of team cap",
+            "Minimum Player Salary": "$300K minimum for rookies, $1M for 10-year veterans, plus pension",
+            "Free Agency Rules": "Restricted until 4 years, mid-level exception for capped teams"
+          },
+          "rationale": "This proposal acknowledges the NBPA's recent movement toward a luxury tax model while moving us closer to the financial sustainability required to end the lockout. A 54% BRI split represents a fair middle ground that addresses the owners' need to curb salary escalation while still providing players with a significant share of revenue.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: The NBPA has demonstrated they are willing to shift from their 'Bird rights' position toward a luxury tax model, signaling that they recognize the owners' financial constraints. They care deeply about the BRI split and contract security. Strategy: By accepting the luxury tax structure they offered, I am building trust and meeting their interest in a modern cap system. By pushing for a 54% BRI split (midway between their 55% and my 52% target), I am attempting to bridge the final gap on the core revenue issue. This move creates value by aligning our structural preferences while negotiating the monetary split.",
+        "phase": "generation",
+        "round": 7,
+        "turn": 0,
+        "party_name": "NBA Owners (Commissioner's Office)"
+      },
+      "delay_ms": 2475
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "6614f439",
+        "timestamp": "2026-03-23T21:09:38.659102",
+        "party_id": "players",
+        "move_type": "propose",
+        "package": {
+          "id": "0dd5caa4",
+          "issue_values": {
+            "Salary Cap Structure": "Soft cap with luxury tax \u2014 $34M cap, 100% tax on overages",
+            "Basketball-Related Income Split": "Players get 54.25% of BRI",
+            "Maximum Contract Terms": "6-year max, 25% of team cap",
+            "Minimum Player Salary": "$300K minimum for rookies, $1M for 10-year veterans, plus pension",
+            "Free Agency Rules": "Restricted until 4 years, mid-level exception for capped teams"
+          },
+          "rationale": "We are making a good-faith effort to close the final gap on revenue sharing. By moving to 54.25%, we are showing our commitment to finding a middle ground that addresses owner profitability while ensuring our players receive a fair share of the league's growth.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: The Owners are clearly focused on cost certainty and minimizing revenue outflow (BRI). Their movement from 52% to 54% suggests they are willing to deal if they get the structure they want (luxury tax, 6-year max). They are likely afraid of a long lockout that hurts their brand, but they are also under pressure from their own ownership groups to keep costs down. Strategic Calculation: I have already conceded the structural changes they demanded (luxury tax, contract caps). The remaining gap on BRI is small (0.25%). By splitting the difference, I am signaling that we are ready to close this deal while maintaining a fair revenue share for the players. This package keeps the structural integrity of the previous mediator and owner proposals while refining the revenue split to a point where both sides can claim a win.",
+        "phase": "generation",
+        "round": 7,
+        "turn": 1,
+        "party_name": "NBA Players Association (NBPA)"
+      },
+      "delay_ms": 2638
+    },
+    {
+      "type": "mediator_note",
+      "data": {
+        "id": "d41ff0ef",
+        "timestamp": "2026-03-23T21:09:41.004325",
+        "party_id": "mediator",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "8e3b0557",
+          "claim": "The parties have reached a remarkable level of consensus, with both sides now accepting the luxury tax structure, the 6-year max contract, the minimum salary requirements, and the restricted free agency rules. The remaining delta on the BRI split is a mere 0.25%, representing a shift from a stalemate to a fine-tuning phase.",
+          "grounds": [
+            "Both parties have moved past the structural debate and now fundamentally agree on the core components of a new economic system, prioritizing league stability and predictable cost controls.",
+            "With the structural issues settled, the remaining 0.25% gap on BRI can be bridged by either party as a final gesture of goodwill to finalize the agreement, or by incorporating a performance-based kicker tied to revenue growth targets."
+          ],
+          "criterion_id": null,
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": null,
+        "phase": "generation",
+        "round": 7,
+        "turn": 2,
+        "party_name": "Mediator"
+      },
+      "delay_ms": 2345
+    },
+    {
+      "type": "phase_change",
+      "data": {
+        "phase": "bargaining",
+        "round": 7,
+        "message": "Entering bargaining phase \u2014 proposals and counterproposals"
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "e396b8be",
+        "timestamp": "2026-03-23T21:09:42.966419",
+        "party_id": "owners",
+        "move_type": "accept",
+        "package": {
+          "id": "be917051",
+          "issue_values": {
+            "Salary Cap Structure": "Soft cap with luxury tax \u2014 $34M cap, 100% tax on overages",
+            "Basketball-Related Income Split": "Players get 54.25% of BRI",
+            "Maximum Contract Terms": "6-year max, 25% of team cap",
+            "Minimum Player Salary": "$300K minimum for rookies, $1M for 10-year veterans, plus pension",
+            "Free Agency Rules": "Restricted until 4 years, mid-level exception for capped teams"
+          },
+          "rationale": "The NBPA has made a significant good-faith move to 54.25% BRI. Accepting this offer balances our need for cost control via the luxury tax with the players' need for a fair share of revenue, effectively ending the lockout and restoring the league's stability.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: The NBPA has moved significantly to accept the luxury tax, which was our primary mechanism for cost control. They are clearly signaling a desire to avoid a lost season and have compromised on the BRI split. Strategic Calculation: The gap between 54% and 54.25% is marginal compared to the $100M+ monthly losses we incur during a lockout. Accepting this deal preserves the luxury tax structure, which is the most critical tool for managing team profitability. My move is to accept their latest proposal to finalize the agreement.",
+        "phase": "bargaining",
+        "round": 8,
+        "turn": 0,
+        "party_name": "NBA Owners (Commissioner's Office)"
+      },
+      "delay_ms": 4000
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "ffd7e210",
+        "timestamp": "2026-03-23T21:09:48.903429",
+        "party_id": "players",
+        "move_type": "accept",
+        "package": {
+          "id": "15f04751",
+          "issue_values": {
+            "Salary Cap Structure": "Soft cap with luxury tax \u2014 $34M cap, 100% tax on overages",
+            "Basketball-Related Income Split": "Players get 54.25% of BRI",
+            "Maximum Contract Terms": "6-year max, 25% of team cap",
+            "Minimum Player Salary": "$300K minimum for rookies, $1M for 10-year veterans, plus pension",
+            "Free Agency Rules": "Restricted until 4 years, mid-level exception for capped teams"
+          },
+          "rationale": "We accept this agreement as it provides long-term stability for the league while ensuring fair compensation and protection for our players, particularly through the inclusion of pension benefits and a reasonable revenue share.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: The owners have prioritized cost control and predictability, which they achieved through the luxury tax structure and a reduced BRI share. They were willing to accept my last proposal because it met their financial targets while avoiding the disruption of a lockout. Strategy: Accepting the deal now solidifies the gains made for the players (pension, veteran protections, reasonable salary floor) and avoids the risk of the negotiation stalling or the owners retracting their offer. This fulfills the NBPA's need to get players back on the court while securing a fair economic framework.",
+        "phase": "bargaining",
+        "round": 8,
+        "turn": 1,
+        "party_name": "NBA Players Association (NBPA)"
+      },
+      "delay_ms": 4000
+    },
+    {
+      "type": "settlement",
+      "data": {
+        "agreement": {
+          "id": "15f04751",
+          "issue_values": {
+            "Salary Cap Structure": "Soft cap with luxury tax \u2014 $34M cap, 100% tax on overages",
+            "Basketball-Related Income Split": "Players get 54.25% of BRI",
+            "Maximum Contract Terms": "6-year max, 25% of team cap",
+            "Minimum Player Salary": "$300K minimum for rookies, $1M for 10-year veterans, plus pension",
+            "Free Agency Rules": "Restricted until 4 years, mid-level exception for capped teams"
+          },
+          "rationale": "We accept this agreement as it provides long-term stability for the league while ensuring fair compensation and protection for our players, particularly through the inclusion of pension benefits and a reasonable revenue share.",
+          "pareto_rank": null
+        },
+        "total_rounds": 8,
+        "total_moves": 23
+      },
+      "delay_ms": 1191
+    }
+  ],
+  "metrics": {
+    "outcome": "agreement",
+    "party_utilities": {
+      "owners": 0.0,
+      "players": 0.0
+    },
+    "party_batna_surplus": {
+      "owners": -0.35,
+      "players": -0.25
+    },
+    "social_welfare": 0.0,
+    "pareto_efficient": false,
+    "nash_product": 1e-06,
+    "integrative_index": 0.0,
+    "total_rounds": 8,
+    "total_moves": 23,
+    "move_breakdown": {
+      "disclose_interest": 4,
+      "argue": 8,
+      "invoke_criterion": 2,
+      "propose": 6,
+      "meso": 1,
+      "accept": 2
+    },
+    "disclosure_rate": 0.4,
+    "phases_visited": [
+      "discovery",
+      "generation",
+      "bargaining",
+      "settlement"
+    ],
+    "agreement": {
+      "id": "15f04751",
+      "issue_values": {
+        "Salary Cap Structure": "Soft cap with luxury tax \u2014 $34M cap, 100% tax on overages",
+        "Basketball-Related Income Split": "Players get 54.25% of BRI",
+        "Maximum Contract Terms": "6-year max, 25% of team cap",
+        "Minimum Player Salary": "$300K minimum for rookies, $1M for 10-year veterans, plus pension",
+        "Free Agency Rules": "Restricted until 4 years, mid-level exception for capped teams"
+      },
+      "rationale": "We accept this agreement as it provides long-term stability for the league while ensuring fair compensation and protection for our players, particularly through the inclusion of pension benefits and a reasonable revenue share.",
+      "pareto_rank": null
+    }
+  },
+  "critique": [
+    {
+      "severity": "medium",
+      "description": "Integrative index 0.00 < 1.0 \u2014 value may have been destroyed."
+    }
+  ]
+}

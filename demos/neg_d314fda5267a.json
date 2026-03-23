@@ -1,0 +1,2519 @@
+{
+  "session_id": "neg_d314fda5267a",
+  "scenario_name": "Apple Inc. (CEO Office) vs Samsung Electronics (CEO Office)",
+  "description": "2 parties, 5 issues, impasse",
+  "parties": [
+    {
+      "id": "apple",
+      "name": "Apple Inc. (CEO Office)",
+      "role": "Plaintiff alleging smartphone design patent infringement"
+    },
+    {
+      "id": "samsung",
+      "name": "Samsung Electronics (CEO Office)",
+      "role": "Defendant in design patent infringement case"
+    }
+  ],
+  "issues": [
+    {
+      "id": "damages_payment",
+      "name": "Financial Settlement",
+      "description": "",
+      "issue_type": "monetary",
+      "options": [],
+      "range": [
+        0.0,
+        2000000000.0
+      ],
+      "is_divisible": true
+    },
+    {
+      "id": "design_patents",
+      "name": "Design Patent Validity Acknowledgment",
+      "description": "",
+      "issue_type": "categorical",
+      "options": [
+        "Samsung acknowledges infringement on all 7 patents",
+        "Samsung acknowledges infringement on 3 core design patents, disputes 4",
+        "No admission \u2014 settlement without admission of liability",
+        "Both parties acknowledge the other's IP contributions"
+      ],
+      "range": null,
+      "is_divisible": false
+    },
+    {
+      "id": "licensing_terms",
+      "name": "Patent Licensing Agreement",
+      "description": "",
+      "issue_type": "categorical",
+      "options": [
+        "No licensing \u2014 Samsung must design around all Apple patents",
+        "Limited license for existing products only, no future products",
+        "Broad license at $15 per Samsung device sold",
+        "Broad license at $5 per device with volume discount"
+      ],
+      "range": null,
+      "is_divisible": false
+    },
+    {
+      "id": "cross_licensing",
+      "name": "Cross-Licensing Samsung's Patents",
+      "description": "",
+      "issue_type": "categorical",
+      "options": [
+        "No cross-licensing \u2014 Apple keeps its own patents",
+        "Samsung grants Apple license to wireless communication patents at $2/device",
+        "Mutual cross-license \u2014 both portfolios available to both parties",
+        "Mutual cross-license with royalty offset (net payment by larger user)"
+      ],
+      "range": null,
+      "is_divisible": false
+    },
+    {
+      "id": "injunction_scope",
+      "name": "Product Injunction Terms",
+      "description": "",
+      "issue_type": "categorical",
+      "options": [
+        "Samsung pulls all infringing products from US market immediately",
+        "Samsung redesigns flagged features within 6 months, no pull",
+        "No injunction \u2014 Samsung modifies future products only",
+        "No injunction, both parties agree to 90-day design review process for future disputes"
+      ],
+      "range": null,
+      "is_divisible": false
+    }
+  ],
+  "criteria": [
+    {
+      "id": "6e2e8e4a",
+      "name": "Motorola-Microsoft patent settlement",
+      "description": "",
+      "source": "precedent",
+      "applies_to": [
+        "licensing_terms",
+        "damages_payment"
+      ],
+      "reference_value": "Settled at $1.8/device cross-licensing rate in 2013"
+    },
+    {
+      "id": "2ca82d25",
+      "name": "Federal Circuit design patent damages standard",
+      "description": "",
+      "source": "regulation",
+      "applies_to": [
+        "damages_payment",
+        "design_patents"
+      ],
+      "reference_value": "Disgorgement of infringer's total profit from infringing article (Samsung v Apple, SCOTUS 2016 reduced this)"
+    },
+    {
+      "id": "e6f2c0ed",
+      "name": "FRAND licensing rates for standard-essential patents",
+      "description": "",
+      "source": "industry_norm",
+      "applies_to": [
+        "cross_licensing",
+        "licensing_terms"
+      ],
+      "reference_value": "Fair, Reasonable, and Non-Discriminatory rates typically $1-5 per device for wireless patents"
+    },
+    {
+      "id": "c43f81f9",
+      "name": "Global smartphone litigation costs",
+      "description": "",
+      "source": "market_data",
+      "applies_to": [
+        "damages_payment"
+      ],
+      "reference_value": "Apple-Samsung litigation has cost an estimated $200M+ combined in legal fees across 50+ cases in 10 countries"
+    }
+  ],
+  "outcome": "impasse",
+  "agreement": null,
+  "events": [
+    {
+      "type": "phase_change",
+      "data": {
+        "phase": "setup",
+        "round": 0,
+        "message": "Generating satisfaction anchors for utility scoring..."
+      },
+      "delay_ms": 0
+    },
+    {
+      "type": "setup_progress",
+      "data": {
+        "message": "Generating anchors for 2 parties (10 interests)...",
+        "parties": [
+          "apple",
+          "samsung"
+        ],
+        "total_interests": 10,
+        "completed_interests": 0
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "setup_progress",
+      "data": {
+        "message": "Generating anchors for Apple Inc. (CEO Office) (5 interests)...",
+        "party_id": "apple",
+        "party_name": "Apple Inc. (CEO Office)",
+        "interest_count": 5
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "setup_progress",
+      "data": {
+        "message": "Generating anchors for Samsung Electronics (CEO Office) (5 interests)...",
+        "party_id": "samsung",
+        "party_name": "Samsung Electronics (CEO Office)",
+        "interest_count": 5
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "apple",
+        "party_name": "Apple Inc. (CEO Office)",
+        "interest_description": "Establish legal precedent that design patents matter \u2014 if Samsung copies freely, everyone will",
+        "interest_type": "need",
+        "anchor_count": 4,
+        "completed_interests": 1,
+        "total_interests": 10
+      },
+      "delay_ms": 2263
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "samsung",
+        "party_name": "Samsung Electronics (CEO Office)",
+        "interest_description": "Samsung holds 100K+ patents \u2014 want cross-licensing leverage recognized, not just treated as a copycat",
+        "interest_type": "desire",
+        "anchor_count": 4,
+        "completed_interests": 2,
+        "total_interests": 10
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "apple",
+        "party_name": "Apple Inc. (CEO Office)",
+        "interest_description": "Fear of being seen as weak \u2014 if Apple settles cheap, every Chinese manufacturer will copy next",
+        "interest_type": "fear",
+        "anchor_count": 4,
+        "completed_interests": 3,
+        "total_interests": 10
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "samsung",
+        "party_name": "Samsung Electronics (CEO Office)",
+        "interest_description": "Fear that an injunction on Galaxy phones in the US would be catastrophic \u2014 35% of Samsung mobile revenue",
+        "interest_type": "fear",
+        "anchor_count": 4,
+        "completed_interests": 4,
+        "total_interests": 10
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "samsung",
+        "party_name": "Samsung Electronics (CEO Office)",
+        "interest_description": "Avoid paying billions in damages that would set a devastating precedent for the Android ecosystem",
+        "interest_type": "need",
+        "anchor_count": 4,
+        "completed_interests": 5,
+        "total_interests": 10
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "apple",
+        "party_name": "Apple Inc. (CEO Office)",
+        "interest_description": "End the litigation drain \u2014 Apple's legal team has spent 3 years and $100M+ on this case across 10 countries",
+        "interest_type": "concern",
+        "anchor_count": 5,
+        "completed_interests": 6,
+        "total_interests": 10
+      },
+      "delay_ms": 264
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "apple",
+        "party_name": "Apple Inc. (CEO Office)",
+        "interest_description": "Financial compensation for lost sales \u2014 estimated $2B+ in diverted revenue",
+        "interest_type": "desire",
+        "anchor_count": 4,
+        "completed_interests": 7,
+        "total_interests": 10
+      },
+      "delay_ms": 237
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "apple",
+        "party_name": "Apple Inc. (CEO Office)",
+        "interest_description": "Protect the iPhone's iconic design \u2014 it's not just a product, it's the foundation of Apple's brand identity",
+        "interest_type": "need",
+        "anchor_count": 4,
+        "completed_interests": 8,
+        "total_interests": 10
+      },
+      "delay_ms": 306
+    },
+    {
+      "type": "anchors_generated",
+      "data": {
+        "party_id": "apple",
+        "party_name": "Apple Inc. (CEO Office)",
+        "anchor_count": 21,
+        "interests": [
+          {
+            "description": "Protect the iPhone's iconic design \u2014 it's not just a product, it's the foundation of Apple's brand identity",
+            "interest_type": "need",
+            "priority": 0.95,
+            "related_issues": [
+              "design_patents",
+              "licensing_terms"
+            ],
+            "anchors": [
+              {
+                "condition": "design_patents = 'No admission \u2014 settlement without admission of liability' AND licensing_terms = 'Broad license at $5 per device with volume discount'",
+                "score": 0.05,
+                "reason": "This outcome represents a total loss for the brand identity, as it allows the infringer to continue using the designs under a broad license without any legal acknowledgment of wrongdoing."
+              },
+              {
+                "condition": "design_patents = 'Samsung acknowledges infringement on 3 core design patents, disputes 4' AND licensing_terms = 'Limited license for existing products only, no future products'",
+                "score": 0.35,
+                "reason": "This is a mediocre outcome; it forces a design shift for future products and admits partial infringement, but still legitimizes the copying of 3 core design elements."
+              },
+              {
+                "condition": "design_patents = 'Samsung acknowledges infringement on all 7 patents' AND licensing_terms = 'Limited license for existing products only, no future products'",
+                "score": 0.65,
+                "reason": "This is an acceptable middle ground where the infringer admits to violating all design patents and is forced to stop using the designs in future product cycles, protecting the long-term brand identity."
+              },
+              {
+                "condition": "design_patents = 'Samsung acknowledges infringement on all 7 patents' AND licensing_terms = 'No licensing \u2014 Samsung must design around all Apple patents' AND injunction_scope = 'Samsung pulls all infringing products from US market immediately'",
+                "score": 0.95,
+                "reason": "This is an excellent outcome, mirroring the ideal litigation result where the infringer is forced to acknowledge all violations, remove infringing products, and design entirely around Apple's intellectual property."
+              }
+            ]
+          },
+          {
+            "description": "Establish legal precedent that design patents matter \u2014 if Samsung copies freely, everyone will",
+            "interest_type": "need",
+            "priority": 0.9,
+            "related_issues": [
+              "design_patents",
+              "injunction_scope"
+            ],
+            "anchors": [
+              {
+                "condition": "design_patents = 'No admission \u2014 settlement without admission of liability' AND injunction_scope = 'No injunction, both parties agree to 90-day design review process for future disputes'",
+                "score": 0.0,
+                "reason": "This outcome effectively erases the legal precedent we seek to establish, treating the litigation as a mere financial transaction rather than a validation of design rights."
+              },
+              {
+                "condition": "design_patents = 'Samsung acknowledges infringement on 3 core design patents, disputes 4' AND injunction_scope = 'No injunction \u2014 Samsung modifies future products only'",
+                "score": 0.35,
+                "reason": "Acknowledging three patents is better than nothing, but letting Samsung off the hook for the other four and avoiding immediate injunctions fails to set a strong, deterrent precedent."
+              },
+              {
+                "condition": "design_patents = 'Samsung acknowledges infringement on all 7 patents' AND injunction_scope = 'Samsung redesigns flagged features within 6 months, no pull'",
+                "score": 0.65,
+                "reason": "Full acknowledgment of infringement across all patents is a major win for precedent, even if the injunction is limited to a redesign period rather than an immediate market pull."
+              },
+              {
+                "condition": "design_patents = 'Samsung acknowledges infringement on all 7 patents' AND injunction_scope = 'Samsung pulls all infringing products from US market immediately'",
+                "score": 1.0,
+                "reason": "This is the gold standard for our interest: complete validation of all patents and a concrete, immediate market consequence that serves as a massive deterrent to future copying."
+              }
+            ]
+          },
+          {
+            "description": "Financial compensation for lost sales \u2014 estimated $2B+ in diverted revenue",
+            "interest_type": "desire",
+            "priority": 0.8,
+            "related_issues": [
+              "damages_payment",
+              "licensing_terms"
+            ],
+            "anchors": [
+              {
+                "condition": "damages_payment < 500000000",
+                "score": 0.05,
+                "reason": "This is significantly lower than the current jury verdict and fails to recover even a quarter of the estimated loss."
+              },
+              {
+                "condition": "damages_payment >= 1000000000 AND licensing_terms = 'no_license'",
+                "score": 0.35,
+                "reason": "Matches the previous jury verdict, but without a licensing agreement, the revenue loss continues, making it a poor long-term outcome."
+              },
+              {
+                "condition": "damages_payment >= 1500000000 AND licensing_terms = 'Broad license at $15 per Samsung device sold'",
+                "score": 0.65,
+                "reason": "Substantial recovery of losses combined with a high-royalty licensing stream creates a fair, balanced financial outcome."
+              },
+              {
+                "condition": "damages_payment >= 1800000000 AND licensing_terms = 'Broad license at $15 per Samsung device sold'",
+                "score": 0.95,
+                "reason": "Nearly full recovery of estimated damages combined with a lucrative, long-term licensing revenue stream is an excellent result."
+              }
+            ]
+          },
+          {
+            "description": "Fear of being seen as weak \u2014 if Apple settles cheap, every Chinese manufacturer will copy next",
+            "interest_type": "fear",
+            "priority": 0.75,
+            "related_issues": [
+              "damages_payment",
+              "design_patents"
+            ],
+            "anchors": [
+              {
+                "condition": "design_patents = 'No admission \u2014 settlement without admission of liability' AND damages_payment < 500000000",
+                "score": 0.05,
+                "reason": "This is a public admission of weakness; paying a low amount without a patent acknowledgment signals that Apple can be bought off, inviting mass infringement."
+              },
+              {
+                "condition": "design_patents = 'No admission \u2014 settlement without admission of liability' AND damages_payment >= 1000000000",
+                "score": 0.35,
+                "reason": "While the payout is substantial, the lack of patent acknowledgment still leaves the core IP vulnerable to copycats who will view the payment as a 'cost of doing business' rather than a defeat."
+              },
+              {
+                "condition": "design_patents = 'Samsung acknowledges infringement on 3 core design patents, disputes 4' AND damages_payment >= 750000000",
+                "score": 0.65,
+                "reason": "Partial admission provides enough legal cover to deter some copycats, and the payment is high enough to demonstrate that infringing on Apple's design is not a cheap strategy."
+              },
+              {
+                "condition": "design_patents = 'Samsung acknowledges infringement on all 7 patents' AND damages_payment >= 1000000000",
+                "score": 0.95,
+                "reason": "Full acknowledgment of all patents combined with a high settlement payment sends a clear, powerful market signal that Apple's IP is untouchable and infringement carries severe consequences."
+              }
+            ]
+          },
+          {
+            "description": "End the litigation drain \u2014 Apple's legal team has spent 3 years and $100M+ on this case across 10 countries",
+            "interest_type": "concern",
+            "priority": 0.65,
+            "related_issues": [
+              "damages_payment",
+              "cross_licensing"
+            ],
+            "anchors": [
+              {
+                "condition": "damages_payment >= 1500000000 AND cross_licensing = 'Mutual cross-license with royalty offset (net payment by larger user)'",
+                "score": 1.0,
+                "reason": "Exceeds current BATNA expectations while securing long-term IP protection through royalty offsets."
+              },
+              {
+                "condition": "damages_payment >= 1000000000 AND cross_licensing = 'Mutual cross-license'",
+                "score": 0.85,
+                "reason": "Matches the jury verdict and provides strategic value through cross-licensing, ending litigation effectively."
+              },
+              {
+                "condition": "damages_payment >= 500000000 AND cross_licensing = 'Samsung grants Apple license to wireless communication patents at $2/device'",
+                "score": 0.6,
+                "reason": "Acceptable settlement that recovers some cost and gains minor licensing, though significantly below BATNA damages."
+              },
+              {
+                "condition": "damages_payment >= 100000000 AND cross_licensing = 'No cross-licensing \u2014 Apple keeps its own patents'",
+                "score": 0.35,
+                "reason": "Barely covers the sunk costs of the last 3 years of litigation without providing future strategic IP alignment."
+              },
+              {
+                "condition": "damages_payment < 100000000 AND cross_licensing = 'No cross-licensing \u2014 Apple keeps its own patents'",
+                "score": 0.05,
+                "reason": "Catastrophic outcome that fails to recoup legal spend and leaves the company in the same vulnerable position as before."
+              }
+            ]
+          }
+        ]
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "samsung",
+        "party_name": "Samsung Electronics (CEO Office)",
+        "interest_description": "Maintain ability to compete in smartphone market \u2014 Samsung's Galaxy line is their fastest-growing business",
+        "interest_type": "need",
+        "anchor_count": 4,
+        "completed_interests": 9,
+        "total_interests": 10
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "samsung",
+        "party_name": "Samsung Electronics (CEO Office)",
+        "interest_description": "Resolve quickly \u2014 the legal uncertainty is depressing Samsung's stock and scaring enterprise customers",
+        "interest_type": "desire",
+        "anchor_count": 4,
+        "completed_interests": 10,
+        "total_interests": 10
+      },
+      "delay_ms": 519
+    },
+    {
+      "type": "anchors_generated",
+      "data": {
+        "party_id": "samsung",
+        "party_name": "Samsung Electronics (CEO Office)",
+        "anchor_count": 20,
+        "interests": [
+          {
+            "description": "Avoid paying billions in damages that would set a devastating precedent for the Android ecosystem",
+            "interest_type": "need",
+            "priority": 0.95,
+            "related_issues": [
+              "damages_payment",
+              "design_patents"
+            ],
+            "anchors": [
+              {
+                "condition": "damages_payment >= 1500000000 AND design_patents = 'Samsung acknowledges infringement on all 7 patents'",
+                "score": 0.0,
+                "reason": "This is a catastrophic outcome exceeding the current verdict and forcing a total surrender of IP rights, setting the worst possible precedent."
+              },
+              {
+                "condition": "damages_payment >= 800000000 AND design_patents = 'Samsung acknowledges infringement on 3 core design patents, disputes 4'",
+                "score": 0.35,
+                "reason": "Paying a high settlement while admitting to core patent infringement creates a dangerous legal precedent, even if the total is lower than the initial verdict."
+              },
+              {
+                "condition": "damages_payment <= 500000000 AND design_patents = 'No admission \u2014 settlement without admission of liability'",
+                "score": 0.65,
+                "reason": "This aligns with the BATNA of $500M and avoids an admission of guilt, preventing the worst precedent-setting effects."
+              },
+              {
+                "condition": "damages_payment <= 200000000 AND design_patents = 'Both parties acknowledge the other's IP contributions'",
+                "score": 1.0,
+                "reason": "A low payment combined with a mutual acknowledgment of IP contributions effectively neutralizes the precedent issue and validates Samsung's own portfolio."
+              }
+            ]
+          },
+          {
+            "description": "Maintain ability to compete in smartphone market \u2014 Samsung's Galaxy line is their fastest-growing business",
+            "interest_type": "need",
+            "priority": 0.9,
+            "related_issues": [
+              "injunction_scope",
+              "design_patents"
+            ],
+            "anchors": [
+              {
+                "condition": "injunction_scope = Samsung pulls all infringing products from US market immediately",
+                "score": 0.0,
+                "reason": "Immediate removal of flagship products is a catastrophic blow to market share and growth, directly undermining the ability to compete."
+              },
+              {
+                "condition": "injunction_scope = Samsung redesigns flagged features within 6 months, no pull AND design_patents = Samsung acknowledges infringement on 3 core design patents, disputes 4",
+                "score": 0.35,
+                "reason": "A 6-month redesign window is slightly better than immediate pull but still causes massive disruption to the product roadmap; admitting infringement on core patents hurts brand integrity."
+              },
+              {
+                "condition": "injunction_scope = No injunction \u2014 Samsung modifies future products only AND licensing_terms = Limited license for existing products only, no future products",
+                "score": 0.65,
+                "reason": "Avoiding a market withdrawal is a major win. While future licensing is restricted, existing product stability allows the Galaxy line to maintain momentum."
+              },
+              {
+                "condition": "injunction_scope = No injunction, both parties agree to 90-day design review process for future disputes AND licensing_terms = Broad license at $5 per device with volume discount",
+                "score": 0.95,
+                "reason": "This provides total operational freedom for the Galaxy line, clear cost predictability, and a structured dispute process that replaces costly litigation, ensuring long-term competitiveness."
+              }
+            ]
+          },
+          {
+            "description": "Samsung holds 100K+ patents \u2014 want cross-licensing leverage recognized, not just treated as a copycat",
+            "interest_type": "desire",
+            "priority": 0.8,
+            "related_issues": [
+              "cross_licensing",
+              "licensing_terms"
+            ],
+            "anchors": [
+              {
+                "condition": "cross_licensing = No cross-licensing",
+                "score": 0.0,
+                "reason": "This represents total failure to gain recognition for Samsung's patent portfolio, keeping the company in a defensive-only position."
+              },
+              {
+                "condition": "cross_licensing = Samsung grants Apple license to wireless communication patents at $2/device",
+                "score": 0.35,
+                "reason": "This is a poor outcome; while it acknowledges some IP value, it is a one-way street that treats Samsung as a vendor rather than a strategic peer."
+              },
+              {
+                "condition": "cross_licensing = Mutual cross-license \u2014 both portfolios available to both parties",
+                "score": 0.65,
+                "reason": "This is a fair middle ground where the parity of the patent portfolios is recognized by both sides, ending the 'copycat' narrative."
+              },
+              {
+                "condition": "cross_licensing = Mutual cross-license with royalty offset (net payment by larger user) AND licensing_terms = Broad license at $5 per device with volume discount",
+                "score": 0.95,
+                "reason": "This is an excellent outcome, establishing a sophisticated business relationship that treats Samsung's IP as a strategic asset with clear financial parity."
+              }
+            ]
+          },
+          {
+            "description": "Resolve quickly \u2014 the legal uncertainty is depressing Samsung's stock and scaring enterprise customers",
+            "interest_type": "desire",
+            "priority": 0.7,
+            "related_issues": [
+              "damages_payment",
+              "licensing_terms"
+            ],
+            "anchors": [
+              {
+                "condition": "damages_payment >= 1500000000 AND injunction_scope = Samsung pulls all infringing products from US market immediately",
+                "score": 0.05,
+                "reason": "This is a worst-case scenario that causes catastrophic financial loss and market disruption, far worse than the BATNA."
+              },
+              {
+                "condition": "damages_payment >= 700000000 AND licensing_terms = No licensing \u2014 Samsung must design around all Apple patents",
+                "score": 0.35,
+                "reason": "Higher than the BATNA's expected damages and forces a costly, forced design change process, failing to provide the desired quick resolution."
+              },
+              {
+                "condition": "damages_payment <= 500000000 AND injunction_scope = Samsung redesigns flagged features within 6 months, no pull",
+                "score": 0.65,
+                "reason": "Matches the BATNA's expected financial impact while providing a clear, defined path to end the legal uncertainty within a reasonable timeframe."
+              },
+              {
+                "condition": "damages_payment <= 300000000 AND licensing_terms = Broad license at $5 per device with volume discount AND injunction_scope = No injunction, both parties agree to 90-day design review process for future disputes",
+                "score": 0.95,
+                "reason": "Excellent outcome: lower than expected damages, immediate resolution of licensing, and a collaborative process that permanently removes the threat of future injunctions."
+              }
+            ]
+          },
+          {
+            "description": "Fear that an injunction on Galaxy phones in the US would be catastrophic \u2014 35% of Samsung mobile revenue",
+            "interest_type": "fear",
+            "priority": 0.85,
+            "related_issues": [
+              "injunction_scope"
+            ],
+            "anchors": [
+              {
+                "condition": "injunction_scope = Samsung pulls all infringing products from US market immediately",
+                "score": 0.0,
+                "reason": "This represents the catastrophic 35% revenue loss scenario that the company fears most."
+              },
+              {
+                "condition": "injunction_scope = Samsung redesigns flagged features within 6 months, no pull",
+                "score": 0.35,
+                "reason": "A 6-month timeline is aggressive and likely disruptive to product cycles, though better than an immediate market exit."
+              },
+              {
+                "condition": "injunction_scope = No injunction \u2014 Samsung modifies future products only",
+                "score": 0.7,
+                "reason": "This aligns with the company's BATNA strategy of avoiding immediate market disruption by focusing modifications on future iterations."
+              },
+              {
+                "condition": "injunction_scope = No injunction, both parties agree to 90-day design review process for future disputes",
+                "score": 1.0,
+                "reason": "This provides total immunity from current injunctions and establishes a cooperative framework that eliminates the risk of sudden future litigation-driven pull-offs."
+              }
+            ]
+          }
+        ]
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "phase_change",
+      "data": {
+        "phase": "discovery",
+        "round": 0,
+        "message": "Entering interest discovery phase"
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "331cafd0",
+        "timestamp": "2026-03-23T21:10:00.695742",
+        "party_id": "apple",
+        "move_type": "disclose_interest",
+        "package": null,
+        "argument": null,
+        "disclosed_interest": {
+          "id": "858cec56",
+          "description": "Protecting the integrity and uniqueness of the iPhone design is our paramount priority, as it forms the bedrock of our brand identity and consumer trust.",
+          "interest_type": "need",
+          "priority": 0.95,
+          "related_issues": [
+            "Design Patent Validity Acknowledgment",
+            "Product Injunction Terms"
+          ],
+          "disclosed": true,
+          "satisfaction_anchors": []
+        },
+        "references": [],
+        "reasoning": "This is the opening move. Samsung likely fears a massive financial hit and a total injunction that would cripple their market presence. They likely value their own intellectual property and want to avoid looking like they copied. My strategy is to start by anchoring on our core need\u2014protecting the design\u2014while remaining cooperative. By disclosing this need first, I set the stage for a discussion on how they can acknowledge our design patents without necessarily destroying their product line, which opens the door for mutual gain through licensing or design-around agreements later.",
+        "phase": "discovery",
+        "round": 1,
+        "turn": 0,
+        "party_name": "Apple Inc. (CEO Office)"
+      },
+      "delay_ms": 1683
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "9300e2c5",
+        "timestamp": "2026-03-23T21:10:02.504987",
+        "party_id": "samsung",
+        "move_type": "disclose_interest",
+        "package": null,
+        "argument": null,
+        "disclosed_interest": {
+          "id": "0293a512",
+          "description": "Maintaining the continuity of the Galaxy smartphone line in the US market is vital for our business, and we are concerned that a broad injunction would cause irreparable harm to our market presence.",
+          "interest_type": "fear",
+          "priority": 0.85,
+          "related_issues": [
+            "Product Injunction Terms"
+          ],
+          "disclosed": true,
+          "satisfaction_anchors": []
+        },
+        "references": [],
+        "reasoning": "Theory of Mind: Apple is focused on brand identity and protecting their design uniqueness. They likely fear that if Samsung is not penalized or restricted, their market position as the premium design innovator is eroded. My strategy is to acknowledge their need for brand integrity while highlighting my fear of an injunction. By disclosing my fear first, I signal that an injunction is a 'red line' for me, which helps steer the negotiation toward monetary or licensing solutions that protect their revenue and my market access without destroying my business model. This builds trust by being transparent about my constraints.",
+        "phase": "discovery",
+        "round": 1,
+        "turn": 1,
+        "party_name": "Samsung Electronics (CEO Office)"
+      },
+      "delay_ms": 1809
+    },
+    {
+      "type": "mediator_note",
+      "data": {
+        "id": "699d91b0",
+        "timestamp": "2026-03-23T21:10:03.915449",
+        "party_id": "mediator",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "102caf7e",
+          "claim": "Both Apple and Samsung have expressed an interest in resolving the litigation, which is a significant starting point. The current litigation environment has already resulted in over $200 million in combined legal fees, suggesting that both parties stand to gain from avoiding further protracted court battles. By focusing on this shared interest in efficiency and risk mitigation, we can move away from rigid positional bargaining.",
+          "grounds": [
+            "Both parties are motivated to conclude this litigation to stop the ongoing accumulation of legal costs and to regain strategic focus on their respective product roadmaps.",
+            "There is a potential trade-off between the financial settlement amount and the scope of a cross-licensing agreement; specifically, a lower cash payment could be offset by a more comprehensive cross-licensing arrangement that provides long-term value to both companies."
+          ],
+          "criterion_id": null,
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": null,
+        "phase": "discovery",
+        "round": 1,
+        "turn": 2,
+        "party_name": "Mediator"
+      },
+      "delay_ms": 1410
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "3807e8b1",
+        "timestamp": "2026-03-23T21:10:05.969249",
+        "party_id": "apple",
+        "move_type": "disclose_interest",
+        "package": null,
+        "argument": null,
+        "disclosed_interest": {
+          "id": "ae918570",
+          "description": "The substantial drain on resources caused by ongoing global litigation is a significant concern; we seek a resolution that allows us to focus on innovation rather than courtrooms.",
+          "interest_type": "concern",
+          "priority": 0.65,
+          "related_issues": [
+            "Financial Settlement",
+            "Patent Licensing Agreement"
+          ],
+          "disclosed": true,
+          "satisfaction_anchors": []
+        },
+        "references": [],
+        "reasoning": "Theory of Mind: Samsung is clearly fearful of market disruption (injunctions), which indicates their primary goal is business continuity. They likely want to avoid a total ban on their devices. My strategy is to pivot from the 'design patent' conflict (where I need to hold firm) toward the 'litigation exhaustion' concern, which is a shared interest. By disclosing this concern, I invite them to discuss a settlement that moves away from the 'all-or-nothing' risk of litigation, while signaling that I am open to a business-focused resolution rather than a purely punitive one.",
+        "phase": "discovery",
+        "round": 2,
+        "turn": 0,
+        "party_name": "Apple Inc. (CEO Office)"
+      },
+      "delay_ms": 2053
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "4339bfa2",
+        "timestamp": "2026-03-23T21:10:08.360653",
+        "party_id": "samsung",
+        "move_type": "disclose_interest",
+        "package": null,
+        "argument": null,
+        "disclosed_interest": {
+          "id": "982f593e",
+          "description": "Samsung holds a massive portfolio of over 100,000 patents and we seek to ensure that any resolution recognizes our own intellectual property contributions, moving away from a purely punitive damages model.",
+          "interest_type": "desire",
+          "priority": 0.8,
+          "related_issues": [
+            "Cross-Licensing Samsung's Patents",
+            "Patent Licensing Agreement"
+          ],
+          "disclosed": true,
+          "satisfaction_anchors": []
+        },
+        "references": [],
+        "reasoning": "Theory of Mind: Apple has signaled a desire to reduce litigation costs and protect their brand identity. They are likely weary of the resource drain, which suggests they might be open to a structured licensing deal if it protects their 'uniqueness'. My strategy is to pivot from the defensive (fearing injunctions) to proactive value creation by emphasizing our own patent portfolio. By disclosing our interest in cross-licensing, I am positioning ourselves not as a 'copycat' but as an equal innovation partner, which addresses our desire for leverage while potentially offering Apple the 'innovation' focus they claim to want.",
+        "phase": "discovery",
+        "round": 2,
+        "turn": 1,
+        "party_name": "Samsung Electronics (CEO Office)"
+      },
+      "delay_ms": 2391
+    },
+    {
+      "type": "mediator_note",
+      "data": {
+        "id": "2c2ccefc",
+        "timestamp": "2026-03-23T21:10:09.999495",
+        "party_id": "mediator",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "9e82a888",
+          "claim": "Both parties are currently in the discovery phase and have acknowledged the mutual benefit of resolving the dispute to avoid further legal costs. I am reinforcing this alignment to encourage a shift from positional bargaining to interest-based discussion before moving into more contentious issues like financial settlement or licensing terms.",
+          "grounds": [
+            "Both Apple and Samsung have explicitly identified the goal of resolving the litigation to avoid the mounting costs and business uncertainty associated with global court battles."
+          ],
+          "criterion_id": null,
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": null,
+        "phase": "discovery",
+        "round": 2,
+        "turn": 2,
+        "party_name": "Mediator"
+      },
+      "delay_ms": 1638
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "1716ac1e",
+        "timestamp": "2026-03-23T21:10:12.461807",
+        "party_id": "apple",
+        "move_type": "invoke_criterion",
+        "package": null,
+        "argument": {
+          "id": "ea08716b",
+          "claim": "A resolution that includes a mutual cross-licensing agreement and reasonable compensation for past infringement is the most effective way to end the litigation drain and respect both parties' innovation.",
+          "grounds": [
+            "The ongoing global litigation is a massive resource sink for both firms, costing hundreds of millions of dollars that could be better spent on R&D.",
+            "The Motorola-Microsoft settlement precedent demonstrates that cross-licensing at fair rates can successfully resolve complex multi-patent disputes.",
+            "Recognizing each other's IP contributions through a mutual cross-license, as Samsung suggested, aligns with industry norms for major technology companies."
+          ],
+          "criterion_id": "Motorola-Microsoft patent settlement",
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: Samsung is clearly afraid of a market injunction (as disclosed) and wants to move away from punitive damages toward a recognition of their own IP portfolio. They want to avoid being forced out of the market. My strategic calculation is to pivot the conversation toward a cross-licensing model, which satisfies my goal of ending the litigation drain and protecting my IP, while simultaneously addressing Samsung's desire for an IP-recognition-based settlement. By invoking the Motorola-Microsoft precedent, I am grounding the discussion in objective, industry-standard behavior.",
+        "phase": "discovery",
+        "round": 3,
+        "turn": 0,
+        "party_name": "Apple Inc. (CEO Office)"
+      },
+      "delay_ms": 2462
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "98d74cec",
+        "timestamp": "2026-03-23T21:10:16.682325",
+        "party_id": "samsung",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "b76b3014",
+          "claim": "A sustainable resolution must move beyond unilateral damages toward a balanced cross-licensing framework that reflects the actual contributions of both portfolios.",
+          "grounds": [
+            "The Motorola-Microsoft precedent suggests a royalty rate of approximately $1.80 per device for broad cross-licensing, which provides a fair benchmark for industry-wide patent settlements.",
+            "Recognizing Samsung's extensive wireless communications portfolio via a mutual cross-license with royalty offset would mitigate the financial impact of past damages while fostering future innovation.",
+            "Our combined legal expenditures exceeding $200 million illustrate that continued litigation is a net loss for both companies, whereas a cross-licensing agreement aligns with the industry norm for resolving complex IP disputes."
+          ],
+          "criterion_id": "Motorola-Microsoft patent settlement",
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [
+          "Round 3"
+        ],
+        "reasoning": "Theory of Mind: Apple clearly values their brand identity and design uniqueness, but their expressed concern regarding the 'drain on resources' from litigation suggests they are open to a deal that preserves their market position without the continued cost of court. They are moving toward cross-licensing, which is an opportunity for me. Strategy: I need to anchor the negotiation toward a cross-licensing model rather than just a damages payment. By invoking the Motorola-Microsoft precedent, I provide an objective basis for a lower, more reasonable royalty rate that acknowledges our own IP contributions, directly addressing my desire to be recognized as an innovator, not just an infringer.",
+        "phase": "discovery",
+        "round": 3,
+        "turn": 1,
+        "party_name": "Samsung Electronics (CEO Office)"
+      },
+      "delay_ms": 4000
+    },
+    {
+      "type": "mediator_note",
+      "data": {
+        "id": "2c935045",
+        "timestamp": "2026-03-23T21:10:18.292164",
+        "party_id": "mediator",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "2460cdb9",
+          "claim": "Both parties are now explicitly advocating for a cross-licensing framework, moving away from a 'winner-take-all' approach. This indicates that the parties are ready to transition from debating past infringement liability to negotiating a forward-looking, sustainable business relationship. This alignment on the necessity of a balanced portfolio agreement is the most significant development in the discovery phase.",
+          "grounds": [
+            "Both Apple and Samsung have signaled a willingness to move toward a mutual cross-licensing framework, which suggests a shared interest in securing future operational freedom rather than solely focusing on past litigation outcomes.",
+            "There is a clear opportunity to link the financial settlement (past damages) with the valuation of the cross-licensing agreement (future royalties), allowing parties to offset costs against the value of the intellectual property portfolios being exchanged."
+          ],
+          "criterion_id": null,
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": null,
+        "phase": "discovery",
+        "round": 3,
+        "turn": 2,
+        "party_name": "Mediator"
+      },
+      "delay_ms": 1609
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "a2507b09",
+        "timestamp": "2026-03-23T21:10:20.365208",
+        "party_id": "apple",
+        "move_type": "propose",
+        "package": {
+          "id": "b8fcec09",
+          "issue_values": {
+            "Financial Settlement": "1500000000.0",
+            "Design Patent Validity Acknowledgment": "Samsung acknowledges infringement on 3 core design patents, disputes 4",
+            "Patent Licensing Agreement": "Broad license at $5 per device with volume discount",
+            "Cross-Licensing Samsung's Patents": "Mutual cross-license with royalty offset (net payment by larger user)",
+            "Product Injunction Terms": "Samsung redesigns flagged features within 6 months, no pull"
+          },
+          "rationale": "This package balances Apple's need to protect core design integrity and secure fair compensation with Samsung's desire for market continuity and recognition of their own patent portfolio through a mutually beneficial royalty-offset framework.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: Samsung is clearly afraid of a market exit (injunction) and wants to avoid being labeled solely as an infringer. They value their own IP portfolio. I will propose a package that concedes on the injunction (redesign period) to avoid their biggest fear, while securing a licensing structure and financial settlement that validates our design patents. The royalty-offset cross-license allows them to leverage their portfolio, addressing their stated desire, while keeping the net economics favorable to Apple.",
+        "phase": "discovery",
+        "round": 4,
+        "turn": 0,
+        "party_name": "Apple Inc. (CEO Office)"
+      },
+      "delay_ms": 2073
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "edf63e41",
+        "timestamp": "2026-03-23T21:10:22.593646",
+        "party_id": "samsung",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "fc703749",
+          "claim": "The proposed financial settlement and licensing terms are disproportionate to industry standards and do not sufficiently leverage our mutual patent portfolios.",
+          "grounds": [
+            "The $1.5 billion financial demand significantly exceeds the damages benchmarks established in recent Supreme Court jurisprudence regarding design patent disgorgement.",
+            "Industry norms for wireless and utility patent cross-licensing, such as the Motorola-Microsoft precedent, suggest rates closer to $1.80 per device, which contrasts sharply with the proposed $5.00 per device structure.",
+            "A sustainable agreement must emphasize the value of Samsung's 100,000+ patent portfolio to ensure the 'royalty offset' mentioned in the proposal is calculated fairly rather than functioning as a hidden penalty."
+          ],
+          "criterion_id": "Motorola-Microsoft patent settlement",
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [
+          "Round 4"
+        ],
+        "reasoning": "Theory of Mind: Apple is signaling a willingness to settle if they get both financial compensation and a recognition of their design 'uniqueness'. They are clearly afraid of the litigation costs and potential unpredictability of further court rulings, hence their offer to move to a licensing model. Strategic Calculation: I need to reject the $1.5B figure by anchoring to the Motorola-Microsoft precedent ($1.80/unit) to show their proposal is objectively high. I want to shift the focus toward a balanced cross-licensing deal that recognizes my IP, which is our key desire. I will use the 'argue' move to establish a fair objective baseline before I counter-propose.",
+        "phase": "discovery",
+        "round": 4,
+        "turn": 1,
+        "party_name": "Samsung Electronics (CEO Office)"
+      },
+      "delay_ms": 2228
+    },
+    {
+      "type": "mediator_note",
+      "data": {
+        "id": "c957eba9",
+        "timestamp": "2026-03-23T21:10:24.933670",
+        "party_id": "mediator",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "2270e67f",
+          "claim": "The parties are currently deadlocked on the specific dollar amount of the financial settlement and the licensing rates. While Samsung expresses that Apple's proposal is disproportionate, both sides have already agreed on the structural need for a cross-licensing framework and a transition toward a business-focused relationship. It is time to shift the focus from the specific $1.5B figure to the underlying interests of 'fair compensation' versus 'portfolio value.'",
+          "grounds": [
+            "Both parties are committed to a mutual cross-licensing framework and agree that a sustainable resolution must account for the value of their respective patent portfolios rather than focusing solely on past legal damages.",
+            "There is potential to trade off the quantum of the lump-sum financial settlement against the per-device royalty rates in a cross-licensing agreement, allowing the parties to find a 'net' value that reflects both the infringement damages and future IP access."
+          ],
+          "criterion_id": null,
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": null,
+        "phase": "discovery",
+        "round": 4,
+        "turn": 2,
+        "party_name": "Mediator"
+      },
+      "delay_ms": 2340
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "eaebf5ba",
+        "timestamp": "2026-03-23T21:10:29.455050",
+        "party_id": "apple",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "f4c621c3",
+          "claim": "The proposed financial settlement and licensing terms are grounded in objective precedent and reflect the significant value of our design patents compared to standard-essential wireless patents.",
+          "grounds": [
+            "The Supreme Court and Federal Circuit have affirmed that design patents are distinct and valuable assets that protect the unique aesthetic identity of a product, justifying higher compensation than standard-essential patents.",
+            "The $1.5B figure represents a compromise from our initial estimate, accounting for the massive scale of Samsung's distribution of infringing devices, which diluted the uniqueness of the iPhone's design.",
+            "A broad, royalty-offset cross-licensing agreement provides Samsung with long-term security to innovate without the risk of future litigation, which is a significant intangible value that offsets the cash payment.",
+            "Industry norms for licensing complex hardware portfolios often involve significant upfront payments when infringement has occurred over several years, as is the case here."
+          ],
+          "criterion_id": "Federal Circuit design patent damages standard",
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: Samsung is clearly pushing back on the financial aspect to preserve their margins and avoid a 'punitive' precedent that would hurt them in other markets. They likely fear that admitting infringement on 3 patents and paying $1.5B sets a dangerous standard for their other legal battles. They want a 'balanced' framework that minimizes their cash outflow while gaining access to our IP. Strategic Calculation: I need to maintain the firm position on the value of design patents while showing willingness to discuss the 'offset' mechanism. By invoking the Federal Circuit's standard, I anchor the discussion in legal reality rather than just 'punitive' damages. I will keep the pressure on the valuation while signaling that the cross-license is the path to a mutual 'win'.",
+        "phase": "discovery",
+        "round": 5,
+        "turn": 0,
+        "party_name": "Apple Inc. (CEO Office)"
+      },
+      "delay_ms": 4000
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "48bcec16",
+        "timestamp": "2026-03-23T21:10:31.664320",
+        "party_id": "samsung",
+        "move_type": "propose",
+        "package": {
+          "id": "9d766223",
+          "issue_values": {
+            "Financial Settlement": "450000000.0",
+            "Design Patent Validity Acknowledgment": "No admission \u2014 settlement without admission of liability",
+            "Patent Licensing Agreement": "Broad license at $5 per device with volume discount",
+            "Cross-Licensing Samsung's Patents": "Mutual cross-license with royalty offset (net payment by larger user)",
+            "Product Injunction Terms": "No injunction \u2014 Samsung modifies future products only"
+          },
+          "rationale": "This package offers a realistic settlement amount closer to appellate expectations, maintains a fair cross-licensing framework with royalty offsets to account for Samsung's own patent portfolio, and avoids catastrophic market disruption via a no-injunction path for existing products.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: Apple seeks to protect brand identity while reducing legal costs. Their $1.5B proposal is a high anchor. They fear losing their design advantage but seem open to cross-licensing. I need to pivot the conversation from punitive damages to a sustainable licensing model. By offering a $450M settlement (closer to likely court outcomes) and a mutual cross-license, I address their need for compensation and IP protection while securing my market presence and leveraging our portfolio.",
+        "phase": "discovery",
+        "round": 5,
+        "turn": 1,
+        "party_name": "Samsung Electronics (CEO Office)"
+      },
+      "delay_ms": 2209
+    },
+    {
+      "type": "mediator_note",
+      "data": {
+        "id": "3d29cf8d",
+        "timestamp": "2026-03-23T21:10:33.958530",
+        "party_id": "mediator",
+        "move_type": "propose",
+        "package": {
+          "id": "7b660fb7",
+          "issue_values": {
+            "Financial Settlement": "975000000.0",
+            "Design Patent Validity Acknowledgment": "Both parties acknowledge the other's IP contributions",
+            "Patent Licensing Agreement": "Broad license at $5 per device with volume discount",
+            "Cross-Licensing Samsung's Patents": "Mutual cross-license with royalty offset (net payment by larger user)",
+            "Product Injunction Terms": "Samsung redesigns flagged features within 6 months, no pull"
+          },
+          "rationale": "This package bridges the gap between the $450M and $1.5B proposals, landing near the midpoint. It replaces the 'admission of liability' issue with a neutral mutual acknowledgment of IP contributions, which satisfies Samsung's interest in avoiding liability admissions while respecting Apple's interest in protecting design value. By pairing the $5/device licensing and the 6-month redesign window, it provides a stable path forward that avoids market disruption while ensuring fair compensation.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": null,
+        "phase": "discovery",
+        "round": 5,
+        "turn": 2,
+        "party_name": "Mediator"
+      },
+      "delay_ms": 2294
+    },
+    {
+      "type": "phase_change",
+      "data": {
+        "phase": "generation",
+        "round": 5,
+        "message": "Entering option generation phase \u2014 agents propose packages"
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "cbd4be11",
+        "timestamp": "2026-03-23T21:10:36.601708",
+        "party_id": "apple",
+        "move_type": "propose",
+        "package": {
+          "id": "3dec59b6",
+          "issue_values": {
+            "Financial Settlement": "975000000.0",
+            "Design Patent Validity Acknowledgment": "Both parties acknowledge the other's IP contributions",
+            "Patent Licensing Agreement": "Broad license at $5 per device with volume discount",
+            "Cross-Licensing Samsung's Patents": "Mutual cross-license with royalty offset (net payment by larger user)",
+            "Product Injunction Terms": "Samsung redesigns flagged features within 6 months, no pull"
+          },
+          "rationale": "This package represents a balanced compromise that respects our need for design protection and fair compensation while addressing Samsung's concerns regarding market continuity and the recognition of their own IP portfolio. By accepting the mediator's framework, we move toward a constructive future partnership.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: Samsung is clearly signaling a desire to avoid a massive financial penalty and a market-disruptive injunction, evidenced by their $450M proposal and 'no admission' clause. They want to protect their Galaxy brand continuity. However, they also recognize the value of our IP and have moved toward a cross-licensing framework. My strategic calculation is that the mediator's proposal is a fair 'middle ground' that satisfies our need for significant compensation and design recognition, while allowing Samsung to save face and avoid an injunction. By accepting this, I signal cooperation and a desire to end the costly litigation drain, which is in our best interest given the risk of appellate reductions in damages.",
+        "phase": "generation",
+        "round": 6,
+        "turn": 0,
+        "party_name": "Apple Inc. (CEO Office)"
+      },
+      "delay_ms": 2642
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "e80048a2",
+        "timestamp": "2026-03-23T21:10:39.594400",
+        "party_id": "samsung",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "6d7b760e",
+          "claim": "The proposed $975 million settlement remains significantly above the fair value, even with the inclusion of cross-licensing, and warrants a recalibration toward $600 million to better reflect the reduced scope of design patent damages established in recent Supreme Court precedent.",
+          "grounds": [
+            "The Supreme Court in Samsung v. Apple narrowed the 'total profit' disgorgement standard, which should lead to a substantial reduction in damages compared to the initial $1B verdict.",
+            "A settlement of $975M is nearly double the expected outcome of $500M-$600M based on our legal analysis of potential appellate reductions.",
+            "The inclusion of a mutual cross-licensing agreement provides significant intangible value to Apple, which offsets the need for such a high cash payment.",
+            "The 6-month design-around period is a significant operational concession that ensures Apple's design integrity is protected without the catastrophic impact of an immediate market withdrawal."
+          ],
+          "criterion_id": "Federal Circuit design patent damages standard",
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: Apple has accepted the mediator's package, signaling they are ready to settle if the cash component is high enough. They fear losing the 'precedent' of their design patents, which is why they insist on the 6-month redesign and the acknowledgement. My strategy is to keep the cross-licensing and redesign terms (which benefit me by avoiding an injunction) but push for a more realistic financial figure that aligns with my BATNA and appellate expectations. I am using the 'Federal Circuit' criterion to justify why $975M is too high and $600M is a fairer reflection of current law.",
+        "phase": "generation",
+        "round": 6,
+        "turn": 1,
+        "party_name": "Samsung Electronics (CEO Office)"
+      },
+      "delay_ms": 2992
+    },
+    {
+      "type": "mediator_note",
+      "data": {
+        "id": "1e0d3f5d",
+        "timestamp": "2026-03-23T21:10:41.558407",
+        "party_id": "mediator",
+        "move_type": "propose",
+        "package": {
+          "id": "2af05f47",
+          "issue_values": {
+            "Financial Settlement": "787500000.0",
+            "Design Patent Validity Acknowledgment": "Both parties acknowledge the other's IP contributions",
+            "Patent Licensing Agreement": "Broad license at $5 per device with volume discount",
+            "Cross-Licensing Samsung's Patents": "Mutual cross-license with royalty offset (net payment by larger user)",
+            "Product Injunction Terms": "Samsung redesigns flagged features within 6 months, no pull"
+          },
+          "rationale": "This package bridges the $375 million gap between the parties' latest positions by centering on a value that aligns with the midpoint of their recent proposals. It maintains the cross-licensing structure and mutual acknowledgment of IP which both parties have already agreed upon, while providing a clear timeline for feature updates that avoids market disruption.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": null,
+        "phase": "generation",
+        "round": 6,
+        "turn": 2,
+        "party_name": "Mediator"
+      },
+      "delay_ms": 1963
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "6f428547",
+        "timestamp": "2026-03-23T21:10:44.303902",
+        "party_id": "apple",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "76a4f901",
+          "claim": "The proposed settlement of $787.5 million is a reasonable compromise that reflects the significant value of Apple's design portfolio and the substantial legal costs incurred by both parties.",
+          "grounds": [
+            "The figure of $787.5 million represents a significant concession from our initial $2 billion estimate, demonstrating our commitment to ending the litigation drain.",
+            "By agreeing to a mutual acknowledgment of IP contributions and a royalty-offset cross-license, we are providing Samsung with long-term security and access to our technology, which holds immense value beyond mere damages.",
+            "The requirement for a 6-month redesign window rather than an immediate market pull provides Samsung the operational flexibility they fear losing, while still upholding the principle of design integrity.",
+            "This settlement aligns with the objective of resolving the conflict efficiently to focus on future innovation rather than past disputes, adhering to the spirit of the Motorola-Microsoft precedent where parties opted for stability over perpetual litigation."
+          ],
+          "criterion_id": "global_smartphone_litigation_costs",
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "My theory of mind suggests Samsung is highly sensitive to the financial impact of a large settlement and the operational risk of an immediate injunction. They want to avoid a 'loss' in the public eye (hence the 'no admission' preference) and are likely constrained by internal budget approvals for settlements. By arguing for the mediator's $787.5M compromise, I demonstrate flexibility while justifying that this price is 'fair' because it includes valuable access to Apple's IP and prevents further, more costly litigation. I am choosing to argue first to solidify the mediator's proposal as a reasonable baseline before potentially moving to accept or refine it in the next turn.",
+        "phase": "generation",
+        "round": 7,
+        "turn": 0,
+        "party_name": "Apple Inc. (CEO Office)"
+      },
+      "delay_ms": 2745
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "a3cc7460",
+        "timestamp": "2026-03-23T21:10:46.760955",
+        "party_id": "samsung",
+        "move_type": "propose",
+        "package": {
+          "id": "f27cc7b2",
+          "issue_values": {
+            "Financial Settlement": "600000000.0",
+            "Design Patent Validity Acknowledgment": "Both parties acknowledge the other's IP contributions",
+            "Patent Licensing Agreement": "Broad license at $5 per device with volume discount",
+            "Cross-Licensing Samsung's Patents": "Mutual cross-license with royalty offset (net payment by larger user)",
+            "Product Injunction Terms": "No injunction \u2014 Samsung modifies future products only"
+          },
+          "rationale": "This proposal reflects a fair compromise that aligns with appellate expectations regarding damages and avoids the market disruption of an injunction, while securing a long-term cross-licensing framework that recognizes our mutual IP contributions.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: Apple is signaling that they want a high-value settlement to validate their design patents and protect their brand, but they are also weary of the resource drain of litigation. They have moved closer to the midpoint, suggesting they are open to a compromise that includes both a payout and a long-term licensing deal. My strategy is to push the financial settlement closer to the $400-600M range (my BATNA estimate for post-appeal damages) while conceding on the licensing and acknowledgment terms to provide Apple with the 'win' they need to justify the settlement to their stakeholders. By offering to drop the injunction threat entirely in exchange for a lower, more realistic settlement, I protect the Galaxy line's market access, which is my highest priority concern.",
+        "phase": "generation",
+        "round": 7,
+        "turn": 1,
+        "party_name": "Samsung Electronics (CEO Office)"
+      },
+      "delay_ms": 2457
+    },
+    {
+      "type": "mediator_note",
+      "data": {
+        "id": "3fec3951",
+        "timestamp": "2026-03-23T21:10:49.160411",
+        "party_id": "mediator",
+        "move_type": "propose",
+        "package": {
+          "id": "ee9b920b",
+          "issue_values": {
+            "Financial Settlement": "693750000.0",
+            "Design Patent Validity Acknowledgment": "Both parties acknowledge the other's IP contributions",
+            "Patent Licensing Agreement": "Broad license at $5 per device with volume discount",
+            "Cross-Licensing Samsung's Patents": "Mutual cross-license with royalty offset (net payment by larger user)",
+            "Product Injunction Terms": "Samsung redesigns flagged features within 6 months, no pull"
+          },
+          "rationale": "The parties have reached consensus on all operational and structural terms including cross-licensing and design acknowledgment. The remaining gap is purely financial. This figure represents the exact midpoint between the current positions, balancing Apple's interest in design valuation and Samsung's interest in reflecting recent legal precedents regarding damages.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": null,
+        "phase": "generation",
+        "round": 7,
+        "turn": 2,
+        "party_name": "Mediator"
+      },
+      "delay_ms": 2399
+    },
+    {
+      "type": "phase_change",
+      "data": {
+        "phase": "bargaining",
+        "round": 7,
+        "message": "Entering bargaining phase \u2014 proposals and counterproposals"
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "validation_error",
+      "data": {
+        "party_id": "apple",
+        "violations": [
+          "Accepting a deal worse than BATNA \u2014 converting to REJECT"
+        ]
+      },
+      "delay_ms": 4000
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "2a75e8f5",
+        "timestamp": "2026-03-23T21:10:54.954494",
+        "party_id": "apple",
+        "move_type": "reject",
+        "package": {
+          "id": "f8c6fe48",
+          "issue_values": {
+            "Financial Settlement": "693750000.0",
+            "Design Patent Validity Acknowledgment": "Both parties acknowledge the other's IP contributions",
+            "Patent Licensing Agreement": "Broad license at $5 per device with volume discount",
+            "Cross-Licensing Samsung's Patents": "Mutual cross-license with royalty offset (net payment by larger user)",
+            "Product Injunction Terms": "Samsung redesigns flagged features within 6 months, no pull"
+          },
+          "rationale": "This package represents a fair compromise that ends the costly litigation, secures mutual IP recognition, and ensures design protection through the redesign commitment, aligning with the mediator's balanced proposal.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Rejected by validator: deal is worse than BATNA",
+        "phase": "bargaining",
+        "round": 8,
+        "turn": 0,
+        "party_name": "Apple Inc. (CEO Office)"
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "5eb68eb2",
+        "timestamp": "2026-03-23T21:10:57.060259",
+        "party_id": "samsung",
+        "move_type": "counter",
+        "package": {
+          "id": "be28c174",
+          "issue_values": {
+            "Financial Settlement": "725000000.0",
+            "Design Patent Validity Acknowledgment": "Both parties acknowledge the other's IP contributions",
+            "Patent Licensing Agreement": "Broad license at $5 per device with volume discount",
+            "Cross-Licensing Samsung's Patents": "Mutual cross-license with royalty offset (net payment by larger user)",
+            "Product Injunction Terms": "Samsung redesigns flagged features within 6 months, no pull"
+          },
+          "rationale": "This package moves closer to the mediator's midpoint to demonstrate flexibility while maintaining a settlement figure that reflects the appellate-adjusted risk profile. By accepting the redesign terms, we provide Apple with the design protection they seek while securing the business continuity required for our operations.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: Apple is clearly signaling that they are nearing their reservation price but remain sensitive to the 'precedent' of the financial settlement amount. They fear being seen as 'losing' the design integrity battle. By accepting their preferred injunction terms (redesign within 6 months) while nudging the financial settlement upward toward the mediator's last proposal, I am addressing their core need for design protection and a face-saving financial number. This move signals good faith and a desire to close the deal without further litigation risk.",
+        "phase": "bargaining",
+        "round": 8,
+        "turn": 1,
+        "party_name": "Samsung Electronics (CEO Office)"
+      },
+      "delay_ms": 2105
+    },
+    {
+      "type": "mediator_note",
+      "data": {
+        "id": "916a19be",
+        "timestamp": "2026-03-23T21:10:59.457505",
+        "party_id": "mediator",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "a1e02a7e",
+          "claim": "The parties have moved significantly closer, with Apple's rejection of the $693.75M figure and Samsung's counter-offer of $725M narrowing the financial gap to only $250M. More importantly, both parties have now aligned on all non-monetary terms, specifically the IP acknowledgement, the licensing structure, and the product redesign terms. This indicates that the core dispute has been successfully distilled down to a single financial variable.",
+          "grounds": [
+            "Both parties are now in full agreement on the structural and legal components of the deal, including mutual IP acknowledgment, the $5/device licensing rate with volume discounts, cross-licensing with royalty offsets, and the commitment to redesign flagged features within 6 months.",
+            "Since all other terms are settled, the remaining delta represents the final barrier to ending the litigation costs, which have already exceeded $200M collectively. The parties may want to consider how the total settlement amount interacts with the long-term value of the ongoing cross-licensing relationship."
+          ],
+          "criterion_id": null,
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": null,
+        "phase": "bargaining",
+        "round": 8,
+        "turn": 2,
+        "party_name": "Mediator"
+      },
+      "delay_ms": 2397
+    },
+    {
+      "type": "validation_error",
+      "data": {
+        "party_id": "apple",
+        "violations": [
+          "Accepting a deal worse than BATNA \u2014 converting to REJECT"
+        ]
+      },
+      "delay_ms": 4000
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "78c14d74",
+        "timestamp": "2026-03-23T21:11:07.167612",
+        "party_id": "apple",
+        "move_type": "reject",
+        "package": {
+          "id": "09f3dd8e",
+          "issue_values": {
+            "Financial Settlement": "725000000.0",
+            "Design Patent Validity Acknowledgment": "Both parties acknowledge the other's IP contributions",
+            "Patent Licensing Agreement": "Broad license at $5 per device with volume discount",
+            "Cross-Licensing Samsung's Patents": "Mutual cross-license with royalty offset (net payment by larger user)",
+            "Product Injunction Terms": "Samsung redesigns flagged features within 6 months, no pull"
+          },
+          "rationale": "After careful consideration, accepting the $725 million settlement provides a stable, mutually beneficial conclusion to our long-standing dispute. This figure, while lower than our initial aspiration, reflects a fair compromise that validates our core intellectual property through a mutual acknowledgement framework and secures a sustainable licensing path forward for both companies, allowing us to focus our resources on innovation rather than litigation.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Rejected by validator: deal is worse than BATNA",
+        "phase": "bargaining",
+        "round": 9,
+        "turn": 0,
+        "party_name": "Apple Inc. (CEO Office)"
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "f82a7cc0",
+        "timestamp": "2026-03-23T21:11:10.277864",
+        "party_id": "samsung",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "43377ba9",
+          "claim": "The current impasse over the final $70 million gap between $725M and $795M is suboptimal for both parties given the significant costs of ongoing litigation.",
+          "grounds": [
+            "Both parties have already agreed on the structural framework, including the $5/device licensing, mutual cross-licensing, and the 6-month design-around commitment.",
+            "The $725 million figure is well within the range established by legal precedents following the Supreme Court's narrowing of disgorgement damages.",
+            "Continuing litigation to bridge a relatively small delta compared to the initial $1 billion demand risks further depletion of resources that could be better allocated to R&D and innovation.",
+            "A settlement at this stage allows both companies to pivot from legal confrontation to market competition, providing much-needed certainty for shareholders and enterprise customers."
+          ],
+          "criterion_id": "Global smartphone litigation costs",
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: Apple has rejected $725M, likely signaling that their internal floor is slightly higher, perhaps closer to the mediator's previous midpoint or the $750M-800M range. They fear appearing weak or underselling their core IP, but their willingness to negotiate suggests they are ready to settle. My strategy is to highlight that we are now in the 'zone of agreement' where the cost of further legal friction exceeds the remaining marginal financial difference. By arguing for the efficiency of closing the gap now, I am positioning us to find a final compromise number that satisfies their need for a 'win' while keeping the total payment within my acceptable bounds for avoiding a catastrophic precedent.",
+        "phase": "bargaining",
+        "round": 9,
+        "turn": 1,
+        "party_name": "Samsung Electronics (CEO Office)"
+      },
+      "delay_ms": 3110
+    },
+    {
+      "type": "mediator_note",
+      "data": {
+        "id": "48f49a59",
+        "timestamp": "2026-03-23T21:11:12.920762",
+        "party_id": "mediator",
+        "move_type": "propose",
+        "package": {
+          "id": "7a8e2de0",
+          "issue_values": {
+            "Financial Settlement": "760000000.0",
+            "Design Patent Validity Acknowledgment": "Both parties acknowledge the other's IP contributions",
+            "Patent Licensing Agreement": "Broad license at $5 per device with volume discount",
+            "Cross-Licensing Samsung's Patents": "Mutual cross-license with royalty offset (net payment by larger user)",
+            "Product Injunction Terms": "Samsung redesigns flagged features within 6 months, no pull"
+          },
+          "rationale": "The parties have reached a consensus on all non-monetary terms, and the financial gap has narrowed to a range between $725M and $795M. This midpoint proposal provides a compromise that acknowledges the significant value both companies place on their respective IP portfolios while allowing both to avoid the estimated $200M+ in ongoing litigation costs, effectively balancing the objective of a fair settlement against the reality of continued legal expenditure.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": null,
+        "phase": "bargaining",
+        "round": 9,
+        "turn": 2,
+        "party_name": "Mediator"
+      },
+      "delay_ms": 2642
+    },
+    {
+      "type": "validation_error",
+      "data": {
+        "party_id": "apple",
+        "violations": [
+          "Accepting a deal worse than BATNA \u2014 converting to REJECT"
+        ]
+      },
+      "delay_ms": 4000
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "9ac4e0bd",
+        "timestamp": "2026-03-23T21:11:21.270332",
+        "party_id": "apple",
+        "move_type": "reject",
+        "package": {
+          "id": "6cc699ae",
+          "issue_values": {
+            "Financial Settlement": "760000000.0",
+            "Design Patent Validity Acknowledgment": "Both parties acknowledge the other's IP contributions",
+            "Patent Licensing Agreement": "Broad license at $5 per device with volume discount",
+            "Cross-Licensing Samsung's Patents": "Mutual cross-license with royalty offset (net payment by larger user)",
+            "Product Injunction Terms": "Samsung redesigns flagged features within 6 months, no pull"
+          },
+          "rationale": "Accepting the mediator's proposal of $760M allows us to close the litigation, secure the cross-licensing framework, and protect our design integrity while avoiding further legal uncertainty and costs.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Rejected by validator: deal is worse than BATNA",
+        "phase": "bargaining",
+        "round": 10,
+        "turn": 0,
+        "party_name": "Apple Inc. (CEO Office)"
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "c71aa91a",
+        "timestamp": "2026-03-23T21:11:23.418480",
+        "party_id": "samsung",
+        "move_type": "counter",
+        "package": {
+          "id": "38d714e9",
+          "issue_values": {
+            "Financial Settlement": "775000000.0",
+            "Design Patent Validity Acknowledgment": "Both parties acknowledge the other's IP contributions",
+            "Patent Licensing Agreement": "Broad license at $5 per device with volume discount",
+            "Cross-Licensing Samsung's Patents": "Mutual cross-license with royalty offset (net payment by larger user)",
+            "Product Injunction Terms": "Samsung redesigns flagged features within 6 months, no pull"
+          },
+          "rationale": "This offer represents a final, good-faith effort to bridge the remaining gap. By moving to $775M, we are significantly closer to Apple's position while ensuring the resolution remains within the bounds of appellate expectations and market-based reasonableness.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: Apple has rejected $760M, signaling that they value a slightly higher number to justify the settlement to their stakeholders or that they are holding out for the $795M they previously hinted at. They fear looking like they 'lost' the litigation, so a final small concession on my part helps them save face. My strategy is to make one final, incremental move toward their number to demonstrate a sincere desire for closure, while staying below the $800M threshold which would exceed my internal BATNA valuation of the potential appellate outcome. I am choosing a move that bridges the gap almost entirely to secure a deal now and avoid further litigation costs.",
+        "phase": "bargaining",
+        "round": 10,
+        "turn": 1,
+        "party_name": "Samsung Electronics (CEO Office)"
+      },
+      "delay_ms": 2148
+    },
+    {
+      "type": "mediator_note",
+      "data": {
+        "id": "1ac8b1a0",
+        "timestamp": "2026-03-23T21:11:26.692259",
+        "party_id": "mediator",
+        "move_type": "propose",
+        "package": {
+          "id": "b1445895",
+          "issue_values": {
+            "Financial Settlement": "785000000.0",
+            "Design Patent Validity Acknowledgment": "Both parties acknowledge the other's IP contributions",
+            "Patent Licensing Agreement": "Broad license at $5 per device with volume discount",
+            "Cross-Licensing Samsung's Patents": "Mutual cross-license with royalty offset (net payment by larger user)",
+            "Product Injunction Terms": "Samsung redesigns flagged features within 6 months, no pull"
+          },
+          "rationale": "The parties have reached a consensus on all non-monetary terms and are now separated by only $10 million on the financial settlement. This package lands at $785 million, representing a midpoint that acknowledges the high cost of continued litigation compared to the incremental financial difference, allowing both sides to preserve their core operational and intellectual property strategies.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": null,
+        "phase": "bargaining",
+        "round": 10,
+        "turn": 2,
+        "party_name": "Mediator"
+      },
+      "delay_ms": 3273
+    },
+    {
+      "type": "validation_error",
+      "data": {
+        "party_id": "apple",
+        "violations": [
+          "Accepting a deal worse than BATNA \u2014 converting to REJECT"
+        ]
+      },
+      "delay_ms": 4000
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "5db5cda7",
+        "timestamp": "2026-03-23T21:11:32.781341",
+        "party_id": "apple",
+        "move_type": "reject",
+        "package": {
+          "id": "9c0e4b96",
+          "issue_values": {
+            "Financial Settlement": "785000000.0",
+            "Design Patent Validity Acknowledgment": "Both parties acknowledge the other's IP contributions",
+            "Patent Licensing Agreement": "Broad license at $5 per device with volume discount",
+            "Cross-Licensing Samsung's Patents": "Mutual cross-license with royalty offset (net payment by larger user)",
+            "Product Injunction Terms": "Samsung redesigns flagged features within 6 months, no pull"
+          },
+          "rationale": "After extensive negotiation, this settlement provides a fair financial resolution that respects our intellectual property, secures a long-term cross-licensing framework, and avoids the continued drain of multi-jurisdictional litigation. Accepting this proposal ends the uncertainty of appellate outcomes and allows us to focus on innovation while maintaining our brand integrity.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Rejected by validator: deal is worse than BATNA",
+        "phase": "bargaining",
+        "round": 11,
+        "turn": 0,
+        "party_name": "Apple Inc. (CEO Office)"
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "727f1e75",
+        "timestamp": "2026-03-23T21:11:36.935631",
+        "party_id": "samsung",
+        "move_type": "accept",
+        "package": {
+          "id": "0a85a39f",
+          "issue_values": {
+            "Financial Settlement": "785000000.0",
+            "Design Patent Validity Acknowledgment": "Both parties acknowledge the other's IP contributions",
+            "Patent Licensing Agreement": "Broad license at $5 per device with volume discount",
+            "Cross-Licensing Samsung's Patents": "Mutual cross-license with royalty offset (net payment by larger user)",
+            "Product Injunction Terms": "Samsung redesigns flagged features within 6 months, no pull"
+          },
+          "rationale": "By accepting the mediator's proposal of $785 million, we close the litigation at a figure that remains within our acceptable range while securing the long-term stability of a mutual cross-licensing agreement and avoiding the catastrophic risk of a market injunction.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [
+          "Round 11"
+        ],
+        "reasoning": "Theory of Mind: Apple has shown they are highly motivated to finalize this at a number near $785M-$795M, evidenced by their rejections of lower figures and their focus on 'fair financial resolution.' Their insistence on the mediator's previous proposal suggests they view the $785M mark as the threshold for an acceptable deal. Strategic calculation: The $10 million difference between my last offer ($775M) and the mediator's proposal ($785M) is negligible compared to the cost of continued litigation, legal uncertainty, and the risk of a worse outcome in court. Accepting this package satisfies our core need to avoid an injunction and secures the cross-licensing framework we desire, effectively ending the dispute on favorable terms.",
+        "phase": "bargaining",
+        "round": 11,
+        "turn": 1,
+        "party_name": "Samsung Electronics (CEO Office)"
+      },
+      "delay_ms": 4000
+    },
+    {
+      "type": "phase_change",
+      "data": {
+        "phase": "convergence",
+        "round": 11,
+        "message": "Parties are close \u2014 entering convergence"
+      },
+      "delay_ms": 1103
+    },
+    {
+      "type": "validation_error",
+      "data": {
+        "party_id": "apple",
+        "violations": [
+          "Accepting a deal worse than BATNA \u2014 converting to REJECT"
+        ]
+      },
+      "delay_ms": 4000
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "fa60300e",
+        "timestamp": "2026-03-23T21:11:47.354124",
+        "party_id": "apple",
+        "move_type": "reject",
+        "package": {
+          "id": "804da398",
+          "issue_values": {
+            "Financial Settlement": "785000000.0",
+            "Design Patent Validity Acknowledgment": "Both parties acknowledge the other's IP contributions",
+            "Patent Licensing Agreement": "Broad license at $5 per device with volume discount",
+            "Cross-Licensing Samsung's Patents": "Mutual cross-license with royalty offset (net payment by larger user)",
+            "Product Injunction Terms": "Samsung redesigns flagged features within 6 months, no pull"
+          },
+          "rationale": "By accepting the $785 million settlement, we conclude years of expensive litigation, secure a cross-licensing agreement that protects our future innovation, and obtain formal mutual recognition of IP contributions, which satisfies our core interest in establishing the value of our design patents.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Rejected by validator: deal is worse than BATNA",
+        "phase": "convergence",
+        "round": 12,
+        "turn": 0,
+        "party_name": "Apple Inc. (CEO Office)"
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "b55506d5",
+        "timestamp": "2026-03-23T21:11:50.250431",
+        "party_id": "samsung",
+        "move_type": "counter",
+        "package": {
+          "id": "9934775f",
+          "issue_values": {
+            "Financial Settlement": "795000000.0",
+            "Design Patent Validity Acknowledgment": "Both parties acknowledge the other's IP contributions",
+            "Patent Licensing Agreement": "Broad license at $5 per device with volume discount",
+            "Cross-Licensing Samsung's Patents": "Mutual cross-license with royalty offset (net payment by larger user)",
+            "Product Injunction Terms": "Samsung redesigns flagged features within 6 months, no pull"
+          },
+          "rationale": "By moving to $795M, we are essentially meeting the midpoint between our last offer and your implied expectation, demonstrating a final, good-faith effort to resolve this dispute and avoid further legal uncertainty for both companies.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: Apple has rejected the $785M offer despite their previous messaging suggesting it was reasonable. This indicates their internal 'walk-away' point is likely slightly higher, perhaps closer to $800M, or they are testing our resolve to see if we will cover the final gap. They value the closure of litigation and the cross-licensing agreement as much as we do. Strategic Calculation: I am moving to $795M to signal finality. This is a very small incremental increase that should be palatable to their board while staying within my acceptable range. I am maintaining all other terms which we have already agreed upon to keep the deal stable. I will use an argument to emphasize that this is the final movement to end the impasse.",
+        "phase": "convergence",
+        "round": 12,
+        "turn": 1,
+        "party_name": "Samsung Electronics (CEO Office)"
+      },
+      "delay_ms": 2896
+    },
+    {
+      "type": "mediator_note",
+      "data": {
+        "id": "87d64b7e",
+        "timestamp": "2026-03-23T21:11:52.594314",
+        "party_id": "mediator",
+        "move_type": "propose",
+        "package": {
+          "id": "0caaa593",
+          "issue_values": {
+            "Financial Settlement": "790000000.0",
+            "Design Patent Validity Acknowledgment": "Both parties acknowledge the other's IP contributions",
+            "Patent Licensing Agreement": "Broad license at $5 per device with volume discount",
+            "Cross-Licensing Samsung's Patents": "Mutual cross-license with royalty offset (net payment by larger user)",
+            "Product Injunction Terms": "Samsung redesigns flagged features within 6 months, no pull"
+          },
+          "rationale": "With both parties having successfully aligned on all operational, legal, and licensing terms, the remaining delta of only $10M between Samsung's offer and Apple's last rejection represents a negligible fraction of the total litigation value. This mid-point offer respects the progress made and provides a clear path to resolution, allowing both firms to avoid the compounding costs of continued legal conflict.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": null,
+        "phase": "convergence",
+        "round": 12,
+        "turn": 2,
+        "party_name": "Mediator"
+      },
+      "delay_ms": 2343
+    },
+    {
+      "type": "phase_change",
+      "data": {
+        "phase": "bargaining",
+        "round": 12,
+        "message": "Entering bargaining phase \u2014 proposals and counterproposals"
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "validation_error",
+      "data": {
+        "party_id": "apple",
+        "violations": [
+          "Accepting a deal worse than BATNA \u2014 converting to REJECT"
+        ]
+      },
+      "delay_ms": 4000
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "8a771297",
+        "timestamp": "2026-03-23T21:11:58.885758",
+        "party_id": "apple",
+        "move_type": "reject",
+        "package": {
+          "id": "acac478c",
+          "issue_values": {
+            "Financial Settlement": "790000000.0",
+            "Design Patent Validity Acknowledgment": "Both parties acknowledge the other's IP contributions",
+            "Patent Licensing Agreement": "Broad license at $5 per device with volume discount",
+            "Cross-Licensing Samsung's Patents": "Mutual cross-license with royalty offset (net payment by larger user)",
+            "Product Injunction Terms": "Samsung redesigns flagged features within 6 months, no pull"
+          },
+          "rationale": "Accepting the mediator's proposal of $790M provides a fair, definitive end to this long-standing litigation. It secures Apple's core interests in design patent recognition and a broad cross-licensing framework while providing a significant financial recovery that reflects the value of our intellectual property.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Rejected by validator: deal is worse than BATNA",
+        "phase": "bargaining",
+        "round": 13,
+        "turn": 0,
+        "party_name": "Apple Inc. (CEO Office)"
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "e4cb5a0f",
+        "timestamp": "2026-03-23T21:12:01.309556",
+        "party_id": "samsung",
+        "move_type": "accept",
+        "package": {
+          "id": "510330a1",
+          "issue_values": {
+            "Financial Settlement": "790000000.0",
+            "Design Patent Validity Acknowledgment": "Both parties acknowledge the other's IP contributions",
+            "Patent Licensing Agreement": "Broad license at $5 per device with volume discount",
+            "Cross-Licensing Samsung's Patents": "Mutual cross-license with royalty offset (net payment by larger user)",
+            "Product Injunction Terms": "Samsung redesigns flagged features within 6 months, no pull"
+          },
+          "rationale": "Apple has consistently indicated that a figure around $790M meets their requirements for ending this litigation. By accepting the mediator's proposal, we secure the mutual cross-licensing and operational terms that protect our long-term interests in the smartphone market, while finally putting this protracted legal uncertainty behind us.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: Apple's rejection of $785M and subsequent rejection of the mediator's $790M proposal (likely due to a misunderstanding of the negotiation flow or a desire to signal strength) suggests they are anchored near $800M. However, their explicit language in the rejection note mentions that $790M 'provides a fair, definitive end'. My strategic calculation is that the marginal cost of continuing to argue over $5-10M is outweighed by the massive benefit of ending the stock market volatility and legal drain. Accepting the mediator's $790M proposal is the most cooperative and logical way to finalize this deal, satisfying our need to avoid a catastrophic injunction while securing our cross-licensing interests.",
+        "phase": "bargaining",
+        "round": 13,
+        "turn": 1,
+        "party_name": "Samsung Electronics (CEO Office)"
+      },
+      "delay_ms": 4000
+    },
+    {
+      "type": "mediator_note",
+      "data": {
+        "id": "f6a0a7a2",
+        "timestamp": "2026-03-23T21:12:07.862309",
+        "party_id": "mediator",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "dd6c285d",
+          "claim": "The parties have reached a remarkable level of consensus, agreeing on all non-monetary terms including IP acknowledgement, licensing structures, and product injunction terms. The remaining gap has been narrowed to a very small margin of $5 million between the last proposed figure and Apple's previous rejection. Given that both parties have already demonstrated a willingness to move toward each other, it is important to acknowledge this progress before the final resolution.",
+          "grounds": [
+            "Both parties are in complete agreement on the operational and legal framework of the settlement, including the mutual IP acknowledgement, the broad licensing terms, and the non-punitive product redesign path. This demonstrates a shared interest in ending the litigation while preserving their respective market positions.",
+            "Since all non-monetary issues are resolved, the parties have a clear path to bridge the remaining $5 million gap through a final adjustment or by considering the significant, ongoing cost of litigation which exceeds this remaining difference."
+          ],
+          "criterion_id": null,
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": null,
+        "phase": "bargaining",
+        "round": 13,
+        "turn": 2,
+        "party_name": "Mediator"
+      },
+      "delay_ms": 2911
+    },
+    {
+      "type": "phase_change",
+      "data": {
+        "phase": "convergence",
+        "round": 13,
+        "message": "Parties are close \u2014 entering convergence"
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "validation_error",
+      "data": {
+        "party_id": "apple",
+        "violations": [
+          "Accepting a deal worse than BATNA \u2014 converting to REJECT"
+        ]
+      },
+      "delay_ms": 4000
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "bfb8a28a",
+        "timestamp": "2026-03-23T21:12:14.678823",
+        "party_id": "apple",
+        "move_type": "reject",
+        "package": {
+          "id": "465b1266",
+          "issue_values": {
+            "Financial Settlement": "790000000.0",
+            "Design Patent Validity Acknowledgment": "Both parties acknowledge the other's IP contributions",
+            "Patent Licensing Agreement": "Broad license at $5 per device with volume discount",
+            "Cross-Licensing Samsung's Patents": "Mutual cross-license with royalty offset (net payment by larger user)",
+            "Product Injunction Terms": "Samsung redesigns flagged features within 6 months, no pull"
+          },
+          "rationale": "This settlement package represents a comprehensive resolution that protects Apple's intellectual property interests while providing a fair financial outcome. By securing a mutual cross-license and acknowledgment of IP contributions, we uphold our design patent standards and end years of costly, distracting litigation.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Rejected by validator: deal is worse than BATNA",
+        "phase": "convergence",
+        "round": 14,
+        "turn": 0,
+        "party_name": "Apple Inc. (CEO Office)"
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "53f21cd6",
+        "timestamp": "2026-03-23T21:12:17.647512",
+        "party_id": "samsung",
+        "move_type": "counter",
+        "package": {
+          "id": "87135f8f",
+          "issue_values": {
+            "Financial Settlement": "795000000.0",
+            "Design Patent Validity Acknowledgment": "Both parties acknowledge the other's IP contributions",
+            "Patent Licensing Agreement": "Broad license at $5 per device with volume discount",
+            "Cross-Licensing Samsung's Patents": "Mutual cross-license with royalty offset (net payment by larger user)",
+            "Product Injunction Terms": "Samsung redesigns flagged features within 6 months, no pull"
+          },
+          "rationale": "We are moving to $795M to demonstrate our commitment to closing this matter. This figure represents a significant financial investment to ensure business continuity and stability for our partners and shareholders, acknowledging Apple's position while remaining within the bounds of reasonable appellate outcomes.",
+          "pareto_rank": null
+        },
+        "argument": {
+          "id": "33587947",
+          "claim": "A financial settlement of $795M is a reasonable compromise that reflects both the value of the IP and the need to avoid the systemic risks of a permanent injunction.",
+          "grounds": [
+            "This amount exceeds the likely range of $400-600M anticipated on appeal, demonstrating Samsung's willingness to pay a premium for certainty.",
+            "The agreement on all non-monetary terms\u2014including the cross-licensing and design-around protocol\u2014ensures the long-term health of both companies' ecosystems.",
+            "Ending this litigation allows both parties to redirect resources from legal fees toward innovation, which benefits the consumer market."
+          ],
+          "criterion_id": "Global smartphone litigation costs",
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: Apple has rejected $790M, suggesting they have an internal mandate for a slightly higher number or are testing our final limit. Their rejection of the mediator's proposal implies they value the finality but are holding out for a symbolic 'win' on the damages amount. Strategic Calculation: I will move to $795M. This is a small, incremental increase that signals we are at our ceiling without appearing as though we have infinite capacity. By coupling this with an argument focusing on the total package value\u2014the cross-licensing and the avoidance of market disruption\u2014I am highlighting that the deal is worth more than just the cash value.",
+        "phase": "convergence",
+        "round": 14,
+        "turn": 1,
+        "party_name": "Samsung Electronics (CEO Office)"
+      },
+      "delay_ms": 2968
+    },
+    {
+      "type": "mediator_note",
+      "data": {
+        "id": "d8ede4ec",
+        "timestamp": "2026-03-23T21:12:20.388916",
+        "party_id": "mediator",
+        "move_type": "propose",
+        "package": {
+          "id": "8db75628",
+          "issue_values": {
+            "Financial Settlement": "792500000.0",
+            "Design Patent Validity Acknowledgment": "Both parties acknowledge the other's IP contributions",
+            "Patent Licensing Agreement": "Broad license at $5 per device with volume discount",
+            "Cross-Licensing Samsung's Patents": "Mutual cross-license with royalty offset (net payment by larger user)",
+            "Product Injunction Terms": "Samsung redesigns flagged features within 6 months, no pull"
+          },
+          "rationale": "The parties are currently separated by only $2.5 million, a negligible amount compared to the $200 million+ in estimated litigation costs previously incurred. This package splits the difference on the final financial gap to close the deal, while maintaining all other terms upon which both parties have already reached consensus.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": null,
+        "phase": "convergence",
+        "round": 14,
+        "turn": 2,
+        "party_name": "Mediator"
+      },
+      "delay_ms": 2741
+    },
+    {
+      "type": "phase_change",
+      "data": {
+        "phase": "bargaining",
+        "round": 14,
+        "message": "Entering bargaining phase \u2014 proposals and counterproposals"
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "validation_error",
+      "data": {
+        "party_id": "apple",
+        "violations": [
+          "Accepting a deal worse than BATNA \u2014 converting to REJECT"
+        ]
+      },
+      "delay_ms": 4000
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "f04ceade",
+        "timestamp": "2026-03-23T21:12:27.906278",
+        "party_id": "apple",
+        "move_type": "reject",
+        "package": {
+          "id": "3d5de10b",
+          "issue_values": {
+            "Financial Settlement": "792500000.0",
+            "Design Patent Validity Acknowledgment": "Both parties acknowledge the other's IP contributions",
+            "Patent Licensing Agreement": "Broad license at $5 per device with volume discount",
+            "Cross-Licensing Samsung's Patents": "Mutual cross-license with royalty offset (net payment by larger user)",
+            "Product Injunction Terms": "Samsung redesigns flagged features within 6 months, no pull"
+          },
+          "rationale": "The mediator's proposal of $792.5M successfully bridges the final gap, providing a fair financial resolution that respects our intellectual property and ends the drain of long-standing global litigation.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Rejected by validator: deal is worse than BATNA",
+        "phase": "bargaining",
+        "round": 15,
+        "turn": 0,
+        "party_name": "Apple Inc. (CEO Office)"
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "2962e98e",
+        "timestamp": "2026-03-23T21:12:30.390601",
+        "party_id": "samsung",
+        "move_type": "accept",
+        "package": {
+          "id": "f8a1dd25",
+          "issue_values": {
+            "Financial Settlement": "792500000.0",
+            "Design Patent Validity Acknowledgment": "Both parties acknowledge the other's IP contributions",
+            "Patent Licensing Agreement": "Broad license at $5 per device with volume discount",
+            "Cross-Licensing Samsung's Patents": "Mutual cross-license with royalty offset (net payment by larger user)",
+            "Product Injunction Terms": "Samsung redesigns flagged features within 6 months, no pull"
+          },
+          "rationale": "By accepting the mediator's proposal of $792.5 million, we resolve the final $2.5 million discrepancy. This amount is well within our acceptable range and secures the comprehensive, non-injunctive resolution we have been seeking, protecting our Galaxy product line and ending costly legal uncertainty.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: Apple has shown through their rejection of $790M and their previous signaling that they are holding out for a specific, higher number to justify the settlement to their stakeholders. The mediator's proposal of $792.5M is a very small incremental increase from our last offer. Apple's rejection of the mediator's proposal is likely a final 'last-mile' negotiation tactic to ensure they get the absolute best price they can before conceding. Strategy: Since we have already agreed on all non-monetary terms\u2014which were our biggest priorities\u2014and the $2.5M gap is negligible compared to the total litigation cost and the risk of an injunction, accepting the mediator's proposal is the most logical path to reach closure and avoid further legal fees.",
+        "phase": "bargaining",
+        "round": 15,
+        "turn": 1,
+        "party_name": "Samsung Electronics (CEO Office)"
+      },
+      "delay_ms": 4000
+    },
+    {
+      "type": "mediator_note",
+      "data": {
+        "id": "d2a196df",
+        "timestamp": "2026-03-23T21:12:35.905716",
+        "party_id": "mediator",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "de3cdd4c",
+          "claim": "The parties have achieved a comprehensive agreement on all operational, legal, and licensing terms, which covers the vast majority of the complex issues inherent in this dispute. The only remaining point of contention is a marginal financial difference. Given that both parties have already demonstrated significant flexibility to reach this stage, focusing on the shared consensus on long-term stability and IP cooperation is the most productive path forward.",
+          "grounds": [
+            "Both parties are in complete agreement on the non-monetary framework: acknowledging mutual IP contributions, establishing a broad licensing model with volume discounts, implementing a mutual cross-licensing royalty offset, and agreeing to a 6-month design review process rather than immediate market exit. This alignment shows a shared interest in business continuity and avoiding the high costs of continued litigation.",
+            "The current impasse is purely financial. Since all other structural issues are settled, the parties might consider whether the remaining $2.5M gap is worth the risk of losing the entire deal and incurring further legal costs, which have already exceeded $200M collectively."
+          ],
+          "criterion_id": null,
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": null,
+        "phase": "bargaining",
+        "round": 15,
+        "turn": 2,
+        "party_name": "Mediator"
+      },
+      "delay_ms": 2007
+    },
+    {
+      "type": "phase_change",
+      "data": {
+        "phase": "convergence",
+        "round": 15,
+        "message": "Parties are close \u2014 entering convergence"
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "validation_error",
+      "data": {
+        "party_id": "apple",
+        "violations": [
+          "Accepting a deal worse than BATNA \u2014 converting to REJECT"
+        ]
+      },
+      "delay_ms": 4000
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "6f40fa30",
+        "timestamp": "2026-03-23T21:12:43.296059",
+        "party_id": "apple",
+        "move_type": "reject",
+        "package": {
+          "id": "a4ab3500",
+          "issue_values": {
+            "Financial Settlement": "792500000.0",
+            "Design Patent Validity Acknowledgment": "Both parties acknowledge the other's IP contributions",
+            "Patent Licensing Agreement": "Broad license at $5 per device with volume discount",
+            "Cross-Licensing Samsung's Patents": "Mutual cross-license with royalty offset (net payment by larger user)",
+            "Product Injunction Terms": "Samsung redesigns flagged features within 6 months, no pull"
+          },
+          "rationale": "After careful review of the mediator's proposal and Samsung's acceptance, Apple concludes that $792.5M, combined with the comprehensive cross-licensing and design acknowledgment terms, satisfies our core interests of protecting our IP, ending the litigation drain, and establishing a stable relationship for future innovation.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Rejected by validator: deal is worse than BATNA",
+        "phase": "convergence",
+        "round": 16,
+        "turn": 0,
+        "party_name": "Apple Inc. (CEO Office)"
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "0780687d",
+        "timestamp": "2026-03-23T21:12:46.480486",
+        "party_id": "samsung",
+        "move_type": "counter",
+        "package": {
+          "id": "d099e059",
+          "issue_values": {
+            "Financial Settlement": "797500000.0",
+            "Design Patent Validity Acknowledgment": "Both parties acknowledge the other's IP contributions",
+            "Patent Licensing Agreement": "Broad license at $5 per device with volume discount",
+            "Cross-Licensing Samsung's Patents": "Mutual cross-license with royalty offset (net payment by larger user)",
+            "Product Injunction Terms": "Samsung redesigns flagged features within 6 months, no pull"
+          },
+          "rationale": "By slightly adjusting the financial settlement to $797.5M, we are attempting to bridge the final perceived gap while keeping all other mutually agreed-upon terms intact to ensure a comprehensive resolution.",
+          "pareto_rank": null
+        },
+        "argument": {
+          "id": "d1c0969f",
+          "claim": "A financial settlement of $797.5M is a reasonable, good-faith effort to move past the impasse and reflects the value of the cross-licensing and operational stability we are both securing.",
+          "grounds": [
+            "The parties have already reached full consensus on all non-monetary terms, including cross-licensing and injunction avoidance, which provides immense strategic value to both companies.",
+            "Given the $200M+ in estimated legal fees incurred by both sides to date, resolving this matter now avoids further depletion of resources on both sides.",
+            "This figure remains well within the range of our internal assessments and demonstrates our commitment to ending this litigation cycle."
+          ],
+          "criterion_id": "Global smartphone litigation costs",
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Apple has repeatedly rejected figures around $790M-$792.5M, suggesting they have a higher internal floor for the settlement amount. My theory of mind is that they feel entitled to a higher number due to the precedent-setting nature of this case and their desire to 'win' the financial aspect to justify the long legal battle to their shareholders. By moving to $797.5M, I am testing if a slight increase can bridge their perceived gap while remaining within my own acceptable range. I am maintaining the non-monetary terms because they were already agreed upon and are critical for my business continuity (avoiding an injunction). I am using the 'Global smartphone litigation costs' as an objective basis to argue for the value of immediate closure.",
+        "phase": "convergence",
+        "round": 16,
+        "turn": 1,
+        "party_name": "Samsung Electronics (CEO Office)"
+      },
+      "delay_ms": 3184
+    },
+    {
+      "type": "mediator_note",
+      "data": {
+        "id": "a3023f59",
+        "timestamp": "2026-03-23T21:12:48.719100",
+        "party_id": "mediator",
+        "move_type": "propose",
+        "package": {
+          "id": "051ceffd",
+          "issue_values": {
+            "Financial Settlement": "796250000.0",
+            "Design Patent Validity Acknowledgment": "Both parties acknowledge the other's IP contributions",
+            "Patent Licensing Agreement": "Broad license at $5 per device with volume discount",
+            "Cross-Licensing Samsung's Patents": "Mutual cross-license with royalty offset (net payment by larger user)",
+            "Product Injunction Terms": "Samsung redesigns flagged features within 6 months, no pull"
+          },
+          "rationale": "Both parties have reached near-total consensus on the entire framework of this agreement, including critical operational and legal terms. The remaining financial gap is minimal relative to the total value and the staggering costs of continued litigation. This figure represents the midpoint between the last two proposals, providing a balanced resolution that allows both companies to exit the conflict and focus on market competition rather than legal expenses.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": null,
+        "phase": "convergence",
+        "round": 16,
+        "turn": 2,
+        "party_name": "Mediator"
+      },
+      "delay_ms": 2238
+    },
+    {
+      "type": "phase_change",
+      "data": {
+        "phase": "bargaining",
+        "round": 16,
+        "message": "Entering bargaining phase \u2014 proposals and counterproposals"
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "validation_error",
+      "data": {
+        "party_id": "apple",
+        "violations": [
+          "Accepting a deal worse than BATNA \u2014 converting to REJECT"
+        ]
+      },
+      "delay_ms": 4000
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "a4f0a604",
+        "timestamp": "2026-03-23T21:12:56.296248",
+        "party_id": "apple",
+        "move_type": "reject",
+        "package": {
+          "id": "cab88d1c",
+          "issue_values": {
+            "Financial Settlement": "796250000.0",
+            "Design Patent Validity Acknowledgment": "Both parties acknowledge the other's IP contributions",
+            "Patent Licensing Agreement": "Broad license at $5 per device with volume discount",
+            "Cross-Licensing Samsung's Patents": "Mutual cross-license with royalty offset (net payment by larger user)",
+            "Product Injunction Terms": "Samsung redesigns flagged features within 6 months, no pull"
+          },
+          "rationale": "After extensive negotiations, this package provides a comprehensive resolution that protects Apple's intellectual property, secures a long-term cross-licensing framework, and concludes years of litigation. The financial settlement of $796.25M is a reasonable compromise that allows both companies to move forward and focus on innovation.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Rejected by validator: deal is worse than BATNA",
+        "phase": "bargaining",
+        "round": 17,
+        "turn": 0,
+        "party_name": "Apple Inc. (CEO Office)"
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "510494da",
+        "timestamp": "2026-03-23T21:12:59.203872",
+        "party_id": "samsung",
+        "move_type": "counter",
+        "package": {
+          "id": "11361caa",
+          "issue_values": {
+            "Financial Settlement": "798750000.0",
+            "Design Patent Validity Acknowledgment": "Both parties acknowledge the other's IP contributions",
+            "Patent Licensing Agreement": "Broad license at $5 per device with volume discount",
+            "Cross-Licensing Samsung's Patents": "Mutual cross-license with royalty offset (net payment by larger user)",
+            "Product Injunction Terms": "Samsung redesigns flagged features within 6 months, no pull"
+          },
+          "rationale": "We are increasing our offer to $798.75M to demonstrate our sincere desire to conclude this litigation. This reflects a significant commitment to resolving the impasse, as we have already reached consensus on all non-monetary aspects of this agreement.",
+          "pareto_rank": null
+        },
+        "argument": {
+          "id": "6d6437cc",
+          "claim": "A financial settlement of $798.75M is a reasonable, good-faith effort to move past the impasse and reflects the true value of a global cross-licensing partnership.",
+          "grounds": [
+            "The parties have already agreed on all complex operational and licensing terms, which are far more critical for long-term stability than a marginal difference in settlement amount.",
+            "This figure represents a balanced compromise that avoids further legal expenditure and provides immediate finality for our respective businesses.",
+            "Continuing to litigate over a small fraction of the total value is counterproductive and inconsistent with the collaborative spirit of the cross-licensing agreement we have already successfully negotiated."
+          ],
+          "criterion_id": null,
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: Apple is clearly signaling they want to settle but are being extremely positional regarding the final dollar amount. They likely have internal pressures to secure a 'win' on the financial component. By moving to $798.75M, I am showing I am willing to meet them nearly halfway from the previous mediator suggestion to my last offer, demonstrating flexibility. My goal is to exhaust their positional bargaining space without significantly exceeding my internal target, hoping they will accept this near-final step to avoid the risk and cost of further court proceedings.",
+        "phase": "bargaining",
+        "round": 17,
+        "turn": 1,
+        "party_name": "Samsung Electronics (CEO Office)"
+      },
+      "delay_ms": 2907
+    },
+    {
+      "type": "mediator_note",
+      "data": {
+        "id": "0c96ae9b",
+        "timestamp": "2026-03-23T21:13:01.285196",
+        "party_id": "mediator",
+        "move_type": "propose",
+        "package": {
+          "id": "d153d7be",
+          "issue_values": {
+            "Financial Settlement": "797500000.0",
+            "Design Patent Validity Acknowledgment": "Both parties acknowledge the other's IP contributions",
+            "Patent Licensing Agreement": "Broad license at $5 per device with volume discount",
+            "Cross-Licensing Samsung's Patents": "Mutual cross-license with royalty offset (net payment by larger user)",
+            "Product Injunction Terms": "Samsung redesigns flagged features within 6 months, no pull"
+          },
+          "rationale": "Given that both parties have reached a total consensus on all complex operational, licensing, and legal terms, the only remaining barrier is a difference of $1.25 million. Considering the massive cost of ongoing litigation\u2014estimated at over $200 million\u2014and the value of the long-term stability provided by this comprehensive cross-licensing agreement, this figure represents a midpoint that respects the progress made while allowing both parties to realize the substantial benefits of ending the dispute.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": null,
+        "phase": "bargaining",
+        "round": 17,
+        "turn": 2,
+        "party_name": "Mediator"
+      },
+      "delay_ms": 2081
+    },
+    {
+      "type": "validation_error",
+      "data": {
+        "party_id": "apple",
+        "violations": [
+          "Accepting a deal worse than BATNA \u2014 converting to REJECT"
+        ]
+      },
+      "delay_ms": 4000
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "2b94b7e9",
+        "timestamp": "2026-03-23T21:13:08.993543",
+        "party_id": "apple",
+        "move_type": "reject",
+        "package": {
+          "id": "f6ea7590",
+          "issue_values": {
+            "Financial Settlement": "797500000.0",
+            "Design Patent Validity Acknowledgment": "Both parties acknowledge the other's IP contributions",
+            "Patent Licensing Agreement": "Broad license at $5 per device with volume discount",
+            "Cross-Licensing Samsung's Patents": "Mutual cross-license with royalty offset (net payment by larger user)",
+            "Product Injunction Terms": "Samsung redesigns flagged features within 6 months, no pull"
+          },
+          "rationale": "After careful consideration of the mediator's proposal and the progress made in these negotiations, Apple accepts the $797.5M financial settlement. This agreement effectively concludes years of complex litigation, secures a long-term cross-licensing framework, and provides a clear path for design compliance, which serves our interest in protecting our brand identity while moving past the significant costs and risks of continued global litigation.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Rejected by validator: deal is worse than BATNA",
+        "phase": "bargaining",
+        "round": 18,
+        "turn": 0,
+        "party_name": "Apple Inc. (CEO Office)"
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "12a668c6",
+        "timestamp": "2026-03-23T21:13:11.290228",
+        "party_id": "samsung",
+        "move_type": "counter",
+        "package": {
+          "id": "91b43fd1",
+          "issue_values": {
+            "Financial Settlement": "799000000.0",
+            "Design Patent Validity Acknowledgment": "Both parties acknowledge the other's IP contributions",
+            "Patent Licensing Agreement": "Broad license at $5 per device with volume discount",
+            "Cross-Licensing Samsung's Patents": "Mutual cross-license with royalty offset (net payment by larger user)",
+            "Product Injunction Terms": "Samsung redesigns flagged features within 6 months, no pull"
+          },
+          "rationale": "We are adjusting our offer to $799M to demonstrate our commitment to finalizing this agreement. This figure is extremely close to the mediator's previous suggestions and reflects a fair resolution that avoids further litigation costs and market uncertainty.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [
+          "Round 18"
+        ],
+        "reasoning": "Theory of Mind: Apple is likely holding out for a specific 'round' number or a higher psychological threshold to justify the settlement to their board, despite the mediator's $797.5M suggestion. They clearly value the non-monetary terms (licensing, cross-licensing, and redesigns) which we have already conceded. My move is to inch slightly closer to $800M, a clean figure that might satisfy their internal pressure while keeping the total under our internal risk assessment for damages. I am choosing to counter rather than accept because Apple has rejected the mediator's $797.5M, implying they want a slightly higher number to finalize the deal.",
+        "phase": "bargaining",
+        "round": 18,
+        "turn": 1,
+        "party_name": "Samsung Electronics (CEO Office)"
+      },
+      "delay_ms": 2296
+    },
+    {
+      "type": "mediator_note",
+      "data": {
+        "id": "3147cc96",
+        "timestamp": "2026-03-23T21:13:13.357966",
+        "party_id": "mediator",
+        "move_type": "propose",
+        "package": {
+          "id": "603e0d9d",
+          "issue_values": {
+            "Financial Settlement": "798000000.0",
+            "Design Patent Validity Acknowledgment": "Both parties acknowledge the other's IP contributions",
+            "Patent Licensing Agreement": "Broad license at $5 per device with volume discount",
+            "Cross-Licensing Samsung's Patents": "Mutual cross-license with royalty offset (net payment by larger user)",
+            "Product Injunction Terms": "Samsung redesigns flagged features within 6 months, no pull"
+          },
+          "rationale": "The parties have reached total consensus on all non-monetary terms, signaling a mutual desire for long-term IP cooperation and operational stability. The financial difference has been reduced to a marginal $1.5M gap. This package splits the remaining difference, providing a finality that avoids the massive ongoing litigation costs cited in industry data, which far exceed the remaining delta in this negotiation.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": null,
+        "phase": "bargaining",
+        "round": 18,
+        "turn": 2,
+        "party_name": "Mediator"
+      },
+      "delay_ms": 2067
+    },
+    {
+      "type": "impasse",
+      "data": {
+        "total_rounds": 18,
+        "total_moves": 53,
+        "message": "No agreement reached \u2014 parties fall back to BATNAs"
+      },
+      "delay_ms": 200
+    }
+  ],
+  "metrics": {
+    "outcome": "impasse",
+    "party_utilities": {
+      "apple": 0.55,
+      "samsung": 0.5
+    },
+    "party_batna_surplus": {
+      "apple": 0.0,
+      "samsung": 0.0
+    },
+    "social_welfare": 1.05,
+    "pareto_efficient": true,
+    "nash_product": 1e-06,
+    "integrative_index": 1.0,
+    "total_rounds": 18,
+    "total_moves": 53,
+    "move_breakdown": {
+      "disclose_interest": 4,
+      "argue": 13,
+      "invoke_criterion": 1,
+      "propose": 14,
+      "reject": 11,
+      "counter": 7,
+      "accept": 3
+    },
+    "disclosure_rate": 0.4,
+    "phases_visited": [
+      "discovery",
+      "generation",
+      "bargaining",
+      "convergence",
+      "impasse"
+    ],
+    "agreement": null
+  },
+  "critique": [
+    {
+      "severity": "high",
+      "description": "Negotiation ended in impasse \u2014 no agreement reached."
+    },
+    {
+      "severity": "low",
+      "description": "No multi-option (MESO) packages were generated."
+    },
+    {
+      "severity": "info",
+      "description": "Agreement is Pareto efficient."
+    }
+  ]
+}

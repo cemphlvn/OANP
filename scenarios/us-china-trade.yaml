@@ -1,0 +1,160 @@
+name: "US-China AI Chip Trade Deal"
+description: "The US Trade Representative and China's Ministry of Commerce negotiate AI chip export controls. America wants to maintain technological advantage while China calls it economic warfare. Billions in trade, thousands of jobs, and the future of AI development hang in the balance. Real diplomats have failed for 3 years — can principled negotiation agents find a deal?"
+architecture: mediated
+
+parties:
+  - id: us
+    name: "United States (Trade Representative)"
+    role: "US Trade Representative negotiating semiconductor export policy"
+    interests:
+      - description: "Prevent advanced AI chips from being used to develop military AI systems that threaten US national security"
+        type: need
+        priority: 1.0
+        related_issues: [chip_export_tiers, end_use_monitoring, enforcement_mechanism]
+      - description: "Maintain US semiconductor industry leadership — NVIDIA, AMD, Intel depend on global market access"
+        type: need
+        priority: 0.9
+        related_issues: [chip_export_tiers, market_access_reciprocity]
+      - description: "Allied coordination — Japan and Netherlands have aligned restrictions, can't undermine coalition"
+        type: concern
+        priority: 0.8
+        related_issues: [chip_export_tiers, enforcement_mechanism]
+      - description: "Support domestic chip manufacturing (CHIPS Act investments) without completely losing China market revenue"
+        type: desire
+        priority: 0.75
+        related_issues: [market_access_reciprocity, chip_export_tiers]
+      - description: "Fear of escalation spiral — China retaliates with rare earth export controls, disrupting US defense supply chain"
+        type: fear
+        priority: 0.85
+        related_issues: [rare_earth_access, enforcement_mechanism]
+    batna:
+      description: "Maintain current blanket export ban on advanced chips — costs US companies $15B/year in lost revenue but perceived as safer for national security"
+      utility: 0.45
+      confidence: 0.7
+      components:
+        chip_export_tiers: "full_ban_advanced"
+        end_use_monitoring: "not_applicable"
+        market_access_reciprocity: "no_access"
+        rare_earth_access: "current_restricted"
+        enforcement_mechanism: "unilateral_sanctions"
+
+  - id: china
+    name: "People's Republic of China (Commerce Ministry)"
+    role: "China's Ministry of Commerce negotiating technology trade access"
+    interests:
+      - description: "Access to advanced AI chips needed for China's $150B AI industry — 80% of AI startups depend on NVIDIA hardware"
+        type: need
+        priority: 1.0
+        related_issues: [chip_export_tiers, market_access_reciprocity]
+      - description: "Technological sovereignty — reduce dependency on US technology for critical infrastructure"
+        type: need
+        priority: 0.9
+        related_issues: [chip_export_tiers, market_access_reciprocity]
+      - description: "Not accept inspections that feel like surveillance of Chinese companies and sovereignty violations"
+        type: need
+        priority: 0.85
+        related_issues: [end_use_monitoring, enforcement_mechanism]
+      - description: "Demonstrate to domestic audience that China negotiates from strength, not submission"
+        type: concern
+        priority: 0.8
+        related_issues: [chip_export_tiers, enforcement_mechanism]
+      - description: "Fear that permanent tech decoupling will split the world into two incompatible AI ecosystems"
+        type: fear
+        priority: 0.7
+        related_issues: [chip_export_tiers, market_access_reciprocity]
+    batna:
+      description: "Accelerate domestic chip development (Huawei Ascend), retaliate with rare earth export controls, strengthen BRICS tech alliance"
+      utility: 0.4
+      confidence: 0.55
+      components:
+        chip_export_tiers: "domestic_alternatives"
+        end_use_monitoring: "none"
+        market_access_reciprocity: "restricted"
+        rare_earth_access: "weaponized"
+        enforcement_mechanism: "counter_sanctions"
+
+issues:
+  - id: chip_export_tiers
+    name: "AI Chip Export Tiers"
+    description: "Which chips can be exported to China and under what conditions"
+    type: categorical
+    options:
+      - "full_ban_all_advanced_chips"
+      - "tiered_by_compute_threshold"
+      - "licensed_case_by_case"
+      - "commercial_allowed_military_banned"
+      - "open_with_end_use_restrictions"
+
+  - id: end_use_monitoring
+    name: "End-Use Monitoring"
+    description: "How to verify chips aren't diverted to military applications"
+    type: categorical
+    options:
+      - "no_monitoring"
+      - "self_reporting_by_buyer"
+      - "third_party_audit_annual"
+      - "joint_us_china_inspection_body"
+      - "real_time_chip_tracking_technology"
+
+  - id: market_access_reciprocity
+    name: "Market Access Reciprocity"
+    description: "What China offers in return for chip access"
+    type: categorical
+    options:
+      - "no_reciprocity"
+      - "open_chinese_cloud_market_to_us"
+      - "joint_ai_safety_research_program"
+      - "mutual_market_access_framework"
+      - "technology_exchange_agreement"
+
+  - id: rare_earth_access
+    name: "Rare Earth Supply Guarantees"
+    description: "China's commitment on rare earth mineral exports critical for US defense"
+    type: categorical
+    options:
+      - "no_guarantees"
+      - "current_levels_maintained"
+      - "10yr_supply_agreement"
+      - "joint_processing_facilities"
+      - "strategic_reserve_sharing"
+
+  - id: enforcement_mechanism
+    name: "Enforcement & Dispute Resolution"
+    description: "How violations are detected and resolved"
+    type: categorical
+    options:
+      - "unilateral_sanctions"
+      - "wto_dispute_resolution"
+      - "bilateral_trade_commission"
+      - "independent_international_body"
+      - "automatic_snapback_provisions"
+
+criteria:
+  - name: "WTO trade dispute precedents"
+    source: regulation
+    applies_to: [chip_export_tiers, enforcement_mechanism]
+    reference_value: "National security exceptions (Article XXI) allow export controls but must be proportionate"
+
+  - name: "RAND Corporation tech trade analysis"
+    source: expert_opinion
+    applies_to: [chip_export_tiers, market_access_reciprocity]
+    reference_value: "Partial restrictions with monitoring are more effective than blanket bans which accelerate domestic alternatives"
+
+  - name: "Semiconductor Industry Association data"
+    source: market_data
+    applies_to: [chip_export_tiers, market_access_reciprocity]
+    reference_value: "China represents 27% of global semiconductor revenue — $150B+ market"
+
+  - name: "Nuclear Non-Proliferation Treaty model"
+    source: precedent
+    applies_to: [end_use_monitoring, enforcement_mechanism]
+    reference_value: "International inspection regimes with sovereignty protections have 70+ year track record in nuclear domain"
+
+mediator:
+  mode: evaluative
+  knowledge: caucus_only
+  intervention: every_round
+  evaluates_fairness: true
+
+protocol:
+  max_rounds: 20

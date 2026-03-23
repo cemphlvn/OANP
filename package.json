@@ -1,0 +1,23 @@
+{
+  "name": "oanp",
+  "version": "0.1.0",
+  "description": "OANP — Ontology-based Agentic Negotiation Protocol. A simulation framework for principled multi-party negotiation using autonomous agents.",
+  "scripts": {
+    "setup": "npm install && npm install --prefix src/frontend",
+    "setup:backend": "uv sync",
+    "setup:all": "npm run setup && npm run setup:backend",
+    "setup:env": "test -f .env || cp .env.example .env && echo '✅ .env created — add your API key'",
+    "dev": "concurrently --kill-others -n \"backend,frontend\" -c \"green,cyan\" \"npm run backend\" \"npm run frontend\"",
+    "backend": "uv run python src/backend/run.py",
+    "frontend": "cd src/frontend && npm run dev",
+    "build": "cd src/frontend && npm run build",
+    "simulate": "uv run python simulate.py"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "license": "MIT"
+}

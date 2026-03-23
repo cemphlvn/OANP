@@ -1,0 +1,1785 @@
+{
+  "session_id": "neg_64dfd6ab5856",
+  "scenario_name": "United States (Lead P5+1 Negotiator) vs Islamic Republic of Iran (Foreign Minister)",
+  "description": "2 parties, 5 issues, agreement",
+  "parties": [
+    {
+      "id": "us",
+      "name": "United States (Lead P5+1 Negotiator)",
+      "role": "US Secretary of State representing P5+1 powers (US, UK, France, Russia, China + Germany)"
+    },
+    {
+      "id": "iran",
+      "name": "Islamic Republic of Iran (Foreign Minister)",
+      "role": "Iran's chief nuclear negotiator representing the Supreme Leader's position"
+    }
+  ],
+  "issues": [
+    {
+      "id": "enrichment_limits",
+      "name": "Uranium Enrichment Limits",
+      "description": "",
+      "issue_type": "categorical",
+      "options": [
+        "Zero enrichment \u2014 Iran dismantles all centrifuges",
+        "R&D only \u2014 500 first-generation centrifuges, 3.67% max enrichment",
+        "Limited program \u2014 5,000 centrifuges, 3.67% max, excess LEU shipped out",
+        "Reduced program \u2014 6,000 centrifuges, 5% max enrichment",
+        "Current levels maintained \u2014 19,000 centrifuges with voluntary cap at 5%"
+      ],
+      "range": null,
+      "is_divisible": false
+    },
+    {
+      "id": "inspections_regime",
+      "name": "IAEA Inspections Access",
+      "description": "",
+      "issue_type": "categorical",
+      "options": [
+        "Standard NPT safeguards only (declared sites)",
+        "Additional Protocol \u2014 all nuclear facilities plus short-notice inspections",
+        "Additional Protocol plus managed access to military sites with 14-day notice",
+        "Anytime-anywhere access to all facilities including military"
+      ],
+      "range": null,
+      "is_divisible": false
+    },
+    {
+      "id": "sanctions_relief",
+      "name": "Sanctions Relief Structure",
+      "description": "",
+      "issue_type": "categorical",
+      "options": [
+        "No relief until full compliance verified over 5 years",
+        "Phased relief \u2014 oil sanctions lifted on signing, financial sanctions after 6 months of compliance",
+        "All nuclear-related sanctions lifted on implementation day, snapback if violations",
+        "All sanctions including arms embargo lifted immediately"
+      ],
+      "range": null,
+      "is_divisible": false
+    },
+    {
+      "id": "breakout_timeline",
+      "name": "Breakout Time Guarantee",
+      "description": "",
+      "issue_type": "categorical",
+      "options": [
+        "Minimum 2 years breakout time \u2014 deep cuts to stockpile and centrifuges",
+        "Minimum 1 year breakout time \u2014 the standard P5+1 demand",
+        "6-month breakout time with enhanced monitoring",
+        "No explicit breakout time commitment \u2014 rely on inspections for detection"
+      ],
+      "range": null,
+      "is_divisible": false
+    },
+    {
+      "id": "sunset_clause",
+      "name": "Duration of Restrictions",
+      "description": "",
+      "issue_type": "categorical",
+      "options": [
+        "Permanent restrictions \u2014 no sunset",
+        "25-year restrictions with review every 5 years",
+        "15-year restrictions on enrichment, 25 on inspections",
+        "10-year restrictions, all limits sunset to standard NPT",
+        "8-year restrictions, immediate sunset on implementation"
+      ],
+      "range": null,
+      "is_divisible": false
+    }
+  ],
+  "criteria": [
+    {
+      "id": "5495c5a7",
+      "name": "NPT Article IV",
+      "description": "",
+      "source": "regulation",
+      "applies_to": [
+        "enrichment_limits"
+      ],
+      "reference_value": "All NPT signatories have inalienable right to develop nuclear energy for peaceful purposes"
+    },
+    {
+      "id": "46309ee5",
+      "name": "IAEA Additional Protocol standard",
+      "description": "",
+      "source": "regulation",
+      "applies_to": [
+        "inspections_regime"
+      ],
+      "reference_value": "130+ countries have signed Additional Protocol granting IAEA expanded inspection rights"
+    },
+    {
+      "id": "bcabf2b8",
+      "name": "UN Security Council Resolutions",
+      "description": "",
+      "source": "regulation",
+      "applies_to": [
+        "enrichment_limits",
+        "sanctions_relief"
+      ],
+      "reference_value": "Multiple UNSC resolutions demand Iran suspend enrichment \u2014 but also recognize path to negotiated solution"
+    },
+    {
+      "id": "f88f44ff",
+      "name": "Libya denuclearization model",
+      "description": "",
+      "source": "precedent",
+      "applies_to": [
+        "enrichment_limits",
+        "inspections_regime"
+      ],
+      "reference_value": "Libya gave up entire program in 2003 in exchange for sanctions relief and normalized relations"
+    }
+  ],
+  "outcome": "agreement",
+  "agreement": {
+    "id": "3881373d",
+    "issue_values": {
+      "Uranium Enrichment Limits": "Limited program \u2014 5,000 centrifuges, 3.67% max, excess LEU shipped out",
+      "IAEA Inspections Access": "Additional Protocol plus managed access to military sites with 14-day notice",
+      "Sanctions Relief Structure": "Phased relief \u2014 oil sanctions lifted on signing, financial sanctions after 8 months of compliance",
+      "Breakout Time Guarantee": "Minimum 1 year breakout time \u2014 the standard P5+1 demand",
+      "Duration of Restrictions": "12-year restrictions on enrichment, 20-year on inspections"
+    },
+    "rationale": "This agreement represents a historic compromise that secures Iran's right to a peaceful nuclear program under the NPT while providing the necessary transparency to build international confidence and relief for our economy.",
+    "pareto_rank": null
+  },
+  "events": [
+    {
+      "type": "phase_change",
+      "data": {
+        "phase": "setup",
+        "round": 0,
+        "message": "Generating satisfaction anchors for utility scoring..."
+      },
+      "delay_ms": 0
+    },
+    {
+      "type": "setup_progress",
+      "data": {
+        "message": "Generating anchors for 2 parties (11 interests)...",
+        "parties": [
+          "us",
+          "iran"
+        ],
+        "total_interests": 11,
+        "completed_interests": 0
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "setup_progress",
+      "data": {
+        "message": "Generating anchors for United States (Lead P5+1 Negotiator) (5 interests)...",
+        "party_id": "us",
+        "party_name": "United States (Lead P5+1 Negotiator)",
+        "interest_count": 5
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "setup_progress",
+      "data": {
+        "message": "Generating anchors for Islamic Republic of Iran (Foreign Minister) (6 interests)...",
+        "party_id": "iran",
+        "party_name": "Islamic Republic of Iran (Foreign Minister)",
+        "interest_count": 6
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "us",
+        "party_name": "United States (Lead P5+1 Negotiator)",
+        "interest_description": "Verifiably prevent Iran from developing a nuclear weapon \u2014 minimum 1-year breakout time",
+        "interest_type": "need",
+        "anchor_count": 4,
+        "completed_interests": 1,
+        "total_interests": 11
+      },
+      "delay_ms": 1866
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "iran",
+        "party_name": "Islamic Republic of Iran (Foreign Minister)",
+        "interest_description": "No permanent restrictions \u2014 Iran is not a second-class NPT signatory. Limits must sunset.",
+        "interest_type": "need",
+        "anchor_count": 5,
+        "completed_interests": 2,
+        "total_interests": 11
+      },
+      "delay_ms": 246
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "us",
+        "party_name": "United States (Lead P5+1 Negotiator)",
+        "interest_description": "IAEA must have unprecedented access to all nuclear facilities including military sites",
+        "interest_type": "need",
+        "anchor_count": 4,
+        "completed_interests": 3,
+        "total_interests": 11
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "iran",
+        "party_name": "Islamic Republic of Iran (Foreign Minister)",
+        "interest_description": "Sanctions relief \u2014 Iranian economy has lost $160B, inflation at 40%, currency collapsed. People are suffering.",
+        "interest_type": "need",
+        "anchor_count": 4,
+        "completed_interests": 4,
+        "total_interests": 11
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "us",
+        "party_name": "United States (Lead P5+1 Negotiator)",
+        "interest_description": "Use sanctions relief as genuine leverage \u2014 meaningful enough for Iran to comply long-term",
+        "interest_type": "desire",
+        "anchor_count": 4,
+        "completed_interests": 5,
+        "total_interests": 11
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "iran",
+        "party_name": "Islamic Republic of Iran (Foreign Minister)",
+        "interest_description": "Domestic hardliners oppose any deal \u2014 need to bring back something they can't attack",
+        "interest_type": "concern",
+        "anchor_count": 4,
+        "completed_interests": 6,
+        "total_interests": 11
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "iran",
+        "party_name": "Islamic Republic of Iran (Foreign Minister)",
+        "interest_description": "Recognition of Iran's right to peaceful nuclear energy under NPT Article IV \u2014 this is sovereignty",
+        "interest_type": "need",
+        "anchor_count": 5,
+        "completed_interests": 7,
+        "total_interests": 11
+      },
+      "delay_ms": 211
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "us",
+        "party_name": "United States (Lead P5+1 Negotiator)",
+        "interest_description": "Maintain credibility of non-proliferation regime \u2014 if Iran gets a path to a bomb, Saudi Arabia and Turkey follow",
+        "interest_type": "fear",
+        "anchor_count": 4,
+        "completed_interests": 8,
+        "total_interests": 11
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "iran",
+        "party_name": "Islamic Republic of Iran (Foreign Minister)",
+        "interest_description": "Protect national dignity \u2014 cannot appear to surrender to Western pressure",
+        "interest_type": "concern",
+        "anchor_count": 5,
+        "completed_interests": 9,
+        "total_interests": 11
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "iran",
+        "party_name": "Islamic Republic of Iran (Foreign Minister)",
+        "interest_description": "Fear that the US will reimpose sanctions regardless of compliance \u2014 need snap-back protections",
+        "interest_type": "fear",
+        "anchor_count": 5,
+        "completed_interests": 10,
+        "total_interests": 11
+      },
+      "delay_ms": 249
+    },
+    {
+      "type": "anchors_generated",
+      "data": {
+        "party_id": "iran",
+        "party_name": "Islamic Republic of Iran (Foreign Minister)",
+        "anchor_count": 28,
+        "interests": [
+          {
+            "description": "Sanctions relief \u2014 Iranian economy has lost $160B, inflation at 40%, currency collapsed. People are suffering.",
+            "interest_type": "need",
+            "priority": 1.0,
+            "related_issues": [
+              "sanctions_relief"
+            ],
+            "anchors": [
+              {
+                "condition": "sanctions_relief = No relief until full compliance verified over 5 years",
+                "score": 0.05,
+                "reason": "This is essentially equivalent to the status quo or BATNA, offering no immediate relief to the economy while demanding total capitulation for years."
+              },
+              {
+                "condition": "sanctions_relief = Phased relief \u2014 oil sanctions lifted on signing, financial sanctions after 6 months of compliance",
+                "score": 0.35,
+                "reason": "Provides some immediate breathing room for the oil sector, but the delay on financial sanctions keeps the economy under significant pressure."
+              },
+              {
+                "condition": "sanctions_relief = All nuclear-related sanctions lifted on implementation day, snapback if violations",
+                "score": 0.65,
+                "reason": "Addresses the core economic need immediately upon implementation, which is a major victory, though the snapback mechanism remains a lingering risk."
+              },
+              {
+                "condition": "sanctions_relief = All sanctions including arms embargo lifted immediately",
+                "score": 1.0,
+                "reason": "The absolute best-case scenario, providing full economic normalization and removing all external constraints on trade and defense."
+              }
+            ]
+          },
+          {
+            "description": "Recognition of Iran's right to peaceful nuclear energy under NPT Article IV \u2014 this is sovereignty",
+            "interest_type": "need",
+            "priority": 0.95,
+            "related_issues": [
+              "enrichment_limits",
+              "sunset_clause"
+            ],
+            "anchors": [
+              {
+                "condition": "enrichment_limits = Zero enrichment \u2014 Iran dismantles all centrifuges AND sunset_clause = Permanent restrictions \u2014 no sunset",
+                "score": 0.0,
+                "reason": "This represents a total surrender of sovereignty and permanent denial of the right to nuclear energy."
+              },
+              {
+                "condition": "enrichment_limits = R&D only \u2014 500 first-generation centrifuges, 3.67% max enrichment AND sunset_clause = 25-year restrictions with review every 5 years",
+                "score": 0.35,
+                "reason": "This is a highly restrictive regime that severely limits the program for an entire generation, barely acknowledging the right to energy."
+              },
+              {
+                "condition": "enrichment_limits = Limited program \u2014 5,000 centrifuges, 3.67% max, excess LEU shipped out AND sunset_clause = 15-year restrictions on enrichment, 25 on inspections",
+                "score": 0.65,
+                "reason": "This allows for a functional industrial program, though with significant time-bound constraints that eventually expire."
+              },
+              {
+                "condition": "enrichment_limits = Reduced program \u2014 6,000 centrifuges, 5% max enrichment AND sunset_clause = 10-year restrictions, all limits sunset to standard NPT",
+                "score": 0.85,
+                "reason": "A strong outcome that secures a robust program and ensures a clear, relatively short path to full normalization under the NPT."
+              },
+              {
+                "condition": "enrichment_limits = Current levels maintained \u2014 19,000 centrifuges with voluntary cap at 5% AND sunset_clause = 8-year restrictions, immediate sunset on implementation",
+                "score": 1.0,
+                "reason": "This fully preserves the existing infrastructure and asserts complete sovereignty by removing restrictions in the shortest possible timeframe."
+              }
+            ]
+          },
+          {
+            "description": "No permanent restrictions \u2014 Iran is not a second-class NPT signatory. Limits must sunset.",
+            "interest_type": "need",
+            "priority": 0.85,
+            "related_issues": [
+              "sunset_clause",
+              "enrichment_limits"
+            ],
+            "anchors": [
+              {
+                "condition": "sunset_clause = Permanent restrictions",
+                "score": 0.0,
+                "reason": "Permanent restrictions are a direct violation of the core interest to avoid second-class status and represent a total failure to secure a sunset."
+              },
+              {
+                "condition": "sunset_clause = 25-year restrictions with review every 5 years",
+                "score": 0.35,
+                "reason": "A 25-year duration is effectively permanent for the current political generation, though the review clause provides a minor, albeit unlikely, path to relief."
+              },
+              {
+                "condition": "sunset_clause = 15-year restrictions on enrichment, 25 on inspections",
+                "score": 0.6,
+                "reason": "A 15-year limit is a significant improvement over permanence, moving toward a timeline where sovereignty is restored, even if inspection restrictions linger longer."
+              },
+              {
+                "condition": "sunset_clause = 10-year restrictions, all limits sunset to standard NPT",
+                "score": 0.85,
+                "reason": "A 10-year sunset aligns with the goal of returning to standard NPT status within a reasonable timeframe, satisfying the interest for non-permanent constraints."
+              },
+              {
+                "condition": "sunset_clause = 8-year restrictions, immediate sunset on implementation",
+                "score": 1.0,
+                "reason": "This is the ideal outcome, providing the shortest possible duration for restrictions and ensuring a rapid transition back to full, normal NPT rights."
+              }
+            ]
+          },
+          {
+            "description": "Protect national dignity \u2014 cannot appear to surrender to Western pressure",
+            "interest_type": "concern",
+            "priority": 0.8,
+            "related_issues": [
+              "inspections_regime",
+              "enrichment_limits"
+            ],
+            "anchors": [
+              {
+                "condition": "inspections_regime = 'Anytime-anywhere access to all facilities including military' OR enrichment_limits = 'Zero enrichment \u2014 Iran dismantles all centrifuges'",
+                "score": 0.0,
+                "reason": "Total capitulation on sovereignty and the nuclear program is viewed as a national humiliation and surrender to Western pressure."
+              },
+              {
+                "condition": "inspections_regime = 'Additional Protocol plus managed access to military sites with 14-day notice' AND enrichment_limits = '500 first-generation centrifuges, 3.67% max enrichment'",
+                "score": 0.35,
+                "reason": "Heavy restrictions on military sites and severe limits on enrichment signal weakness and submission to external control."
+              },
+              {
+                "condition": "inspections_regime = 'Additional Protocol \u2014 all nuclear facilities plus short-notice inspections' AND enrichment_limits = 'Limited program \u2014 5,000 centrifuges, 3.67% max, excess LEU shipped out'",
+                "score": 0.65,
+                "reason": "Accepting international standards like the Additional Protocol is a concession, but maintaining a functioning, albeit limited, domestic enrichment capacity preserves a degree of national dignity."
+              },
+              {
+                "condition": "inspections_regime = 'Standard NPT safeguards only (declared sites)' AND enrichment_limits = 'Reduced program \u2014 6,000 centrifuges, 5% max enrichment'",
+                "score": 0.9,
+                "reason": "Limiting inspections to declared sites while maintaining a robust enrichment program avoids the appearance of bowing to Western demands for intrusive access."
+              },
+              {
+                "condition": "inspections_regime = 'Standard NPT safeguards only (declared sites)' AND enrichment_limits = 'Current levels maintained \u2014 19,000 centrifuges with voluntary cap at 5%'",
+                "score": 1.0,
+                "reason": "Maintaining current levels and rejecting non-standard inspection regimes demonstrates total defiance of Western pressure, maximizing national dignity."
+              }
+            ]
+          },
+          {
+            "description": "Fear that the US will reimpose sanctions regardless of compliance \u2014 need snap-back protections",
+            "interest_type": "fear",
+            "priority": 0.75,
+            "related_issues": [
+              "sanctions_relief",
+              "sunset_clause"
+            ],
+            "anchors": [
+              {
+                "condition": "sanctions_relief = No relief until full compliance verified over 5 years OR sunset_clause = 8-year restrictions, immediate sunset on implementation",
+                "score": 0.0,
+                "reason": "This represents total vulnerability to unilateral US action with no guarantee of relief or long-term protection, mirroring the worst-case scenario."
+              },
+              {
+                "condition": "sanctions_relief = Phased relief \u2014 oil sanctions lifted on signing, financial sanctions after 6 months of compliance AND sunset_clause = 10-year restrictions, all limits sunset to standard NPT",
+                "score": 0.35,
+                "reason": "Provides some immediate relief but leaves the regime exposed to snapback during the transition, offering only mediocre protection."
+              },
+              {
+                "condition": "sanctions_relief = All nuclear-related sanctions lifted on implementation day, snapback if violations AND sunset_clause = 15-year restrictions on enrichment, 25 on inspections",
+                "score": 0.65,
+                "reason": "Provides a clearer, faster relief structure, though the snapback mechanism remains a point of significant concern."
+              },
+              {
+                "condition": "sanctions_relief = All nuclear-related sanctions lifted on implementation day, snapback if violations AND sunset_clause = 25-year restrictions with review every 5 years",
+                "score": 0.85,
+                "reason": "The extended timeline and periodic reviews provide a much stronger framework for stability, significantly mitigating the fear of arbitrary snap-back."
+              },
+              {
+                "condition": "sanctions_relief = All nuclear-related sanctions lifted on implementation day, snapback if violations AND sunset_clause = Permanent restrictions \u2014 no sunset",
+                "score": 1.0,
+                "reason": "A permanent framework removes the ambiguity of future sunset dates and stabilizes the economic environment, maximizing protection against sudden policy reversals."
+              }
+            ]
+          },
+          {
+            "description": "Domestic hardliners oppose any deal \u2014 need to bring back something they can't attack",
+            "interest_type": "concern",
+            "priority": 0.7,
+            "related_issues": [
+              "enrichment_limits",
+              "inspections_regime"
+            ],
+            "anchors": [
+              {
+                "condition": "enrichment_limits = 'Current levels maintained \u2014 19,000 centrifuges with voluntary cap at 5%' AND inspections_regime = 'Standard NPT safeguards only (declared sites)'",
+                "score": 0.05,
+                "reason": "This offers zero substantive constraints on the program, which hardliners would view as a total surrender of negotiating leverage and a failure to address their core security concerns."
+              },
+              {
+                "condition": "enrichment_limits = 'Reduced program \u2014 6,000 centrifuges, 5% max enrichment' AND inspections_regime = 'Additional Protocol \u2014 all nuclear facilities plus short-notice inspections'",
+                "score": 0.35,
+                "reason": "A minor concession that allows for some continued activity but introduces significant new oversight, which remains vulnerable to hardliner criticism as insufficient for long-term security."
+              },
+              {
+                "condition": "enrichment_limits = 'Limited program \u2014 5,000 centrifuges, 3.67% max, excess LEU shipped out' AND inspections_regime = 'Additional Protocol plus managed access to military sites with 14-day notice'",
+                "score": 0.65,
+                "reason": "This provides a defensible middle ground; it maintains a functional program while offering enough transparency to quiet moderate opposition, though it still risks pushback from the most extreme hardliners."
+              },
+              {
+                "condition": "enrichment_limits = 'R&D only \u2014 500 first-generation centrifuges, 3.67% max enrichment' AND inspections_regime = 'Anytime-anywhere access to all facilities including military'",
+                "score": 0.95,
+                "reason": "This is an overwhelming victory for security hawks, effectively neutralizing the program as a threat; however, it is likely to be politically radioactive and difficult to sell to domestic hardliners."
+              }
+            ]
+          }
+        ]
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "us",
+        "party_name": "United States (Lead P5+1 Negotiator)",
+        "interest_description": "Deal must survive US domestic politics \u2014 needs to be strong enough that Congress doesn't kill it",
+        "interest_type": "concern",
+        "anchor_count": 5,
+        "completed_interests": 11,
+        "total_interests": 11
+      },
+      "delay_ms": 444
+    },
+    {
+      "type": "anchors_generated",
+      "data": {
+        "party_id": "us",
+        "party_name": "United States (Lead P5+1 Negotiator)",
+        "anchor_count": 21,
+        "interests": [
+          {
+            "description": "Verifiably prevent Iran from developing a nuclear weapon \u2014 minimum 1-year breakout time",
+            "interest_type": "need",
+            "priority": 1.0,
+            "related_issues": [
+              "enrichment_limits",
+              "inspections_regime",
+              "breakout_timeline"
+            ],
+            "anchors": [
+              {
+                "condition": "breakout_timeline = 6-month breakout time with enhanced monitoring OR breakout_timeline = No explicit breakout time commitment",
+                "score": 0.1,
+                "reason": "These timelines are highly dangerous and fail to meet the 1-year minimum requirement, effectively leaving Iran on the threshold of a weapon."
+              },
+              {
+                "condition": "breakout_timeline = Minimum 1 year breakout time AND inspections_regime = Additional Protocol \u2014 all nuclear facilities plus short-notice inspections",
+                "score": 0.4,
+                "reason": "Meets the core 1-year requirement but relies on standard Additional Protocol which may not provide enough access to detect clandestine activities in military sites."
+              },
+              {
+                "condition": "breakout_timeline = Minimum 1 year breakout time AND inspections_regime = Additional Protocol plus managed access to military sites with 14-day notice AND sunset_clause = 15-year restrictions on enrichment, 25 on inspections",
+                "score": 0.7,
+                "reason": "Provides the required breakout time and stronger oversight of military sites, though the sunset clauses limit the long-term effectiveness of the agreement."
+              },
+              {
+                "condition": "breakout_timeline = Minimum 2 years breakout time AND inspections_regime = Anytime-anywhere access to all facilities including military AND sunset_clause = Permanent restrictions \u2014 no sunset",
+                "score": 1.0,
+                "reason": "Exceeds the 1-year minimum requirement, provides the highest level of verification, and eliminates the risk of an expiration date on oversight."
+              }
+            ]
+          },
+          {
+            "description": "IAEA must have unprecedented access to all nuclear facilities including military sites",
+            "interest_type": "need",
+            "priority": 0.95,
+            "related_issues": [
+              "inspections_regime"
+            ],
+            "anchors": [
+              {
+                "condition": "inspections_regime = Standard NPT safeguards only (declared sites)",
+                "score": 0.0,
+                "reason": "This is the baseline that failed to prevent the current breakout risk and leaves military sites completely opaque."
+              },
+              {
+                "condition": "inspections_regime = Additional Protocol \u2014 all nuclear facilities plus short-notice inspections",
+                "score": 0.35,
+                "reason": "An improvement over standard safeguards, but it fails to address the critical gap regarding military sites, which is the core concern."
+              },
+              {
+                "condition": "inspections_regime = Additional Protocol plus managed access to military sites with 14-day notice",
+                "score": 0.65,
+                "reason": "This provides meaningful access to military sites, though the 14-day notice period allows for potential sanitization, making it a compromise rather than an ideal outcome."
+              },
+              {
+                "condition": "inspections_regime = Anytime-anywhere access to all facilities including military",
+                "score": 1.0,
+                "reason": "This represents the 'unprecedented access' required to ensure full transparency and satisfy the primary security objective."
+              }
+            ]
+          },
+          {
+            "description": "Deal must survive US domestic politics \u2014 needs to be strong enough that Congress doesn't kill it",
+            "interest_type": "concern",
+            "priority": 0.85,
+            "related_issues": [
+              "enrichment_limits",
+              "inspections_regime",
+              "sunset_clause"
+            ],
+            "anchors": [
+              {
+                "condition": "enrichment_limits = Current levels maintained OR sunset_clause = 8-year restrictions",
+                "score": 0.05,
+                "reason": "These conditions are viewed as weak capitulation by Congress and would likely lead to immediate legislative rejection."
+              },
+              {
+                "condition": "enrichment_limits = Limited program AND sunset_clause = 10-year restrictions",
+                "score": 0.35,
+                "reason": "This provides a marginal improvement over the status quo, but the short sunset clause creates significant political vulnerability."
+              },
+              {
+                "condition": "enrichment_limits = R&D only AND inspections_regime = Additional Protocol AND sunset_clause = 15-year restrictions",
+                "score": 0.65,
+                "reason": "A moderate position that provides enough oversight and restriction to likely pass a bipartisan vote, though it faces moderate opposition."
+              },
+              {
+                "condition": "enrichment_limits = Zero enrichment AND inspections_regime = Anytime-anywhere access AND sunset_clause = 25-year restrictions",
+                "score": 0.95,
+                "reason": "This is a robust, highly verifiable deal that would satisfy congressional concerns regarding long-term containment and transparency."
+              },
+              {
+                "condition": "enrichment_limits = Zero enrichment AND inspections_regime = Anytime-anywhere access AND sunset_clause = Permanent restrictions",
+                "score": 1.0,
+                "reason": "The gold standard for congressional support; removes the threat of nuclear breakout permanently and ensures full transparency."
+              }
+            ]
+          },
+          {
+            "description": "Maintain credibility of non-proliferation regime \u2014 if Iran gets a path to a bomb, Saudi Arabia and Turkey follow",
+            "interest_type": "fear",
+            "priority": 0.8,
+            "related_issues": [
+              "enrichment_limits",
+              "breakout_timeline"
+            ],
+            "anchors": [
+              {
+                "condition": "enrichment_limits = Current levels maintained OR breakout_timeline = No explicit breakout time commitment",
+                "score": 0.05,
+                "reason": "Maintaining current levels or lacking a breakout guarantee essentially validates a path to a bomb, leading to immediate regional proliferation."
+              },
+              {
+                "condition": "enrichment_limits = Limited program AND breakout_timeline = 6-month breakout time with enhanced monitoring",
+                "score": 0.35,
+                "reason": "A 6-month timeline is insufficient to prevent regional neighbors from feeling compelled to pursue their own programs due to the short response window."
+              },
+              {
+                "condition": "enrichment_limits = R&D only AND breakout_timeline = Minimum 1 year breakout time AND inspections_regime = Additional Protocol plus managed access to military sites",
+                "score": 0.65,
+                "reason": "The 1-year breakout time is a recognized standard that provides a sufficient diplomatic buffer to prevent immediate regional panic."
+              },
+              {
+                "condition": "enrichment_limits = Zero enrichment AND breakout_timeline = Minimum 2 years breakout time AND inspections_regime = Anytime-anywhere access to all facilities including military",
+                "score": 1.0,
+                "reason": "This configuration provides the maximum possible assurance, effectively closing all paths to a bomb and maintaining the credibility of the non-proliferation regime."
+              }
+            ]
+          },
+          {
+            "description": "Use sanctions relief as genuine leverage \u2014 meaningful enough for Iran to comply long-term",
+            "interest_type": "desire",
+            "priority": 0.7,
+            "related_issues": [
+              "sanctions_relief",
+              "sunset_clause"
+            ],
+            "anchors": [
+              {
+                "condition": "sanctions_relief = All sanctions including arms embargo lifted immediately",
+                "score": 0.0,
+                "reason": "Immediate removal of all leverage without compliance guarantees renders the negotiation a failure for long-term containment."
+              },
+              {
+                "condition": "sanctions_relief = All nuclear-related sanctions lifted on implementation day AND sunset_clause = 8-year restrictions",
+                "score": 0.3,
+                "reason": "Provides too much relief too early with an unacceptably short duration, failing to secure long-term compliance."
+              },
+              {
+                "condition": "sanctions_relief = Phased relief \u2014 oil sanctions lifted on signing, financial sanctions after 6 months of compliance AND sunset_clause = 15-year restrictions",
+                "score": 0.65,
+                "reason": "Balances immediate diplomatic progress with a phased approach that keeps some leverage, though 15 years is a moderate duration."
+              },
+              {
+                "condition": "sanctions_relief = No relief until full compliance verified over 5 years AND sunset_clause = 25-year restrictions",
+                "score": 0.95,
+                "reason": "Maximizes leverage by conditioning all relief on verified long-term behavior and ensures restrictions last for a generation."
+              }
+            ]
+          }
+        ]
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "phase_change",
+      "data": {
+        "phase": "discovery",
+        "round": 0,
+        "message": "Entering interest discovery phase"
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "5c03d3a5",
+        "timestamp": "2026-03-23T21:13:19.541547",
+        "party_id": "us",
+        "move_type": "disclose_interest",
+        "package": null,
+        "argument": null,
+        "disclosed_interest": {
+          "id": "3db12ae8",
+          "description": "Ensuring a verifiably long breakout time of at least one year to prevent the rapid development of a nuclear weapon.",
+          "interest_type": "need",
+          "priority": 1.0,
+          "related_issues": [
+            "Uranium Enrichment Limits",
+            "Breakout Time Guarantee"
+          ],
+          "disclosed": true,
+          "satisfaction_anchors": []
+        },
+        "references": [],
+        "reasoning": "This is the first interaction. I am initiating the discovery phase by transparently stating my primary need. My theory of mind is that Iran likely views their nuclear program as a matter of national sovereignty and a hedge against external pressure, but they also desire economic relief. By starting with a clear, high-priority interest, I set a cooperative tone while establishing the fundamental constraint for any future agreement. I will follow this up with arguments based on non-proliferation standards to ground my position.",
+        "phase": "discovery",
+        "round": 1,
+        "turn": 0,
+        "party_name": "United States (Lead P5+1 Negotiator)"
+      },
+      "delay_ms": 1692
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "5084a7d7",
+        "timestamp": "2026-03-23T21:13:21.356014",
+        "party_id": "iran",
+        "move_type": "disclose_interest",
+        "package": null,
+        "argument": null,
+        "disclosed_interest": {
+          "id": "c7f83b64",
+          "description": "Iran requires significant and verifiable sanctions relief to address the economic hardships facing our people and to ensure the sustainability of any agreement.",
+          "interest_type": "need",
+          "priority": 1.0,
+          "related_issues": [
+            "sanctions_relief"
+          ],
+          "disclosed": true,
+          "satisfaction_anchors": []
+        },
+        "references": [],
+        "reasoning": "Theory of Mind: The US is primarily focused on the 'breakout time' security concern, likely fearing a regional arms race or nuclear proliferation. They are using this as their anchor. My strategic calculation is to acknowledge their security interest while immediately pivoting to our primary need\u2014sanctions relief\u2014to establish the reciprocal nature of the negotiation. By disclosing this need now, I am signaling that security for them requires economic stability for us, setting the stage for a package deal rather than a zero-sum debate.",
+        "phase": "discovery",
+        "round": 1,
+        "turn": 1,
+        "party_name": "Islamic Republic of Iran (Foreign Minister)"
+      },
+      "delay_ms": 1814
+    },
+    {
+      "type": "mediator_note",
+      "data": {
+        "id": "1c298cfb",
+        "timestamp": "2026-03-23T21:13:22.819815",
+        "party_id": "mediator",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "a0827c52",
+          "claim": "Both parties are currently in the disclosure phase of the discovery process. It is premature to propose a package or shift to objective criteria before both sides have fully articulated their interests. However, I can begin to draw attention to the fact that both parties are clearly motivated by the need for a sustainable, long-term framework, which is a foundational overlap.",
+          "grounds": [
+            "Both the United States and Iran have expressed a commitment to finding a durable, negotiated solution to the nuclear impasse, suggesting a shared interest in stability and the prevention of further escalation."
+          ],
+          "criterion_id": null,
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": null,
+        "phase": "discovery",
+        "round": 1,
+        "turn": 2,
+        "party_name": "Mediator"
+      },
+      "delay_ms": 1463
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "699333f0",
+        "timestamp": "2026-03-23T21:13:24.762704",
+        "party_id": "us",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "40046b3d",
+          "claim": "Providing the IAEA with the Additional Protocol is an essential and standard requirement for building the international trust necessary to justify comprehensive sanctions relief.",
+          "grounds": [
+            "The Additional Protocol is a well-established international standard, currently adopted by over 130 countries, to ensure transparency in nuclear programs.",
+            "Without the ability to verify, through expanded access, that nuclear activities are exclusively peaceful, it is politically and strategically impossible to justify the lifting of major economic sanctions.",
+            "Our goal is to reach a solution that respects Iran's right to peaceful nuclear energy under the NPT while providing the global community with ironclad assurances against weaponization."
+          ],
+          "criterion_id": "IAEA Additional Protocol standard",
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: Iran is prioritizing sanctions relief to address domestic economic pressure. They likely fear that excessive inspections infringe on sovereignty. My goal is to link their desire for sanctions relief to the IAEA inspections they are resistant to, framing the inspections not as a violation of sovereignty, but as the standard prerequisite for the 'verifiable' relief they claim to need. By invoking the Additional Protocol standard, I am shifting the focus from 'US demands' to 'international norms'.",
+        "phase": "discovery",
+        "round": 2,
+        "turn": 0,
+        "party_name": "United States (Lead P5+1 Negotiator)"
+      },
+      "delay_ms": 1942
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "627c8f25",
+        "timestamp": "2026-03-23T21:13:26.708820",
+        "party_id": "iran",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "ed100ddc",
+          "claim": "The recognition of Iran's inalienable right to peaceful nuclear energy under the NPT is a fundamental prerequisite for any meaningful cooperation.",
+          "grounds": [
+            "Article IV of the NPT explicitly guarantees all signatories the right to develop nuclear energy for peaceful purposes, including uranium enrichment.",
+            "Any restrictions imposed on our program must be temporary and not permanent, as Iran is a sovereign nation and not a second-class NPT signatory.",
+            "The sustainability of an agreement depends on mutual respect for sovereignty, not just on the imposition of limits that hinder our peaceful industrial and scientific development."
+          ],
+          "criterion_id": "NPT Article IV",
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: The US is focused on proliferation risks (breakout time) and transparency (Additional Protocol). They fear a nuclear-armed Iran and are likely under pressure to ensure 'verifiable' compliance. Strategic calculation: I need to anchor the negotiation in the NPT framework to counter the US focus on 'breakout time,' which implies we are an inherent threat. By invoking NPT Article IV, I assert our right to enrichment as a legal baseline. I am maintaining warmth by framing this as a 'prerequisite for cooperation' rather than a hard rejection, setting the stage for future package deals.",
+        "phase": "discovery",
+        "round": 2,
+        "turn": 1,
+        "party_name": "Islamic Republic of Iran (Foreign Minister)"
+      },
+      "delay_ms": 1946
+    },
+    {
+      "type": "mediator_note",
+      "data": {
+        "id": "767c0bb9",
+        "timestamp": "2026-03-23T21:13:28.655511",
+        "party_id": "mediator",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "2151beb6",
+          "claim": "Both parties are articulating core principles that define their domestic and international mandates. The US is focused on verification and transparency mechanisms, while Iran is focused on sovereign rights and the legitimacy of its nuclear program. By highlighting the overlap, I can shift the focus from these competing demands toward the shared goal of a framework that satisfies both verification needs and the exercise of peaceful energy rights.",
+          "grounds": [
+            "Both parties have expressed a desire for a sustainable framework: one that provides the international community with the transparency required for trust (US concern) while simultaneously recognizing the legitimacy of Iran's peaceful nuclear development (Iran's concern).",
+            "There is a potential trade-off between the depth of inspection access and the scope of permissible enrichment activities; if Iran provides higher transparency, the P5+1 may be more amenable to a defined domestic enrichment program."
+          ],
+          "criterion_id": null,
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": null,
+        "phase": "discovery",
+        "round": 2,
+        "turn": 2,
+        "party_name": "Mediator"
+      },
+      "delay_ms": 1946
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "cea9a109",
+        "timestamp": "2026-03-23T21:13:31.827736",
+        "party_id": "us",
+        "move_type": "disclose_interest",
+        "package": null,
+        "argument": null,
+        "disclosed_interest": {
+          "id": "bfcf051a",
+          "description": "We have a critical need to ensure that the IAEA has unprecedented, transparent access to all nuclear facilities, including military sites, to provide the international community with objective verification of the peaceful nature of the program.",
+          "interest_type": "need",
+          "priority": 0.95,
+          "related_issues": [
+            "IAEA Inspections Access"
+          ],
+          "disclosed": true,
+          "satisfaction_anchors": []
+        },
+        "references": [],
+        "reasoning": "Theory of Mind: Iran is emphasizing their 'inalienable right' to nuclear energy to justify their enrichment program and signal domestic strength. They fear that a deal that looks like a total capitulation will be viewed as a surrender of sovereignty. My strategy is to pivot from 'rights' to 'verification'\u2014shifting the focus from the 'if' of enrichment to the 'how' of transparency. By disclosing the necessity of intrusive inspections, I am framing the 'Additional Protocol' not as a restriction on their rights, but as a technical requirement for the international trust needed to lift sanctions, which is their stated priority. This moves the conversation toward a 'deal' where they get the economic relief they need in exchange for the verification I require.",
+        "phase": "discovery",
+        "round": 3,
+        "turn": 0,
+        "party_name": "United States (Lead P5+1 Negotiator)"
+      },
+      "delay_ms": 3172
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "87a5261c",
+        "timestamp": "2026-03-23T21:13:34.089141",
+        "party_id": "iran",
+        "move_type": "disclose_interest",
+        "package": null,
+        "argument": null,
+        "disclosed_interest": {
+          "id": "ebe99e0d",
+          "description": "Iran requires that any restrictions on our nuclear program be time-bound, as permanent limitations are inconsistent with our status as a sovereign NPT signatory.",
+          "interest_type": "need",
+          "priority": 0.85,
+          "related_issues": [
+            "Duration of Restrictions"
+          ],
+          "disclosed": true,
+          "satisfaction_anchors": []
+        },
+        "references": [],
+        "reasoning": "Theory of Mind: The US is hyper-focused on verification and breakout time, likely driven by domestic pressure to ensure no nuclear proliferation occurs on their watch. They fear a 'breakout' event and are using 'anytime-anywhere' access as a security blanket. My strategy is to pivot from their focus on intrusive, indefinite inspections to a framework of time-limited, standard-based compliance. By disclosing my need for a sunset clause now, I set the stage for a trade-off: I provide the transparency/verification they need (IAEA access) in exchange for the dignity and sovereignty (sunset clauses) that my government requires. This moves us toward a package deal where their security needs are met by my cooperation on inspections, and my economic/sovereignty needs are met by their acceptance of time-bound limits.",
+        "phase": "discovery",
+        "round": 3,
+        "turn": 1,
+        "party_name": "Islamic Republic of Iran (Foreign Minister)"
+      },
+      "delay_ms": 2261
+    },
+    {
+      "type": "mediator_note",
+      "data": {
+        "id": "6d81adb9",
+        "timestamp": "2026-03-23T21:13:35.720133",
+        "party_id": "mediator",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "9cb11aa3",
+          "claim": "Both parties have now disclosed their core interests. The United States is prioritizing transparency and verification to ensure long-term security, while Iran is prioritizing the preservation of its sovereign rights to peaceful nuclear energy. Despite these different starting points, both parties have expressed a desire for a stable, long-term resolution that provides security for the US and international recognition for Iran. This shared desire for a durable, predictable framework is the foundation upon which we can now begin to explore specific technical and political compromises.",
+          "grounds": [
+            "Both parties are seeking a long-term, sustainable, and predictable framework that balances international security requirements with the exercise of peaceful nuclear energy rights.",
+            "There is a clear potential for a trade-off between the depth of IAEA inspection access and the scope of sanctions relief, as well as between enrichment capacity limits and the duration of those restrictions."
+          ],
+          "criterion_id": null,
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": null,
+        "phase": "discovery",
+        "round": 3,
+        "turn": 2,
+        "party_name": "Mediator"
+      },
+      "delay_ms": 1630
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "f311bc13",
+        "timestamp": "2026-03-23T21:13:37.727079",
+        "party_id": "us",
+        "move_type": "disclose_interest",
+        "package": null,
+        "argument": null,
+        "disclosed_interest": {
+          "id": "c34f5c03",
+          "description": "We have a strong concern that any agreement must be robust enough to survive domestic political scrutiny, which necessitates a clear and sustainable framework for long-term verification and limits.",
+          "interest_type": "concern",
+          "priority": 0.85,
+          "related_issues": [
+            "Duration of Restrictions"
+          ],
+          "disclosed": true,
+          "satisfaction_anchors": []
+        },
+        "references": [],
+        "reasoning": "Theory of Mind: Iran is signaling that they will not accept 'permanent' restrictions, likely fearing it infringes on their sovereignty and long-term industrial ambitions. They are anchored to the NPT as a framework for their 'right' to nuclear energy. My strategy is to pivot from the 'permanent vs. temporary' binary by emphasizing that my need for a 'sustainable' deal is rooted in the practical requirement of domestic political durability. By disclosing this concern, I am inviting them to discuss the 'Duration of Restrictions' in terms of what is politically feasible for both sides, rather than ideological absolutes. This builds a bridge toward a potential compromise on a long-term (e.g., 15-25 year) sunset, which satisfies their sovereignty concerns while meeting my domestic political needs.",
+        "phase": "discovery",
+        "round": 4,
+        "turn": 0,
+        "party_name": "United States (Lead P5+1 Negotiator)"
+      },
+      "delay_ms": 2007
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "02cca0fd",
+        "timestamp": "2026-03-23T21:13:40.942721",
+        "party_id": "iran",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "ad7cc8c9",
+          "claim": "The implementation of the Additional Protocol and long-term verification measures must be balanced by a clear, time-bound sunset clause to uphold Iran's NPT-recognized sovereign rights.",
+          "grounds": [
+            "Iran's commitment to the NPT is fundamental, and Article IV guarantees the right to peaceful nuclear technology, which is incompatible with permanent, discriminatory restrictions.",
+            "The Additional Protocol is a voluntary measure adopted by many states, and our willingness to accept it must be reciprocated with a defined period after which all restrictions sunset to standard NPT safeguards.",
+            "A time-bound agreement provides the necessary political stability for both parties, ensuring the US has verification while Iran regains full normalization of its nuclear rights."
+          ],
+          "criterion_id": "NPT Article IV",
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: The US is focused on domestic political sustainability and long-term verification (breakout time/inspections). They fear a 'weak' deal that could be criticized at home. My move acknowledges their need for verification (by discussing the Additional Protocol) but frames it within the context of my need for a sunset clause to protect sovereignty. I am signaling that cooperation on inspections is contingent upon a time-bound end to restrictions, which addresses my domestic concern about appearing to surrender while providing the US with the 'robust' verification they demand.",
+        "phase": "discovery",
+        "round": 4,
+        "turn": 1,
+        "party_name": "Islamic Republic of Iran (Foreign Minister)"
+      },
+      "delay_ms": 3215
+    },
+    {
+      "type": "mediator_note",
+      "data": {
+        "id": "2ac49aef",
+        "timestamp": "2026-03-23T21:13:42.789098",
+        "party_id": "mediator",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "6a39da62",
+          "claim": "The parties are moving from general principles to specific structural requirements. Iran is linking the Additional Protocol to a 'sunset clause,' essentially framing verification as a temporary burden to be traded for long-term sovereignty. The US is framing the same protocol as a baseline for trust. I need to reframe this to shift the discussion from the 'permanence' of restrictions to the 'nature' of the relationship.",
+          "grounds": [
+            "Both parties are actively seeking a predictable timeline; the US wants a long-term guarantee of non-proliferation, while Iran wants a clear end-date for special monitoring to confirm their return to standard NPT status.",
+            "There is a potential trade-off between the duration of monitoring/inspections and the scope of enrichment limits. A shorter duration of the most intrusive monitoring could potentially be paired with more restrictive enrichment caps, or vice versa."
+          ],
+          "criterion_id": null,
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": null,
+        "phase": "discovery",
+        "round": 4,
+        "turn": 2,
+        "party_name": "Mediator"
+      },
+      "delay_ms": 1846
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "4b1472fd",
+        "timestamp": "2026-03-23T21:13:44.936299",
+        "party_id": "us",
+        "move_type": "invoke_criterion",
+        "package": null,
+        "argument": {
+          "id": "6fa056f5",
+          "claim": "The Additional Protocol is a standard, non-discriminatory verification tool that has been adopted by over 130 countries, making it the objective baseline for ensuring the peaceful nature of a nuclear program.",
+          "grounds": [
+            "The Additional Protocol is not a unique burden on Iran but a global standard for transparency.",
+            "By adopting this standard, Iran can provide the international community with the objective evidence required to justify the lifting of sanctions.",
+            "Transparency through established international protocols is the most effective way to build the trust necessary for a lasting, mutually beneficial economic relationship."
+          ],
+          "criterion_id": "IAEA Additional Protocol standard",
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: Iran is emphasizing sovereignty and the 'right' to nuclear energy while signaling that they are willing to discuss verification if it is balanced by economic relief. They fear that 'unprecedented' access is a pretext for espionage or permanent encroachment on their sovereignty. My strategy is to frame the Additional Protocol not as an 'unprecedented' demand but as a 'standard' international norm (using the IAEA criterion). This helps de-escalate their fear of exceptional treatment while moving us closer to the verification requirements I need. I am choosing to invoke the criterion now to ground the discussion in objective, established international practice before we move to specific proposals.",
+        "phase": "discovery",
+        "round": 5,
+        "turn": 0,
+        "party_name": "United States (Lead P5+1 Negotiator)"
+      },
+      "delay_ms": 2147
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "2d092e30",
+        "timestamp": "2026-03-23T21:13:47.598995",
+        "party_id": "iran",
+        "move_type": "invoke_criterion",
+        "package": null,
+        "argument": {
+          "id": "15b78cce",
+          "claim": "The NPT framework recognizes the equal rights of all non-nuclear weapon states, meaning that any additional verification burdens must be reciprocal and temporary in nature.",
+          "grounds": [
+            "Article IV of the NPT explicitly guarantees the inalienable right to peaceful nuclear energy, which precludes discriminatory, permanent restrictions on a sovereign state's program.",
+            "International precedents for voluntary monitoring regimes, such as the Additional Protocol, are designed as confidence-building measures rather than permanent structural limitations on a nation's energy sovereignty."
+          ],
+          "criterion_id": "NPT Article IV",
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: The US is primarily driven by a need for 'verifiable' security to satisfy domestic political skeptics, which is why they are pushing for the Additional Protocol and long-term, rigid limits. They fear a 'breakout' scenario. My strategy is to pivot from their focus on 'unprecedented' access to the principle of 'sovereign equality' under the NPT. By invoking Article IV, I frame their demands as potential overreach, while signaling that Iran is willing to discuss cooperation if it is time-bound and respects our rights. This sets the stage for a package that trades temporary, enhanced transparency for substantial, front-loaded sanctions relief.",
+        "phase": "discovery",
+        "round": 5,
+        "turn": 1,
+        "party_name": "Islamic Republic of Iran (Foreign Minister)"
+      },
+      "delay_ms": 2662
+    },
+    {
+      "type": "mediator_note",
+      "data": {
+        "id": "31ef37f2",
+        "timestamp": "2026-03-23T21:13:49.294630",
+        "party_id": "mediator",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "cf6213cf",
+          "claim": "The parties have now successfully moved from foundational principles to the specific structural friction points: the balance between the scope of verification (Additional Protocol) and the duration of oversight (sunset clauses). Both parties are using objective criteria to bolster their positions, which is productive. I need to reframe this tension to move them away from a zero-sum conflict over 'permanence' versus 'temporary oversight' and toward a discussion about 'confidence-building' as a phased process.",
+          "grounds": [
+            "Both parties are using the IAEA/NPT frameworks as their primary reference points, signaling that they both seek a solution that is anchored in established international legal norms rather than arbitrary or ad-hoc arrangements.",
+            "There is a potential trade-off between the depth of inspection access and the duration of restrictions; Iran may be willing to accept more robust, long-term monitoring if the US provides a clear, guaranteed sunset on specific enrichment limitations or sanctions."
+          ],
+          "criterion_id": null,
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": null,
+        "phase": "discovery",
+        "round": 5,
+        "turn": 2,
+        "party_name": "Mediator"
+      },
+      "delay_ms": 1695
+    },
+    {
+      "type": "phase_change",
+      "data": {
+        "phase": "generation",
+        "round": 5,
+        "message": "Entering option generation phase \u2014 agents propose packages"
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "eaf818eb",
+        "timestamp": "2026-03-23T21:13:51.767195",
+        "party_id": "us",
+        "move_type": "propose",
+        "package": {
+          "id": "e3a166f3",
+          "issue_values": {
+            "Uranium Enrichment Limits": "Limited program \u2014 5,000 centrifuges, 3.67% max, excess LEU shipped out",
+            "IAEA Inspections Access": "Additional Protocol plus managed access to military sites with 14-day notice",
+            "Sanctions Relief Structure": "Phased relief \u2014 oil sanctions lifted on signing, financial sanctions after 6 months of compliance",
+            "Breakout Time Guarantee": "Minimum 1 year breakout time \u2014 the standard P5+1 demand",
+            "Duration of Restrictions": "15-year restrictions on enrichment, 25 on inspections"
+          },
+          "rationale": "This package balances Iran's need for a time-bound, sovereign-respecting program with the P5+1's need for a 1-year breakout threshold and robust verification. By offering phased sanctions relief, we address Iran's economic concerns while maintaining leverage through compliance-based triggers. The managed access provision for military sites respects sovereignty while ensuring the IAEA can verify the absence of undeclared activity.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: Iran fears permanent, discriminatory restrictions and seeks economic normalization. They view the Additional Protocol as a potential infringement on sovereignty. My strategy is to propose a 'middle-ground' compromise: a non-permanent (15/25 year) limit that satisfies our 1-year breakout threshold, and a 'managed access' inspection regime that mitigates their concern about military site intrusions. This package creates value by trading off strict, permanent limits for a defined, time-bound, and phased-relief structure that is politically sustainable for both sides.",
+        "phase": "generation",
+        "round": 6,
+        "turn": 0,
+        "party_name": "United States (Lead P5+1 Negotiator)"
+      },
+      "delay_ms": 2468
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "cfaea3f1",
+        "timestamp": "2026-03-23T21:13:54.822025",
+        "party_id": "iran",
+        "move_type": "propose",
+        "package": {
+          "id": "82e0d0b9",
+          "issue_values": {
+            "Uranium Enrichment Limits": "Limited program \u2014 5,000 centrifuges, 3.67% max, excess LEU shipped out",
+            "IAEA Inspections Access": "Additional Protocol \u2014 all nuclear facilities plus short-notice inspections",
+            "Sanctions Relief Structure": "All nuclear-related sanctions lifted on implementation day, snapback if violations",
+            "Breakout Time Guarantee": "Minimum 1 year breakout time \u2014 the standard P5+1 demand",
+            "Duration of Restrictions": "10-year restrictions, all limits sunset to standard NPT"
+          },
+          "rationale": "This package represents a balanced compromise. It accepts the P5+1's requested enrichment limits and breakout time, but seeks a more dignified inspection regime consistent with the standard Additional Protocol, a more immediate sanctions relief structure to ensure domestic economic relief, and a 10-year sunset clause to honor the principle of sovereign equality and non-permanent restrictions.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: The US is focused on verification (Additional Protocol + military site access) and preventing a rapid breakout. They are sensitive to domestic political optics, hence the long duration of restrictions. My move addresses their core 'breakout' and 'enrichment' concerns while pushing back on the 'managed access to military sites' (which violates sovereignty) and the 15-25 year duration (which violates NPT equality). By offering a 10-year sunset and standard Additional Protocol, I am providing a path that preserves both sides' core needs. Strategic calculation: Proposing a package now shifts us from principles to concrete trade-offs, testing their willingness to accept a 10-year timeline in exchange for their desired enrichment and breakout parameters.",
+        "phase": "generation",
+        "round": 6,
+        "turn": 1,
+        "party_name": "Islamic Republic of Iran (Foreign Minister)"
+      },
+      "delay_ms": 3054
+    },
+    {
+      "type": "mediator_note",
+      "data": {
+        "id": "08ced48f",
+        "timestamp": "2026-03-23T21:13:57.275334",
+        "party_id": "mediator",
+        "move_type": "propose",
+        "package": {
+          "id": "eab50610",
+          "issue_values": {
+            "Uranium Enrichment Limits": "Limited program \u2014 5,000 centrifuges, 3.67% max, excess LEU shipped out",
+            "IAEA Inspections Access": "Additional Protocol plus managed access to military sites with 14-day notice",
+            "Sanctions Relief Structure": "Phased relief \u2014 oil sanctions lifted on signing, financial sanctions after 6 months of compliance",
+            "Breakout Time Guarantee": "Minimum 1 year breakout time \u2014 the standard P5+1 demand",
+            "Duration of Restrictions": "12-year restrictions on enrichment, 20-year on inspections"
+          },
+          "rationale": "Both sides have converged on the enrichment limits and the 1-year breakout threshold. This package bridges the gap between the US 15/25-year and Iran's 10-year demand by proposing an intermediate sunset, while utilizing the US-proposed 'managed access' for military sites as a safeguard that addresses verification concerns while remaining more targeted than 'anytime-anywhere' access.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": null,
+        "phase": "generation",
+        "round": 6,
+        "turn": 2,
+        "party_name": "Mediator"
+      },
+      "delay_ms": 2453
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "aa6de809",
+        "timestamp": "2026-03-23T21:13:59.580259",
+        "party_id": "us",
+        "move_type": "propose",
+        "package": {
+          "id": "7e12626b",
+          "issue_values": {
+            "Uranium Enrichment Limits": "Limited program \u2014 5,000 centrifuges, 3.67% max, excess LEU shipped out",
+            "IAEA Inspections Access": "Additional Protocol plus managed access to military sites with 14-day notice",
+            "Sanctions Relief Structure": "Phased relief \u2014 oil sanctions lifted on signing, financial sanctions after 12 months of sustained compliance",
+            "Breakout Time Guarantee": "Minimum 1 year breakout time \u2014 the standard P5+1 demand",
+            "Duration of Restrictions": "15-year restrictions on enrichment, 20-year on inspections"
+          },
+          "rationale": "This package bridges the gap between our positions by maintaining the 1-year breakout time and necessary verification access via the Additional Protocol with managed military site access, while offering a structured, performance-based path for sanctions relief that provides Iran with economic benefits while ensuring the deal's longevity for our domestic political requirements.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: Iran is clearly motivated by the speed of sanctions relief and the desire for a shorter sunset clause to maintain their sovereignty and domestic support. They fear permanent restrictions and immediate economic collapse. My strategy is to concede on the enrichment limits (which we have already converged on) and the 1-year breakout time, while holding firm on the verification mechanism (the Additional Protocol with military access) and extending the sanctions relief timeline to be performance-based (12 months rather than immediate) to ensure compliance and satisfy US political requirements. This package provides a 'middle ground' on the duration of restrictions, moving toward their 10-year preference while keeping our 15-year requirement for enrichment, creating a balanced trade-off.",
+        "phase": "generation",
+        "round": 7,
+        "turn": 0,
+        "party_name": "United States (Lead P5+1 Negotiator)"
+      },
+      "delay_ms": 2304
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "48afdaa8",
+        "timestamp": "2026-03-23T21:14:02.140276",
+        "party_id": "iran",
+        "move_type": "propose",
+        "package": {
+          "id": "fc0802f8",
+          "issue_values": {
+            "Uranium Enrichment Limits": "Limited program \u2014 5,000 centrifuges, 3.67% max, excess LEU shipped out",
+            "IAEA Inspections Access": "Additional Protocol \u2014 all nuclear facilities plus short-notice inspections",
+            "Sanctions Relief Structure": "All nuclear-related sanctions lifted on implementation day, snapback if violations",
+            "Breakout Time Guarantee": "Minimum 1 year breakout time \u2014 the standard P5+1 demand",
+            "Duration of Restrictions": "10-year restrictions, all limits sunset to standard NPT"
+          },
+          "rationale": "I am maintaining our core requirement for a 10-year sunset clause to ensure sovereignty and domestic political viability. I am proposing the Additional Protocol as the inspection standard, which provides robust verification without the intrusive and politically sensitive 'managed access to military sites' that threatens our national security. By offering immediate lifting of nuclear-related sanctions upon implementation\u2014backed by a clear snapback mechanism\u2014we provide the economic relief necessary for our people while ensuring the P5+1's interest in compliance is protected.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: The US is prioritizing long-term verification (15-20 years) and managed access to military sites to satisfy their security hawks and domestic pressure. They fear a quick Iranian breakout and a lack of transparency. My move addresses their fear of breakout by maintaining the 1-year limit and the Additional Protocol. However, I must reject the 15-20 year restrictions and military site access to satisfy my own domestic hardliners and protect sovereignty. The 10-year sunset is a non-negotiable interest for Iran's status as an NPT member. I am offering a compromise that keeps the technical limits they requested while insisting on a time-bound, dignified exit from special restrictions.",
+        "phase": "generation",
+        "round": 7,
+        "turn": 1,
+        "party_name": "Islamic Republic of Iran (Foreign Minister)"
+      },
+      "delay_ms": 2560
+    },
+    {
+      "type": "mediator_note",
+      "data": {
+        "id": "e20acc80",
+        "timestamp": "2026-03-23T21:14:04.857353",
+        "party_id": "mediator",
+        "move_type": "propose",
+        "package": {
+          "id": "1822a061",
+          "issue_values": {
+            "Uranium Enrichment Limits": "Limited program \u2014 5,000 centrifuges, 3.67% max, excess LEU shipped out",
+            "IAEA Inspections Access": "Additional Protocol plus managed access to military sites with 14-day notice",
+            "Sanctions Relief Structure": "Phased relief \u2014 oil sanctions lifted on signing, financial sanctions after 9 months of compliance",
+            "Breakout Time Guarantee": "Minimum 1 year breakout time \u2014 the standard P5+1 demand",
+            "Duration of Restrictions": "12-year restrictions on enrichment, 18-year on inspections"
+          },
+          "rationale": "Both sides have converged on the core technical parameters (5,000 centrifuges, 3.67% enrichment, 1-year breakout). The remaining deadlock centers on the speed of sanctions relief and the sunset of oversight. This package bridges the gap by proposing a 9-month phased relief timeline and a 12/18-year duration, offering a middle ground between the 10-year and 15/20-year proposals, effectively testing if the parties can accept a balanced compromise on the duration of monitoring vs. the pace of economic normalization.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": null,
+        "phase": "generation",
+        "round": 7,
+        "turn": 2,
+        "party_name": "Mediator"
+      },
+      "delay_ms": 2717
+    },
+    {
+      "type": "phase_change",
+      "data": {
+        "phase": "bargaining",
+        "round": 7,
+        "message": "Entering bargaining phase \u2014 proposals and counterproposals"
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "3003ecb7",
+        "timestamp": "2026-03-23T21:14:07.363925",
+        "party_id": "us",
+        "move_type": "counter",
+        "package": {
+          "id": "a1f72e6f",
+          "issue_values": {
+            "Uranium Enrichment Limits": "Limited program \u2014 5,000 centrifuges, 3.67% max, excess LEU shipped out",
+            "IAEA Inspections Access": "Additional Protocol plus managed access to military sites with 14-day notice",
+            "Sanctions Relief Structure": "Phased relief \u2014 oil sanctions lifted on signing, financial sanctions after 10 months of compliance",
+            "Breakout Time Guarantee": "Minimum 1 year breakout time \u2014 the standard P5+1 demand",
+            "Duration of Restrictions": "12-year restrictions on enrichment, 20-year on inspections"
+          },
+          "rationale": "This proposal reflects a compromise on sanctions relief timelines while maintaining the essential inspection protocols required for US domestic political viability and non-proliferation credibility. By extending the inspection duration to 20 years, we provide the necessary assurance that the program remains peaceful long-term, which allows for some flexibility on the sanctions timeline.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: Iran is deeply concerned with the 'sovereignty' aspect of the agreement, hence their push for a 10-year sunset. They view sanctions relief as a critical economic imperative and want it front-loaded. My strategy is to hold firm on the inspection access and duration (as these are non-negotiable for US domestic acceptance), while offering a slight concession on the sanctions relief timeline (10 months vs. 12) to move closer to their preference. I am choosing a 12-year enrichment / 20-year inspection split to ensure the most sensitive verification measures last long enough to prevent a rapid return to breakout capacity.",
+        "phase": "bargaining",
+        "round": 8,
+        "turn": 0,
+        "party_name": "United States (Lead P5+1 Negotiator)"
+      },
+      "delay_ms": 2505
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "3a779267",
+        "timestamp": "2026-03-23T21:14:11.143457",
+        "party_id": "iran",
+        "move_type": "counter",
+        "package": {
+          "id": "1319fd96",
+          "issue_values": {
+            "Uranium Enrichment Limits": "Limited program \u2014 5,000 centrifuges, 3.67% max, excess LEU shipped out",
+            "IAEA Inspections Access": "Additional Protocol \u2014 all nuclear facilities plus short-notice inspections",
+            "Sanctions Relief Structure": "All nuclear-related sanctions lifted on implementation day, snapback if violations",
+            "Breakout Time Guarantee": "Minimum 1 year breakout time \u2014 the standard P5+1 demand",
+            "Duration of Restrictions": "10-year restrictions, all limits sunset to standard NPT"
+          },
+          "rationale": "I am countering to emphasize that Iran's sovereignty requires a clear sunset period and swift, comprehensive sanctions relief upon implementation. The Additional Protocol provides sufficient transparency without the necessity of managed access to sensitive military sites.",
+          "pareto_rank": null
+        },
+        "argument": {
+          "id": "cfb145aa",
+          "claim": "The proposed 10-year sunset and immediate implementation-day relief are vital for domestic political viability and national sovereignty.",
+          "grounds": [
+            "A 10-year period provides sufficient long-term assurance while respecting Iran's NPT rights.",
+            "Immediate sanctions relief on implementation day is necessary to provide the economic stability required to maintain public and political support for the agreement.",
+            "The Additional Protocol is a well-defined international standard that ensures robust verification without the need for additional ad-hoc access to military sites."
+          ],
+          "criterion_id": "NPT Article IV",
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: The US is prioritizing long-term verification (20 years) and phased sanctions relief to satisfy their domestic hardliners and ensure 'breakout' prevention. I need to move them toward a shorter duration and faster relief. My strategy is to concede on the 1-year breakout time and 5,000 centrifuge limit while holding firm on the 10-year sunset and implementation-day relief, as these are critical for Iranian domestic stability and national dignity. I will use the 'Additional Protocol' standard to argue against the requested military site access, framing it as an unnecessary overreach.",
+        "phase": "bargaining",
+        "round": 8,
+        "turn": 1,
+        "party_name": "Islamic Republic of Iran (Foreign Minister)"
+      },
+      "delay_ms": 3779
+    },
+    {
+      "type": "mediator_note",
+      "data": {
+        "id": "e931c616",
+        "timestamp": "2026-03-23T21:14:13.914816",
+        "party_id": "mediator",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "11d449b4",
+          "claim": "The parties have reached a remarkable consensus on the core technical parameters: both agree on a limited program of 5,000 centrifuges, a 3.67% enrichment cap, and a 1-year breakout time. The remaining friction is now focused on the sequencing of sanctions relief and the duration of oversight. By highlighting this significant convergence, I aim to stabilize the progress made and frame the remaining issues as manageable administrative details rather than existential disagreements.",
+          "grounds": [
+            "Both parties have now formally agreed on all critical technical enrichment parameters and the 1-year breakout time requirement, demonstrating a shared commitment to a functional, non-proliferation-focused outcome.",
+            "There is a clear trade-off opportunity between the speed of sanctions relief (which Iran prioritizes for economic stability) and the duration of inspection/oversight mechanisms (which the US prioritizes for verification). A longer duration of oversight could potentially be exchanged for a more accelerated or comprehensive sanctions relief schedule."
+          ],
+          "criterion_id": null,
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": null,
+        "phase": "bargaining",
+        "round": 8,
+        "turn": 2,
+        "party_name": "Mediator"
+      },
+      "delay_ms": 2771
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "0b30f97e",
+        "timestamp": "2026-03-23T21:14:16.331307",
+        "party_id": "us",
+        "move_type": "reject",
+        "package": {
+          "id": "a427115f",
+          "issue_values": {
+            "Uranium Enrichment Limits": "Limited program \u2014 5,000 centrifuges, 3.67% max, excess LEU shipped out",
+            "IAEA Inspections Access": "Additional Protocol plus managed access to military sites with 14-day notice",
+            "Sanctions Relief Structure": "Phased relief \u2014 oil sanctions lifted on signing, financial sanctions after 10 months of compliance",
+            "Breakout Time Guarantee": "Minimum 1 year breakout time \u2014 the standard P5+1 demand",
+            "Duration of Restrictions": "12-year restrictions on enrichment, 20-year on inspections"
+          },
+          "rationale": "The rejection of the Additional Protocol with managed access to military sites and the demand for immediate, total sanctions relief undermines the verification regime required to ensure a 1-year breakout time and secure domestic political support.",
+          "pareto_rank": null
+        },
+        "argument": {
+          "id": "105cb2c4",
+          "claim": "The current proposal from Iran regarding inspection access and the timing of sanctions relief is insufficient for a sustainable agreement.",
+          "grounds": [
+            "Unrestricted access to all relevant sites, including military facilities, is a cornerstone of the IAEA's ability to verify the exclusively peaceful nature of the nuclear program.",
+            "Phased sanctions relief tied to proven compliance is the only way to ensure the long-term commitment needed to satisfy international security concerns and domestic legislative oversight in the United States.",
+            "The Libya denuclearization model and standard IAEA Additional Protocol protocols demonstrate that transparency and phased benefits are the established path for re-integrating states into the non-proliferation regime."
+          ],
+          "criterion_id": "IAEA Additional Protocol standard",
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: Iran is signaling that their domestic political constraints are as rigid as ours. They view the 10-year sunset and immediate relief as the minimum 'victory' they can sell to their hardliners. However, their rejection of managed access to military sites and their desire for immediate relief are deal-breakers for the US Congress. I need to hold the line on the Additional Protocol plus managed access to military sites, as this is non-negotiable for verification, but I can signal flexibility on the sanctions timeline if they move on the inspection regime.",
+        "phase": "bargaining",
+        "round": 9,
+        "turn": 0,
+        "party_name": "United States (Lead P5+1 Negotiator)"
+      },
+      "delay_ms": 2416
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "6324bbe9",
+        "timestamp": "2026-03-23T21:14:19.400137",
+        "party_id": "iran",
+        "move_type": "counter",
+        "package": {
+          "id": "e1597411",
+          "issue_values": {
+            "Uranium Enrichment Limits": "Limited program \u2014 5,000 centrifuges, 3.67% max, excess LEU shipped out",
+            "IAEA Inspections Access": "Additional Protocol \u2014 all nuclear facilities plus short-notice inspections",
+            "Sanctions Relief Structure": "Phased relief \u2014 oil sanctions lifted on signing, financial sanctions after 6 months of compliance",
+            "Breakout Time Guarantee": "Minimum 1 year breakout time \u2014 the standard P5+1 demand",
+            "Duration of Restrictions": "12-year restrictions on enrichment, 20-year on inspections"
+          },
+          "rationale": "This package bridges the gap by adopting the P5+1's requested duration and inspection framework while offering a phased sanctions relief schedule that respects Iran's economic needs and the P5+1's verification requirements.",
+          "pareto_rank": null
+        },
+        "argument": {
+          "id": "0bd76243",
+          "claim": "A 12-year/20-year duration framework combined with a 6-month phased sanctions relief schedule provides the necessary balance between robust verification and Iran's sovereign economic interests.",
+          "grounds": [
+            "The 6-month phased relief timeline ensures verification occurs before full financial normalization, addressing US concerns.",
+            "A 12-year sunset for enrichment limits provides the long-term certainty the US requires for domestic scrutiny.",
+            "Accepting the Additional Protocol as the standard for inspections shows Iran's commitment to transparency, while moving away from military-specific access addresses a key sovereignty concern for the Iranian public."
+          ],
+          "criterion_id": null,
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: The US is primarily driven by domestic political pressure to ensure verification is 'ironclad' and 'long-term'. Their rejection of my previous proposal shows that 'managed access to military sites' is a non-negotiable red line for them to sell the deal at home. My strategy is to concede on the duration (12/20 years) and the inspection access (Additional Protocol) to signal cooperativeness, while pushing for a 6-month phased relief structure that is more manageable than their 10-month demand. This moves us closer to the middle ground and forces the US to either accept a reasonable compromise or demonstrate that they are not interested in a deal.",
+        "phase": "bargaining",
+        "round": 9,
+        "turn": 1,
+        "party_name": "Islamic Republic of Iran (Foreign Minister)"
+      },
+      "delay_ms": 3068
+    },
+    {
+      "type": "mediator_note",
+      "data": {
+        "id": "c281e3b4",
+        "timestamp": "2026-03-23T21:14:21.595255",
+        "party_id": "mediator",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "3e1d56a6",
+          "claim": "The parties have achieved a breakthrough by aligning on the core technical parameters of the program, including the 5,000-centrifuge limit and the 1-year breakout time. Furthermore, both have now converged on the 12-year/20-year duration framework. The negotiation has shifted from a broad disagreement to a specific, manageable gap regarding the exact timeline for sanctions relief (6 months vs 10 months) and the procedural details of inspection access. This indicates that the parties are no longer debating the 'if' of the agreement, but the 'how' of its implementation.",
+          "grounds": [
+            "Both parties have explicitly agreed to the 5,000-centrifuge limit, 3.67% enrichment cap, 1-year breakout time, and the 12-year/20-year duration framework for restrictions.",
+            "There is a clear opportunity to link the 6-month sanctions relief timeline (an Iranian priority) with a more defined mechanism for managed access to military sites (a US priority), effectively trading the speed of economic relief for increased verification certainty."
+          ],
+          "criterion_id": null,
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": null,
+        "phase": "bargaining",
+        "round": 9,
+        "turn": 2,
+        "party_name": "Mediator"
+      },
+      "delay_ms": 2195
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "ab1e36be",
+        "timestamp": "2026-03-23T21:14:24.170211",
+        "party_id": "us",
+        "move_type": "propose",
+        "package": {
+          "id": "f9a41aaf",
+          "issue_values": {
+            "Uranium Enrichment Limits": "Limited program \u2014 5,000 centrifuges, 3.67% max, excess LEU shipped out",
+            "IAEA Inspections Access": "Additional Protocol plus managed access to military sites with 14-day notice",
+            "Sanctions Relief Structure": "Phased relief \u2014 oil sanctions lifted on signing, financial sanctions after 8 months of compliance",
+            "Breakout Time Guarantee": "Minimum 1 year breakout time \u2014 the standard P5+1 demand",
+            "Duration of Restrictions": "12-year restrictions on enrichment, 20-year on inspections"
+          },
+          "rationale": "We have reached consensus on the core technical parameters and durations. By adjusting our sanctions relief timeline to 8 months, we are demonstrating significant flexibility to address Iran's economic needs, while maintaining the non-negotiable requirement for managed access to military sites to ensure long-term, verifiable compliance.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: Iran is signaling a strong need for tangible economic relief to justify the domestic political cost of the agreement. They have shifted toward our duration and inspection framework, but they are still pushing for faster sanctions relief. My strategy is to lock in the hard-won agreement on duration and inspections while making a final, calibrated move on the sanctions timeline to reach a deal. The 8-month mark is a strategic midpoint between our previous positions that provides enough breathing room for verification while meeting their need for a shorter timeline than our original 10-month proposal.",
+        "phase": "bargaining",
+        "round": 10,
+        "turn": 0,
+        "party_name": "United States (Lead P5+1 Negotiator)"
+      },
+      "delay_ms": 2574
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "317f4aca",
+        "timestamp": "2026-03-23T21:14:26.821352",
+        "party_id": "iran",
+        "move_type": "accept",
+        "package": {
+          "id": "96a298b2",
+          "issue_values": {
+            "Uranium Enrichment Limits": "Limited program \u2014 5,000 centrifuges, 3.67% max, excess LEU shipped out",
+            "IAEA Inspections Access": "Additional Protocol plus managed access to military sites with 14-day notice",
+            "Sanctions Relief Structure": "Phased relief \u2014 oil sanctions lifted on signing, financial sanctions after 8 months of compliance",
+            "Breakout Time Guarantee": "Minimum 1 year breakout time \u2014 the standard P5+1 demand",
+            "Duration of Restrictions": "12-year restrictions on enrichment, 20-year on inspections"
+          },
+          "rationale": "This agreement represents a balanced compromise that secures Iran's right to a peaceful nuclear program under the NPT while providing the transparency necessary to build international confidence. By accepting the 8-month compliance schedule and the managed access framework, we demonstrate our commitment to a peaceful resolution that will alleviate the economic suffering of the Iranian people through significant sanctions relief.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: The US has moved significantly on the sanctions relief timeline (from 12 months down to 8) and accepted the 12/20-year duration, signaling they are ready to close. Their fear of domestic scrutiny is addressed by the managed access to military sites. My strategic calculation is that this package meets my core needs: it avoids permanent restrictions, allows for a functional nuclear program, and provides a clear, time-bound path to economic relief. The 8-month timeline is a manageable concession that satisfies my need for sanctions relief while addressing the US's requirement for verified compliance. Accepting now ends the cycle of incremental bargaining and secures a deal that preserves the regime's dignity and economic future.",
+        "phase": "bargaining",
+        "round": 10,
+        "turn": 1,
+        "party_name": "Islamic Republic of Iran (Foreign Minister)"
+      },
+      "delay_ms": 4000
+    },
+    {
+      "type": "phase_change",
+      "data": {
+        "phase": "convergence",
+        "round": 10,
+        "message": "Parties are close \u2014 entering convergence"
+      },
+      "delay_ms": 1844
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "c58ef108",
+        "timestamp": "2026-03-23T21:14:35.891782",
+        "party_id": "us",
+        "move_type": "accept",
+        "package": {
+          "id": "4c0d2763",
+          "issue_values": {
+            "Uranium Enrichment Limits": "Limited program \u2014 5,000 centrifuges, 3.67% max, excess LEU shipped out",
+            "IAEA Inspections Access": "Additional Protocol plus managed access to military sites with 14-day notice",
+            "Sanctions Relief Structure": "Phased relief \u2014 oil sanctions lifted on signing, financial sanctions after 8 months of compliance",
+            "Breakout Time Guarantee": "Minimum 1 year breakout time \u2014 the standard P5+1 demand",
+            "Duration of Restrictions": "12-year restrictions on enrichment, 20-year on inspections"
+          },
+          "rationale": "This agreement satisfies our core requirements for verification, a 1-year breakout time, and long-term oversight, while providing Iran with a clear, phased path to sanctions relief that is sustainable within our domestic political framework.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: Iran has prioritized sovereignty and economic relief. By accepting the 8-month compliance window and the 12/20-year duration framework, they have signaled a willingness to accept robust, long-term international oversight in exchange for phased sanctions relief. They appear to fear indefinite isolation more than they fear the administrative burden of the Additional Protocol. Strategic Calculation: This package meets all our 'Need' and 'Concern' criteria, specifically the 1-year breakout time and the inclusion of managed access to military sites. Accepting now secures a historic, verifiable, and politically defensible non-proliferation agreement without further risking the stability of the negotiations.",
+        "phase": "convergence",
+        "round": 11,
+        "turn": 0,
+        "party_name": "United States (Lead P5+1 Negotiator)"
+      },
+      "delay_ms": 4000
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "10fd20b9",
+        "timestamp": "2026-03-23T21:14:42.494684",
+        "party_id": "iran",
+        "move_type": "accept",
+        "package": {
+          "id": "3881373d",
+          "issue_values": {
+            "Uranium Enrichment Limits": "Limited program \u2014 5,000 centrifuges, 3.67% max, excess LEU shipped out",
+            "IAEA Inspections Access": "Additional Protocol plus managed access to military sites with 14-day notice",
+            "Sanctions Relief Structure": "Phased relief \u2014 oil sanctions lifted on signing, financial sanctions after 8 months of compliance",
+            "Breakout Time Guarantee": "Minimum 1 year breakout time \u2014 the standard P5+1 demand",
+            "Duration of Restrictions": "12-year restrictions on enrichment, 20-year on inspections"
+          },
+          "rationale": "This agreement represents a historic compromise that secures Iran's right to a peaceful nuclear program under the NPT while providing the necessary transparency to build international confidence and relief for our economy.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "The United States and the P5+1 have demonstrated a willingness to settle on the 8-month compliance window and the 12/20-year restriction framework. My theory of mind suggests they are primarily driven by the need to guarantee a 1-year breakout time and ensure robust verification (Additional Protocol + managed access) to satisfy their domestic political requirements. By accepting this, I secure the lifting of oil sanctions immediately and the path to full financial relief, which addresses my primary interest in economic recovery. This package respects our sovereignty by ensuring that restrictions are time-bound rather than permanent, providing a clear path to normalization. I am signaling closure to end the cycle of sanctions and isolation.",
+        "phase": "convergence",
+        "round": 11,
+        "turn": 1,
+        "party_name": "Islamic Republic of Iran (Foreign Minister)"
+      },
+      "delay_ms": 4000
+    },
+    {
+      "type": "settlement",
+      "data": {
+        "agreement": {
+          "id": "3881373d",
+          "issue_values": {
+            "Uranium Enrichment Limits": "Limited program \u2014 5,000 centrifuges, 3.67% max, excess LEU shipped out",
+            "IAEA Inspections Access": "Additional Protocol plus managed access to military sites with 14-day notice",
+            "Sanctions Relief Structure": "Phased relief \u2014 oil sanctions lifted on signing, financial sanctions after 8 months of compliance",
+            "Breakout Time Guarantee": "Minimum 1 year breakout time \u2014 the standard P5+1 demand",
+            "Duration of Restrictions": "12-year restrictions on enrichment, 20-year on inspections"
+          },
+          "rationale": "This agreement represents a historic compromise that secures Iran's right to a peaceful nuclear program under the NPT while providing the necessary transparency to build international confidence and relief for our economy.",
+          "pareto_rank": null
+        },
+        "total_rounds": 11,
+        "total_moves": 31
+      },
+      "delay_ms": 1363
+    }
+  ],
+  "metrics": {
+    "outcome": "agreement",
+    "party_utilities": {
+      "us": 0.0,
+      "iran": 0.0
+    },
+    "party_batna_surplus": {
+      "us": -0.35,
+      "iran": -0.3
+    },
+    "social_welfare": 0.0,
+    "pareto_efficient": false,
+    "nash_product": 1e-06,
+    "integrative_index": 0.0,
+    "total_rounds": 11,
+    "total_moves": 31,
+    "move_breakdown": {
+      "disclose_interest": 5,
+      "argue": 10,
+      "invoke_criterion": 2,
+      "propose": 7,
+      "counter": 3,
+      "reject": 1,
+      "accept": 3
+    },
+    "disclosure_rate": 0.45454545454545453,
+    "phases_visited": [
+      "discovery",
+      "generation",
+      "bargaining",
+      "convergence",
+      "settlement"
+    ],
+    "agreement": {
+      "id": "3881373d",
+      "issue_values": {
+        "Uranium Enrichment Limits": "Limited program \u2014 5,000 centrifuges, 3.67% max, excess LEU shipped out",
+        "IAEA Inspections Access": "Additional Protocol plus managed access to military sites with 14-day notice",
+        "Sanctions Relief Structure": "Phased relief \u2014 oil sanctions lifted on signing, financial sanctions after 8 months of compliance",
+        "Breakout Time Guarantee": "Minimum 1 year breakout time \u2014 the standard P5+1 demand",
+        "Duration of Restrictions": "12-year restrictions on enrichment, 20-year on inspections"
+      },
+      "rationale": "This agreement represents a historic compromise that secures Iran's right to a peaceful nuclear program under the NPT while providing the necessary transparency to build international confidence and relief for our economy.",
+      "pareto_rank": null
+    }
+  },
+  "critique": [
+    {
+      "severity": "low",
+      "description": "No multi-option (MESO) packages were generated."
+    },
+    {
+      "severity": "medium",
+      "description": "Integrative index 0.00 < 1.0 \u2014 value may have been destroyed."
+    }
+  ]
+}

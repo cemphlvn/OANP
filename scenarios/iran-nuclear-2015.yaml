@@ -1,0 +1,156 @@
+name: "Iran Nuclear Deal — JCPOA Framework"
+description: "Based on the real 2013-2015 negotiations that produced the Joint Comprehensive Plan of Action. Iran wants sanctions lifted and nuclear sovereignty recognized. The US (representing P5+1) wants verifiable limits on enrichment to prevent a nuclear weapon. In reality, negotiations took 20 months across Vienna, Geneva, and Lausanne. The deal eventually collapsed when the US withdrew in 2018. Can agents find a more durable agreement?"
+architecture: mediated
+
+parties:
+  - id: us
+    name: "United States (Lead P5+1 Negotiator)"
+    role: "US Secretary of State representing P5+1 powers (US, UK, France, Russia, China + Germany)"
+    interests:
+      - description: "Verifiably prevent Iran from developing a nuclear weapon — minimum 1-year breakout time"
+        type: need
+        priority: 1.0
+        related_issues: [enrichment_limits, inspections_regime, breakout_timeline]
+      - description: "IAEA must have unprecedented access to all nuclear facilities including military sites"
+        type: need
+        priority: 0.95
+        related_issues: [inspections_regime]
+      - description: "Deal must survive US domestic politics — needs to be strong enough that Congress doesn't kill it"
+        type: concern
+        priority: 0.85
+        related_issues: [enrichment_limits, inspections_regime, sunset_clause]
+      - description: "Maintain credibility of non-proliferation regime — if Iran gets a path to a bomb, Saudi Arabia and Turkey follow"
+        type: fear
+        priority: 0.8
+        related_issues: [enrichment_limits, breakout_timeline]
+      - description: "Use sanctions relief as genuine leverage — meaningful enough for Iran to comply long-term"
+        type: desire
+        priority: 0.7
+        related_issues: [sanctions_relief, sunset_clause]
+    batna:
+      description: "Maintain and tighten sanctions. Iran's economy contracts further. But sanctions haven't stopped enrichment — Iran has 19,000 centrifuges and enough LEU for 8 bombs if further enriched. Military strike option exists but would only delay program 2-3 years and trigger regional war."
+      utility: 0.35
+      confidence: 0.5
+      components:
+        enrichment_limits: "none_iran_continues"
+        sanctions_relief: "none"
+        inspections_regime: "limited_iaea"
+        breakout_timeline: "2_months_current"
+        sunset_clause: "not_applicable"
+
+  - id: iran
+    name: "Islamic Republic of Iran (Foreign Minister)"
+    role: "Iran's chief nuclear negotiator representing the Supreme Leader's position"
+    interests:
+      - description: "Sanctions relief — Iranian economy has lost $160B, inflation at 40%, currency collapsed. People are suffering."
+        type: need
+        priority: 1.0
+        related_issues: [sanctions_relief]
+      - description: "Recognition of Iran's right to peaceful nuclear energy under NPT Article IV — this is sovereignty"
+        type: need
+        priority: 0.95
+        related_issues: [enrichment_limits, sunset_clause]
+      - description: "No permanent restrictions — Iran is not a second-class NPT signatory. Limits must sunset."
+        type: need
+        priority: 0.85
+        related_issues: [sunset_clause, enrichment_limits]
+      - description: "Protect national dignity — cannot appear to surrender to Western pressure"
+        type: concern
+        priority: 0.8
+        related_issues: [inspections_regime, enrichment_limits]
+      - description: "Fear that the US will reimpose sanctions regardless of compliance — need snap-back protections"
+        type: fear
+        priority: 0.75
+        related_issues: [sanctions_relief, sunset_clause]
+      - description: "Domestic hardliners oppose any deal — need to bring back something they can't attack"
+        type: concern
+        priority: 0.7
+        related_issues: [enrichment_limits, inspections_regime]
+    batna:
+      description: "Endure sanctions and continue enrichment program. Domestic costs are severe but regime has survived 35 years of sanctions. Can pivot to Russia/China trade. Risk: Israel or US military strike, further economic collapse."
+      utility: 0.3
+      confidence: 0.45
+      components:
+        enrichment_limits: "no_limits"
+        sanctions_relief: "none"
+        inspections_regime: "minimal"
+        breakout_timeline: "2_months"
+        sunset_clause: "not_applicable"
+
+issues:
+  - id: enrichment_limits
+    name: "Uranium Enrichment Limits"
+    type: categorical
+    options:
+      - "Zero enrichment — Iran dismantles all centrifuges"
+      - "R&D only — 500 first-generation centrifuges, 3.67% max enrichment"
+      - "Limited program — 5,000 centrifuges, 3.67% max, excess LEU shipped out"
+      - "Reduced program — 6,000 centrifuges, 5% max enrichment"
+      - "Current levels maintained — 19,000 centrifuges with voluntary cap at 5%"
+
+  - id: inspections_regime
+    name: "IAEA Inspections Access"
+    type: categorical
+    options:
+      - "Standard NPT safeguards only (declared sites)"
+      - "Additional Protocol — all nuclear facilities plus short-notice inspections"
+      - "Additional Protocol plus managed access to military sites with 14-day notice"
+      - "Anytime-anywhere access to all facilities including military"
+
+  - id: sanctions_relief
+    name: "Sanctions Relief Structure"
+    type: categorical
+    options:
+      - "No relief until full compliance verified over 5 years"
+      - "Phased relief — oil sanctions lifted on signing, financial sanctions after 6 months of compliance"
+      - "All nuclear-related sanctions lifted on implementation day, snapback if violations"
+      - "All sanctions including arms embargo lifted immediately"
+
+  - id: breakout_timeline
+    name: "Breakout Time Guarantee"
+    type: categorical
+    options:
+      - "Minimum 2 years breakout time — deep cuts to stockpile and centrifuges"
+      - "Minimum 1 year breakout time — the standard P5+1 demand"
+      - "6-month breakout time with enhanced monitoring"
+      - "No explicit breakout time commitment — rely on inspections for detection"
+
+  - id: sunset_clause
+    name: "Duration of Restrictions"
+    type: categorical
+    options:
+      - "Permanent restrictions — no sunset"
+      - "25-year restrictions with review every 5 years"
+      - "15-year restrictions on enrichment, 25 on inspections"
+      - "10-year restrictions, all limits sunset to standard NPT"
+      - "8-year restrictions, immediate sunset on implementation"
+
+criteria:
+  - name: "NPT Article IV"
+    source: regulation
+    applies_to: [enrichment_limits]
+    reference_value: "All NPT signatories have inalienable right to develop nuclear energy for peaceful purposes"
+
+  - name: "IAEA Additional Protocol standard"
+    source: regulation
+    applies_to: [inspections_regime]
+    reference_value: "130+ countries have signed Additional Protocol granting IAEA expanded inspection rights"
+
+  - name: "UN Security Council Resolutions"
+    source: regulation
+    applies_to: [enrichment_limits, sanctions_relief]
+    reference_value: "Multiple UNSC resolutions demand Iran suspend enrichment — but also recognize path to negotiated solution"
+
+  - name: "Libya denuclearization model"
+    source: precedent
+    applies_to: [enrichment_limits, inspections_regime]
+    reference_value: "Libya gave up entire program in 2003 in exchange for sanctions relief and normalized relations"
+
+mediator:
+  mode: evaluative
+  knowledge: caucus_only
+  intervention: every_round
+  evaluates_fairness: true
+
+protocol:
+  max_rounds: 22

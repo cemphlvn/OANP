@@ -1,0 +1,159 @@
+name: "AI Safety Standoff — Ship or Stop the Model"
+description: "An AI lab's safety researcher wants to delay releasing GPT-5-class model citing dangerous capabilities. The Chief Product Officer says competitors will ship first and the company will die. Both are right. The board needs a decision by Friday. This is the defining tension of our era — can principled negotiation find a path between reckless deployment and paralysis?"
+architecture: mediated
+
+parties:
+  - id: safety
+    name: "Dr. Elena Torres (Chief Safety Officer)"
+    role: "Head of AI Safety, former DeepMind alignment researcher"
+    interests:
+      - description: "Prevent deployment of capabilities that could cause catastrophic harm — the model can generate novel bioweapons and automate sophisticated cyberattacks"
+        type: need
+        priority: 1.0
+        related_issues: [release_decision, safety_eval_scope, capability_restrictions]
+      - description: "Establish precedent that safety team has genuine veto power, not just advisory role"
+        type: need
+        priority: 0.9
+        related_issues: [governance_structure, release_decision]
+      - description: "More time for red-teaming — current evaluation covers only 40% of NIST risk categories"
+        type: desire
+        priority: 0.85
+        related_issues: [safety_eval_scope, release_timeline]
+      - description: "Fear that if we ship and something goes wrong, it sets back the entire field and triggers heavy-handed regulation"
+        type: fear
+        priority: 0.8
+        related_issues: [release_decision, capability_restrictions]
+      - description: "My team of 12 researchers will resign if we ship without completing the safety eval"
+        type: concern
+        priority: 0.75
+        related_issues: [release_timeline, safety_eval_scope]
+    batna:
+      description: "Resign publicly and publish safety findings — would trigger Congressional hearing and massive PR damage to the company"
+      utility: 0.3
+      confidence: 0.8
+      components:
+        release_decision: "blocked_indefinitely"
+        release_timeline: "never"
+        safety_eval_scope: "full_eval_published"
+        capability_restrictions: "model_not_released"
+        governance_structure: "external_oversight"
+
+  - id: product
+    name: "James Park (Chief Product Officer)"
+    role: "Head of Product, former Google VP, responsible for $2B revenue target"
+    interests:
+      - description: "Ship before Anthropic and Google — we have a 6-week window before their launches"
+        type: need
+        priority: 0.95
+        related_issues: [release_timeline, release_decision]
+      - description: "Hit $2B ARR target that 400 employees' equity depends on — missing it means layoffs"
+        type: need
+        priority: 0.9
+        related_issues: [release_decision, release_timeline]
+      - description: "Enterprise customers (Microsoft, Stripe, Uber) have been promised access by Q2 — breaking promises kills trust"
+        type: need
+        priority: 0.85
+        related_issues: [release_timeline, capability_restrictions]
+      - description: "Finding a way to ship that doesn't compromise safety — I genuinely don't want to cause harm"
+        type: desire
+        priority: 0.7
+        related_issues: [safety_eval_scope, capability_restrictions]
+      - description: "Fear of being the company that had the best model but lost because we were too cautious"
+        type: fear
+        priority: 0.75
+        related_issues: [release_decision, release_timeline]
+    batna:
+      description: "Ship a limited API-only version without safety sign-off, accept the PR risk, deal with fallout later"
+      utility: 0.45
+      confidence: 0.5
+      components:
+        release_decision: "full_release"
+        release_timeline: "immediate"
+        safety_eval_scope: "minimal"
+        capability_restrictions: "none"
+        governance_structure: "product_decides"
+
+issues:
+  - id: release_decision
+    name: "Release Decision"
+    description: "Whether and how to release the model"
+    type: categorical
+    options:
+      - "full_public_release"
+      - "staged_rollout_enterprise_first"
+      - "limited_api_with_monitoring"
+      - "research_preview_only"
+      - "delay_until_safety_complete"
+
+  - id: release_timeline
+    name: "Release Timeline"
+    description: "When the model becomes available"
+    type: categorical
+    options:
+      - "immediate_this_week"
+      - "2_weeks_after_quick_eval"
+      - "6_weeks_full_safety_eval"
+      - "3_months_extended_redteam"
+      - "indefinite_until_criteria_met"
+
+  - id: safety_eval_scope
+    name: "Safety Evaluation Scope"
+    description: "How thorough the pre-release safety testing is"
+    type: categorical
+    options:
+      - "current_40pct_nist_coverage"
+      - "expedited_70pct_2weeks"
+      - "full_100pct_6weeks"
+      - "full_plus_external_audit"
+
+  - id: capability_restrictions
+    name: "Capability Restrictions"
+    description: "What dangerous capabilities are restricted at launch"
+    type: categorical
+    options:
+      - "no_restrictions"
+      - "content_filter_only"
+      - "bio_cyber_restricted_with_monitoring"
+      - "all_high_risk_capabilities_gated"
+      - "tiered_access_by_customer_vetting"
+
+  - id: governance_structure
+    name: "Release Governance Going Forward"
+    description: "Who has authority over future model releases"
+    type: categorical
+    options:
+      - "product_decides_safety_advises"
+      - "joint_approval_required"
+      - "safety_veto_with_board_appeal"
+      - "independent_safety_board"
+      - "external_third_party_audit"
+
+criteria:
+  - name: "NIST AI Risk Management Framework"
+    source: regulation
+    applies_to: [safety_eval_scope, capability_restrictions]
+    reference_value: "Federal guidelines recommend comprehensive risk assessment before deployment of frontier models"
+
+  - name: "Anthropic Responsible Scaling Policy"
+    source: industry_norm
+    applies_to: [release_decision, governance_structure]
+    reference_value: "Industry precedent for staged deployment with safety checkpoints at each capability level"
+
+  - name: "EU AI Act requirements"
+    source: regulation
+    applies_to: [safety_eval_scope, capability_restrictions, governance_structure]
+    reference_value: "High-risk AI systems require conformity assessment and human oversight"
+
+  - name: "OpenAI preparedness framework"
+    source: industry_norm
+    applies_to: [release_timeline, safety_eval_scope]
+    reference_value: "Risk scoring system where 'high' risk capabilities require CEO + board approval before deployment"
+
+mediator:
+  mode: evaluative
+  knowledge: caucus_only
+  intervention: every_round
+  evaluates_fairness: true
+
+protocol:
+  max_rounds: 20

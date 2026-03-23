@@ -1,0 +1,145 @@
+name: "Hospital Workers Union Strike — 72-Hour Deadline"
+description: "Nurses union threatening to strike in 72 hours. Hospital says they can't afford demands. Patients will suffer. Both sides have already walked out of two prior sessions. Time pressure is extreme."
+architecture: mediated
+
+parties:
+  - id: union
+    name: "United Healthcare Workers (Union)"
+    role: "Representing 2,400 nurses and support staff"
+    interests:
+      - description: "Living wage — nurses haven't had a real raise in 4 years, inflation has eroded 18% of purchasing power"
+        type: need
+        priority: 1.0
+        related_issues: [wage_increase, retroactive_pay]
+      - description: "Safe staffing ratios — overwork is causing burnout and patient safety incidents"
+        type: need
+        priority: 0.95
+        related_issues: [staffing_ratios]
+      - description: "Fear of being replaced by travel nurses or automation if they strike too long"
+        type: fear
+        priority: 0.7
+        related_issues: [job_security]
+      - description: "Health insurance — the hospital proposed shifting to a high-deductible plan that would cost families $4K more per year"
+        type: need
+        priority: 0.85
+        related_issues: [health_insurance]
+      - description: "Dignity — feeling that management doesn't respect their work or sacrifice during COVID"
+        type: concern
+        priority: 0.6
+        related_issues: [wage_increase]
+      - description: "Unity — if the deal is perceived as weak, leadership loses credibility with members"
+        type: fear
+        priority: 0.75
+        related_issues: [wage_increase, staffing_ratios]
+    batna:
+      description: "Strike — will shut down non-emergency services. Members have 30 days of strike fund ($2,100/month per member). Public sympathy is currently with nurses (polls show 68% support). But a long strike hurts families financially and risks permanent replacement."
+      utility: 0.3
+      confidence: 0.5
+      components:
+        wage_increase: "0"
+        staffing_ratios: "no_change"
+        health_insurance: "no_change"
+
+  - id: hospital
+    name: "Regional Medical Center (Management)"
+    role: "Hospital administration under financial pressure"
+    interests:
+      - description: "Financial survival — operating at 2.1% margin, $12M deficit projected if union demands are met in full"
+        type: need
+        priority: 1.0
+        related_issues: [wage_increase, staffing_ratios, retroactive_pay]
+      - description: "Avoid strike — each strike day costs $2.3M in lost revenue, agency nurse costs, and diverted patients"
+        type: need
+        priority: 0.9
+        related_issues: [wage_increase, staffing_ratios]
+      - description: "Maintain ability to attract and retain talent — can't fall too far below market"
+        type: desire
+        priority: 0.7
+        related_issues: [wage_increase, health_insurance]
+      - description: "Fear of setting precedent — other unions in the system are watching this contract"
+        type: fear
+        priority: 0.8
+        related_issues: [wage_increase, retroactive_pay]
+      - description: "Board pressure — the board wants this resolved without a strike or a deal that threatens the hospital's bond rating"
+        type: concern
+        priority: 0.75
+        related_issues: [wage_increase, staffing_ratios]
+      - description: "Patient safety — a strike or inadequate staffing both threaten patients"
+        type: need
+        priority: 0.85
+        related_issues: [staffing_ratios]
+    batna:
+      description: "Hire temporary agency nurses at 3x cost, declare impasse, implement last best offer. Legal but politically toxic. Will damage community relationships for years. Board may fire the CEO."
+      utility: 0.2
+      confidence: 0.3
+      components:
+        wage_increase: "last_best_offer_3pct"
+        staffing_ratios: "no_change"
+
+issues:
+  - id: wage_increase
+    name: "Annual Wage Increase (%)"
+    type: monetary
+    range: [2, 12]
+    divisible: true
+  - id: staffing_ratios
+    name: "Nurse-to-Patient Staffing Ratios"
+    type: categorical
+    options:
+      - "Maintain current ratios (1:6 average)"
+      - "Improve to 1:5 within 12 months"
+      - "Improve to 1:4 within 18 months (union demand)"
+      - "Improve to 1:5 with exception clause for surge periods"
+      - "Implement California-style mandated ratios (1:4 ICU, 1:5 med-surg)"
+  - id: health_insurance
+    name: "Health Insurance Plan"
+    type: categorical
+    options:
+      - "Maintain current PPO plan (hospital absorbs cost increase)"
+      - "Shift to high-deductible plan with HSA contribution"
+      - "Hybrid — current plan for individuals, high-deductible for families with hospital HSA match"
+      - "Tiered system — tenure-based plan quality"
+  - id: retroactive_pay
+    name: "Retroactive Pay (for expired contract period)"
+    type: categorical
+    options:
+      - "Full retroactive pay for 8 months at new rate"
+      - "Lump sum equivalent to 4 months retroactive"
+      - "No retroactive pay"
+      - "Signing bonus ($2,000-5,000) in lieu of retroactive"
+  - id: job_security
+    name: "Job Security Guarantees"
+    type: categorical
+    options:
+      - "No layoffs for 3 years"
+      - "No layoffs for 2 years except in financial emergency (defined)"
+      - "No specific guarantee"
+      - "Retraining fund ($500K/year) for automation-displaced workers"
+
+criteria:
+  - name: "Regional Nurse Wage Comparison"
+    source: market_data
+    applies_to: [wage_increase]
+    reference_value: "Competing hospitals in the region pay 8-15% more. National median RN salary increased 6.2% in 2025."
+  - name: "California Staffing Law"
+    source: regulation
+    applies_to: [staffing_ratios]
+    reference_value: "California mandates 1:4 in ICU, 1:5 in med-surg. Only state with mandated ratios."
+  - name: "Hospital Financial Viability"
+    source: expert_opinion
+    applies_to: [wage_increase, staffing_ratios]
+    reference_value: "Moody's rates hospital bonds BBB-. A sustained deficit could trigger downgrade to junk status."
+  - name: "NLRA Strike Protections"
+    source: regulation
+    applies_to: [job_security]
+    reference_value: "Economic strikers can be permanently replaced but not fired. Unfair labor practice strikers must be reinstated."
+
+mediator:
+  mode: evaluative
+  knowledge: caucus_only
+  intervention: every_round
+  evaluates_fairness: false
+
+protocol:
+  max_rounds: 20
+  disclosure_policy: reciprocal

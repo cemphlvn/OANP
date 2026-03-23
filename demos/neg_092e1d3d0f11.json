@@ -1,0 +1,1444 @@
+{
+  "session_id": "neg_092e1d3d0f11",
+  "scenario_name": "United States (Trade Representative) vs People's Republic of China (Commerce Ministry)",
+  "description": "2 parties, 5 issues, agreement",
+  "parties": [
+    {
+      "id": "us",
+      "name": "United States (Trade Representative)",
+      "role": "US Trade Representative negotiating semiconductor export policy"
+    },
+    {
+      "id": "china",
+      "name": "People's Republic of China (Commerce Ministry)",
+      "role": "China's Ministry of Commerce negotiating technology trade access"
+    }
+  ],
+  "issues": [
+    {
+      "id": "chip_export_tiers",
+      "name": "AI Chip Export Tiers",
+      "description": "Which chips can be exported to China and under what conditions",
+      "issue_type": "categorical",
+      "options": [
+        "full_ban_all_advanced_chips",
+        "tiered_by_compute_threshold",
+        "licensed_case_by_case",
+        "commercial_allowed_military_banned",
+        "open_with_end_use_restrictions"
+      ],
+      "range": null,
+      "is_divisible": false
+    },
+    {
+      "id": "end_use_monitoring",
+      "name": "End-Use Monitoring",
+      "description": "How to verify chips aren't diverted to military applications",
+      "issue_type": "categorical",
+      "options": [
+        "no_monitoring",
+        "self_reporting_by_buyer",
+        "third_party_audit_annual",
+        "joint_us_china_inspection_body",
+        "real_time_chip_tracking_technology"
+      ],
+      "range": null,
+      "is_divisible": false
+    },
+    {
+      "id": "market_access_reciprocity",
+      "name": "Market Access Reciprocity",
+      "description": "What China offers in return for chip access",
+      "issue_type": "categorical",
+      "options": [
+        "no_reciprocity",
+        "open_chinese_cloud_market_to_us",
+        "joint_ai_safety_research_program",
+        "mutual_market_access_framework",
+        "technology_exchange_agreement"
+      ],
+      "range": null,
+      "is_divisible": false
+    },
+    {
+      "id": "rare_earth_access",
+      "name": "Rare Earth Supply Guarantees",
+      "description": "China's commitment on rare earth mineral exports critical for US defense",
+      "issue_type": "categorical",
+      "options": [
+        "no_guarantees",
+        "current_levels_maintained",
+        "10yr_supply_agreement",
+        "joint_processing_facilities",
+        "strategic_reserve_sharing"
+      ],
+      "range": null,
+      "is_divisible": false
+    },
+    {
+      "id": "enforcement_mechanism",
+      "name": "Enforcement & Dispute Resolution",
+      "description": "How violations are detected and resolved",
+      "issue_type": "categorical",
+      "options": [
+        "unilateral_sanctions",
+        "wto_dispute_resolution",
+        "bilateral_trade_commission",
+        "independent_international_body",
+        "automatic_snapback_provisions"
+      ],
+      "range": null,
+      "is_divisible": false
+    }
+  ],
+  "criteria": [
+    {
+      "id": "382b47a2",
+      "name": "WTO trade dispute precedents",
+      "description": "",
+      "source": "regulation",
+      "applies_to": [
+        "chip_export_tiers",
+        "enforcement_mechanism"
+      ],
+      "reference_value": "National security exceptions (Article XXI) allow export controls but must be proportionate"
+    },
+    {
+      "id": "b0a07815",
+      "name": "RAND Corporation tech trade analysis",
+      "description": "",
+      "source": "expert_opinion",
+      "applies_to": [
+        "chip_export_tiers",
+        "market_access_reciprocity"
+      ],
+      "reference_value": "Partial restrictions with monitoring are more effective than blanket bans which accelerate domestic alternatives"
+    },
+    {
+      "id": "da158f4c",
+      "name": "Semiconductor Industry Association data",
+      "description": "",
+      "source": "market_data",
+      "applies_to": [
+        "chip_export_tiers",
+        "market_access_reciprocity"
+      ],
+      "reference_value": "China represents 27% of global semiconductor revenue \u2014 $150B+ market"
+    },
+    {
+      "id": "9479a092",
+      "name": "Nuclear Non-Proliferation Treaty model",
+      "description": "",
+      "source": "precedent",
+      "applies_to": [
+        "end_use_monitoring",
+        "enforcement_mechanism"
+      ],
+      "reference_value": "International inspection regimes with sovereignty protections have 70+ year track record in nuclear domain"
+    }
+  ],
+  "outcome": "agreement",
+  "agreement": {
+    "id": "5129812b",
+    "issue_values": {
+      "chip_export_tiers": "tiered_by_compute_threshold",
+      "end_use_monitoring": "self_reporting_by_buyer",
+      "market_access_reciprocity": "joint_ai_safety_research_program",
+      "rare_earth_supply_guarantees": "10yr_supply_agreement",
+      "enforcement_resolution": "bilateral_trade_commission"
+    },
+    "rationale": "The agreement is finalized as it represents a stable, mutually beneficial framework that upholds our technological sovereignty while ensuring the continued growth of our AI industry through consistent chip access and long-term supply security.",
+    "pareto_rank": null
+  },
+  "events": [
+    {
+      "type": "phase_change",
+      "data": {
+        "phase": "setup",
+        "round": 0,
+        "message": "Generating satisfaction anchors for utility scoring..."
+      },
+      "delay_ms": 0
+    },
+    {
+      "type": "setup_progress",
+      "data": {
+        "message": "Generating anchors for 2 parties (10 interests)...",
+        "parties": [
+          "us",
+          "china"
+        ],
+        "total_interests": 10,
+        "completed_interests": 0
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "setup_progress",
+      "data": {
+        "message": "Generating anchors for United States (Trade Representative) (5 interests)...",
+        "party_id": "us",
+        "party_name": "United States (Trade Representative)",
+        "interest_count": 5
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "setup_progress",
+      "data": {
+        "message": "Generating anchors for People's Republic of China (Commerce Ministry) (5 interests)...",
+        "party_id": "china",
+        "party_name": "People's Republic of China (Commerce Ministry)",
+        "interest_count": 5
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "china",
+        "party_name": "People's Republic of China (Commerce Ministry)",
+        "interest_description": "Technological sovereignty \u2014 reduce dependency on US technology for critical infrastructure",
+        "interest_type": "need",
+        "anchor_count": 4,
+        "completed_interests": 1,
+        "total_interests": 10
+      },
+      "delay_ms": 2073
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "us",
+        "party_name": "United States (Trade Representative)",
+        "interest_description": "Prevent advanced AI chips from being used to develop military AI systems that threaten US national security",
+        "interest_type": "need",
+        "anchor_count": 4,
+        "completed_interests": 2,
+        "total_interests": 10
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "china",
+        "party_name": "People's Republic of China (Commerce Ministry)",
+        "interest_description": "Fear that permanent tech decoupling will split the world into two incompatible AI ecosystems",
+        "interest_type": "fear",
+        "anchor_count": 4,
+        "completed_interests": 3,
+        "total_interests": 10
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "china",
+        "party_name": "People's Republic of China (Commerce Ministry)",
+        "interest_description": "Access to advanced AI chips needed for China's $150B AI industry \u2014 80% of AI startups depend on NVIDIA hardware",
+        "interest_type": "need",
+        "anchor_count": 4,
+        "completed_interests": 4,
+        "total_interests": 10
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "us",
+        "party_name": "United States (Trade Representative)",
+        "interest_description": "Fear of escalation spiral \u2014 China retaliates with rare earth export controls, disrupting US defense supply chain",
+        "interest_type": "fear",
+        "anchor_count": 4,
+        "completed_interests": 5,
+        "total_interests": 10
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "us",
+        "party_name": "United States (Trade Representative)",
+        "interest_description": "Support domestic chip manufacturing (CHIPS Act investments) without completely losing China market revenue",
+        "interest_type": "desire",
+        "anchor_count": 5,
+        "completed_interests": 6,
+        "total_interests": 10
+      },
+      "delay_ms": 217
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "china",
+        "party_name": "People's Republic of China (Commerce Ministry)",
+        "interest_description": "Not accept inspections that feel like surveillance of Chinese companies and sovereignty violations",
+        "interest_type": "need",
+        "anchor_count": 5,
+        "completed_interests": 7,
+        "total_interests": 10
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "us",
+        "party_name": "United States (Trade Representative)",
+        "interest_description": "Maintain US semiconductor industry leadership \u2014 NVIDIA, AMD, Intel depend on global market access",
+        "interest_type": "need",
+        "anchor_count": 4,
+        "completed_interests": 8,
+        "total_interests": 10
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "china",
+        "party_name": "People's Republic of China (Commerce Ministry)",
+        "interest_description": "Demonstrate to domestic audience that China negotiates from strength, not submission",
+        "interest_type": "concern",
+        "anchor_count": 5,
+        "completed_interests": 9,
+        "total_interests": 10
+      },
+      "delay_ms": 209
+    },
+    {
+      "type": "anchors_generated",
+      "data": {
+        "party_id": "china",
+        "party_name": "People's Republic of China (Commerce Ministry)",
+        "anchor_count": 22,
+        "interests": [
+          {
+            "description": "Access to advanced AI chips needed for China's $150B AI industry \u2014 80% of AI startups depend on NVIDIA hardware",
+            "interest_type": "need",
+            "priority": 1.0,
+            "related_issues": [
+              "chip_export_tiers",
+              "market_access_reciprocity"
+            ],
+            "anchors": [
+              {
+                "condition": "chip_export_tiers = full_ban_all_advanced_chips",
+                "score": 0.0,
+                "reason": "A total ban constitutes a catastrophic failure to meet AI industry needs, triggering reliance on inferior domestic alternatives."
+              },
+              {
+                "condition": "chip_export_tiers = licensed_case_by_case AND end_use_monitoring = third_party_audit_annual",
+                "score": 0.35,
+                "reason": "Case-by-case licensing is highly unreliable and burdensome, but marginally better than a total ban."
+              },
+              {
+                "condition": "chip_export_tiers = commercial_allowed_military_banned AND market_access_reciprocity = mutual_market_access_framework",
+                "score": 0.65,
+                "reason": "Allows critical commercial growth for AI startups while providing a stable, reciprocal diplomatic framework."
+              },
+              {
+                "condition": "chip_export_tiers = open_with_end_use_restrictions AND end_use_monitoring = self_reporting_by_buyer",
+                "score": 0.95,
+                "reason": "Near-total access with manageable reporting requirements ensures the 80% of startups dependent on NVIDIA hardware can scale effectively."
+              }
+            ]
+          },
+          {
+            "description": "Technological sovereignty \u2014 reduce dependency on US technology for critical infrastructure",
+            "interest_type": "need",
+            "priority": 0.9,
+            "related_issues": [
+              "chip_export_tiers",
+              "market_access_reciprocity"
+            ],
+            "anchors": [
+              {
+                "condition": "chip_export_tiers = full_ban_all_advanced_chips AND market_access_reciprocity = no_reciprocity",
+                "score": 0.05,
+                "reason": "Total embargo forces immediate reliance on domestic alternatives without any pathway for technology exchange, creating high friction and systemic vulnerability."
+              },
+              {
+                "condition": "chip_export_tiers = licensed_case_by_case AND market_access_reciprocity = open_chinese_cloud_market_to_us",
+                "score": 0.35,
+                "reason": "Case-by-case licensing maintains reliance on US providers while opening domestic cloud markets, which fails to secure technological sovereignty."
+              },
+              {
+                "condition": "chip_export_tiers = commercial_allowed_military_banned AND market_access_reciprocity = mutual_market_access_framework",
+                "score": 0.65,
+                "reason": "Separating commercial and military supply chains while establishing a mutual framework provides a stable, balanced path toward reduced dependency."
+              },
+              {
+                "condition": "chip_export_tiers = open_with_end_use_restrictions AND market_access_reciprocity = technology_exchange_agreement",
+                "score": 0.95,
+                "reason": "A formal technology exchange agreement allows for accelerated domestic advancement while maintaining open access to necessary components without restrictive oversight."
+              }
+            ]
+          },
+          {
+            "description": "Not accept inspections that feel like surveillance of Chinese companies and sovereignty violations",
+            "interest_type": "need",
+            "priority": 0.85,
+            "related_issues": [
+              "end_use_monitoring",
+              "enforcement_mechanism"
+            ],
+            "anchors": [
+              {
+                "condition": "end_use_monitoring = real_time_chip_tracking_technology OR enforcement_mechanism = unilateral_sanctions",
+                "score": 0.05,
+                "reason": "Direct surveillance via real-time tracking or unilateral US enforcement are seen as total violations of sovereignty and unacceptable intrusion."
+              },
+              {
+                "condition": "end_use_monitoring = third_party_audit_annual AND enforcement_mechanism = unilateral_sanctions",
+                "score": 0.35,
+                "reason": "Annual audits remain intrusive and the threat of unilateral sanctions undermines the autonomy of Chinese corporate operations."
+              },
+              {
+                "condition": "end_use_monitoring = joint_us_china_inspection_body AND enforcement_mechanism = bilateral_trade_commission",
+                "score": 0.65,
+                "reason": "Joint inspections and bilateral dispute mechanisms represent a move toward mutual respect and shared sovereignty rather than one-sided policing."
+              },
+              {
+                "condition": "end_use_monitoring = self_reporting_by_buyer AND enforcement_mechanism = wto_dispute_resolution",
+                "score": 0.85,
+                "reason": "Self-reporting respects corporate privacy and utilizing international bodies like the WTO avoids direct US-led surveillance."
+              },
+              {
+                "condition": "end_use_monitoring = no_monitoring AND enforcement_mechanism = independent_international_body",
+                "score": 1.0,
+                "reason": "The complete removal of external monitoring and the use of a neutral international body provides the highest level of sovereignty protection."
+              }
+            ]
+          },
+          {
+            "description": "Demonstrate to domestic audience that China negotiates from strength, not submission",
+            "interest_type": "concern",
+            "priority": 0.8,
+            "related_issues": [
+              "chip_export_tiers",
+              "enforcement_mechanism"
+            ],
+            "anchors": [
+              {
+                "condition": "chip_export_tiers = full_ban_all_advanced_chips AND enforcement_mechanism = unilateral_sanctions",
+                "score": 0.0,
+                "reason": "This represents total submission to US demands, appearing as a complete loss of sovereignty and leverage to the domestic audience."
+              },
+              {
+                "condition": "chip_export_tiers = licensed_case_by_case AND enforcement_mechanism = wto_dispute_resolution",
+                "score": 0.35,
+                "reason": "Relies on external institutions rather than direct state power, which is perceived domestically as a weak, bureaucratic approach to a geopolitical conflict."
+              },
+              {
+                "condition": "chip_export_tiers = commercial_allowed_military_banned AND enforcement_mechanism = bilateral_trade_commission",
+                "score": 0.65,
+                "reason": "A negotiated middle ground that allows the state to claim it protected essential commercial interests through direct, high-level bilateral engagement."
+              },
+              {
+                "condition": "chip_export_tiers = open_with_end_use_restrictions AND enforcement_mechanism = independent_international_body",
+                "score": 0.8,
+                "reason": "Shows the state successfully set the terms of engagement on its own criteria, moving away from US-centric enforcement."
+              },
+              {
+                "condition": "chip_export_tiers = open_with_end_use_restrictions AND enforcement_mechanism = automatic_snapback_provisions",
+                "score": 1.0,
+                "reason": "Demonstrates absolute strength by forcing the US to agree to a framework where China has the power to trigger consequences, effectively reversing the power dynamic."
+              }
+            ]
+          },
+          {
+            "description": "Fear that permanent tech decoupling will split the world into two incompatible AI ecosystems",
+            "interest_type": "fear",
+            "priority": 0.7,
+            "related_issues": [
+              "chip_export_tiers",
+              "market_access_reciprocity"
+            ],
+            "anchors": [
+              {
+                "condition": "chip_export_tiers = full_ban_all_advanced_chips AND market_access_reciprocity = no_reciprocity",
+                "score": 0.0,
+                "reason": "This confirms the total decoupling and isolation of tech ecosystems, directly triggering the core fear."
+              },
+              {
+                "condition": "chip_export_tiers = tiered_by_compute_threshold AND market_access_reciprocity = no_reciprocity",
+                "score": 0.35,
+                "reason": "Allows some access but maintains a rigid barrier that prevents integration, keeping the risk of ecosystem split high."
+              },
+              {
+                "condition": "chip_export_tiers = licensed_case_by_case AND market_access_reciprocity = joint_ai_safety_research_program",
+                "score": 0.65,
+                "reason": "Creates shared technical norms and collaborative safety research, which mitigates the risk of total technical incompatibility."
+              },
+              {
+                "condition": "chip_export_tiers = open_with_end_use_restrictions AND market_access_reciprocity = mutual_market_access_framework",
+                "score": 0.95,
+                "reason": "Ensures deep market integration and shared standards, essentially preventing the feared decoupling of the global AI ecosystem."
+              }
+            ]
+          }
+        ]
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "us",
+        "party_name": "United States (Trade Representative)",
+        "interest_description": "Allied coordination \u2014 Japan and Netherlands have aligned restrictions, can't undermine coalition",
+        "interest_type": "concern",
+        "anchor_count": 4,
+        "completed_interests": 10,
+        "total_interests": 10
+      },
+      "delay_ms": 310
+    },
+    {
+      "type": "anchors_generated",
+      "data": {
+        "party_id": "us",
+        "party_name": "United States (Trade Representative)",
+        "anchor_count": 21,
+        "interests": [
+          {
+            "description": "Prevent advanced AI chips from being used to develop military AI systems that threaten US national security",
+            "interest_type": "need",
+            "priority": 1.0,
+            "related_issues": [
+              "chip_export_tiers",
+              "end_use_monitoring",
+              "enforcement_mechanism"
+            ],
+            "anchors": [
+              {
+                "condition": "chip_export_tiers = open_with_end_use_restrictions AND end_use_monitoring = no_monitoring",
+                "score": 0.0,
+                "reason": "This configuration provides no meaningful oversight or restriction, essentially allowing unchecked access to chips, which is a total failure for national security objectives."
+              },
+              {
+                "condition": "chip_export_tiers = commercial_allowed_military_banned AND end_use_monitoring = self_reporting_by_buyer",
+                "score": 0.35,
+                "reason": "Relying on self-reporting is highly ineffective for military-grade hardware; while it creates a nominal barrier, it provides very little actual security."
+              },
+              {
+                "condition": "chip_export_tiers = tiered_by_compute_threshold AND end_use_monitoring = third_party_audit_annual AND enforcement_mechanism = bilateral_trade_commission",
+                "score": 0.65,
+                "reason": "A tiered approach with annual audits provides a moderate, structured framework that is significantly better than current informal measures, though not absolute."
+              },
+              {
+                "condition": "chip_export_tiers = full_ban_all_advanced_chips AND end_use_monitoring = real_time_chip_tracking_technology AND enforcement_mechanism = automatic_snapback_provisions",
+                "score": 1.0,
+                "reason": "This represents maximum security: a complete ban on the most advanced technology combined with real-time tracking and automated enforcement mechanisms."
+              }
+            ]
+          },
+          {
+            "description": "Maintain US semiconductor industry leadership \u2014 NVIDIA, AMD, Intel depend on global market access",
+            "interest_type": "need",
+            "priority": 0.9,
+            "related_issues": [
+              "chip_export_tiers",
+              "market_access_reciprocity"
+            ],
+            "anchors": [
+              {
+                "condition": "chip_export_tiers = full_ban_all_advanced_chips AND market_access_reciprocity = no_reciprocity",
+                "score": 0.1,
+                "reason": "This represents a continuation of the BATNA, which is highly restrictive and causes significant revenue loss for the industry."
+              },
+              {
+                "condition": "chip_export_tiers = licensed_case_by_case AND market_access_reciprocity = no_reciprocity",
+                "score": 0.35,
+                "reason": "Slight improvement over a total ban, but the lack of market reciprocity keeps US companies at a competitive disadvantage."
+              },
+              {
+                "condition": "chip_export_tiers = commercial_allowed_military_banned AND market_access_reciprocity = joint_ai_safety_research_program",
+                "score": 0.65,
+                "reason": "Allows significant commercial access while maintaining safety, moving toward a collaborative framework that benefits long-term stability."
+              },
+              {
+                "condition": "chip_export_tiers = open_with_end_use_restrictions AND market_access_reciprocity = mutual_market_access_framework",
+                "score": 0.95,
+                "reason": "This is the ideal outcome, ensuring maximum market access for US firms while utilizing smart, targeted restrictions rather than blanket bans."
+              }
+            ]
+          },
+          {
+            "description": "Allied coordination \u2014 Japan and Netherlands have aligned restrictions, can't undermine coalition",
+            "interest_type": "concern",
+            "priority": 0.8,
+            "related_issues": [
+              "chip_export_tiers",
+              "enforcement_mechanism"
+            ],
+            "anchors": [
+              {
+                "condition": "chip_export_tiers = open_with_end_use_restrictions OR enforcement_mechanism = unilateral_sanctions",
+                "score": 0.05,
+                "reason": "Open exports or unilateral enforcement undermines coalition alignment and risks fracturing the diplomatic front with Japan and the Netherlands."
+              },
+              {
+                "condition": "chip_export_tiers = licensed_case_by_case AND enforcement_mechanism = wto_dispute_resolution",
+                "score": 0.35,
+                "reason": "Case-by-case licensing creates loopholes and WTO resolution is too slow, risking the appearance of coalition drift."
+              },
+              {
+                "condition": "chip_export_tiers = tiered_by_compute_threshold AND enforcement_mechanism = bilateral_trade_commission",
+                "score": 0.65,
+                "reason": "Aligned compute thresholds provide a clear technical standard for the coalition, and a bilateral commission ensures ongoing policy coordination."
+              },
+              {
+                "condition": "chip_export_tiers = tiered_by_compute_threshold AND enforcement_mechanism = independent_international_body",
+                "score": 0.95,
+                "reason": "Strongest alignment; using an independent body removes domestic political pressure and ensures a unified, multilateral enforcement stance."
+              }
+            ]
+          },
+          {
+            "description": "Support domestic chip manufacturing (CHIPS Act investments) without completely losing China market revenue",
+            "interest_type": "desire",
+            "priority": 0.75,
+            "related_issues": [
+              "market_access_reciprocity",
+              "chip_export_tiers"
+            ],
+            "anchors": [
+              {
+                "condition": "chip_export_tiers = full_ban_all_advanced_chips AND market_access_reciprocity = no_reciprocity",
+                "score": 0.0,
+                "reason": "This is essentially the BATNA, which leaves revenue losses at maximum levels and fails to secure any market access or strategic guarantees."
+              },
+              {
+                "condition": "chip_export_tiers = licensed_case_by_case AND market_access_reciprocity = no_reciprocity",
+                "score": 0.35,
+                "reason": "Offers marginal flexibility over a full ban but remains highly restrictive and provides no reciprocal benefit for the US industry."
+              },
+              {
+                "condition": "chip_export_tiers = tiered_by_compute_threshold AND market_access_reciprocity = open_chinese_cloud_market_to_us",
+                "score": 0.65,
+                "reason": "Allows lower-tier revenue recovery while securing a tangible market opening in China, balancing security and profit."
+              },
+              {
+                "condition": "chip_export_tiers = commercial_allowed_military_banned AND market_access_reciprocity = mutual_market_access_framework",
+                "score": 0.85,
+                "reason": "Significant market recovery via commercial allowance paired with a structural framework for reciprocity, fulfilling the interest well."
+              },
+              {
+                "condition": "chip_export_tiers = open_with_end_use_restrictions AND market_access_reciprocity = technology_exchange_agreement",
+                "score": 1.0,
+                "reason": "Ideal outcome: maximizes market access and revenue while maintaining security through rigorous, targeted end-use controls."
+              }
+            ]
+          },
+          {
+            "description": "Fear of escalation spiral \u2014 China retaliates with rare earth export controls, disrupting US defense supply chain",
+            "interest_type": "fear",
+            "priority": 0.85,
+            "related_issues": [
+              "rare_earth_access",
+              "enforcement_mechanism"
+            ],
+            "anchors": [
+              {
+                "condition": "rare_earth_access = no_guarantees AND enforcement_mechanism = unilateral_sanctions",
+                "score": 0.0,
+                "reason": "This configuration creates maximum vulnerability to Chinese retaliation without any supply security or diplomatic buffer."
+              },
+              {
+                "condition": "rare_earth_access = current_levels_maintained AND enforcement_mechanism = wto_dispute_resolution",
+                "score": 0.35,
+                "reason": "Maintaining current levels is better than nothing, but relying on slow WTO processes does not effectively mitigate the risk of a sudden escalation spiral."
+              },
+              {
+                "condition": "rare_earth_access = 10yr_supply_agreement AND enforcement_mechanism = bilateral_trade_commission",
+                "score": 0.65,
+                "reason": "A long-term agreement paired with a dedicated bilateral commission provides institutional stability and a mechanism to de-escalate trade tensions before they reach a breaking point."
+              },
+              {
+                "condition": "rare_earth_access = strategic_reserve_sharing AND enforcement_mechanism = automatic_snapback_provisions",
+                "score": 1.0,
+                "reason": "Strategic reserve sharing provides the ultimate defense against supply chain disruption, and automatic snapback provisions remove the ambiguity that fuels escalation spirals."
+              }
+            ]
+          }
+        ]
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "phase_change",
+      "data": {
+        "phase": "discovery",
+        "round": 0,
+        "message": "Entering interest discovery phase"
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "cc76c8be",
+        "timestamp": "2026-03-23T21:07:31.076425",
+        "party_id": "us",
+        "move_type": "disclose_interest",
+        "package": null,
+        "argument": null,
+        "disclosed_interest": {
+          "id": "9bd2caee",
+          "description": "We seek to ensure that advanced semiconductor technology is not diverted to military AI applications that could threaten national security, while simultaneously preserving a viable, stable commercial market for our domestic industry.",
+          "interest_type": "need",
+          "priority": 1.0,
+          "related_issues": [
+            "chip_export_tiers",
+            "end_use_monitoring",
+            "enforcement_mechanism"
+          ],
+          "disclosed": true,
+          "satisfaction_anchors": []
+        },
+        "references": [],
+        "reasoning": "As this is the opening of the negotiation, I need to establish a constructive, transparent, and interest-based tone. My theory of mind regarding China is that they are highly concerned about economic decoupling and technological containment, but they also have a strong interest in maintaining stable access to advanced chips for their civilian and commercial AI growth. By disclosing my 'need' to balance national security with market access, I am inviting them to articulate their own needs regarding market access. This sets the stage for a 'tiered' approach that could address both parties' core concerns.",
+        "phase": "discovery",
+        "round": 1,
+        "turn": 0,
+        "party_name": "United States (Trade Representative)"
+      },
+      "delay_ms": 2580
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "632043af",
+        "timestamp": "2026-03-23T21:07:32.816358",
+        "party_id": "china",
+        "move_type": "disclose_interest",
+        "package": null,
+        "argument": null,
+        "disclosed_interest": {
+          "id": "4042e0af",
+          "description": "Access to advanced AI chips for legitimate commercial development and industry innovation.",
+          "interest_type": "need",
+          "priority": 1.0,
+          "related_issues": [
+            "AI Chip Export Tiers",
+            "Market Access Reciprocity"
+          ],
+          "disclosed": true,
+          "satisfaction_anchors": []
+        },
+        "references": [],
+        "reasoning": "The US has expressed a need to prevent military diversion while maintaining commercial stability. My theory of mind suggests they are motivated by security concerns but are wary of losing the $150B Chinese market. By disclosing my need for commercial access, I am signaling that I want to find a middle ground where commercial trade is separated from military concerns, allowing us to build on their desire for a 'viable, stable commercial market'. This sets the stage for discussing tiered access.",
+        "phase": "discovery",
+        "round": 1,
+        "turn": 1,
+        "party_name": "People's Republic of China (Commerce Ministry)"
+      },
+      "delay_ms": 1739
+    },
+    {
+      "type": "mediator_note",
+      "data": {
+        "id": "334e3694",
+        "timestamp": "2026-03-23T21:07:34.453052",
+        "party_id": "mediator",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "68e5a87e",
+          "claim": "Both parties are in the early discovery phase. While positions on export controls remain distinct, both the United States and China have expressed a fundamental interest in maintaining global supply chain stability and avoiding unpredictable economic shocks in the semiconductor sector. By focusing on this shared goal, we can move away from zero-sum positioning toward a more collaborative framework.",
+          "grounds": [
+            "Both parties acknowledge that uncontrolled trade volatility negatively impacts their respective domestic industries and global stability.",
+            "There is a potential for a trade-off between the stringency of export controls and the assurance of rare earth supply stability, linking technological security with industrial resource security."
+          ],
+          "criterion_id": null,
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": null,
+        "phase": "discovery",
+        "round": 1,
+        "turn": 2,
+        "party_name": "Mediator"
+      },
+      "delay_ms": 1636
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "8703324c",
+        "timestamp": "2026-03-23T21:07:37.014993",
+        "party_id": "us",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "05410b10",
+          "claim": "A move towards a tiered export structure with transparent monitoring is more sustainable for both our economies than a binary, high-friction environment.",
+          "grounds": [
+            "The RAND Corporation tech trade analysis suggests that blanket bans often accelerate the development of domestic alternatives in China, which ultimately diminishes the long-term competitive advantage of US firms.",
+            "The Semiconductor Industry Association highlights that China represents a significant 27% of global semiconductor revenue, meaning that a stable, regulated market is vital for the R&D budgets of US companies.",
+            "By focusing on specific compute thresholds rather than a total ban, we can ensure that non-sensitive commercial innovation continues in China, while we jointly address shared concerns regarding military-grade AI proliferation."
+          ],
+          "criterion_id": "RAND_Corporation_tech_trade_analysis",
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: China wants to avoid technological isolation and ensure their domestic industry can keep pace with global AI development. They fear that US restrictions are a tool for permanent containment. My strategy is to acknowledge their need for 'legitimate commercial development' while shifting the conversation toward objective, risk-based thresholds. By citing the RAND study, I am framing my interest in 'national security' as a proportionate, evidence-based approach that actually protects the commercial market that China values, thereby moving us away from a zero-sum mentality.",
+        "phase": "discovery",
+        "round": 2,
+        "turn": 0,
+        "party_name": "United States (Trade Representative)"
+      },
+      "delay_ms": 2562
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "399d4c12",
+        "timestamp": "2026-03-23T21:07:40.045301",
+        "party_id": "china",
+        "move_type": "invoke_criterion",
+        "package": null,
+        "argument": {
+          "id": "e5696e4c",
+          "claim": "A move towards a tiered export structure must be balanced by objective, non-discriminatory criteria to ensure that legitimate commercial innovation is not stifled by broad, arbitrary restrictions.",
+          "grounds": [
+            "The Semiconductor Industry Association highlights that China represents 27% of global semiconductor revenue, meaning that overly restrictive policies create immense, unnecessary market instability for both US suppliers and Chinese innovators.",
+            "RAND Corporation research suggests that blanket bans are counterproductive, as they primarily serve to accelerate the development of domestic alternatives rather than enhancing security.",
+            "WTO trade dispute precedents, specifically regarding Article XXI national security exceptions, require that any trade measures must be proportional and not act as disguised barriers to legitimate commercial competition."
+          ],
+          "criterion_id": "wto_trade_dispute_precedents",
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: The US is prioritizing national security and military diversion concerns, likely fearing that unrestricted access will lead to rapid military AI advancements. They want to maintain a 'stable' market but are hesitant to fully decouple. My strategy is to align with their interest in a 'tiered' structure while using objective criteria to argue that this tiering must be clearly defined and not used for protectionist purposes. This bridges our need for chips with their need for security oversight. By invoking WTO precedents, I am framing the negotiation within a rules-based system, which protects Chinese sovereignty while addressing their proportionality concerns.",
+        "phase": "discovery",
+        "round": 2,
+        "turn": 1,
+        "party_name": "People's Republic of China (Commerce Ministry)"
+      },
+      "delay_ms": 3030
+    },
+    {
+      "type": "mediator_note",
+      "data": {
+        "id": "59ede434",
+        "timestamp": "2026-03-23T21:07:41.845669",
+        "party_id": "mediator",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "c6324816",
+          "claim": "The parties have moved from purely positional stances to discussing the mechanics of a tiered system. Both sides are now engaging with the concept of 'objective criteria,' which creates a bridge between the US interest in security and the Chinese interest in preventing arbitrary commercial harm. This is a productive shift toward substantive policy design.",
+          "grounds": [
+            "Both parties are now aligned on the necessity of a tiered structure for export controls, provided that the definitions and implementation are governed by objective, predictable standards rather than unilateral or arbitrary measures.",
+            "There is a clear opportunity to link the US interest in 'End-Use Monitoring' with the Chinese interest in 'Market Access Reciprocity.' A framework where monitoring is standardized and transparent could potentially be traded for improved reciprocal market access."
+          ],
+          "criterion_id": null,
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": null,
+        "phase": "discovery",
+        "round": 2,
+        "turn": 2,
+        "party_name": "Mediator"
+      },
+      "delay_ms": 1800
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "aa2adce8",
+        "timestamp": "2026-03-23T21:07:44.220545",
+        "party_id": "us",
+        "move_type": "disclose_interest",
+        "package": null,
+        "argument": null,
+        "disclosed_interest": {
+          "id": "197a744e",
+          "description": "We are concerned about the potential for retaliatory actions, particularly in the rare earth supply chain, which could destabilize global defense and electronics manufacturing, and we seek a stable, predictable supply environment.",
+          "interest_type": "fear",
+          "priority": 0.85,
+          "related_issues": [
+            "rare_earth_access"
+          ],
+          "disclosed": true,
+          "satisfaction_anchors": []
+        },
+        "references": [],
+        "reasoning": "Theory of Mind: China is emphasizing 'non-discriminatory' criteria, suggesting they fear being unfairly isolated or targeted by arbitrary US sanctions. They likely want to secure a predictable supply of high-end chips to maintain their tech sector's growth. Strategic Calculation: I need to build trust by acknowledging their need for non-discrimination while signaling my own vulnerability regarding rare earth materials. This sets the stage for a 'security for supply' trade-off, which addresses both parties' core fears. I am choosing to disclose this fear now to encourage reciprocity and transition toward concrete, balanced proposals.",
+        "phase": "discovery",
+        "round": 3,
+        "turn": 0,
+        "party_name": "United States (Trade Representative)"
+      },
+      "delay_ms": 2374
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "5e04fea3",
+        "timestamp": "2026-03-23T21:07:46.230309",
+        "party_id": "china",
+        "move_type": "disclose_interest",
+        "package": null,
+        "argument": null,
+        "disclosed_interest": {
+          "id": "a36d1882",
+          "description": "Technological sovereignty and the need to reduce dependency on foreign hardware for critical infrastructure while maintaining legitimate commercial industry growth.",
+          "interest_type": "need",
+          "priority": 0.9,
+          "related_issues": [
+            "chip_export_tiers",
+            "market_access_reciprocity"
+          ],
+          "disclosed": true,
+          "satisfaction_anchors": []
+        },
+        "references": [],
+        "reasoning": "Theory of Mind: The US is signaling a clear fear of rare earth retaliation while pushing for monitoring to protect national security. They want to avoid a supply chain shock that harms their own defense manufacturing. My strategy is to acknowledge their stability concern (which helps my goal of predictable trade) while emphasizing that China's interest in 'sovereignty' is a response to the risk of being cut off. By disclosing my need for sovereignty, I am signaling that the 'solution' must involve reliable access, not just US control. This sets the stage for a package where I offer supply guarantees in exchange for predictable, tiered chip access.",
+        "phase": "discovery",
+        "round": 3,
+        "turn": 1,
+        "party_name": "People's Republic of China (Commerce Ministry)"
+      },
+      "delay_ms": 2009
+    },
+    {
+      "type": "mediator_note",
+      "data": {
+        "id": "52551875",
+        "timestamp": "2026-03-23T21:07:47.558935",
+        "party_id": "mediator",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "8695fe34",
+          "claim": "Both parties are now focused on the technical implementation of controls, moving away from binary 'ban or allow' arguments. This shift towards 'objective criteria' creates a common language for negotiation. The US interest in security and the Chinese interest in market predictability both rely on clear, non-arbitrary rules.",
+          "grounds": [
+            "Both parties have identified that a predictable, rules-based system for chip exports\u2014defined by objective criteria rather than unilateral, shifting bans\u2014is preferable for long-term economic stability.",
+            "There is a potential trade-off between the US desire for robust end-use monitoring and China's interest in guaranteeing access to rare earth supply chains, which could be linked in a broader framework."
+          ],
+          "criterion_id": null,
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": null,
+        "phase": "discovery",
+        "round": 3,
+        "turn": 2,
+        "party_name": "Mediator"
+      },
+      "delay_ms": 1328
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "d5e596c5",
+        "timestamp": "2026-03-23T21:07:49.442078",
+        "party_id": "us",
+        "move_type": "propose",
+        "package": {
+          "id": "451f2e52",
+          "issue_values": {
+            "chip_export_tiers": "tiered_by_compute_threshold",
+            "end_use_monitoring": "third_party_audit_annual",
+            "market_access_reciprocity": "mutual_market_access_framework",
+            "rare_earth_supply_guarantees": "current_levels_maintained",
+            "enforcement_resolution": "bilateral_trade_commission"
+          },
+          "rationale": "By combining a tiered approach to exports with independent audits and a bilateral commission, we create a transparent framework that addresses my security needs while providing the commercial predictability and technological sovereignty China seeks, ultimately preventing the catastrophic supply chain disruptions we both fear.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: China wants to avoid total dependency and unilateral sanctions (sovereignty/security concerns) while ensuring continued access to chips for their commercial AI industry. I am using this to propose a package that formalizes the 'tiered' approach they signaled interest in, using 'third-party audits' as a compromise for 'end-use monitoring' (less intrusive than real-time, more effective than self-reporting), and a 'bilateral commission' to replace 'unilateral sanctions', which directly addresses their fear of arbitrary US policy shifts while maintaining my enforcement needs.",
+        "phase": "discovery",
+        "round": 4,
+        "turn": 0,
+        "party_name": "United States (Trade Representative)"
+      },
+      "delay_ms": 1883
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "e1a24f74",
+        "timestamp": "2026-03-23T21:07:51.293732",
+        "party_id": "china",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "951a2441",
+          "claim": "The proposed 'third_party_audit_annual' for end-use monitoring is unacceptable as it infringes upon our sovereign commercial operations, but we are prepared to explore a framework that balances security concerns with national sovereignty.",
+          "grounds": [
+            "Third-party audits of private Chinese entities lack the necessary protections for intellectual property and constitute an overreach into national sovereignty.",
+            "The Nuclear Non-Proliferation Treaty model demonstrates that international inspection regimes can be effective only when they include rigorous sovereignty protections and reciprocal transparency.",
+            "A bilateral approach must focus on non-intrusive verification methods rather than unilateral surveillance of our domestic industrial base."
+          ],
+          "criterion_id": "Nuclear Non-Proliferation Treaty model",
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: The US is primarily concerned with dual-use diversion and supply chain stability (rare earths). They are offering a 'bilateral_trade_commission' and 'mutual_market_access' to tempt us, but the 'third_party_audit' is a non-starter because it feels like intrusive surveillance. Strategic calculation: I need to reject the intrusive audit while keeping the conversation open on the 'tiered' and 'bilateral commission' aspects, which align with my need for a formal, non-unilateral process. I will use the NPT precedent to argue for a more respectful, sovereignty-preserving verification mechanism.",
+        "phase": "discovery",
+        "round": 4,
+        "turn": 1,
+        "party_name": "People's Republic of China (Commerce Ministry)"
+      },
+      "delay_ms": 1851
+    },
+    {
+      "type": "mediator_note",
+      "data": {
+        "id": "a67ee1dc",
+        "timestamp": "2026-03-23T21:07:53.141257",
+        "party_id": "mediator",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "e0c52eae",
+          "claim": "The parties are currently stuck on the mechanism of 'end-use monitoring' because it touches on the sensitive issue of sovereignty. The US wants security assurance, while China wants to avoid intrusive oversight. By reframing this as a search for a mechanism that provides data integrity without violating sovereignty, we can move closer to the NPT-style inspection models which use limited-scope, goal-oriented verification.",
+          "grounds": [
+            "Both parties are demonstrating a willingness to move away from binary positions and are actively seeking a structured, rules-based framework for managing high-tech trade.",
+            "There is a potential trade-off between the depth of end-use monitoring and the breadth of market access reciprocity; China may be willing to accept more rigorous oversight if it is tied to broader market access, while the US may accept less intrusive monitoring if it guarantees supply chain security."
+          ],
+          "criterion_id": null,
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": null,
+        "phase": "discovery",
+        "round": 4,
+        "turn": 2,
+        "party_name": "Mediator"
+      },
+      "delay_ms": 1847
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "5d6d6bbe",
+        "timestamp": "2026-03-23T21:07:55.632955",
+        "party_id": "us",
+        "move_type": "propose",
+        "package": {
+          "id": "97ef74cf",
+          "issue_values": {
+            "chip_export_tiers": "tiered_by_compute_threshold",
+            "end_use_monitoring": "self_reporting_by_buyer",
+            "market_access_reciprocity": "mutual_market_access_framework",
+            "rare_earth_supply_guarantees": "10yr_supply_agreement",
+            "enforcement_resolution": "bilateral_trade_commission"
+          },
+          "rationale": "I recognize that China prioritizes technological sovereignty and is sensitive to external oversight of its internal infrastructure. By shifting from third-party audits to a rigorous 'self-reporting' mechanism supported by a bilateral trade commission for dispute resolution, we address their sovereignty concerns. Pairing this with a 10-year rare earth supply agreement provides the stability both our defense sectors require, creating a mutually beneficial framework that avoids the sensitivity of direct inspections while maintaining security guardrails.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: China is deeply concerned about sovereignty; their rejection of 'third-party audit' confirms that external inspectors are a non-starter. They want stable access to chips and security of supply for their own industry. My strategy is to pivot to a 'self-reporting' model which is less intrusive, while offering the 10-year supply agreement as a high-value concession that secures my own supply chain interests. This addresses their need for sovereignty and my need for stability, moving us away from the impasse on monitoring.",
+        "phase": "discovery",
+        "round": 5,
+        "turn": 0,
+        "party_name": "United States (Trade Representative)"
+      },
+      "delay_ms": 2491
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "d531c409",
+        "timestamp": "2026-03-23T21:07:59.174962",
+        "party_id": "china",
+        "move_type": "propose",
+        "package": {
+          "id": "50563883",
+          "issue_values": {
+            "chip_export_tiers": "tiered_by_compute_threshold",
+            "end_use_monitoring": "self_reporting_by_buyer",
+            "market_access_reciprocity": "joint_ai_safety_research_program",
+            "rare_earth_supply_guarantees": "10yr_supply_agreement",
+            "enforcement_resolution": "bilateral_trade_commission"
+          },
+          "rationale": "This package accepts the tiered export structure and the bilateral commission as a framework for stability, while replacing intrusive audit mechanisms with self-reporting to respect national sovereignty. By shifting from broad market reciprocity to a joint AI safety research program, we align with mutual interests in preventing catastrophic AI failure, while the 10-year rare earth agreement provides the predictable supply chain the US seeks.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: The US is clearly prioritizing supply chain stability (rare earths) and security (monitoring). They have shown flexibility by moving from 'third-party audit' to 'self-reporting'. They fear retaliation and instability. My move leverages this by offering a 10-year rare earth agreement\u2014a high-value concession for them\u2014in exchange for securing the 'self-reporting' mechanism which protects my sovereignty interests. I am proposing a 'joint AI safety research program' instead of a broad market access framework, as this facilitates cooperation without forcing immediate, potentially damaging, opening of our sensitive cloud markets. This package addresses their core needs while safeguarding my own.",
+        "phase": "discovery",
+        "round": 5,
+        "turn": 1,
+        "party_name": "People's Republic of China (Commerce Ministry)"
+      },
+      "delay_ms": 3542
+    },
+    {
+      "type": "mediator_note",
+      "data": {
+        "id": "a6b8e762",
+        "timestamp": "2026-03-23T21:08:01.182879",
+        "party_id": "mediator",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "3bbcf865",
+          "claim": "The parties have reached a remarkable level of consensus on four of the five core pillars, including the move to tiered compute thresholds and a bilateral commission for dispute resolution. The convergence on 'self_reporting_by_buyer' and '10yr_supply_agreement' demonstrates a significant willingness to prioritize stability over maximalist positions. The only remaining point of divergence is the 'market_access_reciprocity' mechanism.",
+          "grounds": [
+            "Both parties have now agreed on the technical structure of export tiers, the use of self-reporting for end-use monitoring, long-term supply guarantees for rare earths, and a bilateral commission for enforcement. This indicates a strong shared commitment to establishing a stable, predictable, and managed trade environment.",
+            "The remaining gap lies in choosing between a 'mutual_market_access_framework' (US preference) and a 'joint_ai_safety_research_program' (China preference). These are not mutually exclusive; a framework could potentially incorporate joint research as a confidence-building measure."
+          ],
+          "criterion_id": null,
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": null,
+        "phase": "discovery",
+        "round": 5,
+        "turn": 2,
+        "party_name": "Mediator"
+      },
+      "delay_ms": 2007
+    },
+    {
+      "type": "phase_change",
+      "data": {
+        "phase": "generation",
+        "round": 5,
+        "message": "Entering option generation phase \u2014 agents propose packages"
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "validation_error",
+      "data": {
+        "party_id": "us",
+        "violations": [
+          "accept is not legal in generation phase. Legal moves: ['propose', 'meso', 'disclose_interest', 'argue', 'invoke_criterion']"
+        ]
+      },
+      "delay_ms": 4000
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "0bc0c806",
+        "timestamp": "2026-03-23T21:08:04.417370",
+        "party_id": "us",
+        "move_type": "accept",
+        "package": {
+          "id": "7f056b4a",
+          "issue_values": {
+            "chip_export_tiers": "tiered_by_compute_threshold",
+            "end_use_monitoring": "self_reporting_by_buyer",
+            "market_access_reciprocity": "joint_ai_safety_research_program",
+            "rare_earth_supply_guarantees": "10yr_supply_agreement",
+            "enforcement_resolution": "bilateral_trade_commission"
+          },
+          "rationale": "By accepting the joint AI safety research program, we address the US need for national security oversight through technical cooperation, while providing China with the collaborative framework they desire. This package ensures supply chain stability for both parties and establishes a durable, bilateral mechanism for long-term dispute resolution.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: China is clearly prioritizing technological sovereignty and avoiding intrusive 'third-party' inspections. By moving to 'self-reporting' and replacing 'mutual market access' with 'joint AI safety research', they demonstrate a preference for collaborative technical engagement over direct market intervention. Strategic Calculation: The 'joint AI safety research' is a high-value concession for me; it provides a 'backdoor' to monitor end-use and safety standards without violating their sovereignty concerns. Since we have reached consensus on all five pillars, accepting the current framework maximizes our interests in supply chain stability and security while preventing the escalation of trade barriers.",
+        "phase": "generation",
+        "round": 6,
+        "turn": 0,
+        "party_name": "United States (Trade Representative)"
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "validation_error",
+      "data": {
+        "party_id": "china",
+        "violations": [
+          "accept is not legal in generation phase. Legal moves: ['propose', 'meso', 'disclose_interest', 'argue', 'invoke_criterion']"
+        ]
+      },
+      "delay_ms": 4000
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "b41966e7",
+        "timestamp": "2026-03-23T21:08:10.397331",
+        "party_id": "china",
+        "move_type": "accept",
+        "package": {
+          "id": "68f113f6",
+          "issue_values": {
+            "chip_export_tiers": "tiered_by_compute_threshold",
+            "end_use_monitoring": "self_reporting_by_buyer",
+            "market_access_reciprocity": "joint_ai_safety_research_program",
+            "rare_earth_supply_guarantees": "10yr_supply_agreement",
+            "enforcement_resolution": "bilateral_trade_commission"
+          },
+          "rationale": "I accept this agreement as it secures stable access to critical technology, respects our sovereignty by replacing intrusive audits with a self-reporting mechanism, and fosters cooperative AI safety research rather than zero-sum market exclusion. This package aligns with our goal of predictable trade relations while protecting our domestic industrial interests.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: The US is primarily concerned with national security and the risk of technology diversion. By agreeing to the bilateral commission and self-reporting, they feel they have sufficient oversight without needing to force intrusive inspections that I would reject. My strategic calculation is that this package is the highest-utility outcome currently possible; it prevents a total decoupling and provides a 10-year supply stability which is a major win for our tech industry. Accepting this move solidifies the gains and prevents the negotiation from stalling on minor remaining details, non-existent points of contention.",
+        "phase": "generation",
+        "round": 6,
+        "turn": 1,
+        "party_name": "People's Republic of China (Commerce Ministry)"
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "validation_error",
+      "data": {
+        "party_id": "us",
+        "violations": [
+          "accept is not legal in generation phase. Legal moves: ['propose', 'meso', 'disclose_interest', 'argue', 'invoke_criterion']"
+        ]
+      },
+      "delay_ms": 4000
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "4d42a51d",
+        "timestamp": "2026-03-23T21:08:17.637901",
+        "party_id": "us",
+        "move_type": "accept",
+        "package": {
+          "id": "dc127bf8",
+          "issue_values": {
+            "chip_export_tiers": "tiered_by_compute_threshold",
+            "end_use_monitoring": "self_reporting_by_buyer",
+            "market_access_reciprocity": "joint_ai_safety_research_program",
+            "rare_earth_supply_guarantees": "10yr_supply_agreement",
+            "enforcement_resolution": "bilateral_trade_commission"
+          },
+          "rationale": "I am confirming the final agreement as it achieves a balance between US national security interests (via tiered controls and joint research) and economic stability (via rare earth supply guarantees and market access). This alignment satisfies our core strategic goals while addressing China's need for sovereignty and technology access.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "The other party has explicitly signaled their acceptance of the proposed package. My theory of mind suggests they value the 10-year supply agreement and the transition to self-reporting to protect their technological sovereignty. By accepting this, I secure the bilateral commission and the joint research program, which are essential for long-term monitoring and security, while mitigating the risk of rare earth retaliation. This represents a successful negotiation outcome that meets my aspiration level.",
+        "phase": "generation",
+        "round": 7,
+        "turn": 0,
+        "party_name": "United States (Trade Representative)"
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "validation_error",
+      "data": {
+        "party_id": "china",
+        "violations": [
+          "accept is not legal in generation phase. Legal moves: ['propose', 'meso', 'disclose_interest', 'argue', 'invoke_criterion']"
+        ]
+      },
+      "delay_ms": 4000
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "a4141d9f",
+        "timestamp": "2026-03-23T21:08:25.091043",
+        "party_id": "china",
+        "move_type": "accept",
+        "package": {
+          "id": "3ea35572",
+          "issue_values": {
+            "chip_export_tiers": "tiered_by_compute_threshold",
+            "end_use_monitoring": "self_reporting_by_buyer",
+            "market_access_reciprocity": "joint_ai_safety_research_program",
+            "rare_earth_supply_guarantees": "10yr_supply_agreement",
+            "enforcement_resolution": "bilateral_trade_commission"
+          },
+          "rationale": "This agreement represents a balanced, sustainable framework that addresses China's need for stable technology access and sovereignty while meeting US requirements for security and transparency through cooperative mechanisms rather than unilateral imposition.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: The US party, through their consistent movement toward a bilateral commission and self-reporting, signals a shift from containment to managed interdependence. They fear supply chain instability (rare earths) and seek security assurances. My strategy is to finalize this deal as it secures the critical technology access we need while avoiding intrusive third-party audits, thereby satisfying both our core interest in sovereignty and our need for AI hardware.",
+        "phase": "generation",
+        "round": 7,
+        "turn": 1,
+        "party_name": "People's Republic of China (Commerce Ministry)"
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "phase_change",
+      "data": {
+        "phase": "bargaining",
+        "round": 7,
+        "message": "Entering bargaining phase \u2014 proposals and counterproposals"
+      },
+      "delay_ms": 1184
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "2ee22034",
+        "timestamp": "2026-03-23T21:08:34.287390",
+        "party_id": "us",
+        "move_type": "accept",
+        "package": {
+          "id": "4fd215c6",
+          "issue_values": {
+            "chip_export_tiers": "tiered_by_compute_threshold",
+            "end_use_monitoring": "self_reporting_by_buyer",
+            "market_access_reciprocity": "joint_ai_safety_research_program",
+            "rare_earth_supply_guarantees": "10yr_supply_agreement",
+            "enforcement_resolution": "bilateral_trade_commission"
+          },
+          "rationale": "The agreement is finalized as it addresses US national security through tiered controls and a bilateral commission, while securing stable supply chains and fostering collaborative AI safety research, aligning with our guiding principles of mutual gain.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: China has clearly signaled that technological sovereignty and stable supply chains are their primary interests, as evidenced by their push for a 10-year supply agreement and their rejection of intrusive auditing. My strategy is to finalize this agreement because it meets my core security objectives (tiered exports) and prevents retaliation (rare earth guarantees) without forcing an impasse on monitoring that they would never accept. The agreement is a balanced outcome.",
+        "phase": "bargaining",
+        "round": 8,
+        "turn": 0,
+        "party_name": "United States (Trade Representative)"
+      },
+      "delay_ms": 4000
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "abd93b71",
+        "timestamp": "2026-03-23T21:08:40.258005",
+        "party_id": "china",
+        "move_type": "accept",
+        "package": {
+          "id": "5129812b",
+          "issue_values": {
+            "chip_export_tiers": "tiered_by_compute_threshold",
+            "end_use_monitoring": "self_reporting_by_buyer",
+            "market_access_reciprocity": "joint_ai_safety_research_program",
+            "rare_earth_supply_guarantees": "10yr_supply_agreement",
+            "enforcement_resolution": "bilateral_trade_commission"
+          },
+          "rationale": "The agreement is finalized as it represents a stable, mutually beneficial framework that upholds our technological sovereignty while ensuring the continued growth of our AI industry through consistent chip access and long-term supply security.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: The US has signaled throughout the negotiation that they seek to de-escalate tensions and secure a predictable environment for their industry, while managing national security concerns. By accepting the final terms, I am confirming that we have reached a sustainable equilibrium that meets China's core requirement for non-intrusive monitoring and long-term access, which prevents the bifurcation of the global tech ecosystem. My strategy is to finalize this positive-sum outcome, as it fulfills my aspiration level and secures the necessary technology for our domestic AI development without violating our sovereignty.",
+        "phase": "bargaining",
+        "round": 8,
+        "turn": 1,
+        "party_name": "People's Republic of China (Commerce Ministry)"
+      },
+      "delay_ms": 4000
+    },
+    {
+      "type": "settlement",
+      "data": {
+        "agreement": {
+          "id": "5129812b",
+          "issue_values": {
+            "chip_export_tiers": "tiered_by_compute_threshold",
+            "end_use_monitoring": "self_reporting_by_buyer",
+            "market_access_reciprocity": "joint_ai_safety_research_program",
+            "rare_earth_supply_guarantees": "10yr_supply_agreement",
+            "enforcement_resolution": "bilateral_trade_commission"
+          },
+          "rationale": "The agreement is finalized as it represents a stable, mutually beneficial framework that upholds our technological sovereignty while ensuring the continued growth of our AI industry through consistent chip access and long-term supply security.",
+          "pareto_rank": null
+        },
+        "total_rounds": 8,
+        "total_moves": 21
+      },
+      "delay_ms": 1318
+    }
+  ],
+  "metrics": {
+    "outcome": "agreement",
+    "party_utilities": {
+      "us": 0.5616279069767443,
+      "china": 0.7
+    },
+    "party_batna_surplus": {
+      "us": 0.11162790697674424,
+      "china": 0.29999999999999993
+    },
+    "social_welfare": 1.2616279069767442,
+    "pareto_efficient": true,
+    "nash_product": 0.033488372093023265,
+    "integrative_index": 1.484268125854993,
+    "total_rounds": 8,
+    "total_moves": 21,
+    "move_breakdown": {
+      "disclose_interest": 4,
+      "argue": 7,
+      "invoke_criterion": 1,
+      "propose": 3,
+      "accept": 6
+    },
+    "disclosure_rate": 0.4,
+    "phases_visited": [
+      "discovery",
+      "generation",
+      "bargaining",
+      "settlement"
+    ],
+    "agreement": {
+      "id": "5129812b",
+      "issue_values": {
+        "chip_export_tiers": "tiered_by_compute_threshold",
+        "end_use_monitoring": "self_reporting_by_buyer",
+        "market_access_reciprocity": "joint_ai_safety_research_program",
+        "rare_earth_supply_guarantees": "10yr_supply_agreement",
+        "enforcement_resolution": "bilateral_trade_commission"
+      },
+      "rationale": "The agreement is finalized as it represents a stable, mutually beneficial framework that upholds our technological sovereignty while ensuring the continued growth of our AI industry through consistent chip access and long-term supply security.",
+      "pareto_rank": null
+    }
+  },
+  "critique": [
+    {
+      "severity": "low",
+      "description": "No multi-option (MESO) packages were generated."
+    },
+    {
+      "severity": "info",
+      "description": "Integrative index 1.48 \u2014 negotiation created significant value."
+    },
+    {
+      "severity": "info",
+      "description": "Agreement is Pareto efficient."
+    }
+  ]
+}

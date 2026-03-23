@@ -1,0 +1,115 @@
+name: "Software Engineer Salary Negotiation"
+description: "Entry-level SWE negotiating with a mid-size startup — the OANP quickstart scenario"
+architecture: mediated
+
+parties:
+  - id: candidate
+    name: "Alex (Candidate)"
+    role: candidate
+    interests:
+      - description: "Maximize total compensation to match market rate"
+        type: desire
+        priority: 0.9
+        related_issues: [base_salary, equity_vesting, signing_bonus]
+      - description: "Work-life balance and flexibility for personal projects"
+        type: need
+        priority: 0.8
+        related_issues: [remote_work]
+      - description: "Start soon to avoid gap in employment"
+        type: concern
+        priority: 0.5
+        related_issues: [start_date]
+      - description: "Fear of being lowballed relative to peers"
+        type: fear
+        priority: 0.6
+        related_issues: [base_salary]
+    batna:
+      description: "Competing offer from BigCorp at $155k base, onsite, standard vesting"
+      utility: 0.65
+      confidence: 0.8
+      components:
+        base_salary: "155000"
+        remote_work: "onsite"
+        equity_vesting: "standard_4yr"
+        signing_bonus: "10000"
+
+  - id: employer
+    name: "TechStartup Inc."
+    role: employer
+    interests:
+      - description: "Stay within headcount budget for this quarter"
+        type: need
+        priority: 0.9
+        related_issues: [base_salary, signing_bonus]
+      - description: "Retain talent long-term with equity alignment"
+        type: desire
+        priority: 0.7
+        related_issues: [equity_vesting]
+      - description: "Team cohesion — some in-person collaboration is valuable"
+        type: desire
+        priority: 0.4
+        related_issues: [remote_work]
+      - description: "Fill the role before Q2 sprint planning"
+        type: concern
+        priority: 0.6
+        related_issues: [start_date]
+      - description: "Fear of overpaying and setting a precedent for the team"
+        type: fear
+        priority: 0.5
+        related_issues: [base_salary]
+    batna:
+      description: "Continue interviewing — expect to hire someone in 6-8 weeks"
+      utility: 0.4
+      confidence: 0.5
+      components:
+        base_salary: "0"
+        start_date: "2026-06-01"
+
+issues:
+  - id: base_salary
+    name: "Base Salary"
+    type: monetary
+    range: [120000, 180000]
+    divisible: true
+  - id: equity_vesting
+    name: "Equity Package"
+    type: categorical
+    options: [standard_4yr, accelerated_3yr, performance_based]
+  - id: remote_work
+    name: "Remote Work Policy"
+    type: categorical
+    options: [full_remote, hybrid_3_2, hybrid_2_3, onsite]
+  - id: start_date
+    name: "Start Date"
+    type: temporal
+    range: ["2026-04-01", "2026-06-01"]
+    divisible: true
+  - id: signing_bonus
+    name: "Signing Bonus"
+    type: monetary
+    range: [0, 30000]
+    divisible: true
+
+criteria:
+  - name: "Market Rate (Levels.fyi)"
+    source: market_data
+    applies_to: [base_salary]
+    reference_value: "$140k-$165k for L3 SWE in this metro area"
+  - name: "Standard Vesting Schedule"
+    source: industry_norm
+    applies_to: [equity_vesting]
+    reference_value: "4-year vest with 1-year cliff is industry standard"
+  - name: "Remote Work Trends"
+    source: market_data
+    applies_to: [remote_work]
+    reference_value: "65% of tech companies offer hybrid or full-remote in 2026"
+
+mediator:
+  mode: facilitative            # facilitative | evaluative | arbitrative
+  knowledge: caucus_only        # blind | caucus_only | omniscient
+  intervention: every_round     # every_round | on_request | at_impasse
+  evaluates_fairness: false
+
+protocol:
+  max_rounds: 20
+  disclosure_policy: gradual
