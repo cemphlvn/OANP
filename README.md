@@ -1,5 +1,9 @@
 <div align="center">
 
+<img src="assets/hero.png" width="100%" alt="OANP — Define any dispute. Watch agents resolve it." />
+
+<br />
+
 # OANP
 
 **Ontology-based Agentic Negotiation Protocol**
@@ -24,6 +28,14 @@ Principled multi-party negotiation, formalized as an open protocol.
 <a href="paper/oanp-one-pager.md">Paper</a> ·
 <a href="CONTRIBUTING.md">Contributing</a>
 
+</div>
+
+<br />
+
+<div align="center">
+<img src="assets/negotiation_ui.png" width="100%" alt="OANP Negotiation UI" />
+<br />
+<sub>Apple vs Samsung patent negotiation with mediator, D3 force graph, and real-time move timeline</sub>
 </div>
 
 <br />
@@ -64,6 +76,14 @@ Typed protocol with 10 move types, 9 negotiation phases, configurable mediator a
 
 > [!NOTE]
 > OANP's approach is validated by the [MIT AI Negotiation Competition](https://arxiv.org/abs/2503.06416) (2025, ~180,000 negotiations) which found that agents adhering to Harvard principles consistently outperform positional bargaining agents.
+
+## Build Any Scenario
+
+<div align="center">
+<img src="assets/build_with_ai.png" width="680" alt="Scenario Builder" />
+</div>
+
+<br />
 
 ## Quick Start
 
@@ -132,6 +152,25 @@ OANP ships with 12 scenarios spanning employment, commercial, legal, and geopoli
 # Create your own
 cp scenarios/salary-negotiation.yaml scenarios/my-scenario.yaml
 ```
+
+## Typed Moves
+
+Every negotiation action is a discrete, auditable event with full reasoning.
+
+<table>
+<tr>
+<td width="50%">
+<img src="assets/counteroffer.png" width="100%" alt="Counter-offer" />
+</td>
+<td width="50%">
+<img src="assets/rejectoffer.png" width="100%" alt="Rejection with reasoning" />
+</td>
+</tr>
+<tr>
+<td align="center"><sub>Samsung counter-offers with $799M settlement</sub></td>
+<td align="center"><sub>Apple rejects, then accepts after mediator intervention</sub></td>
+</tr>
+</table>
 
 ## How It Works
 
