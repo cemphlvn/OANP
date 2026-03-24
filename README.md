@@ -187,6 +187,24 @@ Every negotiation action is a discrete, auditable event with full reasoning.
 
 <br />
 
+## Analysis
+
+<div align="center">
+<img src="assets/analysispage.png" width="100%" alt="Post-negotiation analysis with metrics" />
+<br />
+<sub>US-China trade negotiation: social welfare, Nash product, integrative index, Pareto efficiency, move breakdown, and critique</sub>
+</div>
+
+<br />
+
+<div align="center">
+<img src="assets/uschinatrade.gif" width="100%" alt="US-China trade negotiation in real time" />
+<br />
+<sub>Live: US Trade Representative vs China Commerce Ministry negotiating AI chip export controls</sub>
+</div>
+
+<br />
+
 ## How It Works
 
 ```mermaid
