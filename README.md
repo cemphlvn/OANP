@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="assets/hero.png" width="100%" alt="OANP — Define any dispute. Watch agents resolve it." />
+<img src="assets/hero.gif" width="100%" alt="OANP — Define any dispute. Watch agents resolve it." />
 
 <br />
 
@@ -33,9 +33,9 @@ Principled multi-party negotiation, formalized as an open protocol.
 <br />
 
 <div align="center">
-<img src="assets/negotiation_ui.png" width="100%" alt="OANP Negotiation UI" />
+<img src="assets/negotiation.gif" width="100%" alt="Live negotiation session" />
 <br />
-<sub>Apple vs Samsung patent negotiation with mediator, D3 force graph, and real-time move timeline</sub>
+<sub>Live negotiation: agents discover interests, generate options, and converge on a settlement in real time</sub>
 </div>
 
 <br />
@@ -189,21 +189,33 @@ Every negotiation action is a discrete, auditable event with full reasoning.
 
 ## How It Works
 
-```
-Scenario (YAML)
-    |
-    v
-┌─────────────────────────────────────────────┐
-│  Discovery → Generation → Bargaining → ...  │  9 phases
-│                                             │
-│  Negotiator ←→ Mediator ←→ Negotiator      │  typed moves
-│       |              |            |          │
-│   [private]     [configurable]  [private]   │  information boundaries
-│    state        knowledge level   state     │
-└─────────────────────────────────────────────┘
-    |
-    v
-Settlement + Metrics (utility, Pareto, Nash, integrative index)
+```mermaid
+flowchart TD
+    A["Scenario (YAML)"] --> B["Discovery"]
+    B --> C["Generation"]
+    C --> D["Bargaining"]
+    D --> E["Convergence"]
+    E --> F{"Outcome"}
+    F -->|Agreement| G["Settlement"]
+    F -->|No Agreement| H["Impasse"]
+
+    subgraph Engine["Negotiation Engine"]
+        direction LR
+        N1["Negotiator A\n(private state)"]
+        M["Mediator\n(configurable)"]
+        N2["Negotiator B\n(private state)"]
+        N1 <--> M <--> N2
+    end
+
+    A ~~~ Engine
+
+    G --> U["Utility · Pareto · Nash · Integrative Index"]
+
+    style A fill:#f5f5f5,stroke:#333,color:#000
+    style G fill:#d4edda,stroke:#28a745,color:#000
+    style H fill:#f8d7da,stroke:#dc3545,color:#000
+    style M fill:#fff3cd,stroke:#ffc107,color:#000
+    style Engine fill:#f8f9fa,stroke:#dee2e6,color:#000
 ```
 
 <details>
