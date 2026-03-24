@@ -66,6 +66,11 @@ Typed protocol with 10 move types, 9 negotiation phases, configurable mediator a
 </tr>
 </table>
 
+> [!IMPORTANT]
+> **We're looking for real-world use cases.** If you work in arbitration, commercial law, insurance, procurement, licensing, family law, or any domain involving structured negotiation, we want to hear from you. What disputes would you test this on? What would make it useful for your practice?
+>
+> Reach out at **cem@talp.ai** with your scenario, industry, or research question.
+
 ## Why OANP
 
 - **Interest-first** &mdash; agents reason about *why* parties want things, not just *what* they demand
@@ -172,6 +177,16 @@ Every negotiation action is a discrete, auditable event with full reasoning.
 </tr>
 </table>
 
+## Settlement
+
+<div align="center">
+<img src="assets/agreement.png" width="100%" alt="Agreement Reached — NBA Lockout scenario" />
+<br />
+<sub>1998 NBA Lockout scenario: agents reach agreement on salary cap, revenue split, and minimum player salary</sub>
+</div>
+
+<br />
+
 ## How It Works
 
 ```
@@ -230,7 +245,7 @@ OANP/
 |-------|-----------|
 | **Backend** | FastAPI, WebSocket |
 | **Agents** | LangGraph, LangChain |
-| **Memory** | Graphiti + Neo4j (optional) |
+| **Memory** | Graphiti + Neo4j (planned) |
 | **LLMs** | OpenAI, Anthropic, or any OpenAI-compatible endpoint |
 | **Frontend** | Vue 3, Vite, D3.js |
 
@@ -246,6 +261,17 @@ Key influences:
 - Rahwan et al. (2003) &mdash; interest-based negotiation in multi-agent systems
 - MIT AI Negotiation Competition (2025) &mdash; empirical validation at 180K negotiations
 - Singapore Convention on Mediation (2019) &mdash; cross-border enforceability
+
+## Roadmap
+
+- [x] Protocol v0.1 with typed moves and 9 negotiation phases
+- [x] LLM utility scorer with satisfaction anchors
+- [x] 12 scenarios from employment to diplomacy
+- [x] Configurable mediator (facilitative / evaluative / arbitrative)
+- [ ] Simulation benchmarks across mediator configs, models, and domains
+- [ ] Knowledge graph memory (Graphiti/Neo4j wire-in for cross-session learning)
+- [ ] N-party negotiation with coalition formation
+- [ ] Human-in-the-loop (negotiate alongside agents in the web UI)
 
 ## Contributing
 
