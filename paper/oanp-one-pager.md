@@ -6,7 +6,7 @@
 
 ## Abstract
 
-Principled negotiation (Fisher & Ury, 1981) has been the dominant framework in dispute resolution for forty-five years. It has never been computationally formalized. This paper introduces OANP, the first open protocol encoding interest-based negotiation into a typed, auditable, ontology-grounded specification. We position OANP at the intersection of three converging developments: empirical validation that principled negotiation transfers to autonomous agents (MIT, 2025; 180,000 negotiations), institutional demand for structured approaches to technology in dispute resolution (ICC Task Force 2024, SVAMC Guidelines 2024, UNCITRAL Colloquium 2026), and legal infrastructure that already supports enforcement of machine-mediated settlements (Singapore Convention on Mediation, 2019).
+Principled negotiation (Fisher & Ury, 1981) has been the dominant framework in dispute resolution for forty-five years. It has never been computationally formalized. This paper introduces OANP, an open attempt at encoding interest-based negotiation into a typed, auditable, ontology-grounded specification. We position OANP at the intersection of three converging developments: empirical validation that principled negotiation transfers to autonomous agents (MIT, 2025; 180,000 negotiations), institutional demand for structured approaches to technology in dispute resolution (ICC Task Force 2024, SVAMC Guidelines 2024, UNCITRAL Colloquium 2026), and legal infrastructure that already supports enforcement of machine-mediated settlements (Singapore Convention on Mediation, 2019).
 
 ---
 
@@ -20,7 +20,7 @@ This is an access-to-justice problem. Construction disputes average $60 million 
 
 Every major arbitration institution recognizes the need. The ICC formed a Task Force on technology in dispute resolution (September 2024). The SVAMC published guidelines (April 2024). CIArb issued its own (March 2025). UNCITRAL held a dedicated colloquium (February 2026). All are asking the same question: *how should technology assist dispute resolution?*
 
-What is missing is not institutional will. What is missing is a **protocol**.
+What is missing is not institutional will. What is missing is an open, formal protocol that these institutions and practitioners can examine, test, and build on.
 
 ---
 
@@ -43,13 +43,13 @@ Three research traditions converge on this problem but have never been unified.
 | MIT Competition (2025) | Empirical validation at scale | Unstructured text; no protocol enforcement |
 | Legal ontologies | Formalized legal concepts | No negotiation dynamics; no agent interaction |
 
-The gap is precise: **no open protocol formalizes principled negotiation with typed moves, information boundaries, and ontology grounding.**
+To our knowledge, no open protocol currently formalizes principled negotiation with typed moves, information boundaries, and ontology grounding. OANP is an attempt to fill that gap.
 
 ---
 
 ## 3. The Protocol
 
-OANP is an open, MIT-licensed protocol specification with a reference implementation. Four structural commitments:
+OANP is an open, MIT-licensed protocol specification and reference implementation. It makes four structural commitments, each motivated by a specific failure mode in existing approaches:
 
 **Typed moves.** Every negotiation action is a discrete, auditable event: `PROPOSE`, `COUNTER`, `ARGUE`, `DISCLOSE_INTEREST`, `INVOKE_CRITERION`, `MESO`, `ACCEPT`, `REJECT`, `INVOKE_BATNA`, `REQUEST_MEDIATION`. This vocabulary maps directly to Fisher & Ury. Interest disclosure enables integrative bargaining. Criterion invocation anchors proposals to objective standards. MESO (multiple equivalent simultaneous offers) expands the solution space. The typed structure prevents degeneration into positional haggling and makes every move traceable.
 
@@ -65,11 +65,11 @@ Negotiation proceeds through nine phases (Setup through Settlement or Impasse) w
 
 ## 4. Legal Viability
 
-OANP is designed for the legal infrastructure that already exists.
+A protocol is only useful if its outputs can have legal effect. We designed OANP with existing legal infrastructure in mind, though enforceability will ultimately depend on jurisdictional interpretation and further case development.
 
-**Singapore Convention on Mediation (2019).** Provides cross-border enforcement of mediated commercial settlements across 59 signatory states. Defines mediation as assistance by "a third person or persons" (Article 2(3)) without requiring natural-person status. A settlement produced through an OANP-mediated process that satisfies the Convention's disclosure and standards requirements (Article 5(1)(e)-(f)) has a viable path to enforcement.
+**Singapore Convention on Mediation (2019).** Provides cross-border enforcement of mediated commercial settlements across 59 signatory states. Defines mediation as assistance by "a third person or persons" (Article 2(3)) without requiring natural-person status. Whether a settlement produced through a protocol-mediated process satisfies the Convention's disclosure and standards requirements (Article 5(1)(e)-(f)) remains an open question, but the textual basis for a viable path to enforcement exists.
 
-**EU Artificial Intelligence Act (2024).** Classifies technology in alternative dispute resolution as high-risk (Annex III, Point 8), requiring transparency, record-keeping, and human oversight. OANP satisfies these by design: every move is logged, every decision boundary is inspectable, and the protocol separates machine reasoning from human decisional authority.
+**EU Artificial Intelligence Act (2024).** Classifies technology in alternative dispute resolution as high-risk (Annex III, Point 8), requiring transparency, record-keeping, and human oversight. OANP's architecture is designed to satisfy these: every move is logged, every decision boundary is inspectable, and the protocol separates machine reasoning from human decisional authority.
 
 **Due process.** The central concern with algorithmic dispute resolution is opacity. OANP addresses this structurally. The typed move history provides a complete audit trail. Information boundaries ensure equality of arms. The mediator's configurable knowledge level makes its epistemic position explicit.
 
@@ -89,11 +89,11 @@ The distinction matters: OANP is a negotiation and mediation protocol, not an ad
 
 ## 6. Conclusion
 
-OANP is not a replacement for human mediators, arbitrators, or judges. It is infrastructure. The institutional convergence is clear: the ICC, UNCITRAL, ASA, SVAMC, and CIArb are all asking how technology should enter dispute resolution. The academic convergence is equally clear: the MIT competition validated principled negotiation between autonomous agents; Rahwan's framework awaits implementation. The legal convergence is ready: the Singapore Convention provides enforceability; the EU framework provides compliance structure.
+OANP is not a replacement for human mediators, arbitrators, or judges. It is an open attempt at the kind of infrastructure that dispute resolution institutions have been calling for: formal, auditable, and grounded in established negotiation theory.
 
-What has been missing is a formal, open, auditable protocol that translates principled negotiation theory into executable infrastructure.
+The institutional convergence is clear: the ICC, UNCITRAL, ASA, SVAMC, and CIArb are all asking how technology should enter dispute resolution. The academic convergence is equally clear: the MIT competition validated principled negotiation between autonomous agents; Rahwan's framework awaits implementation. The legal convergence is emerging: the Singapore Convention provides a potential path to enforceability; the EU framework provides compliance structure.
 
-OANP is that protocol.
+Whether OANP is the right formalization remains to be tested by the community. We offer it as a concrete starting point, open for scrutiny, extension, and challenge.
 
 ---
 
