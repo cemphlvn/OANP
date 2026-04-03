@@ -1,0 +1,126 @@
+institution:
+  id: "pca"
+  name: "Permanent Court of Arbitration"
+  full_name: "Permanent Court of Arbitration"
+  seat: "The Hague, Netherlands"
+  rules_version: "2012"
+  rules_effective: "2012-12-17"
+  founded: 1899
+  website: "https://pca-cpa.org"
+  optional_protocol_version: "2024"
+
+procedures:
+  standard:
+    response_deadline_days: 30           # Based on UNCITRAL Rules
+    arbitrator_appointment_days: 30
+    award_deadline_months: null          # No fixed standard deadline
+    default_arbitrators: 3
+    terms_of_reference: false
+    scrutiny_of_awards: false
+    case_management_conference: true
+    based_on: "UNCITRAL Arbitration Rules 2013"
+
+  expedited:
+    enabled: true
+    rule_reference: "PCA 2024 Optional Protocol"
+    threshold_usd: null                  # No monetary threshold
+    auto_apply: false
+    opt_in: true                         # By consent only
+    opt_out: false
+    sole_arbitrator: true
+    award_deadline_months: 6
+    time_limits_halved: true             # All time limits halved
+    summary_reasons: true                # Summary reasons only
+    reduced_fees: true
+
+  emergency:
+    enabled: true
+    rule_reference: "Art. 26 (Interim Measures)"
+    appointment_hours: 48
+    decision_days: 14
+    form: "order"
+    enforceable_as_award: false
+    opt_out: false
+
+  mediation:
+    enabled: true
+    rules: "PCA Mediation Rules"
+    med_arb: false
+    arb_med_arb: false
+
+time_limits:
+  - phase: "filing"
+    action: "respondent_response"
+    days: 30
+    article: "Art. 4 (PCA Rules)"
+    extendable: true
+  - phase: "constitution"
+    action: "arbitrator_appointment"
+    days: 30
+    article: "Art. 9 (PCA Rules)"
+    extendable: false
+  - phase: "expedited"
+    action: "respondent_response"
+    days: 15
+    article: "Optional Protocol"
+    notes: "All time limits halved"
+    extendable: true
+  - phase: "expedited"
+    action: "render_award"
+    months: 6
+    article: "Optional Protocol"
+    extendable: true
+    extendable_by: "appointing_authority"
+
+fees:
+  registration_usd: 0                   # No institutional admin fees
+  fee_model: "no_institutional_fees"
+  arbitrator_fees: "party_arrangement"
+  notes: "PCA provides registry/secretariat services, no admin fees"
+  expedited_reduced: true
+
+due_process:
+  equal_treatment: true
+  right_to_be_heard: true
+  right_to_present_case: true
+  language_requirements: true
+  arbitrator_disclosure: "iba_guidelines"
+  confidentiality: "party_agreement"     # Not default confidential (state disputes)
+  challenge_period_days: 15
+  state_dispute_expertise: true
+
+award_requirements:
+  writing: true
+  signatures: "all_or_majority_with_reason"
+  reasons: true
+  reasons_expedited: "summary"           # Summary reasons in expedited
+  date: true
+  seat: true
+  delivery: "signed_copy_to_each_party"
+  scrutiny: false
+  correction_deadline_days: 30
+
+enforcement:
+  new_york_convention: true
+  singapore_convention: false
+  electronic_signatures: "accepted"
+  electronic_filing: true
+  platform: "PCA Case Repository"
+
+# OANP protocol mapping — slightly looser for inter-state complexity
+oanp_mapping:
+  phase_round_limits:
+    discovery: 5
+    generation: 4
+    bargaining: 12
+    convergence: 6
+  escalation_tiers:
+    - tier: "negotiation"
+      max_rounds: 12
+    - tier: "mediation"
+      max_rounds: 6
+    - tier: "arbitration"
+      max_rounds: 5
+  hard_deadline_rounds: 30
+  stagnation_window: 3
+  stagnation_threshold: 0.02

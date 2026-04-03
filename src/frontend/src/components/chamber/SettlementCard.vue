@@ -34,6 +34,35 @@
             {{ agreement.rationale }}
           </div>
 
+          <!-- Award section (advanced mode) -->
+          <div v-if="award" class="sc-award">
+            <div class="sc-terms-label">AWARD</div>
+            <div class="sc-award-grid">
+              <div class="sc-award-row">
+                <span class="sc-award-key">Type</span>
+                <span class="sc-award-val">{{ awardTypeLabel }}</span>
+              </div>
+              <div v-if="award.seat" class="sc-award-row">
+                <span class="sc-award-key">Seat</span>
+                <span class="sc-award-val">{{ award.seat }}</span>
+              </div>
+              <div v-if="award.governing_law" class="sc-award-row">
+                <span class="sc-award-key">Law</span>
+                <span class="sc-award-val">{{ award.governing_law }}</span>
+              </div>
+              <div v-if="award.institution" class="sc-award-row">
+                <span class="sc-award-key">Framework</span>
+                <span class="sc-award-val">{{ institutionLabel }}</span>
+              </div>
+              <div v-if="award.integrity_hash" class="sc-award-row">
+                <span class="sc-award-key">Hash</span>
+                <span class="sc-award-hash" :title="award.integrity_hash">
+                  {{ award.integrity_hash.slice(0, 16) }}...
+                </span>
+              </div>
+            </div>
+          </div>
+
           <div class="sc-actions">
             <button class="sc-btn primary" @click="$emit('viewAnalysis')">
               View Analysis &#8594;
@@ -49,14 +78,25 @@
 </template>
 
 <script setup>
-defineProps({
+import { computed } from 'vue'
+import { AWARD_TYPES, INSTITUTION_LABELS } from '@/types/protocol'
+
+const props = defineProps({
   visible: { type: Boolean, default: false },
   agreement: { type: Object, default: null },
   rounds: { type: Number, default: 0 },
-  moveCount: { type: Number, default: 0 }
+  moveCount: { type: Number, default: 0 },
+  award: { type: Object, default: null },
 })
 
 defineEmits(['close', 'viewAnalysis'])
+
+const awardTypeLabel = computed(() =>
+  AWARD_TYPES[props.award?.award_type] || props.award?.award_type || 'Award'
+)
+const institutionLabel = computed(() =>
+  INSTITUTION_LABELS[props.award?.institution] || props.award?.institution || ''
+)
 
 function particleStyle(i) {
   const x = 30 + Math.random() * 40
@@ -212,6 +252,32 @@ function particleStyle(i) {
 }
 
 .sc-btn.secondary:hover { border-color: #999; color: #666; }
+
+/* Award section */
+.sc-award {
+  background: #F5F5F5;
+  border: 1px solid #E0E0E0;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.sc-award-grid { display: flex; flex-direction: column; gap: 6px; }
+
+.sc-award-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+}
+
+.sc-award-key { color: #999; font-family: var(--font-mono); }
+.sc-award-val { font-family: var(--font-mono); font-weight: 600; }
+.sc-award-hash {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: #666;
+  cursor: help;
+}
 
 /* Transitions */
 .settle-enter-active { transition: opacity 0.3s; }

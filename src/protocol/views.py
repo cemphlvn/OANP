@@ -98,7 +98,7 @@ class StateView:
             d.pop("reasoning", None)
             moves.append(d)
 
-        return {
+        result = {
             "session_id": state.id,
             "parties": [{"id": p.id, "name": p.name, "role": p.role} for p in state.parties],
             "issues": [i.model_dump() for i in state.issues],
@@ -108,8 +108,30 @@ class StateView:
                 "round": state.protocol.round,
                 "total_rounds": state.protocol.total_rounds,
                 "total_moves": state.protocol.total_moves,
+                "phase_round_limits": state.protocol.phase_round_limits,
+                "escalation_tier": state.protocol.escalation_tier,
             },
             "move_history": moves,
             "outcome": state.outcome,
             "agreement": state.agreement.model_dump() if state.agreement else None,
         }
+
+        # Compliance metadata (advanced mode)
+        if state.compliance:
+            c = state.compliance
+            result["compliance"] = {
+                "mode": c.mode.value,
+                "current_tier": c.current_tier.value,
+                "tier_history": c.tier_history,
+                "due_process_log": c.due_process_log,
+                "institution": c.institution.model_dump(mode="json") if c.institution else None,
+                "escalation": c.escalation.model_dump(mode="json") if c.escalation else None,
+                "deadlines": c.deadlines.model_dump(mode="json") if c.deadlines else None,
+            }
+        else:
+            result["compliance"] = None
+
+        # Award record (generated at settlement/arbitration)
+        result["award"] = state.award.model_dump(mode="json") if state.award else None
+
+        return result

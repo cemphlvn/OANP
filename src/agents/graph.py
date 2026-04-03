@@ -31,13 +31,18 @@ from langgraph.types import Command, interrupt
 
 from ..protocol.types import (
     Architecture,
+    AwardType,
+    EscalationTier,
+    MediatorMode,
     MediatorState,
     Move,
     MoveType,
+    NegotiationMode,
     NegotiationPhase,
     NegotiationState,
     OptionPackage,
 )
+from ..protocol.compliance import ComplianceEngine
 from .negotiator import run_negotiator, get_legal_moves
 from .mediator import run_mediator
 from .events import EventBus
@@ -118,7 +123,7 @@ def should_transition_from_generation(state: NegotiationState) -> bool:
 
 
 def check_bargaining_outcome(state: NegotiationState) -> str:
-    """Returns 'continue', 'settlement', 'converge', or 'impasse'."""
+    """Returns 'continue', 'settlement', 'converge', 'impasse', or 'escalate'."""
     if not state.move_history:
         return "continue"
 
@@ -138,6 +143,29 @@ def check_bargaining_outcome(state: NegotiationState) -> str:
     # Round limit
     if state.protocol.max_rounds and state.protocol.total_rounds >= state.protocol.max_rounds:
         return "impasse"
+
+    # Advanced mode: compliance-driven escalation and deadlines
+    if state.compliance and state.compliance.mode == NegotiationMode.ADVANCED:
+        engine = ComplianceEngine(state.compliance)
+
+        # Hard deadline → impasse
+        hard = engine.check_hard_deadline(state)
+        if hard:
+            return "impasse"
+
+        # Phase deadline → escalation (if available) or impasse
+        phase = engine.check_phase_deadline(state)
+        if phase:
+            next_tier = engine.should_escalate(state)
+            if next_tier:
+                return "escalate"
+            return "impasse"
+
+        # Stagnation → escalation
+        if engine.check_stagnation(state):
+            next_tier = engine.should_escalate(state)
+            if next_tier:
+                return "escalate"
 
     return "continue"
 
@@ -211,16 +239,21 @@ def _record_move(neg: NegotiationState, move: Move) -> None:
             # Accept without package — still count it
             proto.accepted_by.add(move.party_id)
 
-    elif move.move_type in (MoveType.COUNTER, MoveType.REJECT, MoveType.PROPOSE):
-        # A new proposal/counter/reject invalidates all prior accepts
+    elif move.move_type in (MoveType.COUNTER, MoveType.REJECT, MoveType.PROPOSE) and move.party_id != "mediator":
+        # A new proposal/counter/reject from a PARTY invalidates all prior accepts
+        # (Mediator proposals don't clear party accepts — they're suggestions, not positions)
         proto.accepted_by.clear()
         proto.accepted_package_id = None
         proto.accepted_package_hash = None
 
     else:
         # Any other move (ARGUE, INVOKE_CRITERION, DISCLOSE_INTEREST, MESO)
-        # from a party that previously accepted = stale accept, remove them
-        if move.party_id in proto.accepted_by and move.party_id != "mediator":
+        # from a party that previously accepted = stale accept, remove them.
+        # BUT: if all parties have already accepted (settlement locked), don't clear.
+        all_party_ids = {p.id for p in neg.parties}
+        if proto.accepted_by >= all_party_ids:
+            pass  # Settlement is locked — post-accept moves don't undo it
+        elif move.party_id in proto.accepted_by and move.party_id != "mediator":
             proto.accepted_by.discard(move.party_id)
             if not proto.accepted_by:
                 proto.accepted_package_id = None
@@ -308,14 +341,24 @@ async def _run_round(
         party_name = party.name
         await emit("move", _emit_move_event(neg, move, party_name))
 
+        # Early settlement: if all parties accepted the same package, stop immediately
+        all_party_ids = {p.id for p in neg.parties}
+        if neg.protocol.accepted_by >= all_party_ids:
+            break
+
         # Interrupt: terminal moves halt the round immediately
         if move.move_type in INTERRUPT_MOVES:
             interrupted = True
             break
 
-    # Mediator intervention (if not interrupted and architecture supports it)
+    # Check if settlement was reached during the round
+    all_party_ids = {p.id for p in neg.parties}
+    settled_early = neg.protocol.accepted_by >= all_party_ids
+
+    # Mediator intervention (if not interrupted/settled and architecture supports it)
     if (
         not interrupted
+        and not settled_early
         and neg.protocol.architecture != Architecture.BILATERAL
         and neg.mediator
     ):
@@ -323,6 +366,54 @@ async def _run_round(
         if mediator_move:
             _record_move(neg, mediator_move)
             await emit("mediator_note", _emit_move_event(neg, mediator_move, "Mediator"))
+
+
+# ---------------------------------------------------------------------------
+# Compliance event helpers
+# ---------------------------------------------------------------------------
+
+async def _emit_deadline_warnings(neg: NegotiationState, engine) -> None:
+    """Emit deadline_warning events when approaching limits (advanced mode)."""
+    if not neg.compliance or neg.compliance.mode != NegotiationMode.ADVANCED:
+        return
+
+    ce = ComplianceEngine(neg.compliance)
+    deadlines = neg.compliance.deadlines
+    if not deadlines:
+        return
+
+    # Phase deadline warning
+    phase = neg.protocol.phase.value
+    phase_limit = deadlines.phase_max_rounds.get(phase)
+    if phase_limit:
+        remaining = max(0, phase_limit - neg.protocol.round)
+        if remaining <= max(2, phase_limit // 4):  # Warn at ≤25% remaining or ≤2
+            await engine.emit("deadline_warning", {
+                "type": "phase",
+                "phase": phase,
+                "current": neg.protocol.round,
+                "limit": phase_limit,
+                "remaining": remaining,
+            })
+
+    # Hard deadline warning
+    hard_limit = deadlines.hard_deadline_rounds
+    if hard_limit:
+        remaining = max(0, hard_limit - neg.protocol.total_rounds)
+        if remaining <= max(3, hard_limit // 4):
+            await engine.emit("deadline_warning", {
+                "type": "hard",
+                "current": neg.protocol.total_rounds,
+                "limit": hard_limit,
+                "remaining": remaining,
+            })
+
+    # Stagnation warning
+    if ce.check_stagnation(neg):
+        await engine.emit("stagnation_detected", {
+            "window": deadlines.stagnation_window,
+            "message": "Convergence stagnation detected — escalation may occur",
+        })
 
 
 # ---------------------------------------------------------------------------
@@ -367,14 +458,14 @@ async def generation_node(state: GraphState) -> GraphState:
     return {"negotiation": neg}
 
 
-async def bargaining_node(
-    state: GraphState,
-) -> Command[Literal["bargaining", "convergence", "settlement", "impasse"]]:
+async def bargaining_node(state: GraphState) -> Command:
     """Bargaining phase: ONE round per invocation, Command-based routing.
 
     This is the critical path where the accept storm was happening in v1.
     By running exactly one round and routing via Command, we eliminate
     the nested while-loop that caused the oscillation.
+
+    v3: Added 'escalate' routing for advanced mode (→ convergence or arbitration).
     """
     neg = state["negotiation"]
     engine = neg._engine_ref
@@ -388,6 +479,9 @@ async def bargaining_node(
             "message": "Entering bargaining phase — proposals and counterproposals",
         })
 
+    # Emit deadline warnings before round (advanced mode)
+    await _emit_deadline_warnings(neg, engine)
+
     _advance_round(neg)
     await _run_round(neg, engine.llm, engine.emit, engine.validator)
 
@@ -397,15 +491,24 @@ async def bargaining_node(
         return Command(update={"negotiation": neg}, goto="settlement")
     elif outcome == "impasse":
         return Command(update={"negotiation": neg}, goto="impasse")
+    elif outcome == "escalate":
+        from_tier = neg.compliance.current_tier.value if neg.compliance else "?"
+        target = _handle_escalation(neg)
+        to_tier = neg.compliance.current_tier.value if neg.compliance else "?"
+        await engine.emit("tier_change", {
+            "from_tier": from_tier,
+            "to_tier": to_tier,
+            "reason": "deadline_or_stagnation",
+            "at_round": neg.protocol.total_rounds,
+        })
+        return Command(update={"negotiation": neg}, goto=target)
     elif outcome == "converge":
         return Command(update={"negotiation": neg}, goto="convergence")
     else:
         return Command(update={"negotiation": neg}, goto="bargaining")
 
 
-async def convergence_node(
-    state: GraphState,
-) -> Command[Literal["bargaining", "settlement", "impasse"]]:
+async def convergence_node(state: GraphState) -> Command:
     """Convergence phase: ONE round. Parties are close to agreement.
 
     If settlement is reached, route there. Otherwise, back to bargaining.
@@ -423,6 +526,8 @@ async def convergence_node(
             "message": "Parties are close — entering convergence",
         })
 
+    await _emit_deadline_warnings(neg, engine)
+
     _advance_round(neg)
     await _run_round(neg, engine.llm, engine.emit, engine.validator)
 
@@ -432,13 +537,26 @@ async def convergence_node(
         return Command(update={"negotiation": neg}, goto="settlement")
     elif outcome == "impasse":
         return Command(update={"negotiation": neg}, goto="impasse")
+    elif outcome == "escalate":
+        from_tier = neg.compliance.current_tier.value if neg.compliance else "?"
+        target = _handle_escalation(neg)
+        to_tier = neg.compliance.current_tier.value if neg.compliance else "?"
+        await engine.emit("tier_change", {
+            "from_tier": from_tier,
+            "to_tier": to_tier,
+            "reason": "deadline_or_stagnation",
+            "at_round": neg.protocol.total_rounds,
+        })
+        return Command(update={"negotiation": neg}, goto=target)
     else:
-        # Back to bargaining — not settled yet
         return Command(update={"negotiation": neg}, goto="bargaining")
 
 
 async def settlement_node(state: GraphState) -> GraphState:
-    """Record agreement and emit settlement event."""
+    """Record agreement and emit settlement event.
+
+    In advanced mode, also generates a compliant award record.
+    """
     neg = state["negotiation"]
     engine = neg._engine_ref
 
@@ -451,10 +569,16 @@ async def settlement_node(state: GraphState) -> GraphState:
             neg.agreement = move.package
             break
 
+    # Advanced mode: generate award record
+    if neg.compliance and neg.compliance.mode == NegotiationMode.ADVANCED:
+        ce = ComplianceEngine(neg.compliance)
+        neg.award = ce.generate_award(neg, AwardType.CONSENT_AWARD)
+
     await engine.emit("settlement", {
         "agreement": neg.agreement.model_dump() if neg.agreement else None,
         "total_rounds": neg.protocol.total_rounds,
         "total_moves": neg.protocol.total_moves,
+        "award": neg.award.model_dump() if neg.award else None,
     })
 
     return {"negotiation": neg}
@@ -478,16 +602,147 @@ async def impasse_node(state: GraphState) -> GraphState:
 
 
 # ---------------------------------------------------------------------------
+# Escalation helper
+# ---------------------------------------------------------------------------
+
+def _handle_escalation(neg: NegotiationState) -> str:
+    """Execute escalation and return the target node name.
+
+    Called from async bargaining/convergence nodes — they handle emitting
+    the tier_change event after this returns.
+
+    Escalation tiers:
+    - NEGOTIATION → MEDIATION: activate mediator, go to convergence
+    - MEDIATION → ARBITRATION: switch to arbitrative mode, go to arbitration node
+    """
+    if not neg.compliance:
+        return "impasse"
+
+    compliance_engine = ComplianceEngine(neg.compliance)
+    next_tier = compliance_engine.should_escalate(neg)
+
+    if not next_tier:
+        return "impasse"
+
+    compliance_engine.execute_escalation(neg, next_tier)
+
+    if next_tier == EscalationTier.MEDIATION:
+        if not neg.mediator:
+            neg.mediator = MediatorState()
+        neg.protocol.architecture = Architecture.MEDIATED
+        neg.protocol.escalation_tier = "mediation"
+        return "convergence"
+
+    elif next_tier == EscalationTier.ARBITRATION:
+        if neg.mediator:
+            neg.mediator.config.mode = MediatorMode.ARBITRATIVE
+        neg.protocol.escalation_tier = "arbitration"
+        return "arbitration"
+
+    return "impasse"
+
+
+# ---------------------------------------------------------------------------
+# Arbitration node (advanced mode)
+# ---------------------------------------------------------------------------
+
+async def arbitration_node(state: GraphState) -> GraphState:
+    """Arbitration phase: mediator in ARBITRATIVE mode renders a binding decision.
+
+    The arbitrator agent runs for a limited number of rounds (configured by
+    escalation policy), then forces a resolution.
+    """
+    neg = state["negotiation"]
+    engine = neg._engine_ref
+
+    _enter_phase(neg, NegotiationPhase.ARBITRATION)
+    await engine.emit("phase_change", {
+        "phase": "arbitration",
+        "round": neg.protocol.total_rounds,
+        "message": "Escalated to binding arbitration — arbitrator will render a decision",
+    })
+
+    # Ensure mediator is in arbitrative mode
+    if neg.mediator:
+        neg.mediator.config.mode = MediatorMode.ARBITRATIVE
+
+    # Run limited rounds — arbitrator gathers final positions then decides
+    max_arb_rounds = 3
+    if neg.compliance and neg.compliance.escalation:
+        max_arb_rounds = neg.compliance.escalation.arbitration_deadline_rounds
+
+    for _ in range(max_arb_rounds):
+        _advance_round(neg)
+        await _run_round(neg, engine.llm, engine.emit, engine.validator)
+
+        # Check if parties settled during arbitration
+        party_ids = {p.id for p in neg.parties}
+        if neg.protocol.accepted_by >= party_ids:
+            neg.outcome = "agreement"
+            for move in reversed(neg.move_history):
+                if move.package:
+                    neg.agreement = move.package
+                    break
+
+            # Generate award record (consent award via arbitration)
+            if neg.compliance:
+                ce = ComplianceEngine(neg.compliance)
+                neg.award = ce.generate_award(neg, AwardType.CONSENT_AWARD)
+
+            await engine.emit("settlement", {
+                "agreement": neg.agreement.model_dump() if neg.agreement else None,
+                "total_rounds": neg.protocol.total_rounds,
+                "total_moves": neg.protocol.total_moves,
+                "award_type": "consent_award",
+            })
+            return {"negotiation": neg}
+
+    # No settlement — arbitrator renders final award based on last mediator proposal
+    neg.outcome = "arbitration"
+    last_mediator_proposal = None
+    for move in reversed(neg.move_history):
+        if move.party_id == "mediator" and move.package:
+            last_mediator_proposal = move.package
+            break
+
+    if last_mediator_proposal:
+        neg.agreement = last_mediator_proposal
+
+    # Generate final award
+    if neg.compliance:
+        ce = ComplianceEngine(neg.compliance)
+        neg.award = ce.generate_award(
+            neg, AwardType.FINAL_AWARD,
+            reasons="Rendered by arbitrator after parties failed to reach agreement.",
+        )
+
+    await engine.emit("settlement", {
+        "agreement": neg.agreement.model_dump() if neg.agreement else None,
+        "total_rounds": neg.protocol.total_rounds,
+        "total_moves": neg.protocol.total_moves,
+        "award_type": "final_award",
+        "message": "Arbitrator has rendered a binding award",
+    })
+
+    return {"negotiation": neg}
+
+
+# ---------------------------------------------------------------------------
 # Graph builder
 # ---------------------------------------------------------------------------
 
-def build_negotiation_graph(checkpointer=None):
+def build_negotiation_graph(checkpointer=None, advanced_mode: bool = False):
     """Build the LangGraph StateGraph for negotiation.
 
-    Graph structure:
+    Streamlined mode graph:
         START → discovery → generation → bargaining ⇄ convergence
                                               ↓              ↓
                                          settlement      impasse → END
+
+    Advanced mode graph (adds arbitration node + escalation routing):
+        START → discovery → generation → bargaining ⇄ convergence
+                                              ↓      ↓       ↓
+                                         settlement  arbitration  impasse → END
     """
     graph = StateGraph(GraphState)
 
@@ -498,6 +753,11 @@ def build_negotiation_graph(checkpointer=None):
     graph.add_node("convergence", convergence_node)
     graph.add_node("settlement", settlement_node)
     graph.add_node("impasse", impasse_node)
+
+    # Advanced mode: add arbitration node
+    if advanced_mode:
+        graph.add_node("arbitration", arbitration_node)
+        graph.add_edge("arbitration", END)
 
     # Edges
     graph.add_edge(START, "discovery")
@@ -553,8 +813,18 @@ class NegotiationEngine:
         # Checkpointer — default to InMemorySaver
         self.checkpointer = checkpointer or InMemorySaver()
 
+        # Compliance engine (advanced mode)
+        self.compliance_engine = None
+        advanced_mode = False
+        if state.compliance and state.compliance.mode == NegotiationMode.ADVANCED:
+            advanced_mode = True
+            self.compliance_engine = ComplianceEngine(state.compliance)
+
         # Compile the graph
-        self._graph = build_negotiation_graph(checkpointer=self.checkpointer)
+        self._graph = build_negotiation_graph(
+            checkpointer=self.checkpointer,
+            advanced_mode=advanced_mode,
+        )
 
     async def emit(self, event_type: str, data: dict):
         """Emit an event via the event bus."""

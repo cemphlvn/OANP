@@ -1,0 +1,127 @@
+institution:
+  id: "dis"
+  name: "German Arbitration Institute"
+  full_name: "Deutsche Institution für Schiedsgerichtsbarkeit"
+  seat: "Cologne, Germany"
+  rules_version: "2018"
+  rules_effective: "2018-03-01"
+  website: "https://www.disarb.org"
+
+procedures:
+  standard:
+    response_deadline_days: 45
+    arbitrator_nomination_days: 21       # Fastest nomination period
+    award_deadline_months: null          # No fixed standard deadline
+    default_arbitrators: 3
+    terms_of_reference: false
+    scrutiny_of_awards: false
+    case_management_conference: true
+    mandatory_efficiency_discussion: true  # Annex 3 + 4
+
+  expedited:
+    enabled: true
+    rule_reference: "Annex 4 (Expedited Proceedings)"
+    threshold_usd: null                  # No monetary threshold
+    auto_apply: false
+    opt_in: true                         # By consent only
+    opt_out: false
+    sole_arbitrator: false               # Tribunal composition unchanged
+    award_deadline_months: 6             # 6 months from CMC
+    from_event: "case_management_conference"
+    one_additional_submission: true       # Limited to one additional submission
+    one_hearing: true                    # Limited to one hearing
+    reduced_fees: false
+
+  emergency:
+    enabled: true
+    rule_reference: "Annex 4 (Emergency)"
+    appointment_hours: 48
+    decision_days: 14
+    form: "order"
+    enforceable_as_award: false
+    opt_out: true
+
+  mediation:
+    enabled: true
+    rules: "DIS Mediation Rules"
+    med_arb: false
+    arb_med_arb: false
+
+time_limits:
+  - phase: "filing"
+    action: "respondent_response"
+    days: 45
+    article: "Sec. 7"
+    extendable: true
+  - phase: "constitution"
+    action: "arbitrator_nomination"
+    days: 21
+    article: "Sec. 12"
+    extendable: false
+    notes: "Fastest nomination period among major institutions"
+  - phase: "proceedings"
+    action: "case_management_conference"
+    article: "Sec. 27"
+    notes: "Mandatory efficiency discussion per Annex 3"
+  - phase: "emergency"
+    action: "emergency_arbitrator_appointment"
+    hours: 48
+    article: "Annex 4"
+    extendable: false
+  - phase: "expedited"
+    action: "render_award"
+    months: 6
+    article: "Annex 4"
+    from_event: "case_management_conference"
+    extendable: true
+    extendable_by: "dis"
+
+fees:
+  registration_eur: "per_schedule"
+  fee_model: "ad_valorem"
+  expedited_reduced: false               # No fee reduction for expedited
+
+due_process:
+  equal_treatment: true
+  right_to_be_heard: true
+  right_to_present_case: true
+  language_requirements: true
+  arbitrator_disclosure: "iba_guidelines"
+  confidentiality: "default_confidential"
+  challenge_period_days: 14
+  mandatory_efficiency_discussion: true  # Annex 3 + 4
+
+award_requirements:
+  writing: true
+  signatures: "all_or_majority_with_reason"
+  reasons: true
+  date: true
+  seat: true
+  delivery: "signed_copy_to_each_party"
+  scrutiny: false
+  correction_deadline_days: 30
+
+enforcement:
+  new_york_convention: true
+  singapore_convention: false
+  electronic_signatures: "accepted"
+  electronic_filing: true
+  platform: "DIS Online"
+
+# OANP protocol mapping
+oanp_mapping:
+  phase_round_limits:
+    discovery: 4
+    generation: 3
+    bargaining: 10
+    convergence: 5
+  escalation_tiers:
+    - tier: "negotiation"
+      max_rounds: 10
+    - tier: "mediation"
+      max_rounds: 6
+    - tier: "arbitration"
+      max_rounds: 4
+  hard_deadline_rounds: 25
+  stagnation_window: 3
+  stagnation_threshold: 0.02

@@ -1,0 +1,131 @@
+institution:
+  id: "icsid"
+  name: "International Centre for Settlement of Investment Disputes"
+  full_name: "ICSID - World Bank Group"
+  seat: "Washington, D.C., United States"
+  rules_version: "2022"
+  rules_effective: "2022-07-01"
+  website: "https://icsid.worldbank.org"
+
+procedures:
+  standard:
+    response_deadline_days: 45           # Registration + constitution period
+    arbitrator_appointment_days: 90      # 90 days from registration
+    award_deadline_days_post_hearing: 240  # 240 days post-hearing
+    default_arbitrators: 3
+    terms_of_reference: false
+    scrutiny_of_awards: false
+    case_management_conference: true
+    first_session_days: 60               # First session within 60 days of constitution
+
+  expedited:
+    enabled: true
+    rule_reference: "Chapter XII (Rules 75-84)"
+    threshold_usd: null                  # No monetary threshold
+    auto_apply: false
+    opt_in: true                         # By consent only
+    opt_out: false
+    sole_arbitrator: true
+    award_deadline_days_post_hearing: 120  # 120 days post-hearing
+    reduced_fees: true
+
+  emergency:
+    enabled: true
+    rule_reference: "Chapter XI (Provisional Measures)"
+    appointment_hours: 48
+    decision_days: 30
+    form: "recommendation_or_order"
+    enforceable_as_award: false
+    opt_out: false
+
+  mediation:
+    enabled: true
+    rules: "ICSID Mediation Rules 2022"
+    med_arb: false
+    arb_med_arb: false
+
+time_limits:
+  - phase: "filing"
+    action: "registration"
+    days: 45
+    article: "Rule 7"
+    extendable: false
+  - phase: "constitution"
+    action: "arbitrator_appointment"
+    days: 90
+    article: "Rule 14"
+    from_event: "registration"
+    extendable: false
+  - phase: "proceedings"
+    action: "first_session"
+    days: 60
+    article: "Rule 31"
+    from_event: "constitution"
+    extendable: false
+  - phase: "expedited"
+    action: "render_award"
+    days: 120
+    article: "Rule 80"
+    from_event: "last_hearing"
+    extendable: true
+    extendable_by: "tribunal"
+  - phase: "award"
+    action: "render_award"
+    days: 240
+    article: "Rule 58"
+    from_event: "last_hearing"
+    extendable: true
+    extendable_by: "tribunal"
+
+fees:
+  registration_usd: 52000
+  fee_model: "fixed_per_day"
+  expedited_reduced: true
+
+due_process:
+  equal_treatment: true
+  right_to_be_heard: true
+  right_to_present_case: true
+  language_requirements: true
+  arbitrator_disclosure: "icsid_rules"
+  confidentiality: "not_default_confidential"  # ICSID awards may be published
+  challenge_period_days: 21
+  transparency: true                     # Public interest element
+
+award_requirements:
+  writing: true
+  signatures: "all_or_majority_with_reason"
+  reasons: true
+  date: true
+  seat: true
+  delivery: "certified_copy_to_each_party"
+  scrutiny: false
+  correction_deadline_days: 45
+  annulment_committee: true              # Unique: ad hoc annulment committee
+
+enforcement:
+  new_york_convention: false             # Self-contained enforcement regime
+  singapore_convention: false
+  icsid_convention: true                 # Art. 54: enforceable as final judgment
+  electronic_signatures: "accepted"
+  electronic_filing: true
+  platform: "ICSID Filing Portal"
+  self_contained_enforcement: true       # No NY Convention needed
+
+# OANP protocol mapping — looser limits due to investment dispute complexity
+oanp_mapping:
+  phase_round_limits:
+    discovery: 6
+    generation: 5
+    bargaining: 14
+    convergence: 7
+  escalation_tiers:
+    - tier: "negotiation"
+      max_rounds: 14
+    - tier: "mediation"
+      max_rounds: 8
+    - tier: "arbitration"
+      max_rounds: 6
+  hard_deadline_rounds: 35
+  stagnation_window: 4
+  stagnation_threshold: 0.02

@@ -1,0 +1,165 @@
+# ICC Expedited Procedure Test Scenario
+# Tests the advanced mode with ICC institutional rules, escalation, and deadlines.
+
+title: "Cross-Border Supply Contract Dispute"
+description: "A manufacturing company and a supplier dispute over quality standards and pricing for a cross-border supply agreement. The dispute is administered under ICC Expedited Rules."
+
+# ADVANCED MODE — enables legal compliance engine
+mode: advanced
+
+# ICC institutional rules — expedited procedure
+institution:
+  framework: icc
+  procedure: expedited
+  claim_amount_usd: 1500000
+  governing_law: "English law"
+  seat: "London, UK"
+  language: en
+  document_standard: iba_rules
+
+# Three-tier escalation: negotiation → mediation → arbitration
+escalation:
+  tiers: [negotiation, mediation, arbitration]
+  negotiation_deadline_rounds: 8
+  mediation_deadline_rounds: 5
+  arbitration_deadline_rounds: 3
+  auto_escalate: true
+  stagnation_threshold: 0.03
+  cooling_off_rounds: 1
+
+# Protocol settings
+protocol:
+  architecture: mediated
+  max_rounds: 25
+
+mediator:
+  mode: facilitative
+  knowledge: caucus_only
+  intervention: at_impasse
+
+# Parties
+parties:
+  - id: manufacturer
+    name: "GlobalMfg Corp"
+    role: "Claimant (Buyer)"
+    interests:
+      - description: "Consistent product quality meeting ISO 9001 standards"
+        type: need
+        priority: 0.95
+        related_issues: [quality_standard]
+      - description: "Cost-effective pricing to maintain profit margins"
+        type: desire
+        priority: 0.8
+        related_issues: [unit_price]
+      - description: "Reliable delivery schedule for production planning"
+        type: need
+        priority: 0.85
+        related_issues: [delivery_schedule]
+      - description: "Long-term partnership stability"
+        type: desire
+        priority: 0.6
+        related_issues: [contract_duration]
+    batna:
+      description: "Switch to alternative supplier (SupplyChain Asia) — 15% higher cost but proven quality track record"
+      utility: 0.35
+      confidence: 0.6
+
+  - id: supplier
+    name: "PrecisionParts Ltd"
+    role: "Respondent (Seller)"
+    interests:
+      - description: "Fair pricing that covers increased raw material costs"
+        type: need
+        priority: 0.9
+        related_issues: [unit_price]
+      - description: "Flexible quality standards accounting for material variability"
+        type: desire
+        priority: 0.7
+        related_issues: [quality_standard]
+      - description: "Volume commitment for production planning"
+        type: need
+        priority: 0.85
+        related_issues: [volume_commitment]
+      - description: "Avoid reputational damage from quality dispute"
+        type: fear
+        priority: 0.75
+        related_issues: [quality_standard]
+    batna:
+      description: "Sell to domestic market at lower margins — lose the international contract but avoid compliance costs"
+      utility: 0.3
+      confidence: 0.5
+
+# Issues
+issues:
+  - id: unit_price
+    name: "Unit Price (USD)"
+    type: monetary
+    range: [12.50, 18.00]
+    divisible: true
+    description: "Price per unit in USD"
+
+  - id: quality_standard
+    name: "Quality Standard"
+    type: categorical
+    options:
+      - "ISO 9001 full compliance"
+      - "ISO 9001 with 2% tolerance"
+      - "Internal QC standard (supplier-defined)"
+      - "Joint quality committee review"
+    description: "Quality assurance standard for delivered parts"
+
+  - id: delivery_schedule
+    name: "Delivery Schedule"
+    type: categorical
+    options:
+      - "Weekly deliveries (JIT)"
+      - "Bi-weekly deliveries"
+      - "Monthly bulk deliveries"
+      - "Quarterly bulk with buffer stock"
+    description: "Frequency and method of delivery"
+
+  - id: volume_commitment
+    name: "Annual Volume Commitment"
+    type: monetary
+    range: [50000, 200000]
+    divisible: true
+    description: "Minimum annual order volume (units)"
+
+  - id: contract_duration
+    name: "Contract Duration"
+    type: categorical
+    options:
+      - "1 year with renewal option"
+      - "2 years fixed"
+      - "3 years with annual review"
+      - "5 years with price escalation clause"
+    description: "Duration of the supply agreement"
+
+# Objective criteria
+criteria:
+  - name: "Market Price Index"
+    source: market_data
+    applies_to: [unit_price]
+    reference_value: "$14.50-$16.00 per unit (industry average for comparable parts)"
+
+  - name: "ISO 9001:2015 Standard"
+    source: regulation
+    applies_to: [quality_standard]
+    reference_value: "International standard for quality management systems"
+
+  - name: "Industry Lead Time"
+    source: market_data
+    applies_to: [delivery_schedule]
+    reference_value: "2-3 week standard lead time for precision parts in this segment"
+
+# Constraints
+constraints:
+  - description: "Any agreement must comply with international trade regulations (WTO, EU customs)"
+    source: legal
+    applies_to: [unit_price, volume_commitment]
+    is_hard: true
+
+  - description: "Quality standard must be auditable by independent third party"
+    source: regulatory
+    applies_to: [quality_standard]
+    is_hard: true

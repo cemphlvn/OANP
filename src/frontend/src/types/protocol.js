@@ -97,6 +97,60 @@ export const LEGAL_MOVES = {
   impasse: ['request_mediation', 'invoke_batna']
 }
 
+/** Escalation tiers (advanced mode) */
+export const ESCALATION_TIERS = ['negotiation', 'mediation', 'arbitration']
+
+export const TIER_COLORS = {
+  negotiation: '#3b82f6',  // blue
+  mediation: '#f59e0b',    // amber
+  arbitration: '#ef4444'   // red
+}
+
+export const TIER_LABELS = {
+  negotiation: 'Negotiation',
+  mediation: 'Mediation',
+  arbitration: 'Arbitration'
+}
+
+/** Award types */
+export const AWARD_TYPES = {
+  consent_award: 'Consent Award',
+  final_award: 'Final Award',
+  partial_award: 'Partial Award',
+  interim_order: 'Interim Order',
+  default_award: 'Default Award'
+}
+
+/** Institution display names */
+export const INSTITUTION_LABELS = {
+  icc: 'ICC',
+  lcia: 'LCIA',
+  siac: 'SIAC',
+  hkiac: 'HKIAC',
+  aaa_icdr: 'AAA-ICDR',
+  scc: 'SCC',
+  cietac: 'CIETAC',
+  diac: 'DIAC',
+  icsid: 'ICSID',
+  wipo: 'WIPO',
+  jams: 'JAMS',
+  aiac: 'AIAC',
+  viac: 'VIAC',
+  dis: 'DIS',
+  cas: 'CAS',
+  pca: 'PCA',
+  uncitral: 'UNCITRAL',
+  custom: 'Custom'
+}
+
+/** Procedure types */
+export const PROCEDURE_LABELS = {
+  standard: 'Standard',
+  expedited: 'Expedited',
+  streamlined: 'Streamlined',
+  emergency: 'Emergency'
+}
+
 /** Event types from WebSocket */
 export const EVENT_TYPES = [
   'phase_change',
@@ -108,5 +162,8 @@ export const EVENT_TYPES = [
   'anchors_generated',
   'anchors_failed',
   'validation_error',
-  'error'
+  'error',
+  'tier_change',
+  'deadline_warning',
+  'stagnation_detected'
 ]

@@ -1,0 +1,123 @@
+institution:
+  id: "hkiac"
+  name: "Hong Kong International Arbitration Centre"
+  full_name: "Hong Kong International Arbitration Centre"
+  seat: "Hong Kong SAR, China"
+  rules_version: "2024"
+  rules_effective: "2024-06-01"
+  website: "https://www.hkiac.org"
+
+procedures:
+  standard:
+    response_deadline_days: 30           # Art. 5
+    arbitrator_appointment_days: 28
+    award_deadline_months: null          # No fixed deadline in standard
+    default_arbitrators: 1
+    terms_of_reference: false
+    scrutiny_of_awards: false
+    case_management_conference: true
+
+  expedited:
+    enabled: true
+    rule_reference: "Art. 42"
+    threshold_hkd: 25000000              # HKD 25M
+    auto_apply: true
+    opt_in: true
+    opt_out: true
+    sole_arbitrator: true
+    award_deadline_months: 6
+    reduced_fees: true
+
+  emergency:
+    enabled: true
+    rule_reference: "Art. 23"
+    appointment_days: 2
+    decision_days: 14
+    form: "order"
+    enforceable_as_award: false
+    deposit_hkd: 250000
+    opt_out: true
+
+  mediation:
+    enabled: true
+    rules: "HKIAC Mediation Rules"
+    med_arb: true
+    arb_med_arb: true
+
+time_limits:
+  - phase: "filing"
+    action: "respondent_response"
+    days: 30
+    article: "Art. 5"
+    extendable: true
+  - phase: "constitution"
+    action: "arbitrator_appointment"
+    days: 28
+    article: "Art. 7"
+    extendable: false
+  - phase: "emergency"
+    action: "emergency_arbitrator_appointment"
+    days: 2
+    article: "Art. 23"
+    extendable: false
+  - phase: "emergency"
+    action: "emergency_decision"
+    days: 14
+    article: "Art. 23"
+    extendable: false
+  - phase: "expedited"
+    action: "render_award"
+    months: 6
+    article: "Art. 42"
+    extendable: true
+    extendable_by: "hkiac"
+
+fees:
+  registration_hkd: 8000
+  fee_model: "ad_valorem"
+  max_arbitrator_rate_hkd_hr: 6500
+  expedited_reduced: true
+
+due_process:
+  equal_treatment: true
+  right_to_be_heard: true
+  right_to_present_case: true
+  language_requirements: true
+  arbitrator_disclosure: "iba_guidelines"
+  confidentiality: "default_confidential"
+  challenge_period_days: 15
+
+award_requirements:
+  writing: true
+  signatures: "all_or_majority_with_reason"
+  reasons: true
+  date: true
+  seat: true
+  delivery: "signed_copy_to_each_party"
+  scrutiny: false
+  correction_deadline_days: 30
+
+enforcement:
+  new_york_convention: true
+  singapore_convention: true
+  electronic_signatures: "accepted"
+  electronic_filing: true
+  platform: "HKIAC Online"
+
+# OANP protocol mapping
+oanp_mapping:
+  phase_round_limits:
+    discovery: 4
+    generation: 3
+    bargaining: 10
+    convergence: 5
+  escalation_tiers:
+    - tier: "negotiation"
+      max_rounds: 10
+    - tier: "mediation"
+      max_rounds: 6
+    - tier: "arbitration"
+      max_rounds: 4
+  hard_deadline_rounds: 25
+  stagnation_window: 3
+  stagnation_threshold: 0.02

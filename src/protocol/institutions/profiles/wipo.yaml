@@ -1,0 +1,136 @@
+institution:
+  id: "wipo"
+  name: "World Intellectual Property Organization"
+  full_name: "WIPO Arbitration and Mediation Center"
+  seat: "Geneva, Switzerland"
+  rules_version: "2014"
+  rules_effective: "2014-06-01"
+  website: "https://www.wipo.int/amc"
+
+procedures:
+  standard:
+    response_deadline_days: 30           # Art. 7
+    arbitrator_appointment_days: 30
+    award_deadline_months: null          # No fixed standard deadline
+    default_arbitrators: 1
+    terms_of_reference: false
+    scrutiny_of_awards: false
+    case_management_conference: true
+    ip_specialized: true                 # IP/tech dispute specialization
+
+  expedited:
+    enabled: true
+    rule_reference: "WIPO Expedited Arbitration Rules"
+    threshold_usd: null                  # No monetary threshold
+    auto_apply: false
+    opt_in: true
+    opt_out: false
+    sole_arbitrator: true
+    award_deadline_months: 4             # 3+1 months
+    hearing_deadline_days: 30            # Hearing within 30 days
+    max_hearing_days: 3
+    separate_rules: true
+    reduced_fees: true
+
+  emergency:
+    enabled: true
+    rule_reference: "Art. 49-57"
+    appointment_days: 2
+    decision_days: 14
+    form: "order"
+    enforceable_as_award: false
+    opt_out: true
+
+  mediation:
+    enabled: true
+    rules: "WIPO Mediation Rules"
+    med_arb: true
+    arb_med_arb: true
+    sme_discount_pct: 25                 # 25% SME discount
+
+time_limits:
+  - phase: "filing"
+    action: "respondent_response"
+    days: 30
+    article: "Art. 7"
+    extendable: true
+    condition: "standard"
+  - phase: "filing"
+    action: "respondent_response_expedited"
+    days: 20
+    article: "Expedited Rules Art. 7"
+    extendable: true
+    condition: "expedited_only"
+  - phase: "emergency"
+    action: "emergency_arbitrator_appointment"
+    days: 2
+    article: "Art. 49"
+    extendable: false
+  - phase: "expedited"
+    action: "hearing"
+    days: 30
+    article: "Expedited Rules"
+    from_event: "constitution"
+    extendable: false
+  - phase: "expedited"
+    action: "render_award"
+    months: 4
+    article: "Expedited Rules"
+    notes: "3 months + 1 month extension"
+    extendable: true
+    extendable_by: "wipo_center"
+
+fees:
+  registration_usd_standard: 0          # WIPO does not charge registration for standard
+  registration_usd_expedited: 0         # Zero registration fee for expedited
+  fee_model: "fixed_and_ad_valorem"
+  fixed_arbitrator_fee_usd: 20000       # For claims under USD 2.5M
+  fixed_fee_threshold_usd: 2500000
+  sme_discount_pct: 25
+  expedited_reduced: true
+
+due_process:
+  equal_treatment: true
+  right_to_be_heard: true
+  right_to_present_case: true
+  language_requirements: true
+  arbitrator_disclosure: "iba_guidelines"
+  confidentiality: "default_confidential"
+  challenge_period_days: 15
+  ip_expertise: true                     # Specialized IP arbitrator roster
+
+award_requirements:
+  writing: true
+  signatures: "all_or_majority_with_reason"
+  reasons: true
+  date: true
+  seat: true
+  delivery: "signed_copy_to_each_party"
+  scrutiny: false
+  correction_deadline_days: 30
+
+enforcement:
+  new_york_convention: true
+  singapore_convention: true
+  electronic_signatures: "accepted"
+  electronic_filing: true
+  platform: "WIPO eADR"
+
+# OANP protocol mapping
+oanp_mapping:
+  phase_round_limits:
+    discovery: 4
+    generation: 3
+    bargaining: 10
+    convergence: 5
+  escalation_tiers:
+    - tier: "negotiation"
+      max_rounds: 10
+    - tier: "mediation"
+      max_rounds: 7
+      notes: "Strong mediation tradition, 25% SME discount"
+    - tier: "arbitration"
+      max_rounds: 4
+  hard_deadline_rounds: 25
+  stagnation_window: 3
+  stagnation_threshold: 0.02

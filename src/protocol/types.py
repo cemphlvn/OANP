@@ -78,6 +78,58 @@ class MediatorIntervention(str, Enum):
     AT_IMPASSE = "at_impasse"        # Only when negotiation stalls or nears impasse
 
 
+class NegotiationMode(str, Enum):
+    """How the negotiation operates — streamlined (fast) vs advanced (legal compliance)."""
+    STREAMLINED = "streamlined"      # Current behavior: fast, Harvard principles, no legal overhead
+    ADVANCED = "advanced"            # Full legal compliance with institutional rules
+
+
+class EscalationTier(str, Enum):
+    """Multi-tier dispute resolution — UNCITRAL ODR three-stage model."""
+    NEGOTIATION = "negotiation"      # Tier 1: Direct party-to-party
+    MEDIATION = "mediation"          # Tier 2: Facilitated settlement
+    ARBITRATION = "arbitration"      # Tier 3: Binding resolution
+
+
+class ComplianceFramework(str, Enum):
+    """Institutional arbitration rules to follow in advanced mode."""
+    NONE = "none"
+    ICC = "icc"
+    LCIA = "lcia"
+    SIAC = "siac"
+    HKIAC = "hkiac"
+    AAA_ICDR = "aaa_icdr"
+    SCC = "scc"
+    CIETAC = "cietac"
+    DIAC = "diac"
+    ICSID = "icsid"
+    WIPO = "wipo"
+    JAMS = "jams"
+    AIAC = "aiac"
+    VIAC = "viac"
+    DIS = "dis"
+    CAS = "cas"
+    PCA = "pca"
+    UNCITRAL = "uncitral"
+    CUSTOM = "custom"
+
+
+class AwardType(str, Enum):
+    """Type of final resolution — affects enforceability path."""
+    CONSENT_AWARD = "consent_award"          # Settlement recorded as award (Arb-Med-Arb)
+    FINAL_AWARD = "final_award"              # Binding arbitral decision
+    PARTIAL_AWARD = "partial_award"          # Award on some issues
+    INTERIM_ORDER = "interim_order"          # Emergency/provisional measures
+    DEFAULT_AWARD = "default_award"          # Non-participation default
+
+
+class DocumentStandard(str, Enum):
+    """Document production standard — IBA vs Prague approach."""
+    NONE = "none"                            # Streamlined mode
+    IBA_RULES = "iba_rules"                  # IBA 2020 (common law, broader disclosure)
+    PRAGUE_RULES = "prague_rules"            # Prague Rules (civil law, minimal disclosure)
+
+
 # ---------------------------------------------------------------------------
 # Shared Domain Entities
 # ---------------------------------------------------------------------------
@@ -219,6 +271,69 @@ class PrivatePartyState(BaseModel):
 
 
 # ---------------------------------------------------------------------------
+# Legal Compliance Models (Advanced Mode)
+# ---------------------------------------------------------------------------
+
+class InstitutionConfig(BaseModel):
+    """Selected institutional rules for advanced mode."""
+    framework: ComplianceFramework = ComplianceFramework.NONE
+    procedure: str = "standard"                    # standard | expedited | streamlined | emergency
+    claim_amount_usd: Optional[float] = None
+    governing_law: Optional[str] = None
+    seat: Optional[str] = None
+    language: str = "en"
+    document_standard: DocumentStandard = DocumentStandard.NONE
+
+
+class EscalationPolicy(BaseModel):
+    """Multi-tier escalation — inspired by UNCITRAL ODR three-stage model."""
+    tiers: list[EscalationTier] = [EscalationTier.NEGOTIATION]
+    negotiation_deadline_rounds: int = 10
+    mediation_deadline_rounds: int = 6
+    arbitration_deadline_rounds: int = 4
+    stagnation_threshold: float = 0.02     # Min convergence improvement per round
+    auto_escalate: bool = True
+    cooling_off_rounds: int = 1
+
+
+class DeadlineConfig(BaseModel):
+    """Time-boxing inspired by expedited arbitration rules."""
+    phase_max_rounds: dict[str, int] = {}  # Per-phase round caps
+    hard_deadline_rounds: Optional[int] = None  # Global round cap
+    stagnation_window: int = 3             # Rounds to check for stagnation
+    stagnation_threshold: float = 0.02
+    non_participation_timeout_rounds: int = 2
+
+
+class ComplianceMetadata(BaseModel):
+    """Legal compliance tracking attached to a negotiation."""
+    mode: NegotiationMode = NegotiationMode.STREAMLINED
+    institution: Optional[InstitutionConfig] = None
+    escalation: Optional[EscalationPolicy] = None
+    deadlines: Optional[DeadlineConfig] = None
+    current_tier: EscalationTier = EscalationTier.NEGOTIATION
+    tier_history: list[dict] = []          # [{tier, entered_at_round, reason}]
+    due_process_log: list[dict] = []       # [{event, party_id, timestamp, detail}]
+
+
+class AwardRecord(BaseModel):
+    """Enforceable award/settlement — NYC Art IV, UNCITRAL Model Law Art 31."""
+    award_type: AwardType
+    date: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    seat: Optional[str] = None
+    governing_law: Optional[str] = None
+    institution: Optional[str] = None
+    parties: list[dict] = []               # [{party_id, name, role, authorized_by}]
+    terms: dict = {}                       # The agreement: issue_id -> value
+    reasons: str = ""                      # Reasoning/rationale
+    compliance_framework: Optional[str] = None
+    electronic_signatures: list[dict] = [] # [{party_id, timestamp, method}]
+    mediator_attestation: Optional[dict] = None  # Singapore Convention Art 4
+    integrity_hash: str = ""               # SHA-256 of terms
+    audit_trail_hash: str = ""             # SHA-256 of full move history
+
+
+# ---------------------------------------------------------------------------
 # Protocol State
 # ---------------------------------------------------------------------------
 
@@ -236,6 +351,8 @@ class ProtocolState(BaseModel):
     accepted_by: set[str] = set()        # party IDs that have accepted
     accepted_package_id: Optional[str] = None  # which package they accepted
     accepted_package_hash: Optional[str] = None  # hash of accepted issue_values for consistency
+    phase_round_limits: dict[str, int] = {}  # per-phase round caps (advanced mode)
+    escalation_tier: Optional[str] = None    # current escalation tier
 
 
 # ---------------------------------------------------------------------------
@@ -297,6 +414,10 @@ class NegotiationState(BaseModel):
 
     # Mediator state
     mediator: Optional[MediatorState] = None
+
+    # Legal compliance (advanced mode)
+    compliance: Optional[ComplianceMetadata] = None
+    award: Optional[AwardRecord] = None
 
     # Outcome
     agreement: Optional[OptionPackage] = None

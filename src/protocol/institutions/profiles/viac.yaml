@@ -1,0 +1,125 @@
+institution:
+  id: "viac"
+  name: "Vienna International Arbitral Centre"
+  full_name: "Vienna International Arbitral Centre of the Austrian Federal Economic Chamber"
+  seat: "Vienna, Austria"
+  rules_version: "2021"
+  rules_effective: "2021-07-01"
+  website: "https://www.viac.eu"
+
+procedures:
+  standard:
+    response_deadline_days: 30
+    arbitrator_appointment_days: 30
+    award_deadline_months: null          # No fixed standard deadline
+    default_arbitrators: 1               # Sole arbitrator default
+    terms_of_reference: false
+    scrutiny_of_awards: false
+    case_management_conference: true
+    advance_on_costs_days: 30            # Standard advance on costs deadline
+
+  expedited:
+    enabled: true
+    rule_reference: "Art. 45"
+    threshold_usd: null                  # No monetary threshold
+    auto_apply: false
+    opt_in: true                         # By consent only
+    opt_out: false
+    sole_arbitrator: true
+    advance_on_costs_days: 15            # Reduced advance deadline (vs 30)
+    reduced_fees: true
+
+  emergency:
+    enabled: true
+    rule_reference: "Art. 43"
+    appointment_hours: 48
+    decision_days: 14
+    form: "order"
+    enforceable_as_award: false
+    opt_out: true
+
+  mediation:
+    enabled: true
+    rules: "VIAC Mediation Rules"
+    med_arb: true
+    arb_med_arb: true
+    combined_rules: true                 # Combined arbitration+mediation rules
+    cross_credit_fees: true              # Cross-credit mediation fees
+
+time_limits:
+  - phase: "filing"
+    action: "respondent_response"
+    days: 30
+    article: "Art. 8"
+    extendable: true
+  - phase: "constitution"
+    action: "arbitrator_appointment"
+    days: 30
+    article: "Art. 17"
+    extendable: false
+  - phase: "emergency"
+    action: "emergency_arbitrator_appointment"
+    hours: 48
+    article: "Art. 43"
+    extendable: false
+  - phase: "emergency"
+    action: "emergency_decision"
+    days: 14
+    article: "Art. 43"
+    extendable: false
+  - phase: "expedited"
+    action: "advance_on_costs"
+    days: 15
+    article: "Art. 45"
+    notes: "Reduced from 30 days standard"
+
+fees:
+  registration_eur_min: 3000
+  fee_model: "ad_valorem"
+  cross_credit_mediation: true           # Mediation fees credited against arbitration
+  expedited_reduced: true
+
+due_process:
+  equal_treatment: true
+  right_to_be_heard: true
+  right_to_present_case: true
+  language_requirements: true
+  arbitrator_disclosure: "iba_guidelines"
+  confidentiality: "default_confidential"
+  challenge_period_days: 14
+
+award_requirements:
+  writing: true
+  signatures: "all_or_majority_with_reason"
+  reasons: true
+  date: true
+  seat: true
+  delivery: "signed_copy_to_each_party"
+  scrutiny: false
+  correction_deadline_days: 30
+
+enforcement:
+  new_york_convention: true
+  singapore_convention: false
+  electronic_signatures: "accepted"
+  electronic_filing: true
+  platform: "VIAC Online"
+
+# OANP protocol mapping
+oanp_mapping:
+  phase_round_limits:
+    discovery: 4
+    generation: 3
+    bargaining: 10
+    convergence: 5
+  escalation_tiers:
+    - tier: "negotiation"
+      max_rounds: 10
+    - tier: "mediation"
+      max_rounds: 7
+      notes: "Combined arb+med rules, cross-credit fees incentivize mediation"
+    - tier: "arbitration"
+      max_rounds: 4
+  hard_deadline_rounds: 25
+  stagnation_window: 3
+  stagnation_threshold: 0.02

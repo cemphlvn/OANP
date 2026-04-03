@@ -1,0 +1,133 @@
+institution:
+  id: "aiac"
+  name: "Asian International Arbitration Centre"
+  full_name: "Asian International Arbitration Centre"
+  seat: "Kuala Lumpur, Malaysia"
+  rules_version: "2021"
+  rules_effective: "2021-08-01"
+  website: "https://www.aiac.world"
+  established_by: "AALCO Treaty"         # Treaty-established institution
+
+procedures:
+  standard:
+    response_deadline_days: 30
+    arbitrator_appointment_days: 30
+    award_deadline_months: null          # No fixed standard deadline
+    default_arbitrators: 1
+    terms_of_reference: false
+    scrutiny_of_awards: false
+    case_management_conference: true
+
+  fast_track:
+    enabled: true
+    rule_reference: "Rule 8 (Fast Track)"
+    threshold_usd: 500000               # USD 500K (international)
+    auto_apply: true
+    opt_in: true
+    opt_out: true
+    sole_arbitrator: true
+    total_days: 180                      # 90 days proceedings + 90 days award
+    proceedings_days: 90
+    award_days: 90
+    fixed_fees: true                     # Per Schedule 1
+    reduced_fees: true
+
+  emergency:
+    enabled: true
+    rule_reference: "Rule 19"
+    appointment_hours: 48
+    decision_days: 14
+    form: "order"
+    enforceable_as_award: false
+    opt_out: true
+
+  mediation:
+    enabled: true
+    rules: "AIAC Mediation Rules"
+    med_arb: true
+    arb_med_arb: false
+
+time_limits:
+  - phase: "filing"
+    action: "respondent_response"
+    days: 30
+    article: "Rule 3"
+    extendable: true
+  - phase: "constitution"
+    action: "arbitrator_appointment"
+    days: 30
+    article: "Rule 6"
+    extendable: false
+  - phase: "emergency"
+    action: "emergency_arbitrator_appointment"
+    hours: 48
+    article: "Rule 19"
+    extendable: false
+  - phase: "emergency"
+    action: "emergency_decision"
+    days: 14
+    article: "Rule 19"
+    extendable: false
+  - phase: "fast_track"
+    action: "proceedings_complete"
+    days: 90
+    article: "Rule 8"
+    extendable: true
+    extendable_by: "aiac_director"
+  - phase: "fast_track"
+    action: "render_award"
+    days: 90
+    article: "Rule 8"
+    from_event: "close_of_proceedings"
+    extendable: true
+    extendable_by: "aiac_director"
+
+fees:
+  registration_usd: "per_schedule"
+  fee_model: "ad_valorem"
+  fast_track_fees: "fixed_per_schedule_1"
+  expedited_reduced: true
+
+due_process:
+  equal_treatment: true
+  right_to_be_heard: true
+  right_to_present_case: true
+  language_requirements: true
+  arbitrator_disclosure: "iba_guidelines"
+  confidentiality: "default_confidential"
+  challenge_period_days: 14
+
+award_requirements:
+  writing: true
+  signatures: "all_or_majority_with_reason"
+  reasons: true
+  date: true
+  seat: true
+  delivery: "signed_copy_to_each_party"
+  scrutiny: false
+  correction_deadline_days: 30
+
+enforcement:
+  new_york_convention: true
+  singapore_convention: false
+  electronic_signatures: "accepted"
+  electronic_filing: true
+  platform: "AIAC Online"
+
+# OANP protocol mapping — tighter limits for fast track focus
+oanp_mapping:
+  phase_round_limits:
+    discovery: 3
+    generation: 2
+    bargaining: 8
+    convergence: 4
+  escalation_tiers:
+    - tier: "negotiation"
+      max_rounds: 8
+    - tier: "mediation"
+      max_rounds: 5
+    - tier: "arbitration"
+      max_rounds: 3
+  hard_deadline_rounds: 20
+  stagnation_window: 2
+  stagnation_threshold: 0.02

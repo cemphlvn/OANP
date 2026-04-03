@@ -1,0 +1,164 @@
+institution:
+  id: "uncitral"
+  name: "UNCITRAL"
+  full_name: "United Nations Commission on International Trade Law"
+  seat: "Vienna, Austria"
+  rules_version: "2021"
+  rules_effective: "2021-09-21"
+  supplementary_instruments:
+    - "UNCITRAL Expedited Arbitration Rules 2021"
+    - "Model Law on Automated Contracting (MLAC) 2024"
+    - "ODR Technical Notes 2016/2017"
+    - "Singapore Convention on Mediation 2018"
+    - "Electronic Communications Convention Art. 12"
+  website: "https://uncitral.un.org"
+  type: "non_administered"
+  appointing_authority: "PCA or party-designated"
+
+procedures:
+  standard:
+    response_deadline_days: 30           # Art. 3: Notice of Arbitration
+    arbitrator_appointment_days: 30      # Art. 8-10
+    award_deadline_months: null          # Art. 34: No specific time limit
+    default_arbitrators: 3               # Art. 7
+    terms_of_reference: false
+    scrutiny_of_awards: false
+    case_management_conference: false
+    non_administered: true
+
+  expedited:
+    enabled: true
+    rule_reference: "UNCITRAL Expedited Arbitration Rules 2021"
+    auto_apply: false
+    opt_in: true                         # Opt-in only
+    opt_out: true
+    sole_arbitrator: true
+    award_deadline_months: 6
+    time_limits_halved: true             # All time limits halved
+    reasons: "summary"                   # Summary reasons only
+    documents_only: false
+    reduced_fees: false                  # No institutional fees to reduce
+
+  emergency:
+    enabled: false                       # No emergency arbitrator in UNCITRAL rules
+    notes: "Parties may apply to national courts for interim measures under Art. 26"
+
+  mediation:
+    enabled: true
+    rules: "Singapore Convention on Mediation 2018"
+    med_arb: false
+    arb_med_arb: false
+    cross_border_enforcement: true       # Via Singapore Convention
+
+time_limits:
+  - phase: "filing"
+    action: "notice_of_arbitration"
+    article: "Art. 3"
+    extendable: false
+  - phase: "filing"
+    action: "respondent_response"
+    days: 30
+    article: "Art. 4"
+    extendable: true
+  - phase: "constitution"
+    action: "arbitrator_appointment"
+    days: 30
+    article: "Art. 8-10"
+    extendable: false
+  - phase: "award"
+    action: "render_award"
+    months: null
+    article: "Art. 34"
+    notes: "No specific time limit in standard rules"
+  - phase: "expedited"
+    action: "render_award"
+    months: 6
+    article: "Expedited Rules Art. 16"
+    extendable: true
+    extendable_by: "appointing_authority"
+    condition: "expedited_only"
+
+fees:
+  registration_usd: 0                   # No institutional fees
+  fee_model: "none"
+  notes: "Non-administered; PCA or other appointing authority may charge separately"
+  appointing_authority_fee: "varies"
+
+due_process:
+  equal_treatment: true
+  right_to_be_heard: true
+  right_to_present_case: true
+  language_requirements: true
+  arbitrator_disclosure: "iba_guidelines"
+  confidentiality: "not_default"         # No default confidentiality in UNCITRAL rules
+  challenge_period_days: 15
+  electronic_communications: true        # Electronic Communications Convention Art. 12
+
+award_requirements:
+  writing: true
+  signatures: "all_or_majority_with_reason"
+  reasons: true
+  reasons_expedited: "summary"           # Summary reasons in expedited
+  date: true
+  seat: true
+  delivery: "signed_copy_to_each_party"
+  scrutiny: false
+  correction_deadline_days: 30
+
+enforcement:
+  new_york_convention: true
+  singapore_convention: true             # For mediated settlements
+  electronic_signatures: "accepted"      # Electronic Communications Convention Art. 12
+  electronic_filing: false               # Non-administered, no institutional platform
+  platform: null
+
+# Automated contracting and ODR instruments
+automated_contracting:
+  mlac_2024:
+    non_discrimination: "Art. 5 — contracts not denied validity due to automated formation"
+    attribution: "Art. 7 — automated actions attributed to deploying person"
+    unexpected_actions: "Art. 8 — party not bound if action reasonably unexpected AND other party knew"
+    information_requirements: "Art. 9 — disclosure obligations for automated systems"
+  odr_technical_notes:
+    stage_1: "Technology-enabled negotiation"
+    stage_2: "Facilitated settlement by neutral"
+    stage_3: "Final binding resolution"
+    escalation_triggers:
+      - "non_participation"
+      - "failure_to_settle_within_reasonable_time"
+  singapore_convention:
+    scope: "International commercial mediated settlements"
+    article_4_requirements:
+      - "Settlement agreement signed by parties"
+      - "Evidence settlement resulted from mediation"
+      - "Mediator signature or attestation by institution"
+    article_5_refusal_grounds:
+      - "Party incapacity"
+      - "Agreement null/void/inoperative"
+      - "Agreement not binding or not final"
+      - "Obligations already performed"
+      - "Not clear or comprehensible"
+      - "Mediator misconduct or non-disclosure"
+      - "Public policy violation"
+      - "Subject matter not mediable"
+
+# OANP protocol mapping
+oanp_mapping:
+  phase_round_limits:
+    discovery: 5
+    generation: 4
+    bargaining: 12
+    convergence: 6
+  escalation_tiers:
+    - tier: "negotiation"
+      max_rounds: 12
+      notes: "ODR stage 1 — technology-enabled negotiation"
+    - tier: "mediation"
+      max_rounds: 8
+      notes: "ODR stage 2 — facilitated settlement; Singapore Convention enforcement"
+    - tier: "arbitration"
+      max_rounds: 5
+      notes: "ODR stage 3 — final binding resolution"
+  hard_deadline_rounds: 30
+  stagnation_window: 4
+  stagnation_threshold: 0.02

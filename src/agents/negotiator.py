@@ -193,6 +193,10 @@ def build_negotiator_prompt(
         legal_moves=", ".join(m.value for m in legal_moves),
     )
 
+    # Advanced mode: append legal compliance context
+    if state.compliance and state.compliance.mode.value == "advanced":
+        system += _build_compliance_context(state)
+
     # Build move history from scoped view (other parties' reasoning stripped)
     scoped_moves = scoped.get("move_history", [])[-20:]
     history_lines = []
@@ -302,3 +306,48 @@ async def run_negotiator(
         references=response.references,
         reasoning=response.reasoning or None,
     )
+
+
+def _build_compliance_context(state: NegotiationState) -> str:
+    """Build legal compliance context to append to negotiator system prompt (advanced mode)."""
+    parts = ["\n\n## Legal Compliance Context (Advanced Mode)\n"]
+    c = state.compliance
+
+    if c.institution:
+        parts.append(f"**Institutional Rules:** {c.institution.framework.value.upper()}")
+        parts.append(f"**Procedure:** {c.institution.procedure}")
+        if c.institution.governing_law:
+            parts.append(f"**Governing Law:** {c.institution.governing_law}")
+        if c.institution.seat:
+            parts.append(f"**Seat:** {c.institution.seat}")
+
+    if c.escalation:
+        tier_str = " → ".join(t.value.upper() for t in c.escalation.tiers)
+        parts.append(f"\n**Escalation Path:** {tier_str}")
+        parts.append(f"**Current Tier:** {c.current_tier.value.upper()}")
+        if c.tier_history:
+            parts.append(f"**Escalation Events:** {len(c.tier_history)} tier transitions so far")
+
+    if c.deadlines:
+        limits = c.deadlines.phase_max_rounds
+        if limits:
+            current_phase = state.protocol.phase.value
+            limit = limits.get(current_phase)
+            if limit:
+                remaining = max(0, limit - state.protocol.round)
+                parts.append(f"\n**Phase Deadline:** {remaining} rounds remaining in {current_phase}")
+        if c.deadlines.hard_deadline_rounds:
+            remaining_total = max(0, c.deadlines.hard_deadline_rounds - state.protocol.total_rounds)
+            parts.append(f"**Hard Deadline:** {remaining_total} rounds remaining overall")
+
+    parts.append(
+        "\n**Legal Awareness Instructions:**\n"
+        "- You are operating under formal institutional arbitration rules.\n"
+        "- Be aware of time pressure — deadlines will trigger automatic escalation.\n"
+        "- If the negotiation escalates to arbitration, an arbitrator will impose a binding decision.\n"
+        "- Reaching a negotiated settlement is almost always better than an imposed award.\n"
+        "- Frame your arguments using objective criteria recognized by the institutional framework.\n"
+        "- Ensure any agreement you accept could be enforceable under the New York Convention."
+    )
+
+    return "\n".join(parts)

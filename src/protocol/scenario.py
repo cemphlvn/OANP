@@ -15,7 +15,14 @@ import yaml
 from .types import (
     BATNA,
     Architecture,
+    ComplianceFramework,
+    ComplianceMetadata,
     Constraint,
+    DeadlineConfig,
+    DocumentStandard,
+    EscalationPolicy,
+    EscalationTier,
+    InstitutionConfig,
     Interest,
     InterestType,
     Issue,
@@ -24,6 +31,7 @@ from .types import (
     MediatorKnowledge,
     MediatorMode,
     MediatorState,
+    NegotiationMode,
     NegotiationState,
     ObjectiveCriterion,
     Party,
@@ -149,6 +157,86 @@ def load_scenario_from_dict(raw: dict[str, Any]) -> NegotiationState:
         )
         mediator = MediatorState(config=mediator_config)
 
+    # Legal compliance (advanced mode) — all optional, backward compatible
+    compliance = None
+    mode_str = raw.get("mode", "streamlined")
+    if mode_str == "advanced" or "institution" in raw or "escalation" in raw:
+        mode = NegotiationMode(mode_str) if mode_str in ("streamlined", "advanced") else NegotiationMode.ADVANCED
+
+        # Institution config
+        institution = None
+        inst_raw = raw.get("institution", {})
+        if inst_raw:
+            institution = InstitutionConfig(
+                framework=ComplianceFramework(inst_raw.get("framework", "none")),
+                procedure=inst_raw.get("procedure", "standard"),
+                claim_amount_usd=inst_raw.get("claim_amount_usd"),
+                governing_law=inst_raw.get("governing_law"),
+                seat=inst_raw.get("seat"),
+                language=inst_raw.get("language", "en"),
+                document_standard=DocumentStandard(inst_raw.get("document_standard", "none")),
+            )
+
+        # Escalation policy
+        escalation = None
+        esc_raw = raw.get("escalation", {})
+        if esc_raw:
+            escalation = EscalationPolicy(
+                tiers=[EscalationTier(t) for t in esc_raw.get("tiers", ["negotiation"])],
+                negotiation_deadline_rounds=esc_raw.get("negotiation_deadline_rounds", 10),
+                mediation_deadline_rounds=esc_raw.get("mediation_deadline_rounds", 6),
+                arbitration_deadline_rounds=esc_raw.get("arbitration_deadline_rounds", 4),
+                stagnation_threshold=esc_raw.get("stagnation_threshold", 0.02),
+                auto_escalate=esc_raw.get("auto_escalate", True),
+                cooling_off_rounds=esc_raw.get("cooling_off_rounds", 1),
+            )
+
+        # Deadline config
+        deadlines = None
+        dl_raw = raw.get("deadlines", {})
+        if dl_raw:
+            deadlines = DeadlineConfig(
+                phase_max_rounds=dl_raw.get("phase_max_rounds", {}),
+                hard_deadline_rounds=dl_raw.get("hard_deadline_rounds"),
+                stagnation_window=dl_raw.get("stagnation_window", 3),
+                stagnation_threshold=dl_raw.get("stagnation_threshold", 0.02),
+                non_participation_timeout_rounds=dl_raw.get("non_participation_timeout_rounds", 2),
+            )
+
+        # Auto-populate from institution profile if available
+        if institution and institution.framework != ComplianceFramework.NONE:
+            try:
+                from .institutions import get_oanp_defaults
+                defaults = get_oanp_defaults(
+                    institution.framework.value,
+                    procedure=institution.procedure,
+                    claim_amount_usd=institution.claim_amount_usd,
+                )
+                # Fill in deadline config from profile if not explicitly set
+                if not deadlines:
+                    deadlines = DeadlineConfig(
+                        phase_max_rounds=defaults.get("phase_round_limits", {}),
+                        hard_deadline_rounds=defaults.get("hard_deadline_rounds"),
+                        stagnation_window=defaults.get("stagnation_window", 3),
+                        stagnation_threshold=defaults.get("stagnation_threshold", 0.02),
+                    )
+                # Fill in escalation from profile if not explicitly set
+                if not escalation and defaults.get("escalation_tiers"):
+                    tier_list = [EscalationTier(t["tier"]) for t in defaults["escalation_tiers"]]
+                    escalation = EscalationPolicy(tiers=tier_list)
+                # Update protocol with phase round limits
+                if deadlines and deadlines.phase_max_rounds:
+                    protocol.phase_round_limits = deadlines.phase_max_rounds
+            except (FileNotFoundError, Exception):
+                pass  # Profile not found — use explicit config only
+
+        compliance = ComplianceMetadata(
+            mode=mode,
+            institution=institution,
+            escalation=escalation,
+            deadlines=deadlines,
+        )
+
     return NegotiationState(
         parties=parties,
         issues=issues,
@@ -157,4 +245,5 @@ def load_scenario_from_dict(raw: dict[str, Any]) -> NegotiationState:
         protocol=protocol,
         private_states=private_states,
         mediator=mediator,
+        compliance=compliance,
     )

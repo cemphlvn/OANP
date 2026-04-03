@@ -7,8 +7,20 @@
         <span class="ss-dot" :style="{ background: phaseColor }"></span>
         {{ phase?.toUpperCase() }}
       </span>
+      <!-- Tier badge (advanced mode) -->
+      <template v-if="isAdvancedMode && escalationTier">
+        <span class="ss-sep"></span>
+        <span
+          class="ss-tier-badge"
+          :style="{ background: tierColor, color: '#FFF' }"
+        >
+          {{ tierLabel }}
+        </span>
+      </template>
       <span class="ss-sep"></span>
-      <span class="ss-stat">Round <strong>{{ round }}</strong><span v-if="totalRounds">/{{ totalRounds }}</span></span>
+      <span class="ss-stat" :class="deadlineUrgency">
+        Round <strong>{{ round }}</strong><span v-if="roundLimit">/{{ roundLimit }}</span>
+      </span>
       <span class="ss-sep"></span>
       <span class="ss-stat">Moves <strong>{{ moveCount }}</strong></span>
       <span class="ss-sep"></span>
@@ -23,6 +35,14 @@
         <div class="ss-convergence-fill" :style="{ width: convergence + '%' }"></div>
       </div>
       <span class="ss-convergence-pct">{{ convergence }}%</span>
+      <!-- Compliance sidebar toggle (advanced mode) -->
+      <button
+        v-if="isAdvancedMode"
+        class="ss-compliance-btn"
+        :class="{ active: complianceOpen }"
+        @click="$emit('toggleCompliance')"
+        title="Toggle compliance panel"
+      >&#9878;</button>
       <button
         v-if="outcome"
         class="ss-analysis-btn"
@@ -36,7 +56,7 @@
 
 <script setup>
 import { computed } from 'vue'
-import { PHASE_COLORS } from '@/types/protocol'
+import { PHASE_COLORS, TIER_COLORS, TIER_LABELS } from '@/types/protocol'
 
 const props = defineProps({
   phase: String,
@@ -46,12 +66,38 @@ const props = defineProps({
   resolvedCount: { type: Number, default: 0 },
   totalIssues: { type: Number, default: 0 },
   convergence: { type: Number, default: 0 },
-  outcome: { type: String, default: null }
+  outcome: { type: String, default: null },
+  // Advanced mode props
+  isAdvancedMode: { type: Boolean, default: false },
+  escalationTier: { type: String, default: null },
+  tierDeadline: { type: Number, default: null },
+  complianceOpen: { type: Boolean, default: false },
+  stagnationDetected: { type: Boolean, default: false },
 })
 
-defineEmits(['viewAnalysis'])
+defineEmits(['viewAnalysis', 'toggleCompliance'])
 
 const phaseColor = computed(() => PHASE_COLORS[props.phase] || '#999')
+const tierColor = computed(() => TIER_COLORS[props.escalationTier] || '#999')
+const tierLabel = computed(() => {
+  const idx = ['negotiation', 'mediation', 'arbitration'].indexOf(props.escalationTier) + 1
+  const label = TIER_LABELS[props.escalationTier] || props.escalationTier
+  return `TIER ${idx}: ${label.toUpperCase()}`
+})
+
+const roundLimit = computed(() => {
+  if (props.tierDeadline) return props.tierDeadline
+  if (props.totalRounds) return props.totalRounds
+  return null
+})
+
+const deadlineUrgency = computed(() => {
+  if (!roundLimit.value) return ''
+  const remaining = roundLimit.value - props.round
+  if (remaining <= 1) return 'ss-deadline-critical'
+  if (remaining <= 2) return 'ss-deadline-warning'
+  return ''
+})
 </script>
 
 <style scoped>
@@ -121,4 +167,44 @@ const phaseColor = computed(() => PHASE_COLORS[props.phase] || '#999')
 }
 
 .ss-analysis-btn:hover { background: var(--accent); }
+
+/* Tier badge (advanced mode) */
+.ss-tier-badge {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  padding: 2px 8px;
+  border-radius: 3px;
+  white-space: nowrap;
+}
+
+/* Deadline urgency */
+.ss-deadline-warning { color: #f59e0b !important; }
+.ss-deadline-warning strong { color: #f59e0b !important; }
+.ss-deadline-critical { color: #ef4444 !important; }
+.ss-deadline-critical strong { color: #ef4444 !important; animation: pulse-deadline 1s infinite; }
+
+@keyframes pulse-deadline {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* Compliance toggle */
+.ss-compliance-btn {
+  background: transparent;
+  border: 1px solid #E0E0E0;
+  color: #666;
+  width: 28px;
+  height: 28px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+}
+.ss-compliance-btn:hover { border-color: #999; color: #000; }
+.ss-compliance-btn.active { background: #000; color: #FFF; border-color: #000; }
 </style>

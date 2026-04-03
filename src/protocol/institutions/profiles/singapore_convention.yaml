@@ -1,0 +1,123 @@
+institution:
+  id: "singapore_convention"
+  name: "Singapore Convention on Mediation"
+  full_name: "United Nations Convention on International Settlement Agreements Resulting from Mediation"
+  seat: null                             # Not an institution — international treaty
+  type: "enforcement_framework"          # Not an arbitration institution
+  adopted: "2018-12-20"
+  opened_for_signature: "2019-08-07"
+  entry_into_force: "2020-09-12"
+  signatories: 46
+  website: "https://www.singaporeconvention.org"
+
+procedures:
+  standard:
+    scope: "international_commercial"
+    applies_to: "settlement_agreements_from_mediation"
+    excludes:
+      - "consumer_transactions"
+      - "family_law"
+      - "employment_law"
+      - "court_approved_settlements"
+      - "arbitral_awards"
+
+  expedited:
+    enabled: false
+    notes: "Not applicable — enforcement framework, not dispute resolution procedure"
+
+  emergency:
+    enabled: false
+    notes: "Not applicable — enforcement framework"
+
+  mediation:
+    enabled: true
+    notes: "Framework for enforcing mediation settlement agreements"
+    enforcement_mechanism: true
+
+time_limits:
+  - phase: "enforcement"
+    action: "application_for_relief"
+    article: "Art. 4"
+    notes: "No fixed time limit; subject to domestic limitation periods"
+  - phase: "enforcement"
+    action: "court_decision"
+    article: "Art. 4-5"
+    notes: "Subject to domestic procedural timelines"
+
+fees:
+  registration_usd: null                 # No registration — treaty framework
+  fee_model: null
+  notes: "Subject to domestic court filing fees"
+
+due_process:
+  equal_treatment: true
+  right_to_be_heard: true
+  right_to_present_case: true
+  language_requirements: false           # Subject to domestic law
+  confidentiality: "party_agreement"
+
+# Art. 4 — Requirements for reliance on settlement agreement
+art_4_requirements:
+  signed_by_parties: true
+  resulted_from_mediation: true
+  evidence_of_mediation:
+    - "mediator_signature_on_agreement"
+    - "mediator_attestation"
+    - "administering_institution_attestation"
+    - "other_acceptable_evidence"
+  electronic_signatures: "accepted"      # Art. 4.2
+
+# Art. 5 — Grounds for refusing to grant relief
+art_5_refusal_grounds:
+  party_grounds:
+    - "party_incapacity"
+    - "agreement_null_void_inoperative"
+    - "agreement_not_binding_or_final"
+    - "agreement_subsequently_modified"
+    - "obligations_performed"
+    - "obligations_not_clear"
+  mediator_grounds:
+    - "serious_mediator_breach_of_standards"
+    - "mediator_failed_to_disclose_impartiality"
+  public_policy:
+    - "contrary_to_public_policy"
+    - "subject_matter_not_mediable"
+
+award_requirements:
+  writing: true
+  signatures: "all_parties"
+  reasons: false                         # Settlement agreement, not award
+  date: true
+  seat: false                            # International — no seat requirement
+  delivery: "party_copies"
+
+enforcement:
+  new_york_convention: false             # Separate from NY Convention
+  singapore_convention: true             # This IS the Singapore Convention
+  electronic_signatures: "accepted"      # Art. 4.2
+  electronic_filing: "subject_to_domestic_law"
+  cross_border: true
+  contracting_states: 46
+  reservations_permitted:
+    - "Art. 8.1(a): apply only with party consent"
+    - "Art. 8.1(b): apply to government party agreements only with consent"
+
+# OANP protocol mapping — mediation-focused, no arbitration tier
+oanp_mapping:
+  phase_round_limits:
+    discovery: 4
+    generation: 3
+    bargaining: 12
+    convergence: 6
+  escalation_tiers:
+    - tier: "negotiation"
+      max_rounds: 12
+    - tier: "mediation"
+      max_rounds: 10
+      notes: "Convention incentivizes mediation with direct enforcement"
+    - tier: "arbitration"
+      max_rounds: 0
+      notes: "Not applicable — mediation enforcement framework"
+  hard_deadline_rounds: 28
+  stagnation_window: 3
+  stagnation_threshold: 0.02

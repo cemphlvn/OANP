@@ -1,0 +1,127 @@
+institution:
+  id: "cietac"
+  name: "China International Economic and Trade Arbitration Commission"
+  full_name: "China International Economic and Trade Arbitration Commission"
+  seat: "Beijing, China"
+  rules_version: "2024"
+  rules_effective: "2024-01-01"
+  website: "https://www.cietac.org"
+
+procedures:
+  standard:
+    response_deadline_days: 15           # Shorter than most institutions
+    arbitrator_appointment_days: 15
+    award_deadline_months: 6
+    default_arbitrators: 3               # Three-member tribunal default
+    terms_of_reference: false
+    scrutiny_of_awards: false
+    case_management_conference: true
+    early_dismissal: true                # Art. 50
+
+  summary:
+    enabled: true
+    rule_reference: "Chapter IV (Summary Procedure)"
+    threshold_rmb: 5000000               # RMB 5M
+    auto_apply: true
+    opt_in: true
+    opt_out: true
+    sole_arbitrator: true
+    award_deadline_months: 3
+    defence_deadline_days: 20
+    reduced_fees: true
+
+  emergency:
+    enabled: true
+    rule_reference: "Art. 23"
+    appointment_hours: 48
+    decision_days: 15
+    form: "order"
+    enforceable_as_award: false
+    opt_out: true
+
+  mediation:
+    enabled: true
+    rules: "CIETAC Mediation Rules"
+    med_arb: true
+    arb_med_arb: true
+
+time_limits:
+  - phase: "filing"
+    action: "respondent_response"
+    days: 15
+    article: "Art. 14"
+    extendable: true
+  - phase: "constitution"
+    action: "arbitrator_appointment"
+    days: 15
+    article: "Art. 27"
+    extendable: false
+  - phase: "summary"
+    action: "respondent_defence"
+    days: 20
+    article: "Chapter IV"
+    extendable: true
+  - phase: "summary"
+    action: "render_award"
+    months: 3
+    article: "Chapter IV"
+    extendable: true
+    extendable_by: "cietac"
+  - phase: "award"
+    action: "render_award"
+    months: 6
+    article: "Art. 48"
+    from_event: "constitution"
+    extendable: true
+    extendable_by: "cietac"
+
+fees:
+  registration_rmb: 10000
+  fee_model: "ad_valorem"
+  fee_cap_rmb: 3000000000               # RMB 3B cap
+  expedited_reduced: true
+
+due_process:
+  equal_treatment: true
+  right_to_be_heard: true
+  right_to_present_case: true
+  language_requirements: true
+  arbitrator_disclosure: "cietac_rules"
+  confidentiality: "default_confidential"
+  challenge_period_days: 15
+  early_dismissal: true                  # Art. 50
+
+award_requirements:
+  writing: true
+  signatures: "all_or_majority_with_reason"
+  reasons: true
+  date: true
+  seat: true
+  delivery: "signed_copy_to_each_party"
+  scrutiny: false
+  correction_deadline_days: 30
+
+enforcement:
+  new_york_convention: true
+  singapore_convention: false
+  electronic_signatures: "accepted"
+  electronic_filing: true
+  platform: "CIETAC Online"
+
+# OANP protocol mapping
+oanp_mapping:
+  phase_round_limits:
+    discovery: 3
+    generation: 2
+    bargaining: 8
+    convergence: 4
+  escalation_tiers:
+    - tier: "negotiation"
+      max_rounds: 8
+    - tier: "mediation"
+      max_rounds: 5
+    - tier: "arbitration"
+      max_rounds: 3
+  hard_deadline_rounds: 20
+  stagnation_window: 2
+  stagnation_threshold: 0.02

@@ -1,0 +1,1232 @@
+{
+  "session_id": "neg_1c4c0da5789c",
+  "scenario_name": "GlobalMfg Corp vs PrecisionParts Ltd",
+  "description": "2 parties, 5 issues, agreement",
+  "parties": [
+    {
+      "id": "manufacturer",
+      "name": "GlobalMfg Corp",
+      "role": "Claimant (Buyer)"
+    },
+    {
+      "id": "supplier",
+      "name": "PrecisionParts Ltd",
+      "role": "Respondent (Seller)"
+    }
+  ],
+  "issues": [
+    {
+      "id": "unit_price",
+      "name": "Unit Price (USD)",
+      "description": "Price per unit in USD",
+      "issue_type": "monetary",
+      "options": [],
+      "range": [
+        12.5,
+        18.0
+      ],
+      "is_divisible": true
+    },
+    {
+      "id": "quality_standard",
+      "name": "Quality Standard",
+      "description": "Quality assurance standard for delivered parts",
+      "issue_type": "categorical",
+      "options": [
+        "ISO 9001 full compliance",
+        "ISO 9001 with 2% tolerance",
+        "Internal QC standard (supplier-defined)",
+        "Joint quality committee review"
+      ],
+      "range": null,
+      "is_divisible": false
+    },
+    {
+      "id": "delivery_schedule",
+      "name": "Delivery Schedule",
+      "description": "Frequency and method of delivery",
+      "issue_type": "categorical",
+      "options": [
+        "Weekly deliveries (JIT)",
+        "Bi-weekly deliveries",
+        "Monthly bulk deliveries",
+        "Quarterly bulk with buffer stock"
+      ],
+      "range": null,
+      "is_divisible": false
+    },
+    {
+      "id": "volume_commitment",
+      "name": "Annual Volume Commitment",
+      "description": "Minimum annual order volume (units)",
+      "issue_type": "monetary",
+      "options": [],
+      "range": [
+        50000.0,
+        200000.0
+      ],
+      "is_divisible": true
+    },
+    {
+      "id": "contract_duration",
+      "name": "Contract Duration",
+      "description": "Duration of the supply agreement",
+      "issue_type": "categorical",
+      "options": [
+        "1 year with renewal option",
+        "2 years fixed",
+        "3 years with annual review",
+        "5 years with price escalation clause"
+      ],
+      "range": null,
+      "is_divisible": false
+    }
+  ],
+  "criteria": [
+    {
+      "id": "a549c6fa",
+      "name": "Market Price Index",
+      "description": "",
+      "source": "market_data",
+      "applies_to": [
+        "unit_price"
+      ],
+      "reference_value": "$14.50-$16.00 per unit (industry average for comparable parts)"
+    },
+    {
+      "id": "93861f56",
+      "name": "ISO 9001:2015 Standard",
+      "description": "",
+      "source": "regulation",
+      "applies_to": [
+        "quality_standard"
+      ],
+      "reference_value": "International standard for quality management systems"
+    },
+    {
+      "id": "550fb322",
+      "name": "Industry Lead Time",
+      "description": "",
+      "source": "market_data",
+      "applies_to": [
+        "delivery_schedule"
+      ],
+      "reference_value": "2-3 week standard lead time for precision parts in this segment"
+    }
+  ],
+  "outcome": "agreement",
+  "agreement": {
+    "id": "9ee9fcc8",
+    "issue_values": {
+      "unit_price": "16.00",
+      "quality_standard": "ISO 9001 full compliance",
+      "delivery_schedule": "Weekly deliveries (JIT)",
+      "annual_volume_commitment": "145000.0",
+      "contract_duration": "3 years with annual review"
+    },
+    "rationale": "The agreement on these terms satisfies our mutual interests in quality assurance, price stability, and volume commitments, providing a solid foundation for our partnership.",
+    "pareto_rank": null
+  },
+  "events": [
+    {
+      "type": "phase_change",
+      "data": {
+        "phase": "setup",
+        "round": 0,
+        "message": "Generating satisfaction anchors for utility scoring..."
+      },
+      "delay_ms": 0
+    },
+    {
+      "type": "setup_progress",
+      "data": {
+        "message": "Generating anchors for 2 parties (8 interests)...",
+        "parties": [
+          "manufacturer",
+          "supplier"
+        ],
+        "total_interests": 8,
+        "completed_interests": 0
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "setup_progress",
+      "data": {
+        "message": "Generating anchors for GlobalMfg Corp (4 interests)...",
+        "party_id": "manufacturer",
+        "party_name": "GlobalMfg Corp",
+        "interest_count": 4
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "setup_progress",
+      "data": {
+        "message": "Generating anchors for PrecisionParts Ltd (4 interests)...",
+        "party_id": "supplier",
+        "party_name": "PrecisionParts Ltd",
+        "interest_count": 4
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "manufacturer",
+        "party_name": "GlobalMfg Corp",
+        "interest_description": "Consistent product quality meeting ISO 9001 standards",
+        "interest_type": "need",
+        "anchor_count": 4,
+        "completed_interests": 1,
+        "total_interests": 8
+      },
+      "delay_ms": 2017
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "manufacturer",
+        "party_name": "GlobalMfg Corp",
+        "interest_description": "Reliable delivery schedule for production planning",
+        "interest_type": "need",
+        "anchor_count": 4,
+        "completed_interests": 2,
+        "total_interests": 8
+      },
+      "delay_ms": 253
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "supplier",
+        "party_name": "PrecisionParts Ltd",
+        "interest_description": "Flexible quality standards accounting for material variability",
+        "interest_type": "desire",
+        "anchor_count": 4,
+        "completed_interests": 3,
+        "total_interests": 8
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "supplier",
+        "party_name": "PrecisionParts Ltd",
+        "interest_description": "Volume commitment for production planning",
+        "interest_type": "need",
+        "anchor_count": 4,
+        "completed_interests": 4,
+        "total_interests": 8
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "supplier",
+        "party_name": "PrecisionParts Ltd",
+        "interest_description": "Fair pricing that covers increased raw material costs",
+        "interest_type": "need",
+        "anchor_count": 4,
+        "completed_interests": 5,
+        "total_interests": 8
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "supplier",
+        "party_name": "PrecisionParts Ltd",
+        "interest_description": "Avoid reputational damage from quality dispute",
+        "interest_type": "fear",
+        "anchor_count": 4,
+        "completed_interests": 6,
+        "total_interests": 8
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchors_generated",
+      "data": {
+        "party_id": "supplier",
+        "party_name": "PrecisionParts Ltd",
+        "anchor_count": 16,
+        "interests": [
+          {
+            "description": "Fair pricing that covers increased raw material costs",
+            "interest_type": "need",
+            "priority": 0.9,
+            "related_issues": [
+              "unit_price"
+            ],
+            "anchors": [
+              {
+                "condition": "unit_price <= 13.5",
+                "score": 0.1,
+                "reason": "Prices near the bottom of the range fail to cover the increased raw material costs, leading to negative margins and triggering the BATNA."
+              },
+              {
+                "condition": "unit_price > 13.5 AND unit_price <= 15.0",
+                "score": 0.35,
+                "reason": "Provides minimal margin to cover costs but remains significantly below the target necessary for long-term viability."
+              },
+              {
+                "condition": "unit_price > 15.0 AND unit_price <= 16.5",
+                "score": 0.65,
+                "reason": "A fair middle ground that adequately compensates for material cost increases and provides a sustainable profit buffer."
+              },
+              {
+                "condition": "unit_price > 16.5 AND unit_price <= 18.0",
+                "score": 0.95,
+                "reason": "Excellent outcome that fully absorbs cost pressures and maximizes profit margins, comfortably exceeding the BATNA."
+              }
+            ]
+          },
+          {
+            "description": "Flexible quality standards accounting for material variability",
+            "interest_type": "desire",
+            "priority": 0.7,
+            "related_issues": [
+              "quality_standard"
+            ],
+            "anchors": [
+              {
+                "condition": "quality_standard = ISO 9001 full compliance",
+                "score": 0.0,
+                "reason": "Full compliance requires strict adherence that ignores material variability, forcing excessive waste and costs that align with the BATNA's worst-case scenario."
+              },
+              {
+                "condition": "quality_standard = ISO 9001 with 2% tolerance",
+                "score": 0.35,
+                "reason": "Provides a slight buffer, but the rigid ISO structure remains a significant constraint on managing natural material variability."
+              },
+              {
+                "condition": "quality_standard = Internal QC standard (supplier-defined)",
+                "score": 0.65,
+                "reason": "Allows the supplier to define standards that realistically account for material variability, providing operational flexibility while maintaining professionalism."
+              },
+              {
+                "condition": "quality_standard = Joint quality committee review",
+                "score": 1.0,
+                "reason": "Provides the highest flexibility by allowing collaborative, real-time adjustments to quality expectations based on actual material performance batches."
+              }
+            ]
+          },
+          {
+            "description": "Volume commitment for production planning",
+            "interest_type": "need",
+            "priority": 0.85,
+            "related_issues": [
+              "volume_commitment"
+            ],
+            "anchors": [
+              {
+                "condition": "volume_commitment <= 75000",
+                "score": 0.1,
+                "reason": "This low volume fails to justify the overhead of setting up international production lines, making the BATNA more attractive."
+              },
+              {
+                "condition": "volume_commitment > 75000 AND volume_commitment <= 110000",
+                "score": 0.4,
+                "reason": "Provides minimal operational stability but remains below the ideal threshold for economies of scale."
+              },
+              {
+                "condition": "volume_commitment > 110000 AND volume_commitment <= 150000",
+                "score": 0.7,
+                "reason": "A solid, reliable volume that justifies the international compliance costs and allows for efficient production planning."
+              },
+              {
+                "condition": "volume_commitment > 150000",
+                "score": 1.0,
+                "reason": "Maximizes production capacity and ensures high utilization of resources, representing an ideal outcome for the business."
+              }
+            ]
+          },
+          {
+            "description": "Avoid reputational damage from quality dispute",
+            "interest_type": "fear",
+            "priority": 0.75,
+            "related_issues": [
+              "quality_standard"
+            ],
+            "anchors": [
+              {
+                "condition": "quality_standard = Internal QC standard (supplier-defined)",
+                "score": 0.05,
+                "reason": "Relying solely on supplier-defined standards creates significant risk of quality failures and negative reputational impact."
+              },
+              {
+                "condition": "quality_standard = Joint quality committee review",
+                "score": 0.35,
+                "reason": "Shared responsibility provides some oversight, but ambiguity in standards still poses a moderate risk of disputes."
+              },
+              {
+                "condition": "quality_standard = ISO 9001 with 2% tolerance",
+                "score": 0.65,
+                "reason": "Standardized certification provides a reliable baseline, though the 2% tolerance allows for minor variability that could still lead to issues."
+              },
+              {
+                "condition": "quality_standard = ISO 9001 full compliance",
+                "score": 1.0,
+                "reason": "Full ISO 9001 compliance is the industry standard for excellence, minimizing quality risk and protecting the company's reputation."
+              }
+            ]
+          }
+        ]
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "manufacturer",
+        "party_name": "GlobalMfg Corp",
+        "interest_description": "Cost-effective pricing to maintain profit margins",
+        "interest_type": "desire",
+        "anchor_count": 5,
+        "completed_interests": 7,
+        "total_interests": 8
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "manufacturer",
+        "party_name": "GlobalMfg Corp",
+        "interest_description": "Long-term partnership stability",
+        "interest_type": "desire",
+        "anchor_count": 4,
+        "completed_interests": 8,
+        "total_interests": 8
+      },
+      "delay_ms": 1090
+    },
+    {
+      "type": "anchors_generated",
+      "data": {
+        "party_id": "manufacturer",
+        "party_name": "GlobalMfg Corp",
+        "anchor_count": 17,
+        "interests": [
+          {
+            "description": "Consistent product quality meeting ISO 9001 standards",
+            "interest_type": "need",
+            "priority": 0.95,
+            "related_issues": [
+              "quality_standard"
+            ],
+            "anchors": [
+              {
+                "condition": "quality_standard = Internal QC standard (supplier-defined)",
+                "score": 0.0,
+                "reason": "This is completely unacceptable as it lacks the required ISO certification and poses a high risk to product quality."
+              },
+              {
+                "condition": "quality_standard = Joint quality committee review",
+                "score": 0.35,
+                "reason": "This offers some oversight but does not guarantee the specific ISO 9001 standard required, making it a risky middle-ground."
+              },
+              {
+                "condition": "quality_standard = ISO 9001 with 2% tolerance",
+                "score": 0.65,
+                "reason": "This is a fair, acceptable compromise that meets the core requirement while allowing for minor operational variance."
+              },
+              {
+                "condition": "quality_standard = ISO 9001 full compliance",
+                "score": 1.0,
+                "reason": "This perfectly matches the interest, ensuring full adherence to the required quality standards."
+              }
+            ]
+          },
+          {
+            "description": "Cost-effective pricing to maintain profit margins",
+            "interest_type": "desire",
+            "priority": 0.8,
+            "related_issues": [
+              "unit_price"
+            ],
+            "anchors": [
+              {
+                "condition": "unit_price >= 17.5",
+                "score": 0.05,
+                "reason": "Prices near the top of the range eliminate profit margins and make the BATNA more attractive."
+              },
+              {
+                "condition": "unit_price >= 16.0 AND unit_price < 17.5",
+                "score": 0.35,
+                "reason": "Pricing is slightly better than the BATNA, but still compresses margins significantly."
+              },
+              {
+                "condition": "unit_price >= 14.5 AND unit_price < 16.0",
+                "score": 0.65,
+                "reason": "A fair price point that allows for sustainable margins while keeping the supplier competitive."
+              },
+              {
+                "condition": "unit_price >= 13.0 AND unit_price < 14.5",
+                "score": 0.9,
+                "reason": "Excellent pricing that significantly improves the bottom line and exceeds market expectations."
+              },
+              {
+                "condition": "unit_price < 13.0",
+                "score": 1.0,
+                "reason": "Optimal pricing near the floor of the range provides maximum margin potential."
+              }
+            ]
+          },
+          {
+            "description": "Reliable delivery schedule for production planning",
+            "interest_type": "need",
+            "priority": 0.85,
+            "related_issues": [
+              "delivery_schedule"
+            ],
+            "anchors": [
+              {
+                "condition": "delivery_schedule = Quarterly bulk with buffer stock",
+                "score": 0.05,
+                "reason": "Quarterly deliveries create extreme inventory risk and supply chain bottlenecks, making this a catastrophic outcome."
+              },
+              {
+                "condition": "delivery_schedule = Monthly bulk deliveries",
+                "score": 0.35,
+                "reason": "Monthly deliveries are manageable but require significant warehouse space and capital commitment, falling well below ideal operations."
+              },
+              {
+                "condition": "delivery_schedule = Bi-weekly deliveries",
+                "score": 0.65,
+                "reason": "Bi-weekly deliveries provide a stable, predictable flow that aligns with standard production planning cycles."
+              },
+              {
+                "condition": "delivery_schedule = Weekly deliveries (JIT)",
+                "score": 1.0,
+                "reason": "Just-in-time weekly delivery perfectly optimizes production planning and minimizes holding costs, representing the ideal scenario."
+              }
+            ]
+          },
+          {
+            "description": "Long-term partnership stability",
+            "interest_type": "desire",
+            "priority": 0.6,
+            "related_issues": [
+              "contract_duration"
+            ],
+            "anchors": [
+              {
+                "condition": "contract_duration = 1 year with renewal option",
+                "score": 0.1,
+                "reason": "A 1-year term provides minimal stability and forces a renegotiation cycle too soon, failing to secure the partnership."
+              },
+              {
+                "condition": "contract_duration = 2 years fixed",
+                "score": 0.4,
+                "reason": "Provides some breathing room but is still short-term and creates a cliff edge for the relationship relatively quickly."
+              },
+              {
+                "condition": "contract_duration = 3 years with annual review",
+                "score": 0.7,
+                "reason": "A 3-year horizon is a solid middle ground, offering a reasonable commitment while maintaining oversight through annual reviews."
+              },
+              {
+                "condition": "contract_duration = 5 years with price escalation clause",
+                "score": 1.0,
+                "reason": "A 5-year term represents high stability, locking in the partnership for the long term while balancing cost risks with the escalation clause."
+              }
+            ]
+          }
+        ]
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "phase_change",
+      "data": {
+        "phase": "discovery",
+        "round": 0,
+        "message": "Entering interest discovery phase"
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "d2805829",
+        "timestamp": "2026-04-02T15:25:22.351104Z",
+        "party_id": "manufacturer",
+        "move_type": "disclose_interest",
+        "package": null,
+        "argument": null,
+        "disclosed_interest": {
+          "id": "fb0f8682",
+          "description": "We require strict adherence to ISO 9001 standards to ensure the integrity of our manufacturing process.",
+          "interest_type": "need",
+          "priority": 0.95,
+          "related_issues": [
+            "quality_standard"
+          ],
+          "disclosed": true,
+          "satisfaction_anchors": []
+        },
+        "references": [],
+        "reasoning": "Theory of Mind: Since this is the first move, I have no information on the other party's specific motivations. I assume they are a business seeking stable revenue, likely balancing cost-efficiency with operational capacity. My strategy is to open by establishing my core need for quality, which signals professionalism and sets the stage for a collaborative, criteria-based negotiation. By prioritizing the ISO 9001 standard early, I frame the conversation around quality-first, which creates a shared objective standard for our future discussions.",
+        "phase": "discovery",
+        "round": 1,
+        "turn": 0,
+        "party_name": "GlobalMfg Corp"
+      },
+      "delay_ms": 3912
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "d634447c",
+        "timestamp": "2026-04-02T15:25:24.539907Z",
+        "party_id": "supplier",
+        "move_type": "disclose_interest",
+        "package": null,
+        "argument": null,
+        "disclosed_interest": {
+          "id": "79e67b9a",
+          "description": "We need to ensure our production planning remains viable through a stable annual volume commitment.",
+          "interest_type": "need",
+          "priority": 0.85,
+          "related_issues": [
+            "Annual Volume Commitment"
+          ],
+          "disclosed": true,
+          "satisfaction_anchors": []
+        },
+        "references": [],
+        "reasoning": "Theory of Mind: GlobalMfg Corp is prioritizing quality standards, likely due to risk aversion regarding their own supply chain integrity. They are signaling a concern for reliability. Strategy: I will build rapport by acknowledging their focus on quality while introducing my own critical need for volume stability. This sets the stage for a trade-off where I can offer flexibility in quality standards if they can provide the volume guarantees that allow me to manage my own operational risks.",
+        "phase": "discovery",
+        "round": 1,
+        "turn": 1,
+        "party_name": "PrecisionParts Ltd"
+      },
+      "delay_ms": 2187
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "0e0cc2f4",
+        "timestamp": "2026-04-02T15:25:26.335902Z",
+        "party_id": "manufacturer",
+        "move_type": "disclose_interest",
+        "package": null,
+        "argument": null,
+        "disclosed_interest": {
+          "id": "d27946fb",
+          "description": "We need a reliable delivery schedule to support our just-in-time production requirements.",
+          "interest_type": "need",
+          "priority": 0.85,
+          "related_issues": [
+            "delivery_schedule"
+          ],
+          "disclosed": true,
+          "satisfaction_anchors": []
+        },
+        "references": [],
+        "reasoning": "Theory of Mind: PrecisionParts has identified annual volume commitment as their primary need, which suggests they prioritize production stability and predictability. I will disclose my need for a reliable delivery schedule (JIT) to align our operational needs. My move accounts for their interest in stability by signaling that I am looking for a structured, long-term operational relationship, which is mutually beneficial. My strategy is to build rapport before moving to specific price/volume trade-offs.",
+        "phase": "discovery",
+        "round": 2,
+        "turn": 0,
+        "party_name": "GlobalMfg Corp"
+      },
+      "delay_ms": 1795
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "6a0f9696",
+        "timestamp": "2026-04-02T15:25:28.587506Z",
+        "party_id": "supplier",
+        "move_type": "disclose_interest",
+        "package": null,
+        "argument": null,
+        "disclosed_interest": {
+          "id": "c7cbb1ca",
+          "description": "We need to account for raw material cost volatility in our pricing to maintain long-term supply stability.",
+          "interest_type": "need",
+          "priority": 0.9,
+          "related_issues": [
+            "unit_price"
+          ],
+          "disclosed": true,
+          "satisfaction_anchors": []
+        },
+        "references": [],
+        "reasoning": "Theory of Mind: GlobalMfg Corp is focused on operational stability (JIT delivery, ISO 9001 quality). They likely fear production stoppages or quality failures which would hurt their downstream output. My strategy is to highlight that their need for reliability must be balanced by my need for financial viability. By disclosing my need for fair pricing linked to material costs, I set the stage to propose a volume commitment that helps them with their JIT needs while securing my production planning, creating a basis for a package deal.",
+        "phase": "discovery",
+        "round": 2,
+        "turn": 1,
+        "party_name": "PrecisionParts Ltd"
+      },
+      "delay_ms": 2251
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "fa488d8b",
+        "timestamp": "2026-04-02T15:25:31.536521Z",
+        "party_id": "manufacturer",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "22ee4f39",
+          "claim": "Establishing a consistent quality and delivery framework is essential for the long-term success of our partnership.",
+          "grounds": [
+            "ISO 9001 compliance is a non-negotiable requirement for our manufacturing integrity, as it is the globally recognized benchmark for quality.",
+            "Our need for weekly JIT deliveries is driven by the industry-standard lean manufacturing practices we employ to minimize inventory holding costs.",
+            "By aligning these operational needs with your requirement for volume stability, we can create a predictable environment that mitigates the raw material cost volatility you are concerned about."
+          ],
+          "criterion_id": "ISO 9001:2015 Standard",
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: PrecisionParts Ltd is focused on production stability and is sensitive to market volatility. They likely fear that high-intensity requirements like JIT delivery and strict ISO standards will increase their operational costs. Strategic Calculation: I am reinforcing the importance of quality and delivery while acknowledging their interest in volume stability. By framing my needs as aligned with their need for predictability, I am laying the groundwork for a package deal that links volume commitments to service levels. I am using an argumentative move to establish the legitimacy of my requirements before moving to specific proposals.",
+        "phase": "discovery",
+        "round": 3,
+        "turn": 0,
+        "party_name": "GlobalMfg Corp"
+      },
+      "delay_ms": 2949
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "89c4e335",
+        "timestamp": "2026-04-02T15:25:34.298713Z",
+        "party_id": "supplier",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "17b41864",
+          "claim": "A sustainable partnership requires balancing stringent quality requirements with the economic realities of raw material volatility and production stability.",
+          "grounds": [
+            "We acknowledge your need for JIT delivery and strict ISO 9001 compliance, which we support as standard industry practice.",
+            "To ensure we can maintain these standards while managing current market volatility, we need to align on a volume commitment that justifies the operational costs associated with JIT and strict quality assurance.",
+            "A mutual agreement on volume provides the predictability needed to hedge against raw material price fluctuations, which protects your supply chain from potential disruptions."
+          ],
+          "criterion_id": "market_data",
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: GlobalMfg Corp is focused on operational stability (JIT, ISO 9001). They likely fear supply chain interruptions and quality defects that could damage their brand. They are using their bargaining power to push for high standards, likely assuming I will absorb the costs. Strategic Calculation: I need to link their demand for JIT/Quality with my need for volume/pricing. By arguing that volume commitments are the mechanism to mitigate the costs of the standards they demand, I create a trade-off that benefits both parties. This moves the negotiation from positional demands to a mutual problem-solving framework.",
+        "phase": "discovery",
+        "round": 3,
+        "turn": 1,
+        "party_name": "PrecisionParts Ltd"
+      },
+      "delay_ms": 2762
+    },
+    {
+      "type": "phase_change",
+      "data": {
+        "phase": "generation",
+        "round": 3,
+        "message": "Entering option generation phase \u2014 agents propose packages"
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "7f783c83",
+        "timestamp": "2026-04-02T15:25:36.629136Z",
+        "party_id": "manufacturer",
+        "move_type": "propose",
+        "package": {
+          "id": "27c2a020",
+          "issue_values": {
+            "unit_price": "15.25",
+            "quality_standard": "ISO 9001 full compliance",
+            "delivery_schedule": "Weekly deliveries (JIT)",
+            "annual_volume_commitment": "125000.0",
+            "contract_duration": "3 years with annual review"
+          },
+          "rationale": "This package balances our need for JIT delivery and ISO 9001 quality with PrecisionParts' need for volume stability and price protection via a multi-year commitment.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: PrecisionParts is concerned about cost volatility and production stability. They want higher volumes to offset the risks of JIT and strict quality. By proposing a 3-year contract with a mid-range price, I provide them the stability they crave, while securing the JIT and ISO 9001 requirements that are critical for my production efficiency. This creates a win-win where they get guaranteed volume and a fair price, and I get the logistical and quality certainty I need.",
+        "phase": "generation",
+        "round": 4,
+        "turn": 0,
+        "party_name": "GlobalMfg Corp"
+      },
+      "delay_ms": 2327
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "573ca09b",
+        "timestamp": "2026-04-02T15:25:39.793398Z",
+        "party_id": "supplier",
+        "move_type": "propose",
+        "package": {
+          "id": "b514fc3b",
+          "issue_values": {
+            "unit_price": "16.50",
+            "quality_standard": "ISO 9001 with 2% tolerance",
+            "delivery_schedule": "Weekly deliveries (JIT)",
+            "annual_volume_commitment": "150000.0",
+            "contract_duration": "3 years with annual review"
+          },
+          "rationale": "This proposal reflects a fair balance: we increase the volume commitment to 150,000 to help you secure better economies of scale, while adjusting the price to 16.50 to account for raw material volatility. The 2% tolerance on quality allows us to maintain the integrity of the ISO 9001 standard while providing the necessary flexibility to manage material variability, ensuring consistent supply without constant risk of rejection.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: GlobalMfg Corp values reliability and JIT delivery, indicating their production line cannot afford stoppages. They are risk-averse regarding quality (ISO 9001). My strategy is to accept their JIT and duration preference to build trust, while pushing for a higher price and volume to cover my cost risks. By offering 'ISO 9001 with 2% tolerance,' I mitigate my fear of quality disputes while still adhering to their core requirement. The volume increase is a trade-off to justify the price point closer to the upper end of the market range, satisfying my need for production stability and their potential need for more parts.",
+        "phase": "generation",
+        "round": 4,
+        "turn": 1,
+        "party_name": "PrecisionParts Ltd"
+      },
+      "delay_ms": 3163
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "7b5c6534",
+        "timestamp": "2026-04-02T15:25:42.882433Z",
+        "party_id": "manufacturer",
+        "move_type": "propose",
+        "package": {
+          "id": "f23731fe",
+          "issue_values": {
+            "unit_price": "15.85",
+            "quality_standard": "ISO 9001 full compliance",
+            "delivery_schedule": "Weekly deliveries (JIT)",
+            "annual_volume_commitment": "140000.0",
+            "contract_duration": "3 years with annual review"
+          },
+          "rationale": "I am meeting their need for higher volume and price to cover volatility while securing full ISO compliance and JIT delivery, which are non-negotiable for our operations.",
+          "pareto_rank": null
+        },
+        "argument": {
+          "id": "0c4c75c7",
+          "claim": "This package aligns with industry standards for pricing while ensuring the quality and logistical stability required for our partnership.",
+          "grounds": [
+            "The proposed price of 15.85 USD sits within the current market index range of 14.50-16.00 USD, providing fairness to both parties.",
+            "Providing a volume commitment of 140,000 units offers the production stability the supplier requested.",
+            "Maintaining full ISO 9001 compliance is a regulatory necessity for our manufacturing process that cannot be compromised by tolerance levels."
+          ],
+          "criterion_id": "market_data",
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: PrecisionParts is concerned about volume stability and price protection due to raw material volatility. They accepted the 3-year duration and JIT delivery, suggesting these are acceptable to them. They are pushing for a higher price (16.50) and lower quality standard (2% tolerance). I will move closer to their price point to show cooperation, but insist on full ISO 9001 compliance because that is a primary need (priority 0.95). I will offer a compromise volume of 140,000 to assist their production planning while keeping our costs manageable.",
+        "phase": "generation",
+        "round": 5,
+        "turn": 0,
+        "party_name": "GlobalMfg Corp"
+      },
+      "delay_ms": 3089
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "528f2247",
+        "timestamp": "2026-04-02T15:25:46.822551Z",
+        "party_id": "supplier",
+        "move_type": "propose",
+        "package": {
+          "id": "ce403bf4",
+          "issue_values": {
+            "unit_price": "16.15",
+            "quality_standard": "ISO 9001 with 2% tolerance",
+            "delivery_schedule": "Weekly deliveries (JIT)",
+            "annual_volume_commitment": "145000.0",
+            "contract_duration": "3 years with annual review"
+          },
+          "rationale": "This proposal bridges the gap by slightly increasing the volume commitment to 145,000 units to support your JIT needs, while setting a price that accounts for current material cost volatility and the operational overhead of maintaining high-precision standards. The 2% tolerance on quality provides the necessary flexibility to ensure consistent supply without compromising integrity.",
+          "pareto_rank": null
+        },
+        "argument": {
+          "id": "83c02328",
+          "claim": "The proposed price and quality parameters are necessary for long-term operational sustainability.",
+          "grounds": [
+            "Industry data indicates that precision manufacturing with JIT delivery often incurs higher overheads.",
+            "A 2% tolerance is a standard industry practice to mitigate risks associated with natural raw material variability while maintaining the core principles of ISO 9001.",
+            "An annual volume commitment of 145,000 units provides the stability required to lock in material costs, preventing future price spikes."
+          ],
+          "criterion_id": "market_data",
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: GlobalMfg is focused on reliability (JIT) and quality (ISO 9001). They are willing to pay above the market floor ($15.85) to secure these. They fear supply chain disruption. My strategy is to accept their JIT and duration requirements while nudging the price and volume slightly to favor my need for margin stability and material cost protection. By offering a 2% tolerance, I reduce my risk of rejection/rework, which protects my reputation while still meeting their high-level quality needs. I am using the 'market_data' criterion to justify the price adjustment as a reflection of the added value of JIT and quality assurance.",
+        "phase": "generation",
+        "round": 5,
+        "turn": 1,
+        "party_name": "PrecisionParts Ltd"
+      },
+      "delay_ms": 3939
+    },
+    {
+      "type": "phase_change",
+      "data": {
+        "phase": "bargaining",
+        "round": 5,
+        "message": "Entering bargaining phase \u2014 proposals and counterproposals"
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "e0d350d8",
+        "timestamp": "2026-04-02T15:25:50.210359Z",
+        "party_id": "manufacturer",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "cc35f946",
+          "claim": "Full ISO 9001 compliance is a non-negotiable requirement for our production integrity, and the current price of 16.15 USD is above the competitive market range.",
+          "grounds": [
+            "PrecisionParts' proposal of 'ISO 9001 with 2% tolerance' introduces unacceptable quality risks that could lead to costly downstream failures in our assembly line.",
+            "The current market price index for these precision parts is between 14.50 USD and 16.00 USD; a price of 16.15 USD is at the high end, which we can only justify if we receive the highest level of quality assurance.",
+            "By maintaining the 3-year contract duration and a significant volume commitment of 140,000 units, we provide the supply stability that PrecisionParts requires, which should be reflected in a more favorable price point."
+          ],
+          "criterion_id": "ISO 9001:2015 Standard",
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: PrecisionParts is concerned about operational stability and protecting their margins against volatility, evidenced by their insistence on a slightly higher price (16.15) and a tolerance level for quality. They clearly value the volume commitment I have offered. My strategy is to firmly hold the line on the ISO 9001 quality standard, as this is a core need, while using the argument of market price indices to push back on the 16.15 price. I will frame the quality standard as a prerequisite for the volume commitment to create a package that addresses their need for stability while protecting my need for quality and cost control.",
+        "phase": "bargaining",
+        "round": 6,
+        "turn": 0,
+        "party_name": "GlobalMfg Corp"
+      },
+      "delay_ms": 3384
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "51bef969",
+        "timestamp": "2026-04-02T15:25:54.607222Z",
+        "party_id": "supplier",
+        "move_type": "meso",
+        "package": {
+          "id": "d4f0cc28",
+          "issue_values": {
+            "unit_price": "16.00",
+            "quality_standard": "Joint quality committee review",
+            "delivery_schedule": "Weekly deliveries (JIT)",
+            "annual_volume_commitment": "145000.0",
+            "contract_duration": "3 years with annual review"
+          },
+          "rationale": "I am proposing a Joint quality committee review as a creative bridge between your strict requirement for full ISO 9001 compliance and our need for operational flexibility due to material variance. This ensures your integrity standards are met through oversight while allowing us the necessary technical latitude. I have adjusted the price to $16.00, which sits comfortably within the industry market data range, reflecting the value of this collaborative quality management approach.",
+          "pareto_rank": null
+        },
+        "argument": {
+          "id": "7646565b",
+          "claim": "A Joint quality committee review offers a robust, collaborative mechanism to ensure quality integrity while mitigating risks associated with material variability.",
+          "grounds": [
+            "The use of a joint review committee is an objective best-practice in complex supply chain partnerships to manage technical specifications.",
+            "It allows for the strict monitoring of quality outcomes (meeting your needs) while providing a formal process to address material-related variances (meeting ours).",
+            "This approach maintains the spirit of ISO 9001 compliance while adding a layer of operational agility that a rigid binary standard lacks."
+          ],
+          "criterion_id": "ISO 9001:2015 Standard",
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: GlobalMfg is clearly risk-averse regarding quality, viewing ISO 9001 as a proxy for operational stability. They fear supply chain disruption or defective parts. My move pivots from a 'tolerance' argument (which they reject) to a 'procedural' solution (Joint committee). This respects their need for control while protecting me from the rigid, potentially impossible technical demands of 100% compliance during raw material fluctuations. Strategically, I am moving to the mid-point of the price range ($16.00) to show good faith while keeping the volume commitment at my target level.",
+        "phase": "bargaining",
+        "round": 6,
+        "turn": 1,
+        "party_name": "PrecisionParts Ltd"
+      },
+      "delay_ms": 4000
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "eb912683",
+        "timestamp": "2026-04-02T15:25:58.298919Z",
+        "party_id": "manufacturer",
+        "move_type": "counter",
+        "package": {
+          "id": "da90eb8c",
+          "issue_values": {
+            "unit_price": "16.00",
+            "quality_standard": "ISO 9001 full compliance",
+            "delivery_schedule": "Weekly deliveries (JIT)",
+            "annual_volume_commitment": "145000.0",
+            "contract_duration": "3 years with annual review"
+          },
+          "rationale": "I am accepting your proposed price and volume commitment, which acknowledges your operational needs, in exchange for retaining full ISO 9001 compliance, which is critical for our risk management.",
+          "pareto_rank": null
+        },
+        "argument": {
+          "id": "046bc710",
+          "claim": "Full ISO 9001 compliance is the most objective and internationally recognized standard for quality, which mitigates risk for both parties more effectively than a joint committee approach.",
+          "grounds": [
+            "ISO 9001:2015 provides a globally accepted framework that reduces the need for constant committee oversight and aligns with industry best practices.",
+            "Maintaining this standard ensures consistency in supply chain integrity, which is vital for our joint long-term success.",
+            "By accepting your requested price of 16.00 and volume of 145,000, I have addressed your primary economic concerns."
+          ],
+          "criterion_id": "ISO 9001:2015 Standard",
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: PrecisionParts is focused on price stability and risk management regarding quality. They proposed a 'Joint quality committee' to avoid the potential costs/liability of strict ISO compliance. By accepting their price and volume, I address their financial needs. I will counter by insisting on ISO 9001 compliance while keeping their price/volume terms, arguing that ISO 9001 is the industry standard for risk mitigation, which ultimately protects them too by providing a clear, measurable benchmark rather than ambiguous committee reviews.",
+        "phase": "bargaining",
+        "round": 7,
+        "turn": 0,
+        "party_name": "GlobalMfg Corp"
+      },
+      "delay_ms": 3691
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "8b7fbc56",
+        "timestamp": "2026-04-02T15:26:00.857465Z",
+        "party_id": "supplier",
+        "move_type": "accept",
+        "package": {
+          "id": "46b46a3b",
+          "issue_values": {
+            "unit_price": "16.00",
+            "quality_standard": "ISO 9001 full compliance",
+            "delivery_schedule": "Weekly deliveries (JIT)",
+            "annual_volume_commitment": "145000.0",
+            "contract_duration": "3 years with annual review"
+          },
+          "rationale": "Accepting this package balances my need for a stable volume commitment and sustainable pricing with the buyer's requirement for full ISO compliance, creating a mutually acceptable foundation for a long-term partnership.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: GlobalMfg is clearly risk-averse regarding quality and prioritizes the ISO 9001 standard as a non-negotiable benchmark for their supply chain. They have now met my price and volume requirements. Strategic calculation: By accepting the ISO 9001 standard in exchange for the price and volume levels I secured, I satisfy their core need for quality assurance while protecting my firm's financial viability. This is a win-win that avoids further escalation and solidifies a stable, long-term contract.",
+        "phase": "bargaining",
+        "round": 7,
+        "turn": 1,
+        "party_name": "PrecisionParts Ltd"
+      },
+      "delay_ms": 4000
+    },
+    {
+      "type": "phase_change",
+      "data": {
+        "phase": "convergence",
+        "round": 7,
+        "message": "Parties are close \u2014 entering convergence"
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "0e4f4b4c",
+        "timestamp": "2026-04-02T15:26:07.200051Z",
+        "party_id": "manufacturer",
+        "move_type": "accept",
+        "package": {
+          "id": "e1a28b93",
+          "issue_values": {
+            "unit_price": "16.00",
+            "quality_standard": "ISO 9001 full compliance",
+            "delivery_schedule": "Weekly deliveries (JIT)",
+            "annual_volume_commitment": "145000.0",
+            "contract_duration": "3 years with annual review"
+          },
+          "rationale": "I am formally accepting the agreement on these terms as they satisfy our core needs for quality and delivery while aligning with the supplier's volume and pricing requirements.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: PrecisionParts has shown they are motivated by volume stability and price protection against volatility. By accepting $16.00 and 145k units, they have secured a deal that meets their economic requirements. My strategy: Since they have accepted my counter-proposal which contains my 'must-haves' (ISO 9001, JIT delivery), I should finalize the deal to secure the partnership. The outcome falls within my aspiration range and respects the objective criteria of the market price index.",
+        "phase": "convergence",
+        "round": 8,
+        "turn": 0,
+        "party_name": "GlobalMfg Corp"
+      },
+      "delay_ms": 4000
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "50b91c7f",
+        "timestamp": "2026-04-02T15:26:12.526805Z",
+        "party_id": "supplier",
+        "move_type": "accept",
+        "package": {
+          "id": "9ee9fcc8",
+          "issue_values": {
+            "unit_price": "16.00",
+            "quality_standard": "ISO 9001 full compliance",
+            "delivery_schedule": "Weekly deliveries (JIT)",
+            "annual_volume_commitment": "145000.0",
+            "contract_duration": "3 years with annual review"
+          },
+          "rationale": "The agreement on these terms satisfies our mutual interests in quality assurance, price stability, and volume commitments, providing a solid foundation for our partnership.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "The other party has consistently prioritized ISO 9001 compliance and JIT delivery to maintain their manufacturing integrity. By accepting their final proposal, which aligns with my need for a stable volume commitment and sustainable pricing, I have secured a mutually beneficial agreement. My theory of mind suggests they value the certainty of the ISO standard over the minor cost savings of a lower price, and by meeting this, I mitigate my fear of quality disputes while securing a viable long-term contract.",
+        "phase": "convergence",
+        "round": 8,
+        "turn": 1,
+        "party_name": "PrecisionParts Ltd"
+      },
+      "delay_ms": 4000
+    },
+    {
+      "type": "settlement",
+      "data": {
+        "agreement": {
+          "id": "9ee9fcc8",
+          "issue_values": {
+            "unit_price": "16.00",
+            "quality_standard": "ISO 9001 full compliance",
+            "delivery_schedule": "Weekly deliveries (JIT)",
+            "annual_volume_commitment": "145000.0",
+            "contract_duration": "3 years with annual review"
+          },
+          "rationale": "The agreement on these terms satisfies our mutual interests in quality assurance, price stability, and volume commitments, providing a solid foundation for our partnership.",
+          "pareto_rank": null
+        },
+        "total_rounds": 8,
+        "total_moves": 16,
+        "award": {
+          "award_type": "consent_award",
+          "date": "2026-04-02 15:26:15.723294+00:00",
+          "seat": "london",
+          "governing_law": "english law",
+          "institution": "none",
+          "parties": [
+            {
+              "party_id": "manufacturer",
+              "name": "GlobalMfg Corp",
+              "role": "Claimant (Buyer)",
+              "authorized_by": "agent_delegation"
+            },
+            {
+              "party_id": "supplier",
+              "name": "PrecisionParts Ltd",
+              "role": "Respondent (Seller)",
+              "authorized_by": "agent_delegation"
+            }
+          ],
+          "terms": {
+            "unit_price": "16.00",
+            "quality_standard": "ISO 9001 full compliance",
+            "delivery_schedule": "Weekly deliveries (JIT)",
+            "annual_volume_commitment": "145000.0",
+            "contract_duration": "3 years with annual review"
+          },
+          "reasons": "Negotiation conducted under OANP protocol v0.1. Total rounds: 8. Total moves: 16. Phases visited: ['discovery', 'generation', 'bargaining', 'convergence', 'settlement']. Mediation mode: facilitative. Institutional rules: none (expedited procedure). No due process violations detected.",
+          "compliance_framework": "none",
+          "electronic_signatures": [
+            {
+              "party_id": "manufacturer",
+              "timestamp": "2026-04-02T15:26:15.723007+00:00",
+              "method": "oanp_protocol_accept"
+            },
+            {
+              "party_id": "supplier",
+              "timestamp": "2026-04-02T15:26:15.723035+00:00",
+              "method": "oanp_protocol_accept"
+            }
+          ],
+          "mediator_attestation": {
+            "mediator_type": "ai_agent",
+            "mediator_mode": "facilitative",
+            "mediation_commenced": "2026-04-02T15:25:11.867381+00:00",
+            "mediation_concluded": "2026-04-02T15:26:15.723053+00:00",
+            "process_description": "AI-mediated negotiation under OANP protocol using facilitative mediation mode",
+            "institution": "none"
+          },
+          "integrity_hash": "ce1dae1e398cd70fb1f2e9f63d5f130c382de2498684c516ad5446f67424ad89",
+          "audit_trail_hash": "792d0d4b58370e5d71567a85a7e392f08db330175004bbb8d6817a04bb3d4a20"
+        }
+      },
+      "delay_ms": 200
+    }
+  ],
+  "metrics": {
+    "outcome": "agreement",
+    "party_utilities": {
+      "manufacturer": 0.6999999999999998,
+      "supplier": 0.5140624999999999
+    },
+    "party_batna_surplus": {
+      "manufacturer": 0.34999999999999987,
+      "supplier": 0.21406249999999988
+    },
+    "social_welfare": 1.2140624999999998,
+    "pareto_efficient": true,
+    "nash_product": 0.07492187499999993,
+    "integrative_index": 1.8677884615384615,
+    "total_rounds": 8,
+    "total_moves": 16,
+    "move_breakdown": {
+      "disclose_interest": 4,
+      "argue": 3,
+      "propose": 4,
+      "meso": 1,
+      "counter": 1,
+      "accept": 3
+    },
+    "disclosure_rate": 0.5,
+    "phases_visited": [
+      "discovery",
+      "generation",
+      "bargaining",
+      "convergence",
+      "settlement"
+    ],
+    "agreement": {
+      "id": "9ee9fcc8",
+      "issue_values": {
+        "unit_price": "16.00",
+        "quality_standard": "ISO 9001 full compliance",
+        "delivery_schedule": "Weekly deliveries (JIT)",
+        "annual_volume_commitment": "145000.0",
+        "contract_duration": "3 years with annual review"
+      },
+      "rationale": "The agreement on these terms satisfies our mutual interests in quality assurance, price stability, and volume commitments, providing a solid foundation for our partnership.",
+      "pareto_rank": null
+    }
+  },
+  "critique": [
+    {
+      "severity": "low",
+      "description": "Objective criteria were never invoked."
+    },
+    {
+      "severity": "info",
+      "description": "Integrative index 1.87 \u2014 negotiation created significant value."
+    },
+    {
+      "severity": "info",
+      "description": "Agreement is Pareto efficient."
+    }
+  ]
+}

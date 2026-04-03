@@ -1,0 +1,131 @@
+institution:
+  id: "lcia"
+  name: "London Court of International Arbitration"
+  full_name: "London Court of International Arbitration"
+  seat: "London, United Kingdom"
+  rules_version: "2020"
+  rules_effective: "2020-10-01"
+  website: "https://www.lcia.org"
+
+procedures:
+  standard:
+    response_deadline_days: 28           # Art. 2
+    arbitrator_appointment_days: 28      # LCIA Court appoints all arbitrators
+    award_deadline_months: 3             # 3 months from last submission (soft)
+    default_arbitrators: 1               # Sole arbitrator unless warranted
+    terms_of_reference: false
+    scrutiny_of_awards: false
+    case_management_conference: true
+    lcia_appoints_all: true              # Unique: LCIA appoints all arbitrators
+
+  expedited:
+    enabled: true
+    rule_reference: "Art. 9A (Expedited Formation)"
+    threshold_usd: null                  # No monetary threshold
+    auto_apply: false
+    opt_in: true                         # Discretionary, on application
+    opt_out: false
+    sole_arbitrator: true
+    award_deadline_months: 3
+    reduced_fees: false
+
+  emergency:
+    enabled: true
+    rule_reference: "Art. 9B"
+    appointment_days: 3
+    decision_days: 14
+    form: "order"
+    enforceable_as_award: false
+    applies_from: "2014-10-01"
+    opt_out: true
+
+  mediation:
+    enabled: true
+    rules: "LCIA Mediation Rules"
+    med_arb: false
+    arb_med_arb: false
+
+time_limits:
+  - phase: "filing"
+    action: "respondent_response"
+    days: 28
+    article: "Art. 2"
+    extendable: true
+  - phase: "constitution"
+    action: "arbitrator_appointment"
+    days: 28
+    article: "Art. 5"
+    extendable: false
+    notes: "LCIA Court appoints all arbitrators"
+  - phase: "emergency"
+    action: "emergency_arbitrator_appointment"
+    days: 3
+    article: "Art. 9B"
+    extendable: false
+  - phase: "emergency"
+    action: "emergency_decision"
+    days: 14
+    article: "Art. 9B"
+    extendable: false
+  - phase: "expedited"
+    action: "expedited_formation"
+    article: "Art. 9A"
+    notes: "Discretionary, no fixed timeline"
+  - phase: "award"
+    action: "render_award"
+    months: 3
+    article: "Art. 15.10"
+    from_event: "last_submission"
+    extendable: true
+    extendable_by: "lcia_court"
+
+fees:
+  registration_gbp: 1950
+  fee_model: "hourly"
+  hourly_rate_gbp_min: 250
+  hourly_rate_gbp_max: 500
+  expedited_reduced: false
+
+due_process:
+  equal_treatment: true
+  right_to_be_heard: true
+  right_to_present_case: true
+  language_requirements: true
+  arbitrator_disclosure: "iba_guidelines"
+  confidentiality: "default_confidential"
+  challenge_period_days: 14
+
+award_requirements:
+  writing: true
+  signatures: "all_or_majority_with_reason"
+  reasons: true
+  date: true
+  seat: true
+  delivery: "signed_copy_to_each_party"
+  scrutiny: false
+  correction_deadline_days: 28
+
+enforcement:
+  new_york_convention: true
+  singapore_convention: false
+  electronic_signatures: "accepted"
+  electronic_filing: true
+  platform: "LCIA Online"
+
+# OANP protocol mapping
+oanp_mapping:
+  phase_round_limits:
+    discovery: 5
+    generation: 4
+    bargaining: 12
+    convergence: 6
+  escalation_tiers:
+    - tier: "negotiation"
+      max_rounds: 12
+    - tier: "mediation"
+      max_rounds: 6
+    - tier: "arbitration"
+      max_rounds: 5
+  hard_deadline_rounds: 30
+  stagnation_window: 3
+  stagnation_threshold: 0.02

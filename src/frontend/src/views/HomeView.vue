@@ -251,7 +251,13 @@
                 </div>
               </div>
 
-              <!-- Launch from template -->
+              <!-- Dispute Configuration + Launch -->
+              <div v-if="selectedScenario" class="console-section">
+                <DisputeConfig
+                  v-model="disputeConfig"
+                  :institutions="institutions"
+                />
+              </div>
               <div class="console-section btn-section">
                 <div v-if="launchError" class="launch-error">{{ launchError }}</div>
                 <button
@@ -259,7 +265,7 @@
                   @click="launch"
                   :disabled="!selectedScenario || launching"
                 >
-                  <span v-if="!launching">Launch Negotiation</span>
+                  <span v-if="!launching">Launch {{ disputeConfig.mode === 'advanced' ? 'Formal Procedure' : 'Negotiation' }}</span>
                   <span v-else>Initializing...</span>
                   <span class="btn-arrow">→</span>
                 </button>
@@ -276,115 +282,113 @@
                   </span>
                 </div>
 
-                <!-- Introduction (before first message) -->
-                <div v-if="specMessages.length === 0" class="builder-intro">
-                  <p class="intro-text">
-                    Describe any negotiation scenario in natural language. The AI agent will ask
-                    clarifying questions to build a complete scenario with parties, interests,
-                    BATNAs, issues, and objective criteria.
-                  </p>
-                  <div class="intro-examples">
-                    <span class="intro-examples-label">EXAMPLES</span>
+                <p class="intro-text" v-if="specMessages.length === 0">
+                  Describe any negotiation scenario in natural language. The AI agent will ask
+                  clarifying questions to build a complete scenario with parties, interests,
+                  BATNAs, issues, and objective criteria.
+                </p>
+
+                <!-- Unified builder panel -->
+                <div class="builder-panel">
+                  <!-- Examples (before first message) -->
+                  <div v-if="specMessages.length === 0" class="builder-examples">
+                    <span class="builder-examples-label">EXAMPLES</span>
                     <div
                       v-for="ex in builderExamples"
                       :key="ex"
-                      class="intro-example"
+                      class="builder-example-item"
                       @click="prompt = ex"
                     >
                       "{{ ex }}"
                     </div>
                   </div>
-                </div>
 
-                <!-- Chat history -->
-                <div v-if="specMessages.length > 0" class="spec-chat" ref="specChatRef">
-                  <div
-                    v-for="(msg, idx) in specMessages"
-                    :key="idx"
-                    class="spec-message"
-                    :class="msg.role"
-                  >
-                    <div class="spec-msg-header">
-                      <span class="spec-role">{{ msg.role === 'user' ? 'You' : 'OANP Agent' }}</span>
-                    </div>
-                    <div class="spec-msg-body">{{ msg.text }}</div>
+                  <!-- Chat history -->
+                  <div v-if="specMessages.length > 0" class="spec-chat" ref="specChatRef">
+                    <div
+                      v-for="(msg, idx) in specMessages"
+                      :key="idx"
+                      class="spec-message"
+                      :class="msg.role"
+                    >
+                      <div class="spec-msg-header">
+                        <span class="spec-role">{{ msg.role === 'user' ? 'You' : 'OANP Agent' }}</span>
+                      </div>
+                      <div class="spec-msg-body">{{ msg.text }}</div>
 
-                    <!-- Accumulated knowledge -->
-                    <div v-if="msg.known && Object.keys(msg.known).length > 0" class="spec-known">
-                      <span class="spec-known-label">UNDERSTOOD SO FAR</span>
-                      <div v-for="(val, key) in msg.known" :key="key" class="spec-known-row">
-                        <span class="spec-known-key">{{ key }}:</span>
-                        <span class="spec-known-val">{{ formatKnownValue(val) }}</span>
+                      <!-- Accumulated knowledge -->
+                      <div v-if="msg.known && Object.keys(msg.known).length > 0" class="spec-known">
+                        <span class="spec-known-label">UNDERSTOOD SO FAR</span>
+                        <div v-for="(val, key) in msg.known" :key="key" class="spec-known-row">
+                          <span class="spec-known-key">{{ key }}:</span>
+                          <span class="spec-known-val">{{ formatKnownValue(val) }}</span>
+                        </div>
+                      </div>
+
+                      <!-- Missing info -->
+                      <div v-if="msg.missing?.length > 0" class="spec-missing">
+                        <span class="spec-missing-label">STILL NEEDED</span>
+                        <span v-for="m in msg.missing" :key="m" class="spec-missing-tag">{{ m }}</span>
                       </div>
                     </div>
 
-                    <!-- Missing info -->
-                    <div v-if="msg.missing?.length > 0" class="spec-missing">
-                      <span class="spec-missing-label">STILL NEEDED</span>
-                      <span v-for="m in msg.missing" :key="m" class="spec-missing-tag">{{ m }}</span>
+                    <!-- Loading indicator -->
+                    <div v-if="specLoading" class="spec-message assistant">
+                      <div class="spec-thinking">
+                        <span class="thinking-dot"></span>
+                        <span class="thinking-dot"></span>
+                        <span class="thinking-dot"></span>
+                      </div>
                     </div>
                   </div>
 
-                  <!-- Loading indicator -->
-                  <div v-if="specLoading" class="spec-message assistant">
-                    <div class="spec-thinking">
-                      <span class="thinking-dot"></span>
-                      <span class="thinking-dot"></span>
-                      <span class="thinking-dot"></span>
+                  <!-- Input -->
+                  <div class="builder-input-area">
+                    <textarea
+                      ref="specInputRef"
+                      v-model="prompt"
+                      class="code-input"
+                      :placeholder="specMessages.length === 0
+                        ? '// Describe a negotiation scenario...'
+                        : '// Answer the question above...'"
+                      :rows="specMessages.length === 0 ? 3 : 2"
+                      :disabled="launching || specLoading || specReady"
+                      @keydown.enter.meta.prevent="sendSpecify"
+                      @keydown.enter.ctrl.prevent="sendSpecify"
+                    ></textarea>
+                    <div class="input-footer">
+                      <span class="model-badge">{{ specSession ? `session: ${specSession.slice(0, 12)}` : 'Engine: OANP v0.1' }}</span>
+                      <span class="input-hint" v-if="!specReady">⌘+Enter to send</span>
                     </div>
                   </div>
+
+                  <!-- Action button integrated into panel -->
+                  <button
+                    v-if="!specReady"
+                    class="builder-send-btn"
+                    :class="{ secondary: specMessages.length > 0 }"
+                    @click="sendSpecify"
+                    :disabled="!prompt.trim() || specLoading"
+                  >
+                    <span v-if="specLoading">Agent is thinking...</span>
+                    <span v-else-if="specMessages.length === 0">Start Building</span>
+                    <span v-else>Send Response</span>
+                    <span class="btn-arrow">{{ specMessages.length === 0 ? '→' : '↵' }}</span>
+                  </button>
+
+                  <button
+                    v-if="specReady"
+                    class="builder-send-btn"
+                    @click="launch"
+                    :disabled="launching"
+                  >
+                    <span v-if="!launching">Launch Generated Scenario</span>
+                    <span v-else>Initializing...</span>
+                    <span class="btn-arrow">→</span>
+                  </button>
                 </div>
 
-                <!-- Input -->
-                <div class="input-wrapper" :class="{ 'has-chat': specMessages.length > 0 }">
-                  <textarea
-                    ref="specInputRef"
-                    v-model="prompt"
-                    class="code-input"
-                    :placeholder="specMessages.length === 0
-                      ? '// Describe a negotiation scenario...'
-                      : '// Answer the question above...'"
-                    :rows="specMessages.length === 0 ? 4 : 2"
-                    :disabled="launching || specLoading || specReady"
-                    @keydown.enter.meta.prevent="sendSpecify"
-                    @keydown.enter.ctrl.prevent="sendSpecify"
-                  ></textarea>
-                  <div class="input-footer">
-                    <span class="model-badge">{{ specSession ? `session: ${specSession.slice(0, 12)}` : 'Engine: OANP v0.1' }}</span>
-                    <span class="input-hint" v-if="!specReady">⌘+Enter to send</span>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Action Buttons -->
-              <div class="console-section btn-section">
-                <!-- Send button (during conversation) -->
-                <button
-                  v-if="!specReady"
-                  class="start-engine-btn"
-                  :class="{ secondary: specMessages.length > 0 }"
-                  @click="sendSpecify"
-                  :disabled="!prompt.trim() || specLoading"
-                >
-                  <span v-if="specLoading">Agent is thinking...</span>
-                  <span v-else-if="specMessages.length === 0">Start Building</span>
-                  <span v-else>Send Response</span>
-                  <span class="btn-arrow">{{ specMessages.length === 0 ? '→' : '↵' }}</span>
-                </button>
-
-                <!-- Launch generated scenario -->
-                <button
-                  v-if="specReady"
-                  class="start-engine-btn"
-                  @click="launch"
-                  :disabled="launching"
-                >
-                  <span v-if="!launching">Launch Generated Scenario</span>
-                  <span v-else>Initializing...</span>
-                  <span class="btn-arrow">→</span>
-                </button>
-
-                <!-- Reset -->
+                <!-- Reset (outside panel) -->
                 <button
                   v-if="specMessages.length > 0"
                   class="reset-btn"
@@ -434,8 +438,9 @@
 import { ref, computed, onMounted, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAppStore } from '@/store/app'
-import { createSession, generateScenario, specifyStep, getDemos } from '@/api/endpoints'
+import { createSession, generateScenario, specifyStep, getDemos, getInstitutions } from '@/api/endpoints'
 import { PHASE_COLORS, PARTY_COLORS } from '@/types/protocol'
+import DisputeConfig from '@/components/chamber/DisputeConfig.vue'
 
 const router = useRouter()
 const { state: appState, loadScenarios, loadStats, loadHistory, addToHistory } = useAppStore()
@@ -444,6 +449,15 @@ const selectedScenario = ref(null)
 const prompt = ref('')
 const launching = ref(false)
 const loading = ref(false)
+
+// Advanced mode config
+const institutions = ref([])
+const disputeConfig = ref({
+  mode: 'streamlined',
+  institution: null,
+  escalation: null,
+  deadlines: null,
+})
 
 // Specify (conversational scenario builder) state
 const specSession = ref(null)
@@ -584,7 +598,15 @@ async function launch() {
     let scenarioName
 
     if (hasTemplate) {
-      const data = await createSession(selectedScenario.value.file)
+      // Build advanced config if in formal procedure mode
+      const advancedConfig = disputeConfig.value.mode === 'advanced' ? {
+        mode: 'advanced',
+        institution: disputeConfig.value.institution,
+        escalation: disputeConfig.value.escalation,
+        deadlines: disputeConfig.value.deadlines,
+      } : null
+
+      const data = await createSession(selectedScenario.value.file, advancedConfig)
       if (data.error) {
         launchError.value = data.error
         return
@@ -645,6 +667,8 @@ onMounted(async () => {
   loading.value = true
   await Promise.all([loadScenarios(), loadStats()])
   loadHistory()
+  // Load institutions for advanced mode (non-blocking)
+  getInstitutions().then(d => { institutions.value = d }).catch(() => {})
   // Load demos (non-blocking)
   getDemos().then(d => {
     demos.value = d || []
@@ -1362,10 +1386,6 @@ onMounted(async () => {
 .demo-launch-arrow { font-size: 0.9rem; }
 
 /* Builder Intro */
-.builder-intro {
-  margin-bottom: 16px;
-}
-
 .intro-text {
   font-size: 0.85rem;
   color: var(--gray-text);
@@ -1373,23 +1393,29 @@ onMounted(async () => {
   margin-bottom: 16px;
 }
 
-.intro-examples {
-  border: 1px solid #EEE;
+/* Unified builder panel — single container, no gaps */
+.builder-panel {
+  border: 1px solid #E0E0E0;
   background: #FAFAFA;
-  padding: 12px;
+  overflow: hidden;
 }
 
-.intro-examples-label {
+.builder-examples {
+  padding: 14px 16px;
+  border-bottom: 1px solid #EEEEEE;
+}
+
+.builder-examples-label {
   display: block;
   font-family: var(--font-mono);
   font-size: 0.65rem;
   font-weight: 600;
   color: #AAA;
   letter-spacing: 1px;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
-.intro-example {
+.builder-example-item {
   font-size: 0.8rem;
   color: #555;
   padding: 8px 10px;
@@ -1397,36 +1423,30 @@ onMounted(async () => {
   border-left: 2px solid transparent;
   transition: all 0.15s;
   font-style: italic;
-  margin-bottom: 4px;
 }
 
-.intro-example:hover {
+.builder-example-item:hover {
   background: #F0F0F0;
   border-left-color: var(--accent);
   color: var(--black);
 }
 
-/* Input */
-.input-wrapper {
-  border: 1px solid #DDD;
-  background: #FAFAFA;
-}
-
-.input-wrapper.has-chat {
-  border-top: none;
+/* Input area inside panel */
+.builder-input-area {
+  border-top: 1px solid #EEEEEE;
 }
 
 .code-input {
   width: 100%;
   border: none;
   background: transparent;
-  padding: 16px 20px;
+  padding: 14px 16px;
   font-family: var(--font-mono);
   font-size: 0.85rem;
   line-height: 1.6;
   resize: none;
   outline: none;
-  min-height: 60px;
+  min-height: 50px;
 }
 
 .input-footer {
@@ -1445,6 +1465,46 @@ onMounted(async () => {
   font-family: var(--font-mono);
   font-size: 0.65rem;
   color: #CCC;
+}
+
+/* Send button inside panel */
+.builder-send-btn {
+  width: 100%;
+  background: var(--black);
+  color: var(--white);
+  border: none;
+  border-top: 1px solid #333;
+  padding: 16px 20px;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  letter-spacing: 1px;
+}
+
+.builder-send-btn:not(:disabled):hover {
+  background: var(--accent);
+}
+
+.builder-send-btn:disabled {
+  background: #E5E5E5;
+  color: #999;
+  cursor: not-allowed;
+  border-top-color: #DDD;
+}
+
+.builder-send-btn.secondary {
+  background: #FFF;
+  color: var(--black);
+  border-top: 1px solid #EEE;
+}
+
+.builder-send-btn.secondary:hover:not(:disabled) {
+  background: #F5F5F5;
 }
 
 /* Launch error */
@@ -1468,7 +1528,7 @@ onMounted(async () => {
   font-family: var(--font-mono);
   font-size: 0.75rem;
   cursor: pointer;
-  margin-top: 6px;
+  margin-top: 10px;
   transition: color 0.15s;
 }
 
@@ -1627,12 +1687,9 @@ onMounted(async () => {
 
 /* Specify Chat */
 .spec-chat {
-  max-height: 280px;
+  max-height: 320px;
   overflow-y: auto;
-  border: 1px solid #EEE;
-  background: #FAFAFA;
-  margin-bottom: 12px;
-  padding: 12px;
+  padding: 14px 16px;
   display: flex;
   flex-direction: column;
   gap: 12px;

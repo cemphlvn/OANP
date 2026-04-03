@@ -10,7 +10,13 @@
       :totalIssues="session.issues.length"
       :convergence="session.convergence"
       :outcome="session.outcome"
+      :isAdvancedMode="store.isAdvancedMode()"
+      :escalationTier="session.escalationTier"
+      :tierDeadline="store.tierDeadline()"
+      :stagnationDetected="session.stagnationDetected"
+      :complianceOpen="complianceSidebarOpen"
       @viewAnalysis="goToAnalysis"
+      @toggleCompliance="complianceSidebarOpen = !complianceSidebarOpen"
     >
       <ViewToggle v-model="viewMode" />
     </StatusStrip>
@@ -70,6 +76,8 @@
             :moves="session.moves"
             :parties="session.parties"
             :thinkingPartyId="session.thinkingPartyId"
+            :isAdvancedMode="store.isAdvancedMode()"
+            :escalationTier="session.escalationTier"
           />
           <XRayView
             v-else-if="viewMode === 'xray'"
@@ -81,6 +89,19 @@
             :moves="session.moves"
             :parties="session.parties"
             :thinkingPartyId="session.thinkingPartyId"
+          />
+        </div>
+
+        <!-- Compliance Sidebar (advanced mode, collapsible right) -->
+        <div v-if="store.isAdvancedMode() && complianceSidebarOpen" class="nv-compliance">
+          <ComplianceSidebar
+            :compliance="session.compliance"
+            :moves="session.moves"
+            :parties="session.parties"
+            :tierHistory="session.tierHistory"
+            :deadlineStatus="session.deadlineStatus"
+            :stagnationDetected="session.stagnationDetected"
+            @close="complianceSidebarOpen = false"
           />
         </div>
       </template>
@@ -125,12 +146,22 @@
       :message="phaseTransitionData.message"
     />
 
+    <!-- Tier Transition Overlay (advanced mode) -->
+    <TierTransition
+      v-if="session.tierTransition"
+      :visible="!!session.tierTransition"
+      :from="session.tierTransition?.from"
+      :to="session.tierTransition?.to"
+      :reason="session.tierTransition?.reason"
+    />
+
     <!-- Settlement Card Overlay -->
     <SettlementCard
       :visible="showSettlement"
       :agreement="session.agreement"
       :rounds="session.protocol.round"
       :moveCount="session.moves.length"
+      :award="session.award"
       @close="showSettlement = false"
       @viewAnalysis="goToAnalysis"
     />
@@ -152,6 +183,8 @@ import TimelineView from '@/components/chamber/TimelineView.vue'
 import IssueTracker from '@/components/chamber/IssueTracker.vue'
 import SetupPanel from '@/components/chamber/SetupPanel.vue'
 import PhaseTransition from '@/components/chamber/PhaseTransition.vue'
+import TierTransition from '@/components/chamber/TierTransition.vue'
+import ComplianceSidebar from '@/components/chamber/ComplianceSidebar.vue'
 import SettlementCard from '@/components/chamber/SettlementCard.vue'
 import NegotiationGraph from '@/d3/NegotiationGraph.vue'
 import ScenarioDrawer from '@/components/chamber/ScenarioDrawer.vue'
@@ -164,6 +197,7 @@ const route = useRoute()
 const store = createSessionStore()
 provide(SESSION_KEY, store)
 const { state: session } = store
+const complianceSidebarOpen = ref(false)
 
 // UI state
 const viewMode = ref('arena')
@@ -399,6 +433,15 @@ onUnmounted(() => {
   height: 100%;
   overflow: hidden;
   min-width: 0;
+}
+
+/* Compliance sidebar (advanced mode, right side) */
+.nv-compliance {
+  width: 280px;
+  height: 100%;
+  border-left: 1px solid var(--border);
+  flex-shrink: 0;
+  overflow-y: auto;
 }
 
 /* System Log */

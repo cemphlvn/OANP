@@ -33,7 +33,15 @@ export function createSessionStore() {
     issueStates: {},   // issueId -> { partyValues: { partyId: value }, agreed: bool, agreedValue: string }
     resolvedCount: 0,
     convergence: 0,    // 0-100 percentage
-    logs: []
+    logs: [],
+    // Advanced mode: legal compliance
+    compliance: null,       // full compliance metadata from backend
+    award: null,            // AwardRecord from settlement event
+    escalationTier: null,   // 'negotiation' | 'mediation' | 'arbitration'
+    tierHistory: [],        // [{from_tier, to_tier, reason, at_round}]
+    deadlineStatus: null,   // {type, current, limit, remaining}
+    stagnationDetected: false,
+    tierTransition: null,   // {from, to, reason} — triggers overlay
   })
 
   const ws = new OANPWebSocket()
@@ -75,6 +83,13 @@ export function createSessionStore() {
       state.moves = data.move_history || []
       state.outcome = data.outcome || null
       state.agreement = data.agreement || null
+      // Load compliance data (advanced mode)
+      state.compliance = data.compliance || null
+      state.award = data.award || null
+      if (data.compliance) {
+        state.escalationTier = data.compliance.current_tier || null
+        state.tierHistory = data.compliance.tier_history || []
+      }
       // If moves exist or outcome is set, setup is done
       if (state.moves.length > 0 || state.outcome) {
         state.isSetupPhase = false
@@ -147,9 +162,41 @@ export function createSessionStore() {
         addLog('mediator', `Mediator: ${data.move_type}`)
         break
 
+      case 'tier_change':
+        state.escalationTier = data.to_tier
+        state.tierHistory.push({
+          from_tier: data.from_tier,
+          to_tier: data.to_tier,
+          reason: data.reason,
+          at_round: data.at_round,
+        })
+        state.tierTransition = { from: data.from_tier, to: data.to_tier, reason: data.reason }
+        // Clear tier transition overlay after 3s
+        setTimeout(() => { state.tierTransition = null }, 3000)
+        addLog('phase', `ESCALATION: ${data.from_tier.toUpperCase()} → ${data.to_tier.toUpperCase()} (${data.reason})`)
+        break
+
+      case 'deadline_warning':
+        state.deadlineStatus = {
+          type: data.type,
+          current: data.current,
+          limit: data.limit,
+          remaining: data.remaining,
+        }
+        addLog('system', `⚠ Deadline warning: ${data.remaining} rounds remaining (${data.type})`)
+        break
+
+      case 'stagnation_detected':
+        state.stagnationDetected = true
+        addLog('system', `⚠ ${data.message}`)
+        // Reset after 2 rounds
+        setTimeout(() => { state.stagnationDetected = false }, 30000)
+        break
+
       case 'settlement':
         state.outcome = 'agreement'
         state.agreement = data.agreement
+        state.award = data.award || null
         state.protocol.total_rounds = data.total_rounds || state.protocol.round
         state.thinkingPartyId = null
         // Mark all issues as agreed from the settlement package
@@ -329,6 +376,22 @@ export function createSessionStore() {
     addLog('system', 'Disconnected')
   }
 
+  /** Whether this session is in advanced (legal compliance) mode. */
+  function isAdvancedMode() {
+    return state.compliance?.mode === 'advanced'
+  }
+
+  /** Get the current tier's round deadline (if any). */
+  function tierDeadline() {
+    if (!state.compliance?.escalation) return null
+    const esc = state.compliance.escalation
+    const tier = state.escalationTier
+    if (tier === 'negotiation') return esc.negotiation_deadline_rounds
+    if (tier === 'mediation') return esc.mediation_deadline_rounds
+    if (tier === 'arbitration') return esc.arbitration_deadline_rounds
+    return null
+  }
+
   return {
     state,
     connectionStatus,
@@ -344,7 +407,9 @@ export function createSessionStore() {
     loadDemo,
     startReplay,
     stopReplay,
-    setReplaySpeed
+    setReplaySpeed,
+    isAdvancedMode,
+    tierDeadline,
   }
 }
 

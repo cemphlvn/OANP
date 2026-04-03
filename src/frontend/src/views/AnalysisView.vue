@@ -13,6 +13,10 @@
       <div class="analysis-nav">
         <button class="an-btn" :class="{ active: tab === 'report' }" @click="tab = 'report'">Report</button>
         <button class="an-btn" :class="{ active: tab === 'timeline' }" @click="tab = 'timeline'">Timeline</button>
+        <template v-if="compliance">
+          <button class="an-btn" :class="{ active: tab === 'compliance' }" @click="tab = 'compliance'">Compliance</button>
+          <button class="an-btn" :class="{ active: tab === 'award' }" @click="tab = 'award'">Award</button>
+        </template>
       </div>
     </StatusStrip>
 
@@ -37,6 +41,35 @@
         <div class="an-outcome-bar" :class="metrics.outcome">
           <span class="an-outcome-badge">{{ metrics.outcome === 'agreement' ? 'Agreement Reached' : 'Impasse' }}</span>
           <span class="an-outcome-stats">{{ metrics.total_rounds }} rounds · {{ metrics.total_moves }} moves · {{ (metrics.disclosure_rate * 100).toFixed(0) }}% disclosed</span>
+        </div>
+
+        <!-- Procedural summary (advanced mode) -->
+        <div v-if="compliance" class="an-procedural-summary">
+          <div class="an-ps-label">PROCEDURAL SUMMARY</div>
+          <div class="an-ps-grid">
+            <div class="an-ps-item" v-if="compliance.institution">
+              <span class="an-ps-key">Framework</span>
+              <span class="an-ps-val">{{ compliance.institution.framework?.toUpperCase() }} {{ compliance.institution.procedure }}</span>
+            </div>
+            <div class="an-ps-item" v-if="compliance.institution?.seat">
+              <span class="an-ps-key">Seat</span>
+              <span class="an-ps-val">{{ compliance.institution.seat }}</span>
+            </div>
+            <div class="an-ps-item">
+              <span class="an-ps-key">Final Tier</span>
+              <span class="an-ps-val">{{ compliance.current_tier?.toUpperCase() }}</span>
+            </div>
+            <div class="an-ps-item">
+              <span class="an-ps-key">Due Process</span>
+              <span class="an-ps-val" :class="(compliance.due_process_violations?.length || 0) === 0 ? 'good' : 'warn'">
+                {{ (compliance.due_process_violations?.length || 0) === 0 ? 'No violations' : compliance.due_process_violations.length + ' issues' }}
+              </span>
+            </div>
+            <div class="an-ps-item" v-if="award">
+              <span class="an-ps-key">Award Type</span>
+              <span class="an-ps-val">{{ award.award_type?.replace('_', ' ').toUpperCase() }}</span>
+            </div>
+          </div>
         </div>
 
         <div class="an-grid">
@@ -143,16 +176,34 @@
         :parties="parties"
         :showAllReasoning="true"
       />
+
+      <!-- Compliance Tab (advanced mode) -->
+      <ComplianceAudit
+        v-else-if="tab === 'compliance' && compliance"
+        :compliance="compliance"
+        :award="award"
+        :tierHistory="compliance.tier_history || []"
+        :parties="parties"
+      />
+
+      <!-- Award Tab (advanced mode) -->
+      <AwardDocument
+        v-else-if="tab === 'award' && award"
+        :award="award"
+        :formattedText="awardFormattedText"
+      />
     </div>
   </div>
 </template>
 
 <script setup>
 import { ref, computed, onMounted } from 'vue'
-import { getSession, getAnalysis, getMoves } from '@/api/endpoints'
+import { getSession, getAnalysis, getMoves, getCompliance } from '@/api/endpoints'
 import { PHASE_COLORS, MOVE_LABELS, MOVE_COLORS, PARTY_COLORS } from '@/types/protocol'
 import StatusStrip from '@/components/chamber/StatusStrip.vue'
 import TimelineView from '@/components/chamber/TimelineView.vue'
+import ComplianceAudit from '@/components/chamber/ComplianceAudit.vue'
+import AwardDocument from '@/components/chamber/AwardDocument.vue'
 
 const props = defineProps({ sessionId: String })
 
@@ -162,6 +213,9 @@ const parties = ref([])
 const issues = ref([])
 const moves = ref([])
 const loadError = ref(null)
+const compliance = ref(null)
+const award = ref(null)
+const awardFormattedText = ref(null)
 
 const partyNames = computed(() => {
   const map = {}
@@ -189,6 +243,18 @@ async function loadData() {
     issues.value = sessionData.issues || []
     moves.value = movesData?.moves || sessionData.move_history || []
     metrics.value = analysisData
+
+    // Load compliance data if advanced mode
+    if (sessionData.compliance?.mode === 'advanced') {
+      try {
+        const complianceData = await getCompliance(props.sessionId)
+        compliance.value = complianceData.compliance
+        award.value = complianceData.award
+        awardFormattedText.value = complianceData.award?.formatted_text || null
+      } catch (e) {
+        console.warn('Compliance data unavailable:', e)
+      }
+    }
   } catch (err) {
     console.error('Failed to load analysis:', err)
     loadError.value = err.message || 'Unknown error'
@@ -575,4 +641,33 @@ onMounted(loadData)
 }
 
 .an-explore-btn:hover { border-color: #999; color: #333; }
+
+/* Procedural Summary (advanced mode) */
+.an-procedural-summary {
+  background: #F9F9F9;
+  border: 1px solid #EEE;
+  padding: 16px 20px;
+  margin-bottom: 20px;
+}
+
+.an-ps-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  color: #AAA;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+
+.an-ps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 8px;
+}
+
+.an-ps-item { display: flex; justify-content: space-between; gap: 12px; }
+.an-ps-key { font-family: var(--font-mono); font-size: 11px; color: #999; }
+.an-ps-val { font-family: var(--font-mono); font-size: 11px; font-weight: 600; }
+.an-ps-val.good { color: #22c55e; }
+.an-ps-val.warn { color: #f59e0b; }
 </style>

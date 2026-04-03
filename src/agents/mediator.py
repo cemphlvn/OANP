@@ -278,6 +278,10 @@ async def run_mediator(
     elif config.mode == MediatorMode.ARBITRATIVE:
         system += EVALUATIVE_ADDITION + ARBITRATIVE_ADDITION
 
+    # Advanced mode: append legal compliance context for mediator
+    if state.compliance and state.compliance.mode.value == "advanced":
+        system += _build_mediator_compliance_context(state)
+
     messages = [
         SystemMessage(content=system),
         HumanMessage(
@@ -317,3 +321,42 @@ async def run_mediator(
         )
 
     return None
+
+
+def _build_mediator_compliance_context(state) -> str:
+    """Build legal compliance context for the mediator (advanced mode)."""
+    parts = ["\n\n## Legal Compliance Context\n"]
+    c = state.compliance
+
+    if c.institution:
+        parts.append(f"**Institutional Rules:** {c.institution.framework.value.upper()}")
+        parts.append(f"**Procedure:** {c.institution.procedure}")
+
+    parts.append(f"**Current Tier:** {c.current_tier.value.upper()}")
+
+    if c.deadlines:
+        if c.deadlines.hard_deadline_rounds:
+            remaining = max(0, c.deadlines.hard_deadline_rounds - state.protocol.total_rounds)
+            parts.append(f"**Hard Deadline:** {remaining} rounds remaining")
+
+    if c.current_tier.value == "mediation":
+        parts.append(
+            "\n**Mediation Compliance (Singapore Convention):**\n"
+            "- Any settlement you help produce should be clear, comprehensible, and enforceable.\n"
+            "- Record the basis for settlement terms — the audit trail serves as mediation evidence.\n"
+            "- If settlement is reached, recommend recording it as a consent award for enforceability.\n"
+            "- Maintain impartiality — disclose any concerns about process integrity."
+        )
+
+    if c.current_tier.value == "arbitration":
+        parts.append(
+            "\n**Arbitration Mode:**\n"
+            "- You are now acting as an ARBITRATOR with binding authority.\n"
+            "- Your decision will be rendered as a formal AWARD.\n"
+            "- Base your decision on: (1) objective criteria, (2) parties' disclosed interests, "
+            "(3) fairness and equity, (4) applicable institutional rules.\n"
+            "- The award must include clear reasoning to satisfy New York Convention requirements.\n"
+            "- Aim for a balanced resolution that accounts for both parties' legitimate interests."
+        )
+
+    return "\n".join(parts)

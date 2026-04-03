@@ -1,0 +1,1108 @@
+{
+  "session_id": "neg_d60581d181c6",
+  "scenario_name": "Alex (Creditor) vs Baran (Debtor)",
+  "description": "2 parties, 3 issues, agreement",
+  "parties": [
+    {
+      "id": "alex",
+      "name": "Alex (Creditor)",
+      "role": "Lender seeking repayment"
+    },
+    {
+      "id": "baran",
+      "name": "Baran (Debtor)",
+      "role": "Borrower seeking repayment flexibility"
+    }
+  ],
+  "issues": [
+    {
+      "id": "repayment_amount",
+      "name": "Total Repayment Amount",
+      "description": "",
+      "issue_type": "monetary",
+      "options": [],
+      "range": [
+        500.0,
+        1000.0
+      ],
+      "is_divisible": true
+    },
+    {
+      "id": "payment_schedule",
+      "name": "Payment Schedule",
+      "description": "",
+      "issue_type": "temporal",
+      "options": [
+        "Immediate",
+        "3-month installment",
+        "6-month installment",
+        "12-month installment"
+      ],
+      "range": null,
+      "is_divisible": false
+    },
+    {
+      "id": "legal_fee_waiver",
+      "name": "Waiver of Court Costs",
+      "description": "",
+      "issue_type": "categorical",
+      "options": [
+        "Creditor pays",
+        "Debtor pays",
+        "Split"
+      ],
+      "range": null,
+      "is_divisible": false
+    }
+  ],
+  "criteria": [
+    {
+      "id": "457a4389",
+      "name": "Small Claims Court Filing Fees",
+      "description": "",
+      "source": "Local Judiciary Fee Schedule",
+      "applies_to": [
+        "legal_fee_waiver"
+      ],
+      "reference_value": "150 USD"
+    },
+    {
+      "id": "b023ebb2",
+      "name": "Debt Recovery Industry Standards",
+      "description": "",
+      "source": "Fair Debt Collection Practices Act (FDCPA) guidelines",
+      "applies_to": [
+        "repayment_amount",
+        "payment_schedule"
+      ],
+      "reference_value": "Full principal recovery with reasonable installments"
+    }
+  ],
+  "outcome": "agreement",
+  "agreement": {
+    "id": "dad6f288",
+    "issue_values": {
+      "Total Repayment Amount": "1000.0",
+      "Payment Schedule": "9-month installment",
+      "Waiver of Court Costs": "Split"
+    },
+    "rationale": "I am confirming the final agreement as it achieves my core interest of avoiding court while ensuring the creditor's full recovery.",
+    "pareto_rank": null
+  },
+  "events": [
+    {
+      "type": "phase_change",
+      "data": {
+        "phase": "setup",
+        "round": 0,
+        "message": "Generating satisfaction anchors for utility scoring..."
+      },
+      "delay_ms": 0
+    },
+    {
+      "type": "setup_progress",
+      "data": {
+        "message": "Generating anchors for 2 parties (6 interests)...",
+        "parties": [
+          "alex",
+          "baran"
+        ],
+        "total_interests": 6,
+        "completed_interests": 0
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "setup_progress",
+      "data": {
+        "message": "Generating anchors for Alex (Creditor) (3 interests)...",
+        "party_id": "alex",
+        "party_name": "Alex (Creditor)",
+        "interest_count": 3
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "setup_progress",
+      "data": {
+        "message": "Generating anchors for Baran (Debtor) (3 interests)...",
+        "party_id": "baran",
+        "party_name": "Baran (Debtor)",
+        "interest_count": 3
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "baran",
+        "party_name": "Baran (Debtor)",
+        "interest_description": "Managing immediate cash flow constraints",
+        "interest_type": "desire",
+        "anchor_count": 4,
+        "completed_interests": 1,
+        "total_interests": 6
+      },
+      "delay_ms": 2266
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "alex",
+        "party_name": "Alex (Creditor)",
+        "interest_description": "Fear that the debtor is intentionally avoiding obligations",
+        "interest_type": "fear",
+        "anchor_count": 4,
+        "completed_interests": 2,
+        "total_interests": 6
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "alex",
+        "party_name": "Alex (Creditor)",
+        "interest_description": "Recovery of the full 1000 USD principal",
+        "interest_type": "need",
+        "anchor_count": 4,
+        "completed_interests": 3,
+        "total_interests": 6
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "baran",
+        "party_name": "Baran (Debtor)",
+        "interest_description": "Fear of wage garnishment or added legal fees",
+        "interest_type": "fear",
+        "anchor_count": 4,
+        "completed_interests": 4,
+        "total_interests": 6
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "baran",
+        "party_name": "Baran (Debtor)",
+        "interest_description": "Avoiding a court judgment on public record",
+        "interest_type": "need",
+        "anchor_count": 4,
+        "completed_interests": 5,
+        "total_interests": 6
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchors_generated",
+      "data": {
+        "party_id": "baran",
+        "party_name": "Baran (Debtor)",
+        "anchor_count": 12,
+        "interests": [
+          {
+            "description": "Avoiding a court judgment on public record",
+            "interest_type": "need",
+            "priority": 0.9,
+            "related_issues": [
+              "repayment_amount"
+            ],
+            "anchors": [
+              {
+                "condition": "repayment_amount >= 950",
+                "score": 0.1,
+                "reason": "Paying near the maximum amount without clear legal protection or settlement terms leaves the party vulnerable to further litigation risks."
+              },
+              {
+                "condition": "repayment_amount >= 750 AND payment_schedule = 3-month installment",
+                "score": 0.4,
+                "reason": "Reduces immediate financial strain but the higher repayment amount still carries significant burden and does not fully guarantee the avoidance of court-related filings."
+              },
+              {
+                "condition": "repayment_amount <= 600 AND payment_schedule = 6-month installment",
+                "score": 0.7,
+                "reason": "A manageable repayment amount spread over time provides breathing room and suggests a formal settlement agreement, which typically necessitates dropping court filings."
+              },
+              {
+                "condition": "repayment_amount <= 500 AND payment_schedule = 12-month installment AND legal_fee_waiver = Creditor pays",
+                "score": 1.0,
+                "reason": "The absolute best outcome: minimum repayment, maximum time to pay, and the creditor covering legal fees, which effectively guarantees the case is withdrawn from court."
+              }
+            ]
+          },
+          {
+            "description": "Managing immediate cash flow constraints",
+            "interest_type": "desire",
+            "priority": 0.8,
+            "related_issues": [
+              "payment_schedule"
+            ],
+            "anchors": [
+              {
+                "condition": "payment_schedule = Immediate",
+                "score": 0.05,
+                "reason": "Immediate payment does not alleviate cash flow constraints at all, mirroring the worst-case scenario."
+              },
+              {
+                "condition": "payment_schedule = 3-month installment",
+                "score": 0.35,
+                "reason": "Provides minimal relief compared to immediate payment, but still creates significant monthly pressure."
+              },
+              {
+                "condition": "payment_schedule = 6-month installment",
+                "score": 0.65,
+                "reason": "A moderate improvement that allows for better monthly budget management and stability."
+              },
+              {
+                "condition": "payment_schedule = 12-month installment",
+                "score": 0.95,
+                "reason": "Spreading the repayment over a year provides the maximum possible relief for immediate cash flow constraints."
+              }
+            ]
+          },
+          {
+            "description": "Fear of wage garnishment or added legal fees",
+            "interest_type": "fear",
+            "priority": 0.9,
+            "related_issues": [
+              "repayment_amount"
+            ],
+            "anchors": [
+              {
+                "condition": "repayment_amount >= 950 AND legal_fee_waiver = Debtor pays",
+                "score": 0.05,
+                "reason": "High repayment near the maximum limit plus full liability for court costs creates the highest risk of financial distress and potential wage garnishment."
+              },
+              {
+                "condition": "repayment_amount >= 850 AND payment_schedule = Immediate",
+                "score": 0.35,
+                "reason": "A high lump-sum payment places immediate strain on cash flow, increasing the risk of default and subsequent legal escalation."
+              },
+              {
+                "condition": "repayment_amount <= 750 AND payment_schedule = 6-month installment",
+                "score": 0.65,
+                "reason": "A moderate reduction in total amount combined with a manageable installment plan significantly lowers the likelihood of needing legal intervention."
+              },
+              {
+                "condition": "repayment_amount <= 600 AND payment_schedule = 12-month installment AND legal_fee_waiver = Creditor pays",
+                "score": 0.95,
+                "reason": "Low total amount, extended payment terms, and creditor-covered legal fees eliminate the primary drivers of financial fear and legal risk."
+              }
+            ]
+          }
+        ]
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "alex",
+        "party_name": "Alex (Creditor)",
+        "interest_description": "Avoid the time and stress of a protracted court trial",
+        "interest_type": "desire",
+        "anchor_count": 4,
+        "completed_interests": 6,
+        "total_interests": 6
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchors_generated",
+      "data": {
+        "party_id": "alex",
+        "party_name": "Alex (Creditor)",
+        "anchor_count": 12,
+        "interests": [
+          {
+            "description": "Recovery of the full 1000 USD principal",
+            "interest_type": "need",
+            "priority": 0.9,
+            "related_issues": [
+              "repayment_amount"
+            ],
+            "anchors": [
+              {
+                "condition": "repayment_amount <= 500",
+                "score": 0.0,
+                "reason": "Recovering only half the principal is worse than the BATNA, which guarantees a judgment for the full amount."
+              },
+              {
+                "condition": "repayment_amount >= 650 AND repayment_amount < 800",
+                "score": 0.35,
+                "reason": "Recovering some of the principal with immediate payment is better than the uncertainty of court collection, but still a significant loss."
+              },
+              {
+                "condition": "repayment_amount >= 800 AND payment_schedule = '3-month installment'",
+                "score": 0.65,
+                "reason": "A high recovery rate achieved quickly is a strong outcome that avoids the administrative burden of small claims court."
+              },
+              {
+                "condition": "repayment_amount = 1000 AND payment_schedule = 'Immediate'",
+                "score": 1.0,
+                "reason": "Full recovery of principal with immediate payment is the best possible outcome, superior to the BATNA."
+              }
+            ]
+          },
+          {
+            "description": "Avoid the time and stress of a protracted court trial",
+            "interest_type": "desire",
+            "priority": 0.7,
+            "related_issues": [
+              "payment_schedule"
+            ],
+            "anchors": [
+              {
+                "condition": "payment_schedule = 12-month installment AND legal_fee_waiver = Debtor pays",
+                "score": 0.1,
+                "reason": "This setup entails a long, drawn-out process with additional financial burden, which is the exact scenario this interest seeks to avoid."
+              },
+              {
+                "condition": "payment_schedule = 6-month installment AND legal_fee_waiver = Split",
+                "score": 0.4,
+                "reason": "A moderate timeline that is slightly better than the worst case, though still involves extended administrative overhead."
+              },
+              {
+                "condition": "payment_schedule = 3-month installment AND legal_fee_waiver = Split",
+                "score": 0.65,
+                "reason": "This is a reasonable compromise that avoids the court entirely while keeping the settlement duration relatively short."
+              },
+              {
+                "condition": "payment_schedule = Immediate AND legal_fee_waiver = Creditor pays",
+                "score": 0.95,
+                "reason": "An immediate resolution with no further legal obligations is the ideal outcome, effectively eliminating any risk of a protracted trial."
+              }
+            ]
+          },
+          {
+            "description": "Fear that the debtor is intentionally avoiding obligations",
+            "interest_type": "fear",
+            "priority": 0.8,
+            "related_issues": [
+              "payment_schedule"
+            ],
+            "anchors": [
+              {
+                "condition": "payment_schedule = 12-month installment",
+                "score": 0.05,
+                "reason": "A 12-month schedule suggests the debtor is dragging out the process, fueling fears of intentional avoidance and potential default."
+              },
+              {
+                "condition": "payment_schedule = 6-month installment",
+                "score": 0.35,
+                "reason": "A 6-month delay is mediocre; it provides some liquidity but is long enough to signal a lack of urgency or intent to pay quickly."
+              },
+              {
+                "condition": "payment_schedule = 3-month installment",
+                "score": 0.65,
+                "reason": "A 3-month term is an acceptable compromise that reduces the risk of evasion while acknowledging the debtor's cash flow constraints."
+              },
+              {
+                "condition": "payment_schedule = Immediate",
+                "score": 1.0,
+                "reason": "Immediate payment eliminates the risk of avoidance entirely, providing the highest possible satisfaction regarding this fear."
+              }
+            ]
+          }
+        ]
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "phase_change",
+      "data": {
+        "phase": "discovery",
+        "round": 0,
+        "message": "Entering interest discovery phase"
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "0c1cbfa8",
+        "timestamp": "2026-03-25T15:00:29.231200Z",
+        "party_id": "alex",
+        "move_type": "disclose_interest",
+        "package": null,
+        "argument": null,
+        "disclosed_interest": {
+          "id": "0931aaeb",
+          "description": "I am looking for a full recovery of the 1000 USD principal to resolve this debt fairly.",
+          "interest_type": "need",
+          "priority": 0.9,
+          "related_issues": [
+            "repayment_amount"
+          ],
+          "disclosed": true,
+          "satisfaction_anchors": []
+        },
+        "references": [],
+        "reasoning": "Theory of Mind: Baran likely wants to minimize the immediate financial impact on their cash flow and is probably concerned about the legal costs associated with a court case. My strategy is to open by establishing my primary interest (the full principal) to set the anchor, while remaining cooperative. I will disclose my need for the full amount first to create a transparent foundation for the negotiation, paving the way for flexibility on the schedule later.",
+        "phase": "discovery",
+        "round": 1,
+        "turn": 0,
+        "party_name": "Alex (Creditor)"
+      },
+      "delay_ms": 1981
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "a9bc2767",
+        "timestamp": "2026-03-25T15:00:31.598885Z",
+        "party_id": "baran",
+        "move_type": "disclose_interest",
+        "package": null,
+        "argument": null,
+        "disclosed_interest": {
+          "id": "9dbd80d6",
+          "description": "I am experiencing significant cash flow constraints that make an immediate full repayment difficult, and I am highly motivated to avoid the public record of a court judgment.",
+          "interest_type": "need",
+          "priority": 0.9,
+          "related_issues": [
+            "Total Repayment Amount",
+            "Payment Schedule"
+          ],
+          "disclosed": true,
+          "satisfaction_anchors": []
+        },
+        "references": [],
+        "reasoning": "Theory of Mind: Alex is focused on principal recovery (1000 USD), likely fearing default or loss of the full amount. They prioritize efficiency and certainty. Strategic calculation: I need to signal my willingness to pay the full amount (satisfying their core need) while framing my need for an installment plan as a prerequisite for that payment to be feasible. This establishes cooperation and sets the stage for a mutually beneficial schedule. Move: I am disclosing my need for flexibility to build trust before proposing a specific schedule.",
+        "phase": "discovery",
+        "round": 1,
+        "turn": 1,
+        "party_name": "Baran (Debtor)"
+      },
+      "delay_ms": 2366
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "12657fba",
+        "timestamp": "2026-03-25T15:00:36.099931Z",
+        "party_id": "alex",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "d30c8624",
+          "claim": "A full repayment of the 1000 USD principal is a standard and fair expectation for resolving this debt.",
+          "grounds": [
+            "Industry standards and FDCPA guidelines generally support the recovery of the full principal amount.",
+            "A full recovery ensures that I am made whole after providing the loan, which is the primary purpose of our agreement.",
+            "I understand your cash flow constraints, but we must align on the principal amount before we can discuss how to structure a repayment schedule that accommodates your situation."
+          ],
+          "criterion_id": "Debt Recovery Industry Standards",
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: Baran wants to avoid court and needs flexibility, but is currently withholding their specific repayment capacity. My strategy is to anchor the 1000 USD principal firmly using industry standards while showing empathy for their cash flow issues, signaling that I am open to discussing the 'how' (schedule) once we agree on the 'what' (principal).",
+        "phase": "discovery",
+        "round": 2,
+        "turn": 0,
+        "party_name": "Alex (Creditor)"
+      },
+      "delay_ms": 4000
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "a7deb3ac",
+        "timestamp": "2026-03-25T15:00:38.746991Z",
+        "party_id": "baran",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "154ba3a5",
+          "claim": "A structured repayment plan is a mutually beneficial way to ensure full recovery while respecting my current financial limitations.",
+          "grounds": [
+            "I am committed to fulfilling the full 1000 USD obligation to satisfy your need for full recovery.",
+            "My current cash flow constraints make an immediate lump sum payment impossible, which risks defaulting on the agreement.",
+            "Industry standards suggest that reasonable installments are an appropriate way to handle debt recovery when immediate payment is not feasible."
+          ],
+          "criterion_id": "Debt Recovery Industry Standards",
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: Alex is focused on the 1000 USD principal, likely fearing that I will not pay or that they will lose money. They seem to prioritize certainty of recovery. Strategic Calculation: I need to validate their interest in full repayment while setting the stage for an installment plan. By arguing for installments based on industry standards, I am moving the discussion toward a solution that addresses my cash flow constraints without appearing to evade the debt. I am building trust by acknowledging their need for the full amount.",
+        "phase": "discovery",
+        "round": 2,
+        "turn": 1,
+        "party_name": "Baran (Debtor)"
+      },
+      "delay_ms": 2647
+    },
+    {
+      "type": "mediator_note",
+      "data": {
+        "id": "a8f21ffb",
+        "timestamp": "2026-03-25T15:00:40.810392Z",
+        "party_id": "mediator",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "0a26d6b2",
+          "claim": "Both parties are currently focused on the goal of full recovery of the principal amount, which provides a strong foundation for moving toward a mutually agreeable payment structure.",
+          "grounds": [
+            "Both Alex and Baran have expressed a commitment to the full repayment of the 1000 USD principal, indicating that the total amount is not the primary point of contention, but rather the timing and structure of the payments.",
+            "There is a potential trade-off between the duration of the installment plan and the total certainty of repayment; a longer timeline may be more feasible for the debtor while ensuring the creditor still receives the full amount."
+          ],
+          "criterion_id": null,
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": null,
+        "phase": "discovery",
+        "round": 2,
+        "turn": 2,
+        "party_name": "Mediator"
+      },
+      "delay_ms": 2063
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "a7bf4c03",
+        "timestamp": "2026-03-25T15:00:43.778474Z",
+        "party_id": "alex",
+        "move_type": "propose",
+        "package": {
+          "id": "21fb2798",
+          "issue_values": {
+            "Total Repayment Amount": "1000.0",
+            "Payment Schedule": "6-month installment",
+            "Waiver of Court Costs": "Debtor pays"
+          },
+          "rationale": "I am proposing a 6-month installment plan to accommodate your cash flow constraints while ensuring the full 1000 USD principal is recovered. Regarding the court costs, since this debt is overdue, industry standards typically place the burden of recovery costs on the debtor. This structure balances our mutual interests by avoiding court proceedings while upholding the full value of the debt.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: Baran is clearly stressed about immediate liquidity and the stigma of court proceedings. They prioritize flexibility over the total amount, but they acknowledge the debt. Strategic Calculation: I am signaling flexibility on the schedule (my desire to avoid court) while firming up the principal amount (my need). I included the court costs to offset the risk of a long installment plan. This package creates value by trading the payment timeline for the certainty of full repayment.",
+        "phase": "discovery",
+        "round": 3,
+        "turn": 0,
+        "party_name": "Alex (Creditor)"
+      },
+      "delay_ms": 2968
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "200c7f9a",
+        "timestamp": "2026-03-25T15:00:47.465608Z",
+        "party_id": "baran",
+        "move_type": "propose",
+        "package": {
+          "id": "4a52a9fe",
+          "issue_values": {
+            "Total Repayment Amount": "1000.0",
+            "Payment Schedule": "12-month installment",
+            "Waiver of Court Costs": "Split"
+          },
+          "rationale": "I am committed to full repayment of the 1000 USD principal as you requested. However, to ensure I can maintain these payments without default during my current financial hardship, I propose a 12-month schedule. Additionally, splitting the court costs recognizes that both parties are working together to reach an out-of-court resolution, saving the time and expense of a full trial.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: Alex clearly prioritizes full repayment (1000 USD) and has already shown flexibility by offering a 6-month plan, suggesting they want to avoid the uncertainty of court. They are likely concerned about the risk of non-payment if I am pushed beyond my means. Strategic calculation: By agreeing to the full principal, I satisfy their core interest. By moving to a 12-month plan, I address my cash flow constraints. Proposing a 'Split' on court costs is a fair compromise that acknowledges the savings we both achieve by avoiding further litigation. This package creates value by prioritizing the relationship and a sustainable path to full repayment over immediate, but potentially unsustainable, cash flow demands.",
+        "phase": "discovery",
+        "round": 3,
+        "turn": 1,
+        "party_name": "Baran (Debtor)"
+      },
+      "delay_ms": 3687
+    },
+    {
+      "type": "mediator_note",
+      "data": {
+        "id": "6d05096d",
+        "timestamp": "2026-03-25T15:00:50.514462Z",
+        "party_id": "mediator",
+        "move_type": "propose",
+        "package": {
+          "id": "1ec6b892",
+          "issue_values": {
+            "Total Repayment Amount": "1000.0",
+            "Payment Schedule": "9-month installment",
+            "Waiver of Court Costs": "Split"
+          },
+          "rationale": "Both parties have agreed on the principal amount of 1000.0. By splitting the difference on the payment timeline (9 months) and the court costs, this package balances the creditor's interest in timely recovery with the debtor's interest in manageable cash flow and shared administrative burdens.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": null,
+        "phase": "discovery",
+        "round": 3,
+        "turn": 2,
+        "party_name": "Mediator"
+      },
+      "delay_ms": 3048
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "0b1c6373",
+        "timestamp": "2026-03-25T15:00:53.659456Z",
+        "party_id": "alex",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "40e2095f",
+          "claim": "I am open to adjusting the payment schedule, but the court costs must be handled fairly given the effort required to settle this outside of the legal system.",
+          "grounds": [
+            "Industry standards generally suggest that if a creditor makes significant concessions on the repayment timeline, the debtor should bear the costs associated with the potential legal recovery process.",
+            "A 12-month timeline increases my credit risk and the time value of money lost, making the 'Debtor pays' or 'Split' option for court costs a necessary offset for that risk.",
+            "While I appreciate the commitment to the full 1000 USD, I must ensure that my costs are covered if I am to avoid the stress and delay of a formal court proceeding."
+          ],
+          "criterion_id": "Small Claims Court Filing Fees",
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: Baran is clearly cash-strapped and afraid of a court judgment, which motivates them to pay the full amount but stretch the time. They are pushing for a longer 12-month schedule and split costs to minimize immediate impact. Strategy: I will acknowledge their need for flexibility (cooperation) but use the court fee criterion to argue why splitting or having them pay is fair, given the risk I take by waiting 12 months. I want to show I am willing to be flexible on the schedule if the cost allocation acknowledges the burden of the delay.",
+        "phase": "discovery",
+        "round": 4,
+        "turn": 0,
+        "party_name": "Alex (Creditor)"
+      },
+      "delay_ms": 3144
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "68284786",
+        "timestamp": "2026-03-25T15:00:56.579601Z",
+        "party_id": "baran",
+        "move_type": "invoke_criterion",
+        "package": null,
+        "argument": {
+          "id": "55d0ed20",
+          "claim": "Splitting court costs is a fair and standard practice when parties reach a structured settlement to avoid further litigation.",
+          "grounds": [
+            "The Small Claims Court filing fee is 150 USD. Splitting this cost reflects the shared benefit of avoiding a protracted court process and the associated legal expenses for both parties.",
+            "Industry standards for debt recovery, as suggested by FDCPA guidelines, emphasize reasonable settlements that facilitate repayment without imposing undue financial burdens that could lead to default."
+          ],
+          "criterion_id": "Small Claims Court Filing Fees",
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [
+          "Round 4"
+        ],
+        "reasoning": "Theory of Mind: Alex is focused on minimizing their own loss and ensuring the principal is recovered. Their insistence on me paying court costs shows they feel the burden of the debt and the legal effort involved. They likely fear that if they waive costs, they are 'losing' more than just the principal. Strategic Calculation: I need to validate their need for fairness while protecting my own cash flow. By invoking the criteria of court fees and FDCPA guidelines, I argue that a split is not just a concession, but a standard, cooperative step toward a sustainable resolution that keeps me solvent and ensures their full recovery.",
+        "phase": "discovery",
+        "round": 4,
+        "turn": 1,
+        "party_name": "Baran (Debtor)"
+      },
+      "delay_ms": 2920
+    },
+    {
+      "type": "mediator_note",
+      "data": {
+        "id": "ae7ffd80",
+        "timestamp": "2026-03-25T15:00:58.626218Z",
+        "party_id": "mediator",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "6071a76b",
+          "claim": "Both parties are demonstrating a strong commitment to reaching a settlement outside of court, which indicates a shared interest in avoiding the time and expense of formal litigation. While there is a disagreement regarding the court cost allocation and the specific installment duration, the gap between their positions has narrowed significantly.",
+          "grounds": [
+            "Both parties agree on the total repayment amount of 1000 USD and share a common goal of resolving this matter through a structured repayment plan to avoid the costs and uncertainties of court proceedings.",
+            "There is potential to trade off the duration of the installment plan against the allocation of court costs, where a shorter duration might be balanced against a more favorable cost-sharing arrangement for one party."
+          ],
+          "criterion_id": null,
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": null,
+        "phase": "discovery",
+        "round": 4,
+        "turn": 2,
+        "party_name": "Mediator"
+      },
+      "delay_ms": 2046
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "aafe0d76",
+        "timestamp": "2026-03-25T15:01:00.987422Z",
+        "party_id": "alex",
+        "move_type": "propose",
+        "package": {
+          "id": "89c3f8d7",
+          "issue_values": {
+            "Total Repayment Amount": "1000.0",
+            "Payment Schedule": "9-month installment",
+            "Waiver of Court Costs": "Split"
+          },
+          "rationale": "I am accepting the mediator's suggestion of a 9-month installment plan to accommodate your cash flow constraints, and I am agreeing to split the court costs as a gesture of good faith to reach an amicable, out-of-court resolution.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: Baran is clearly motivated to avoid court and seeks flexibility to manage cash flow. They have already agreed to the full principal, which is my primary priority. Their insistence on splitting court costs suggests they are sensitive to immediate out-of-pocket expenses. Strategic Calculation: By accepting the 9-month schedule and the split on court costs, I secure the full 1000 USD principal and avoid the uncertainty and time-cost of court. This satisfies my need for full recovery and my desire to avoid litigation, while providing the flexibility Baran needs to ensure compliance. This is a fair compromise that aligns with objective industry standards for debt recovery.",
+        "phase": "discovery",
+        "round": 5,
+        "turn": 0,
+        "party_name": "Alex (Creditor)"
+      },
+      "delay_ms": 2361
+    },
+    {
+      "type": "validation_error",
+      "data": {
+        "party_id": "baran",
+        "violations": [
+          "accept is not legal in discovery phase. Legal moves: ['disclose_interest', 'argue', 'invoke_criterion', 'propose']"
+        ]
+      },
+      "delay_ms": 4000
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "97cb3f8f",
+        "timestamp": "2026-03-25T15:01:03.850215Z",
+        "party_id": "baran",
+        "move_type": "accept",
+        "package": {
+          "id": "5a5beeb8",
+          "issue_values": {
+            "Total Repayment Amount": "1000.0",
+            "Payment Schedule": "9-month installment",
+            "Waiver of Court Costs": "Split"
+          },
+          "rationale": "This agreement ensures full recovery of the principal as requested by the creditor, while providing me with a manageable 9-month payment schedule that addresses my cash flow concerns and avoids a court judgment.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: Alex is focused on ensuring the full recovery of the 1000 USD principal and likely wants to avoid the time and uncertainty of a full court process, hence their willingness to compromise on the schedule and costs. My strategic calculation: The 9-month plan is a reasonable compromise between my preferred 12-month plan and their initial 6-month plan. Accepting the split on court costs aligns with standard fair practice and satisfies my primary interest of avoiding a court judgment while managing my cash flow. This package meets my aspiration level.",
+        "phase": "discovery",
+        "round": 5,
+        "turn": 1,
+        "party_name": "Baran (Debtor)"
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "phase_change",
+      "data": {
+        "phase": "generation",
+        "round": 5,
+        "message": "Entering option generation phase \u2014 agents propose packages"
+      },
+      "delay_ms": 1951
+    },
+    {
+      "type": "validation_error",
+      "data": {
+        "party_id": "alex",
+        "violations": [
+          "accept is not legal in generation phase. Legal moves: ['propose', 'meso', 'disclose_interest', 'argue', 'invoke_criterion']"
+        ]
+      },
+      "delay_ms": 4000
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "347771d3",
+        "timestamp": "2026-03-25T15:01:11.276566Z",
+        "party_id": "alex",
+        "move_type": "accept",
+        "package": {
+          "id": "96ee0fcc",
+          "issue_values": {
+            "Total Repayment Amount": "1000.0",
+            "Payment Schedule": "9-month installment",
+            "Waiver of Court Costs": "Split"
+          },
+          "rationale": "I am pleased to accept the terms of the agreement as it satisfies my primary need for full principal recovery while providing a structured repayment schedule that accommodates your current financial situation, effectively avoiding the uncertainty of court proceedings.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: Baran prioritizes avoiding a court judgment and needs a flexible timeline due to cash flow issues. By accepting the 9-month split-cost proposal, I secure the full 1000 USD principal, eliminate the risk of a protracted legal battle, and foster a cooperative resolution that Baran is clearly eager to finalize. This move aligns with my strategy of balancing firm recovery goals with pragmatic compromise.",
+        "phase": "generation",
+        "round": 6,
+        "turn": 0,
+        "party_name": "Alex (Creditor)"
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "validation_error",
+      "data": {
+        "party_id": "baran",
+        "violations": [
+          "accept is not legal in generation phase. Legal moves: ['propose', 'meso', 'disclose_interest', 'argue', 'invoke_criterion']"
+        ]
+      },
+      "delay_ms": 4000
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "4c1ba47a",
+        "timestamp": "2026-03-25T15:01:16.524443Z",
+        "party_id": "baran",
+        "move_type": "accept",
+        "package": {
+          "id": "b860c63a",
+          "issue_values": {
+            "Total Repayment Amount": "1000.0",
+            "Payment Schedule": "9-month installment",
+            "Waiver of Court Costs": "Split"
+          },
+          "rationale": "This agreement represents a fair and balanced resolution that satisfies the creditor's interest in full principal recovery while providing the necessary flexibility for my financial situation and avoiding the burden of a court judgment.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: Alex has consistently prioritized full recovery of the 1000 USD and was willing to compromise on the schedule and costs to avoid the time and expense of further litigation. My move confirms the final acceptance of the negotiated terms, ensuring the agreement is formalized and closing the conflict constructively. This aligns with my interests of avoiding court and managing cash flow while meeting the creditor's core requirement.",
+        "phase": "generation",
+        "round": 6,
+        "turn": 1,
+        "party_name": "Baran (Debtor)"
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "validation_error",
+      "data": {
+        "party_id": "alex",
+        "violations": [
+          "accept is not legal in generation phase. Legal moves: ['propose', 'meso', 'disclose_interest', 'argue', 'invoke_criterion']"
+        ]
+      },
+      "delay_ms": 4000
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "6d739664",
+        "timestamp": "2026-03-25T15:01:23.861704Z",
+        "party_id": "alex",
+        "move_type": "accept",
+        "package": {
+          "id": "2bbbe7ea",
+          "issue_values": {
+            "Total Repayment Amount": "1000.0",
+            "Payment Schedule": "9-month installment",
+            "Waiver of Court Costs": "Split"
+          },
+          "rationale": "The agreement on a 9-month repayment plan for the full principal and a split of court costs satisfies my requirement for full recovery while providing the debtor with the flexibility needed to avoid default, successfully concluding the negotiation.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: Baran values the avoidance of court records and needs a manageable schedule due to cash flow constraints. My strategy was to secure the full principal while remaining flexible on the timeline and costs to ensure compliance. Since we have reached a consensus on the mediator's package, accepting it formalizes the agreement and avoids the time and stress of litigation, which was a key fear and interest of mine. The move is a final acceptance to close the negotiation.",
+        "phase": "generation",
+        "round": 7,
+        "turn": 0,
+        "party_name": "Alex (Creditor)"
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "validation_error",
+      "data": {
+        "party_id": "baran",
+        "violations": [
+          "accept is not legal in generation phase. Legal moves: ['propose', 'meso', 'disclose_interest', 'argue', 'invoke_criterion']"
+        ]
+      },
+      "delay_ms": 4000
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "f24b3717",
+        "timestamp": "2026-03-25T15:01:29.759461Z",
+        "party_id": "baran",
+        "move_type": "accept",
+        "package": {
+          "id": "9e64f9de",
+          "issue_values": {
+            "Total Repayment Amount": "1000.0",
+            "Payment Schedule": "9-month installment",
+            "Waiver of Court Costs": "Split"
+          },
+          "rationale": "I am confirming my acceptance of the settled terms to finalize the agreement and avoid any further legal proceedings.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: Alex has consistently demonstrated that full recovery of the principal is their primary objective and that they are willing to be flexible on the schedule if it guarantees that recovery. They have accepted the 9-month split-cost proposal multiple times, signaling that this is their optimal settlement. My strategy is to finalize this agreement to secure the avoidance of court records and maintain a cooperative relationship, as this package satisfies my need for cash flow management and my fear of legal escalation. I am choosing to accept to conclude the negotiation definitively.",
+        "phase": "generation",
+        "round": 7,
+        "turn": 1,
+        "party_name": "Baran (Debtor)"
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "phase_change",
+      "data": {
+        "phase": "bargaining",
+        "round": 7,
+        "message": "Entering bargaining phase \u2014 proposals and counterproposals"
+      },
+      "delay_ms": 1538
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "d6631035",
+        "timestamp": "2026-03-25T15:01:36.951657Z",
+        "party_id": "alex",
+        "move_type": "accept",
+        "package": {
+          "id": "a032511b",
+          "issue_values": {
+            "Total Repayment Amount": "1000.0",
+            "Payment Schedule": "9-month installment",
+            "Waiver of Court Costs": "Split"
+          },
+          "rationale": "I am confirming the final agreement on a 1000 USD repayment over a 9-month schedule with split court costs, as this successfully secures the full principal while accommodating the debtor's cash flow constraints, thereby avoiding the need for further legal action.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: Baran has consistently demonstrated a commitment to full repayment while emphasizing the need for flexibility due to cash flow constraints. By accepting the 9-month split, Baran avoids the uncertainty and public record of a court judgment, which was their primary fear. My strategic calculation is that this deal satisfies my primary requirement for full recovery (1000 USD) and avoids the time and costs of a trial, aligning with my interests. Since both parties have repeatedly accepted these terms, final confirmation is the logical conclusion to finalize the settlement.",
+        "phase": "bargaining",
+        "round": 8,
+        "turn": 0,
+        "party_name": "Alex (Creditor)"
+      },
+      "delay_ms": 4000
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "5551ffc0",
+        "timestamp": "2026-03-25T15:01:42.660810Z",
+        "party_id": "baran",
+        "move_type": "accept",
+        "package": {
+          "id": "dad6f288",
+          "issue_values": {
+            "Total Repayment Amount": "1000.0",
+            "Payment Schedule": "9-month installment",
+            "Waiver of Court Costs": "Split"
+          },
+          "rationale": "I am confirming the final agreement as it achieves my core interest of avoiding court while ensuring the creditor's full recovery.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: Alex has repeatedly accepted and confirmed the terms, showing satisfaction with the full principal repayment and the split of court costs. My strategic calculation is that the negotiation is effectively concluded and further delay or re-negotiation would be counterproductive and risk the established trust. I will formally accept the final terms to finalize the settlement.",
+        "phase": "bargaining",
+        "round": 8,
+        "turn": 1,
+        "party_name": "Baran (Debtor)"
+      },
+      "delay_ms": 4000
+    },
+    {
+      "type": "settlement",
+      "data": {
+        "agreement": {
+          "id": "dad6f288",
+          "issue_values": {
+            "Total Repayment Amount": "1000.0",
+            "Payment Schedule": "9-month installment",
+            "Waiver of Court Costs": "Split"
+          },
+          "rationale": "I am confirming the final agreement as it achieves my core interest of avoiding court while ensuring the creditor's full recovery.",
+          "pareto_rank": null
+        },
+        "total_rounds": 8,
+        "total_moves": 19
+      },
+      "delay_ms": 2253
+    }
+  ],
+  "metrics": {
+    "outcome": "agreement",
+    "party_utilities": {
+      "alex": 0.0,
+      "baran": 0.0
+    },
+    "party_batna_surplus": {
+      "alex": -0.6,
+      "baran": -0.3
+    },
+    "social_welfare": 0.0,
+    "pareto_efficient": false,
+    "nash_product": 1e-06,
+    "integrative_index": 0.0,
+    "total_rounds": 8,
+    "total_moves": 19,
+    "move_breakdown": {
+      "disclose_interest": 2,
+      "argue": 5,
+      "propose": 4,
+      "invoke_criterion": 1,
+      "accept": 7
+    },
+    "disclosure_rate": 0.3333333333333333,
+    "phases_visited": [
+      "discovery",
+      "generation",
+      "bargaining",
+      "settlement"
+    ],
+    "agreement": {
+      "id": "dad6f288",
+      "issue_values": {
+        "Total Repayment Amount": "1000.0",
+        "Payment Schedule": "9-month installment",
+        "Waiver of Court Costs": "Split"
+      },
+      "rationale": "I am confirming the final agreement as it achieves my core interest of avoiding court while ensuring the creditor's full recovery.",
+      "pareto_rank": null
+    }
+  },
+  "critique": [
+    {
+      "severity": "low",
+      "description": "No multi-option (MESO) packages were generated."
+    },
+    {
+      "severity": "medium",
+      "description": "Integrative index 0.00 < 1.0 \u2014 value may have been destroyed."
+    }
+  ]
+}

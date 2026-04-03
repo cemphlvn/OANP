@@ -68,14 +68,20 @@ async def get_stats():
 
 class CreateSessionRequest(BaseModel):
     scenario_path: str | None = None
+    # Advanced mode config (all optional — backward compatible)
+    mode: str | None = None  # "streamlined" | "advanced"
+    institution: dict | None = None  # {framework, procedure, seat, governing_law, ...}
+    escalation: dict | None = None  # {tiers, negotiation_deadline_rounds, ...}
+    deadlines: dict | None = None  # {phase_max_rounds, hard_deadline_rounds, ...}
 
 
 @app.post("/api/sessions")
 async def create_session(body: CreateSessionRequest = CreateSessionRequest()):
     """Create a new negotiation session, optionally from a scenario file."""
     if body.scenario_path:
-        from ..protocol.scenario import load_scenario
+        from ..protocol.scenario import load_scenario, load_scenario_from_dict
         from pathlib import Path
+        import yaml
 
         scenario_path = Path(body.scenario_path)
         # Resolve stem-only paths (e.g. "salary-negotiation") to full path
@@ -89,7 +95,21 @@ async def create_session(body: CreateSessionRequest = CreateSessionRequest()):
                 alt = scenarios_dir / f"{body.scenario_path}.yaml"
                 if alt.exists():
                     scenario_path = alt
-        state = load_scenario(str(scenario_path))
+
+        # If advanced mode config provided, merge it into the scenario
+        if body.mode == "advanced" or body.institution:
+            with open(scenario_path) as f:
+                raw = yaml.safe_load(f)
+            raw["mode"] = body.mode or "advanced"
+            if body.institution:
+                raw["institution"] = body.institution
+            if body.escalation:
+                raw["escalation"] = body.escalation
+            if body.deadlines:
+                raw["deadlines"] = body.deadlines
+            state = load_scenario_from_dict(raw)
+        else:
+            state = load_scenario(str(scenario_path))
     else:
         state = NegotiationState()
 
@@ -101,6 +121,7 @@ async def create_session(body: CreateSessionRequest = CreateSessionRequest()):
         "issues": [i.model_dump() for i in state.issues],
         "phase": state.protocol.phase.value,
         "architecture": state.protocol.architecture.value,
+        "compliance": state.compliance.mode.value if state.compliance else None,
     }
 
 
@@ -391,6 +412,74 @@ async def get_analysis(session_id: str):
         "agreement": metrics.agreement,
         "critique": critique,
     }
+
+
+# ---------------------------------------------------------------------------
+# Institution Profiles API — legal compliance configuration
+# ---------------------------------------------------------------------------
+
+@app.get("/api/institutions")
+async def list_institutions():
+    """List all available institution profiles with summaries."""
+    from ..protocol.institutions import list_profiles, get_profile_summary
+    profiles = []
+    for pid in list_profiles():
+        try:
+            profiles.append(get_profile_summary(pid))
+        except Exception:
+            pass
+    return {"institutions": profiles}
+
+
+@app.get("/api/institutions/{institution_id}")
+async def get_institution(institution_id: str):
+    """Get full institution profile."""
+    from ..protocol.institutions import load_profile
+    try:
+        return load_profile(institution_id)
+    except FileNotFoundError:
+        return {"error": f"Institution '{institution_id}' not found"}
+
+
+@app.get("/api/sessions/{session_id}/compliance")
+async def get_compliance(session_id: str):
+    """Get compliance metadata, checklists, and award for a session."""
+    state = store.get(session_id)
+    if not state:
+        return {"error": "Session not found"}
+
+    result = {"mode": "streamlined", "compliance": None, "award": None, "checklists": None}
+
+    if state.compliance:
+        from ..protocol.compliance import ComplianceEngine
+        from ..protocol.award import format_award_text, format_compliance_report
+
+        ce = ComplianceEngine(state.compliance)
+        result["mode"] = state.compliance.mode.value
+        result["compliance"] = {
+            "current_tier": state.compliance.current_tier.value,
+            "tier_history": state.compliance.tier_history,
+            "due_process_log": state.compliance.due_process_log,
+            "due_process_violations": ce.validate_due_process(state),
+            "institution": state.compliance.institution.model_dump(mode="json") if state.compliance.institution else None,
+            "escalation": state.compliance.escalation.model_dump(mode="json") if state.compliance.escalation else None,
+            "deadlines": state.compliance.deadlines.model_dump(mode="json") if state.compliance.deadlines else None,
+        }
+        result["checklists"] = {
+            "pre_negotiation": ce.get_pre_negotiation_checklist(),
+            "during": ce.get_during_negotiation_checklist(state),
+            "award": ce.get_award_checklist(),
+        }
+
+    if state.award:
+        from ..protocol.award import format_award_text, format_compliance_report
+        result["award"] = {
+            **state.award.model_dump(mode="json"),
+            "formatted_text": format_award_text(state.award, state),
+            "compliance_report": format_compliance_report(state.award, state),
+        }
+
+    return result
 
 
 # ---------------------------------------------------------------------------

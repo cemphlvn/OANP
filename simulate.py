@@ -258,6 +258,9 @@ def build_json_result(
                 "timestamp": m.timestamp.isoformat(),
                 "party_id": m.party_id,
                 "move_type": m.move_type.value,
+                "phase": m.phase,
+                "round": m.round,
+                "turn": m.turn,
                 "package": m.package.model_dump() if m.package else None,
                 "argument": m.argument.model_dump() if m.argument else None,
                 "references": m.references,
@@ -272,6 +275,18 @@ def build_json_result(
             }
             for p in state.parties
         ],
+        # Legal compliance (advanced mode)
+        "compliance": {
+            "mode": state.compliance.mode.value,
+            "institution": state.compliance.institution.framework.value if state.compliance.institution else None,
+            "procedure": state.compliance.institution.procedure if state.compliance.institution else None,
+            "seat": state.compliance.institution.seat if state.compliance.institution else None,
+            "governing_law": state.compliance.institution.governing_law if state.compliance.institution else None,
+            "current_tier": state.compliance.current_tier.value,
+            "tier_history": state.compliance.tier_history,
+            "escalation_tiers": [t.value for t in state.compliance.escalation.tiers] if state.compliance.escalation else [],
+        } if state.compliance else None,
+        "award": state.award.model_dump(mode="json") if state.award else None,
     }
 
 
@@ -344,11 +359,23 @@ def print_event(event_type: str, data: dict, verbose: bool = False):
 
     elif event_type == "settlement":
         print(f"\n{c('🎉 SETTLEMENT REACHED', 'green')}")
-        print(f"   Rounds: {data.get('rounds', '?')}  |  Moves: {data.get('total_moves', '?')}")
+        print(f"   Rounds: {data.get('total_rounds', data.get('rounds', '?'))}  |  Moves: {data.get('total_moves', '?')}")
         if data.get("agreement"):
             print(f"\n   {c('Final Agreement:', 'bold')}")
             for k, v in data["agreement"].get("issue_values", {}).items():
                 print(f"      {c(k, 'dim')}: {c(str(v), 'green')}")
+        if data.get("award"):
+            award = data["award"]
+            print(f"\n   {c('Award:', 'bold')}")
+            print(f"      Type:      {c(award.get('award_type', '?').replace('_', ' ').upper(), 'cyan')}")
+            if award.get("seat"):
+                print(f"      Seat:      {award['seat']}")
+            if award.get("governing_law"):
+                print(f"      Law:       {award['governing_law']}")
+            if award.get("institution"):
+                print(f"      Framework: {award['institution'].upper()}")
+            if award.get("integrity_hash"):
+                print(f"      Hash:      {c(award['integrity_hash'][:24] + '...', 'dim')}")
 
     elif event_type == "impasse":
         print(f"\n{c('❌ IMPASSE', 'red')}")
@@ -493,6 +520,22 @@ async def main():
         print(f"  Model:    {c(args.model, 'cyan')}")
         print(f"  Parties:  {', '.join(p.name for p in state.parties)}")
         print(f"  Issues:   {', '.join(i.name for i in state.issues)}")
+        if state.compliance and state.compliance.mode.value == "advanced":
+            inst = state.compliance.institution
+            esc = state.compliance.escalation
+            dl = state.compliance.deadlines
+            print(f"  {c('Mode:', 'yellow')}    {c('ADVANCED (Formal Procedure)', 'yellow')}")
+            if inst:
+                print(f"  Rules:    {c(inst.framework.value.upper(), 'cyan')} {inst.procedure}")
+                if inst.seat:
+                    print(f"  Seat:     {inst.seat}")
+                if inst.governing_law:
+                    print(f"  Law:      {inst.governing_law}")
+            if esc:
+                tiers = ' → '.join(t.value.upper() for t in esc.tiers)
+                print(f"  Tiers:    {tiers}")
+            if dl and dl.hard_deadline_rounds:
+                print(f"  Deadline: {dl.hard_deadline_rounds} rounds (hard limit)")
         print(f"{c('─' * 40, 'dim')}")
 
     # Initialize LLM
@@ -524,6 +567,28 @@ async def main():
     if args.output == "pretty":
         # Print metrics report
         print(format_metrics_report(metrics, final_state))
+
+        # Print compliance summary (advanced mode)
+        if final_state.compliance and final_state.compliance.mode.value == "advanced":
+            print(f"\n{c('COMPLIANCE', 'cyan')}")
+            print(f"  Institution: {final_state.compliance.institution.framework.value.upper() if final_state.compliance.institution else 'N/A'}")
+            print(f"  Final tier:  {final_state.compliance.current_tier.value.upper()}")
+            tier_h = final_state.compliance.tier_history
+            if tier_h:
+                print(f"  Escalations: {len(tier_h)}")
+                for th in tier_h:
+                    print(f"    Round {th['at_round']}: {th['from_tier']} → {th['to_tier']} ({th['reason']})")
+            else:
+                print(f"  Escalations: None (resolved at initial tier)")
+
+            from src.protocol.compliance import ComplianceEngine
+            ce = ComplianceEngine(final_state.compliance)
+            violations = ce.validate_due_process(final_state)
+            print(f"  Due process: {c('No violations', 'green') if not violations else c(str(len(violations)) + ' issues', 'red')}")
+
+            if final_state.award:
+                print(f"  Award:       {final_state.award.award_type.value.replace('_', ' ').upper()}")
+                print(f"  Hash:        {final_state.award.integrity_hash[:24]}...")
 
         # Print critique
         if critique:

@@ -1,0 +1,131 @@
+institution:
+  id: "jams"
+  name: "JAMS International"
+  full_name: "JAMS International Arbitration Rules"
+  seat: "New York, United States"
+  rules_version: "2021"
+  rules_effective: "2021-06-01"
+  website: "https://www.jamsadr.com"
+
+procedures:
+  standard:
+    response_deadline_days: 30           # Art. 4
+    arbitrator_appointment_days: 45
+    award_deadline_months: 12            # 9 months + 3 months extension
+    default_arbitrators: 1
+    terms_of_reference: false
+    scrutiny_of_awards: false
+    case_management_conference: true
+    integrated_mediation: true           # Unique: integrated mediation option
+
+  expedited:
+    enabled: true
+    rule_reference: "Art. 21"
+    threshold_usd: 5000000               # USD 5M
+    auto_apply: false
+    opt_in: true
+    opt_out: true
+    sole_arbitrator: true
+    award_deadline_months: 6
+    reduced_fees: true
+
+  emergency:
+    enabled: true
+    rule_reference: "Art. 2(e)"
+    appointment_hours: 48
+    decision_days: 14
+    form: "order"
+    enforceable_as_award: false
+    opt_out: true
+
+  mediation:
+    enabled: true
+    rules: "JAMS Mediation Rules"
+    med_arb: true
+    arb_med_arb: true
+    integrated_mediation: true           # Mediation integrated into arbitration process
+
+time_limits:
+  - phase: "filing"
+    action: "respondent_response"
+    days: 30
+    article: "Art. 4"
+    extendable: true
+  - phase: "constitution"
+    action: "arbitrator_appointment"
+    days: 45
+    article: "Art. 6"
+    extendable: false
+  - phase: "emergency"
+    action: "emergency_arbitrator_appointment"
+    hours: 48
+    article: "Art. 2(e)"
+    extendable: false
+  - phase: "emergency"
+    action: "emergency_decision"
+    days: 14
+    article: "Art. 2(e)"
+    extendable: false
+  - phase: "expedited"
+    action: "render_award"
+    months: 6
+    article: "Art. 21"
+    extendable: true
+    extendable_by: "jams"
+  - phase: "award"
+    action: "render_award"
+    months: 9
+    article: "Art. 31"
+    extendable: true
+    extendable_by: "jams"
+    extension_months: 3
+
+fees:
+  registration_usd: "per_schedule"
+  fee_model: "ad_valorem"
+  expedited_reduced: true
+
+due_process:
+  equal_treatment: true
+  right_to_be_heard: true
+  right_to_present_case: true
+  language_requirements: true
+  arbitrator_disclosure: "iba_guidelines"
+  confidentiality: "default_confidential"
+  challenge_period_days: 14
+
+award_requirements:
+  writing: true
+  signatures: "all_or_majority_with_reason"
+  reasons: true
+  date: true
+  seat: true
+  delivery: "signed_copy_to_each_party"
+  scrutiny: false
+  correction_deadline_days: 30
+
+enforcement:
+  new_york_convention: true
+  singapore_convention: false
+  electronic_signatures: "accepted"
+  electronic_filing: true
+  platform: "JAMS Connect"
+
+# OANP protocol mapping
+oanp_mapping:
+  phase_round_limits:
+    discovery: 4
+    generation: 3
+    bargaining: 10
+    convergence: 5
+  escalation_tiers:
+    - tier: "negotiation"
+      max_rounds: 10
+    - tier: "mediation"
+      max_rounds: 8
+      notes: "Integrated mediation built into process"
+    - tier: "arbitration"
+      max_rounds: 4
+  hard_deadline_rounds: 25
+  stagnation_window: 3
+  stagnation_threshold: 0.02

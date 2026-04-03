@@ -1,0 +1,166 @@
+institution:
+  id: "siac"
+  name: "Singapore International Arbitration Centre"
+  full_name: "Singapore International Arbitration Centre"
+  seat: "Singapore"
+  rules_version: "2025"
+  rules_effective: "2025-01-01"
+  rules_edition: "7th Edition"
+  website: "https://siac.org.sg"
+
+procedures:
+  standard:
+    response_deadline_days: 14           # Rule 4: Notice of Arbitration
+    arbitrator_appointment_days: 28      # Rule 7
+    award_deadline_months: null          # No fixed deadline in standard
+    default_arbitrators: 1               # Sole arbitrator unless parties agree otherwise
+    terms_of_reference: false
+    scrutiny_of_awards: false
+    case_management_conference: true     # Rule 22
+    early_dismissal: true                # Early dismissal provisions
+
+  expedited:
+    enabled: true
+    rule_reference: "Rule 14 + Schedule 3"
+    threshold_sgd: 10000000              # SGD 1M–10M
+    threshold_lower_sgd: 1000000
+    auto_apply: false
+    opt_in: true
+    opt_out: true
+    sole_arbitrator: true
+    award_deadline_months: 6
+    cmc_deadline_days: 5                 # CMC within 5 days
+    documents_only: true                 # Written submissions only
+    reduced_fees: true
+
+  streamlined:
+    enabled: true
+    rule_reference: "Rule 13"
+    threshold_sgd: 1000000               # Claims under SGD 1,000,000
+    auto_apply: true
+    sole_arbitrator: true
+    award_deadline_months: 3
+    fees_capped_pct: 50                  # Fees capped at 50%
+    reduced_fees: true
+
+  emergency:
+    enabled: true
+    rule_reference: "Rule 12 + Schedule 1"
+    appointment_hours: 24
+    decision_days: 14
+    form: "order"
+    enforceable_as_award: false
+    protective_preliminary_order: true
+    preliminary_order_hours: 24          # Ex parte, within 24 hours
+    ex_parte: true
+
+  mediation:
+    enabled: true
+    rules: "SIMC Mediation Rules"
+    med_arb: false
+    arb_med_arb: true                    # Arb-Med-Arb via SIMC
+    mediation_window_weeks: 8            # 8-week mediation window
+    partner_institution: "SIMC"
+
+time_limits:
+  - phase: "filing"
+    action: "notice_of_arbitration"
+    article: "Rule 4"
+    extendable: false
+  - phase: "filing"
+    action: "respondent_response"
+    days: 14
+    article: "Rule 4"
+    extendable: true
+  - phase: "constitution"
+    action: "arbitrator_appointment"
+    days: 28
+    article: "Rule 7"
+    extendable: false
+  - phase: "proceedings"
+    action: "case_management_conference"
+    article: "Rule 22"
+  - phase: "emergency"
+    action: "emergency_arbitrator_appointment"
+    hours: 24
+    article: "Rule 12 / Schedule 1"
+    extendable: false
+  - phase: "emergency"
+    action: "emergency_decision"
+    days: 14
+    article: "Rule 12 / Schedule 1"
+    extendable: false
+  - phase: "emergency"
+    action: "protective_preliminary_order"
+    hours: 24
+    article: "Rule 12 / Schedule 1"
+    condition: "ex_parte"
+  - phase: "expedited"
+    action: "case_management_conference"
+    days: 5
+    article: "Rule 14 / Schedule 3"
+    from_event: "constitution"
+  - phase: "expedited"
+    action: "render_award"
+    months: 6
+    article: "Rule 14 / Schedule 3"
+    extendable: true
+    extendable_by: "registrar"
+  - phase: "streamlined"
+    action: "render_award"
+    months: 3
+    article: "Rule 13"
+    extendable: true
+    extendable_by: "registrar"
+
+fees:
+  registration_sgd: 2140
+  fee_model: "ad_valorem"
+  streamlined_cap_pct: 50
+  expedited_reduced: true
+
+due_process:
+  equal_treatment: true
+  right_to_be_heard: true
+  right_to_present_case: true
+  language_requirements: true
+  arbitrator_disclosure: "iba_guidelines"
+  confidentiality: "default_confidential"
+  challenge_period_days: 14
+  early_dismissal: true
+
+award_requirements:
+  writing: true
+  signatures: "all_or_majority_with_reason"
+  reasons: true
+  date: true
+  seat: true
+  delivery: "signed_copy_to_each_party"
+  scrutiny: false
+  correction_deadline_days: 30
+
+enforcement:
+  new_york_convention: true
+  singapore_convention: true
+  electronic_signatures: "accepted"
+  electronic_filing: true
+  platform: "SIAC Gateway"
+
+# OANP protocol mapping
+oanp_mapping:
+  phase_round_limits:
+    discovery: 4
+    generation: 3
+    bargaining: 10
+    convergence: 5
+  escalation_tiers:
+    - tier: "negotiation"
+      max_rounds: 10
+    - tier: "mediation"
+      max_rounds: 8
+      notes: "Arb-Med-Arb via SIMC, 8-week window"
+    - tier: "arbitration"
+      max_rounds: 4
+  hard_deadline_rounds: 25
+  stagnation_window: 3
+  stagnation_threshold: 0.02

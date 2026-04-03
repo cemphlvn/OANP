@@ -1,0 +1,142 @@
+institution:
+  id: "cas"
+  name: "Court of Arbitration for Sport"
+  full_name: "Tribunal Arbitral du Sport / Court of Arbitration for Sport"
+  seat: "Lausanne, Switzerland"
+  rules_version: "2024"
+  rules_effective: "2024-01-01"
+  website: "https://www.tas-cas.org"
+  specialization: "sports"
+
+procedures:
+  standard:
+    response_deadline_days: 20
+    arbitrator_nomination_days: 10       # Fast nomination
+    award_deadline_months: null          # No fixed standard deadline
+    default_arbitrators: 3
+    terms_of_reference: false
+    scrutiny_of_awards: false
+    case_management_conference: false
+    sports_specific: true
+
+  appeals:
+    enabled: true
+    rule_reference: "R47-R59 (Appeals Arbitration)"
+    filing_deadline_days: 21             # 21 days from decision
+    arbitrator_nomination_days: 10
+    award_deadline_months: 3
+    free_arbitrator_fees: true           # Arbitrator fees free for appeals
+    sole_arbitrator_option: true
+
+  expedited:
+    enabled: true
+    rule_reference: "R44.4"
+    threshold_usd: null                  # No monetary threshold
+    auto_apply: false
+    opt_in: true                         # By consent only
+    opt_out: false
+    sole_arbitrator: true
+    reduced_fees: true
+
+  ad_hoc:
+    enabled: true
+    rule_reference: "Ad Hoc Division Rules"
+    decision_hours: 24                   # 24-hour decisions
+    context: "Olympic Games, major events"
+    notes: "Operates on-site at major sporting events"
+
+  emergency:
+    enabled: false                       # No formal emergency arbitrator
+    notes: "Ad Hoc Division serves emergency function"
+
+  mediation:
+    enabled: true
+    rules: "CAS Mediation Rules"
+    med_arb: false
+    arb_med_arb: false
+
+time_limits:
+  - phase: "filing"
+    action: "statement_of_appeal"
+    days: 21
+    article: "R48"
+    extendable: false
+    condition: "appeals_only"
+  - phase: "filing"
+    action: "appeal_brief"
+    days: 10
+    article: "R51"
+    from_event: "statement_of_appeal"
+    extendable: true
+  - phase: "constitution"
+    action: "arbitrator_nomination"
+    days: 10
+    article: "R53"
+    extendable: false
+  - phase: "appeals"
+    action: "render_award"
+    months: 3
+    article: "R59"
+    extendable: true
+    extendable_by: "cas_president"
+  - phase: "expedited"
+    action: "render_award"
+    article: "R44.4"
+    notes: "Expedited by consent, shortened timelines"
+  - phase: "ad_hoc"
+    action: "render_decision"
+    hours: 24
+    article: "Ad Hoc Division Rules"
+    extendable: false
+
+fees:
+  filing_chf: 1000
+  fee_model: "ad_valorem"
+  appeals_arbitrator_fees: "free"        # Free arbitrator fees for appeals
+  expedited_reduced: true
+
+due_process:
+  equal_treatment: true
+  right_to_be_heard: true
+  right_to_present_case: true
+  language_requirements: true
+  arbitrator_disclosure: "cas_rules"
+  confidentiality: "default_confidential"
+  challenge_period_days: 7
+  sports_specific_expertise: true
+
+award_requirements:
+  writing: true
+  signatures: "all_or_majority_with_reason"
+  reasons: true
+  date: true
+  seat: true
+  delivery: "signed_copy_to_each_party"
+  scrutiny: false
+  correction_deadline_days: 30
+  swiss_federal_tribunal_appeal: true    # Appeals to Swiss Federal Tribunal
+
+enforcement:
+  new_york_convention: true
+  singapore_convention: false
+  electronic_signatures: "accepted"
+  electronic_filing: true
+  platform: "CAS e-Filing"
+
+# OANP protocol mapping — fast appeals track
+oanp_mapping:
+  phase_round_limits:
+    discovery: 3
+    generation: 2
+    bargaining: 8
+    convergence: 4
+  escalation_tiers:
+    - tier: "negotiation"
+      max_rounds: 8
+    - tier: "mediation"
+      max_rounds: 4
+    - tier: "arbitration"
+      max_rounds: 3
+  hard_deadline_rounds: 18
+  stagnation_window: 2
+  stagnation_threshold: 0.02

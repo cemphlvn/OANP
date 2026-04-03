@@ -100,11 +100,65 @@
               </div>
             </div>
 
-            <!-- Card 03: Launch -->
-            <div class="step-card active" v-if="!negotiationStarted">
+            <!-- Card 03: Institutional Framework (advanced mode only) -->
+            <div class="step-card completed" v-if="session.compliance?.mode === 'advanced'">
               <div class="card-header">
                 <div class="step-info">
                   <span class="card-step-num">03</span>
+                  <span class="card-step-title">Institutional Framework</span>
+                </div>
+                <span class="badge success">Configured</span>
+              </div>
+              <div class="card-content">
+                <div class="framework-grid">
+                  <div class="fw-row">
+                    <span class="fw-label">Institution</span>
+                    <span class="fw-value">{{ institutionLabel }}</span>
+                  </div>
+                  <div class="fw-row">
+                    <span class="fw-label">Procedure</span>
+                    <span class="fw-value">{{ procedureLabel }}</span>
+                  </div>
+                  <div class="fw-row" v-if="session.compliance.institution?.seat">
+                    <span class="fw-label">Seat</span>
+                    <span class="fw-value">{{ session.compliance.institution.seat }}</span>
+                  </div>
+                  <div class="fw-row" v-if="session.compliance.institution?.governing_law">
+                    <span class="fw-label">Governing Law</span>
+                    <span class="fw-value">{{ session.compliance.institution.governing_law }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 04: Process Timeline (advanced mode only) -->
+            <div class="step-card completed" v-if="session.compliance?.escalation">
+              <div class="card-header">
+                <div class="step-info">
+                  <span class="card-step-num">04</span>
+                  <span class="card-step-title">Process Timeline</span>
+                </div>
+                <span class="badge success">Active</span>
+              </div>
+              <div class="card-content">
+                <ProcessTimeline
+                  :tiers="session.compliance.escalation.tiers || ['negotiation']"
+                  :currentTier="session.compliance.current_tier || 'negotiation'"
+                  :tierLimits="{
+                    negotiation: session.compliance.escalation.negotiation_deadline_rounds,
+                    mediation: session.compliance.escalation.mediation_deadline_rounds,
+                    arbitration: session.compliance.escalation.arbitration_deadline_rounds,
+                  }"
+                  :hardDeadline="session.compliance.deadlines?.hard_deadline_rounds"
+                />
+              </div>
+            </div>
+
+            <!-- Card: Launch -->
+            <div class="step-card active" v-if="!negotiationStarted">
+              <div class="card-header">
+                <div class="step-info">
+                  <span class="card-step-num">{{ startCardNum }}</span>
                   <span class="card-step-title">Start Negotiation</span>
                 </div>
                 <span class="badge accent">Ready</span>
@@ -158,8 +212,10 @@
 import { ref, computed, onMounted, onUnmounted, provide, watch, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 import { createSessionStore, SESSION_KEY } from '@/store/session'
+import { INSTITUTION_LABELS, PROCEDURE_LABELS } from '@/types/protocol'
 import NegotiationGraph from '@/d3/NegotiationGraph.vue'
 import SetupPanel from '@/components/chamber/SetupPanel.vue'
+import ProcessTimeline from '@/components/chamber/ProcessTimeline.vue'
 
 const props = defineProps({ sessionId: String })
 const router = useRouter()
@@ -170,6 +226,17 @@ provide(SESSION_KEY, store)
 const { state: session } = store
 const viewMode = ref('workbench')
 const logContent = ref(null)
+
+// Compliance labels (advanced mode)
+const institutionLabel = computed(() => {
+  const fw = session.compliance?.institution?.framework
+  return INSTITUTION_LABELS[fw] || fw?.toUpperCase() || ''
+})
+const procedureLabel = computed(() => {
+  const p = session.compliance?.institution?.procedure
+  return PROCEDURE_LABELS[p] || p || 'Standard'
+})
+const startCardNum = computed(() => session.compliance?.mode === 'advanced' ? '05' : '03')
 
 const leftPanelStyle = computed(() => {
   if (viewMode.value === 'graph') return { width: '100%', opacity: 1 }
@@ -619,4 +686,11 @@ onUnmounted(() => {
 
 .log-time { color: #666; min-width: 75px; }
 .log-msg { color: #CCC; word-break: break-all; }
+
+/* Framework grid (advanced mode compliance cards) */
+.framework-grid { display: flex; flex-direction: column; gap: 6px; }
+.fw-row { display: flex; justify-content: space-between; align-items: center; padding: 4px 0; border-bottom: 1px solid #F0F0F0; }
+.fw-row:last-child { border-bottom: none; }
+.fw-label { font-family: var(--font-mono); font-size: 11px; color: #999; }
+.fw-value { font-family: var(--font-mono); font-size: 11px; font-weight: 600; color: #333; }
 </style>

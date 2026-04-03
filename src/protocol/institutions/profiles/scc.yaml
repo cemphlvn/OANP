@@ -1,0 +1,130 @@
+institution:
+  id: "scc"
+  name: "Arbitration Institute of the Stockholm Chamber of Commerce"
+  full_name: "SCC Arbitration Institute"
+  seat: "Stockholm, Sweden"
+  rules_version: "2023"
+  rules_effective: "2023-01-01"
+  website: "https://sccinstitute.com"
+
+procedures:
+  standard:
+    response_deadline_days: 30           # Art. 9
+    arbitrator_appointment_days: 30
+    award_deadline_months: 6             # From referral
+    default_arbitrators: 1
+    terms_of_reference: false
+    scrutiny_of_awards: false
+    case_management_conference: true
+
+  expedited:
+    enabled: true
+    rule_reference: "SCC Rules for Expedited Arbitrations"
+    threshold_usd: null                  # No monetary threshold
+    auto_apply: false
+    opt_in: true                         # By consent only
+    opt_out: false
+    sole_arbitrator: true
+    award_deadline_months: 3
+    separate_rules: true                 # Separate set of rules
+    reduced_fees: true
+
+  emergency:
+    enabled: true
+    rule_reference: "Appendix II"
+    appointment_hours: 24
+    decision_days: 5
+    form: "order"
+    enforceable_as_award: false
+    opt_out: true
+
+  mediation:
+    enabled: true
+    rules: "SCC Mediation Rules"
+    med_arb: false
+    arb_med_arb: false
+
+time_limits:
+  - phase: "filing"
+    action: "respondent_response"
+    days: 30
+    article: "Art. 9"
+    extendable: true
+  - phase: "constitution"
+    action: "arbitrator_appointment"
+    days: 30
+    article: "Art. 17"
+    extendable: false
+  - phase: "emergency"
+    action: "emergency_arbitrator_appointment"
+    hours: 24
+    article: "Appendix II"
+    extendable: false
+  - phase: "emergency"
+    action: "emergency_decision"
+    days: 5
+    article: "Appendix II"
+    extendable: false
+  - phase: "expedited"
+    action: "render_award"
+    months: 3
+    article: "Expedited Rules"
+    extendable: true
+    extendable_by: "scc_board"
+  - phase: "award"
+    action: "render_award"
+    months: 6
+    article: "Art. 43"
+    from_event: "referral_to_tribunal"
+    extendable: true
+    extendable_by: "scc_board"
+
+fees:
+  registration_eur_standard: 3000
+  registration_eur_expedited: 2500
+  fee_model: "ad_valorem"
+  expedited_reduced: true
+
+due_process:
+  equal_treatment: true
+  right_to_be_heard: true
+  right_to_present_case: true
+  language_requirements: true
+  arbitrator_disclosure: "iba_guidelines"
+  confidentiality: "default_confidential"
+  challenge_period_days: 15
+
+award_requirements:
+  writing: true
+  signatures: "all_or_majority_with_reason"
+  reasons: true
+  date: true
+  seat: true
+  delivery: "signed_copy_to_each_party"
+  scrutiny: false
+  correction_deadline_days: 30
+
+enforcement:
+  new_york_convention: true
+  singapore_convention: false
+  electronic_signatures: "accepted"
+  electronic_filing: true
+  platform: "SCC Platform"
+
+# OANP protocol mapping
+oanp_mapping:
+  phase_round_limits:
+    discovery: 4
+    generation: 3
+    bargaining: 10
+    convergence: 5
+  escalation_tiers:
+    - tier: "negotiation"
+      max_rounds: 10
+    - tier: "mediation"
+      max_rounds: 6
+    - tier: "arbitration"
+      max_rounds: 4
+  hard_deadline_rounds: 25
+  stagnation_window: 3
+  stagnation_threshold: 0.02

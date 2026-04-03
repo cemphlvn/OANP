@@ -1,0 +1,98 @@
+# Escalation Test — tight deadlines to force tier transitions
+# Purpose: verify tier_change, deadline_warning, and arbitration node code paths
+
+title: "Salary Dispute (Escalation Test)"
+description: "A salary negotiation with extremely tight deadlines to force escalation through all three tiers."
+
+mode: advanced
+
+institution:
+  framework: uncitral
+  procedure: expedited
+  seat: "Geneva, Switzerland"
+  governing_law: "Swiss law"
+
+escalation:
+  tiers: [negotiation, mediation, arbitration]
+  negotiation_deadline_rounds: 3
+  mediation_deadline_rounds: 2
+  arbitration_deadline_rounds: 2
+  auto_escalate: true
+  stagnation_threshold: 0.5
+  cooling_off_rounds: 0
+
+deadlines:
+  phase_max_rounds:
+    discovery: 1
+    generation: 1
+    bargaining: 3
+    convergence: 2
+  hard_deadline_rounds: 12
+  stagnation_window: 2
+  stagnation_threshold: 0.5
+
+protocol:
+  architecture: mediated
+  max_rounds: 15
+
+mediator:
+  mode: facilitative
+  knowledge: caucus_only
+  intervention: every_round
+
+parties:
+  - id: employee
+    name: "Jordan (Employee)"
+    role: "Claimant"
+    interests:
+      - description: "Higher base salary to cover increased living costs"
+        type: need
+        priority: 0.9
+        related_issues: [salary]
+      - description: "More vacation days for work-life balance"
+        type: desire
+        priority: 0.7
+        related_issues: [vacation]
+    batna:
+      description: "Accept competing offer at rival company for $130K"
+      utility: 0.4
+      confidence: 0.7
+
+  - id: employer
+    name: "TechCorp Inc."
+    role: "Respondent"
+    interests:
+      - description: "Keep salary costs within budget constraints"
+        type: need
+        priority: 0.85
+        related_issues: [salary]
+      - description: "Retain talented employee without setting precedent"
+        type: concern
+        priority: 0.7
+        related_issues: [salary, vacation]
+    batna:
+      description: "Hire replacement at market rate ($125K, 3 months to fill)"
+      utility: 0.3
+      confidence: 0.5
+
+issues:
+  - id: salary
+    name: "Annual Salary"
+    type: monetary
+    range: [120000, 160000]
+    divisible: true
+
+  - id: vacation
+    name: "Vacation Days"
+    type: categorical
+    options:
+      - "15 days (current)"
+      - "20 days"
+      - "25 days"
+      - "Unlimited PTO"
+
+criteria:
+  - name: "Market Rate Survey"
+    source: market_data
+    applies_to: [salary]
+    reference_value: "$135K-$145K for comparable roles in the region"
