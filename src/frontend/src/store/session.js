@@ -42,6 +42,9 @@ export function createSessionStore() {
     deadlineStatus: null,   // {type, current, limit, remaining}
     stagnationDetected: false,
     tierTransition: null,   // {from, to, reason} — triggers overlay
+    // BCI opponent model
+    beliefs: {},            // "observerId→targetId" -> belief payload
+    beliefHistory: [],      // chronological snapshots for Beliefs view
   })
 
   const ws = new OANPWebSocket()
@@ -142,6 +145,15 @@ export function createSessionStore() {
         break
 
       case 'move':
+        // Attach latest BCI belief snapshot to the move (for MoveCard display)
+        if (Object.keys(state.beliefs).length > 0) {
+          const beliefKey = Object.keys(state.beliefs).find(
+            k => k.startsWith(data.party_id + '→')
+          )
+          if (beliefKey) {
+            data.belief_snapshot = state.beliefs[beliefKey]
+          }
+        }
         state.moves.push(data)
         state.protocol.total_moves = state.moves.length
         state.thinkingPartyId = null
@@ -255,6 +267,18 @@ export function createSessionStore() {
         state.anchorsStatus = { ...state.anchorsStatus, [data.party_id]: 'failed' }
         addLog('error', `Anchor generation failed for ${partyName(data.party_id)}`)
         break
+
+      case 'belief_update': {
+        const bkey = `${data.observer_party_id}→${data.target_party_id}`
+        state.beliefs[bkey] = data.belief
+        state.beliefHistory.push({
+          round: state.protocol.round,
+          observer_party_id: data.observer_party_id,
+          target_party_id: data.target_party_id,
+          ...data.belief,
+        })
+        break
+      }
 
       case 'validation_error':
         addLog('error', `Validation: ${data.violations?.join(', ')}`)

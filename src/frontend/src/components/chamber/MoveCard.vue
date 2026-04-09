@@ -32,6 +32,25 @@
       <span class="mc-int-priority">{{ move.disclosed_interest.priority }}</span>
     </div>
 
+    <!-- Belief Snapshot (XRay mode only) -->
+    <div v-if="showReasoning && move.belief_snapshot && move.belief_snapshot.confidence >= 0.2" class="mc-belief">
+      <div class="mc-belief-title">OPPONENT MODEL</div>
+      <div class="mc-belief-rows">
+        <div
+          v-for="(w, iid) in sortedBeliefWeights"
+          :key="iid"
+          class="mc-belief-row"
+        >
+          <span class="mc-belief-issue">{{ iid }}</span>
+          <span class="mc-belief-weight">{{ w.toFixed(2) }}</span>
+          <div class="mc-belief-minibar">
+            <div class="mc-belief-fill" :style="{ width: (w * 100) + '%' }"></div>
+          </div>
+        </div>
+      </div>
+      <div class="mc-belief-conf">Conf: {{ (move.belief_snapshot.confidence * 100).toFixed(0) }}%</div>
+    </div>
+
     <!-- Reasoning (collapsible) -->
     <div v-if="move.reasoning && (showReasoning || reasoningExpanded)" class="mc-reasoning">
       <div class="mc-reasoning-text">{{ move.reasoning }}</div>
@@ -62,6 +81,14 @@ const reasoningExpanded = ref(false)
 const moveLabel = computed(() => MOVE_LABELS[props.move.move_type] || props.move.move_type)
 const moveColor = computed(() => MOVE_COLORS[props.move.move_type] || '#999')
 const interestColor = computed(() => INTEREST_TYPE_COLORS[props.move.disclosed_interest?.interest_type] || '#999')
+
+const sortedBeliefWeights = computed(() => {
+  const bp = props.move.belief_snapshot?.estimated_priorities
+  if (!bp) return {}
+  return Object.fromEntries(
+    Object.entries(bp).sort(([,a], [,b]) => b - a)
+  )
+})
 </script>
 
 <style scoped>
@@ -165,4 +192,64 @@ const interestColor = computed(() => INTEREST_TYPE_COLORS[props.move.disclosed_i
 }
 
 .mc-reasoning-toggle:hover { color: var(--accent); }
+
+/* Belief Snapshot */
+.mc-belief {
+  margin-top: 8px;
+  padding: 8px 10px;
+  background: #FFFBF5;
+  border: 1px solid #F0E0C0;
+  border-radius: 4px;
+}
+.mc-belief-title {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  color: #C4A882;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.mc-belief-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 1px 0;
+}
+.mc-belief-issue {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: #886;
+  min-width: 70px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.mc-belief-weight {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  color: #000;
+  min-width: 28px;
+  text-align: right;
+}
+.mc-belief-minibar {
+  flex: 1;
+  height: 3px;
+  background: #F0E0C0;
+  border-radius: 1.5px;
+  overflow: hidden;
+}
+.mc-belief-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 1.5px;
+  transition: width 0.6s ease;
+}
+.mc-belief-conf {
+  margin-top: 4px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: #BBB;
+}
 </style>

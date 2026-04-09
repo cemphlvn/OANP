@@ -36,6 +36,14 @@
               :style="{ width: (100 - issue.gapPct) + '%' }"
             ></div>
           </div>
+          <!-- BCI opponent weight indicator -->
+          <div v-if="issue.oppWeight != null" class="it-bci-row" :class="bciConfClass(issue.oppConf)">
+            <span class="it-bci-label">OPP</span>
+            <span class="it-bci-val">{{ issue.oppWeight.toFixed(2) }}</span>
+            <div class="it-bci-bar">
+              <div class="it-bci-fill" :style="{ width: (issue.oppWeight * 100) + '%' }"></div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -50,7 +58,8 @@ const props = defineProps({
   issues: { type: Array, default: () => [] },
   issueStates: { type: Object, default: () => ({}) },
   parties: { type: Array, default: () => [] },
-  agreement: { type: Object, default: null }
+  agreement: { type: Object, default: null },
+  beliefs: { type: Object, default: () => ({}) },
 })
 
 function truncate(s, n) {
@@ -63,6 +72,12 @@ function gapClass(pct) {
   if (pct <= 0) return 'agreed'
   if (pct > 50) return 'high'
   return 'low'
+}
+
+function bciConfClass(conf) {
+  if (conf > 0.6) return 'it-bci-conf-high'
+  if (conf > 0.3) return 'it-bci-conf-mid'
+  return 'it-bci-conf-low'
 }
 
 const issueCards = computed(() => {
@@ -90,7 +105,19 @@ const issueCards = computed(() => {
       } else gapPct = 50
     }
 
-    return { id: issue.id, name: issue.name, agreed, agreedValue, partyAVal, partyBVal, gapPct }
+    // BCI: get opponent weight for this issue (use first available belief)
+    let oppWeight = null
+    let oppConf = 0
+    const beliefKeys = Object.keys(props.beliefs)
+    if (beliefKeys.length > 0) {
+      const b = props.beliefs[beliefKeys[0]]
+      if (b?.estimated_priorities && b.confidence >= 0.2) {
+        oppWeight = b.estimated_priorities[issue.id] ?? b.estimated_priorities[issue.name] ?? null
+        oppConf = b.confidence
+      }
+    }
+
+    return { id: issue.id, name: issue.name, agreed, agreedValue, partyAVal, partyBVal, gapPct, oppWeight, oppConf }
   })
 })
 </script>
@@ -228,4 +255,44 @@ const issueCards = computed(() => {
 .it-gap-fill.agreed { background: #22c55e; }
 .it-gap-fill.low { background: #3b82f6; }
 .it-gap-fill.high { background: var(--accent); }
+
+/* BCI opponent weight indicator */
+.it-bci-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 4px;
+  transition: opacity 0.3s ease;
+}
+.it-bci-conf-low { opacity: 0.35; }
+.it-bci-conf-mid { opacity: 0.7; }
+.it-bci-conf-high { opacity: 1.0; }
+
+.it-bci-label {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  color: #BBB;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.it-bci-val {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  color: #000;
+  min-width: 24px;
+}
+.it-bci-bar {
+  flex: 1;
+  height: 3px;
+  background: #F0F0F0;
+  border-radius: 1.5px;
+  overflow: hidden;
+}
+.it-bci-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 1.5px;
+  transition: width 0.6s ease;
+}
 </style>

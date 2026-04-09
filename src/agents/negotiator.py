@@ -193,6 +193,11 @@ def build_negotiator_prompt(
         legal_moves=", ".join(m.value for m in legal_moves),
     )
 
+    # BCI opponent model section (if data available)
+    bci_section = _build_bci_section(state, party_id)
+    if bci_section:
+        system += "\n\n" + bci_section
+
     # Advanced mode: append legal compliance context
     if state.compliance and state.compliance.mode.value == "advanced":
         system += _build_compliance_context(state)
@@ -306,6 +311,122 @@ async def run_negotiator(
         references=response.references,
         reasoning=response.reasoning or None,
     )
+
+
+def _build_bci_section(state: NegotiationState, party_id: str) -> str:
+    """Build BCI opponent model section for the negotiator prompt.
+
+    Suppressed when confidence is too low or no opponent bids observed.
+    """
+    private = state.private_states.get(party_id)
+    if not private or not private.belief_models:
+        return ""
+
+    def _weight_label(w: float) -> str:
+        if w > 0.30:
+            return "HIGH"
+        if w > 0.15:
+            return "MODERATE"
+        return "LOW"
+
+    def _util_label(u: float) -> str:
+        if u > 0.8:
+            return "VERY HIGH"
+        if u > 0.6:
+            return "HIGH"
+        if u > 0.4:
+            return "MODERATE"
+        if u > 0.2:
+            return "LOW"
+        return "VERY LOW"
+
+    sections = []
+    for target_id, belief in private.belief_models.items():
+        if belief.confidence < 0.2:
+            continue
+        if not belief.estimated_priorities:
+            continue
+
+        target_name = next(
+            (p.name for p in state.parties if p.id == target_id), target_id
+        )
+
+        conf_label = "HIGH" if belief.confidence > 0.7 else "MODERATE" if belief.confidence > 0.5 else "LOW"
+
+        lines = [
+            f"## Opponent Model: {target_name} (Bayesian Estimate from Observed Bids)",
+            f"Confidence: {conf_label} ({belief.confidence:.0%})",
+            "",
+            "Estimated priorities (what they care about most):",
+        ]
+
+        # Sort by weight descending, map issue IDs to names
+        sorted_priorities = sorted(belief.estimated_priorities.items(), key=lambda x: -x[1])
+        for issue_id, weight in sorted_priorities:
+            issue_name = next(
+                (iss.name for iss in state.issues if iss.id == issue_id or iss.name == issue_id),
+                issue_id,
+            )
+            lines.append(f"- {issue_name}: {_weight_label(weight)} (weight {weight:.2f})")
+
+        # Utility estimates (only when confidence is reasonable)
+        if belief.confidence >= 0.5:
+            # Find opponent's last bid and our last bid
+            opponent_bids = [m for m in state.move_history if m.party_id == target_id and m.package]
+            our_bids = [m for m in state.move_history if m.party_id == party_id and m.package]
+
+            if opponent_bids or our_bids:
+                lines.append("")
+                # Use BCI engine if available via _engine_ref
+                engine = getattr(state, '_engine_ref', None)
+                bci_models = getattr(engine, 'bci_models', {}) if engine else {}
+                bci = bci_models.get(party_id, {}).get(target_id)
+                if bci:
+                    if our_bids:
+                        our_util = bci.estimate_utility(our_bids[-1].package.issue_values)
+                        lines.append(
+                            f"Estimated opponent satisfaction with YOUR last proposal: "
+                            f"{our_util:.2f} ({_util_label(our_util)})"
+                        )
+                    if opponent_bids:
+                        their_util = bci.estimate_utility(opponent_bids[-1].package.issue_values)
+                        lines.append(
+                            f"Estimated opponent satisfaction with THEIR last proposal: "
+                            f"{their_util:.2f} ({_util_label(their_util)})"
+                        )
+
+        if belief.confidence < 0.5:
+            lines.append("")
+            lines.append("(Low confidence — treat as tentative hypotheses, not facts.)")
+
+        lines.extend([
+            "",
+            "This data COMPLEMENTS your theory-of-mind reasoning. The opponent may have",
+            "interests not captured by bid patterns (relationship concerns, undisclosed constraints).",
+        ])
+
+        # Strategy hints based on BCI
+        if belief.confidence >= 0.4 and len(sorted_priorities) >= 2:
+            top_issue = sorted_priorities[0][0]
+            top_name = next(
+                (iss.name for iss in state.issues if iss.id == top_issue or iss.name == top_issue),
+                top_issue,
+            )
+            bottom_issue = sorted_priorities[-1][0]
+            bottom_name = next(
+                (iss.name for iss in state.issues if iss.id == bottom_issue or iss.name == bottom_issue),
+                bottom_issue,
+            )
+            lines.append("")
+            lines.append(
+                f"TACTICAL HINT: Opponent cares most about {top_name} and least about "
+                f"{bottom_name}. Consider conceding on {top_name} (high value to them) "
+                f"while holding firm on issues you value most."
+            )
+
+        sections.append("\n".join(lines))
+
+    return "\n\n".join(sections)
 
 
 def _build_compliance_context(state: NegotiationState) -> str:

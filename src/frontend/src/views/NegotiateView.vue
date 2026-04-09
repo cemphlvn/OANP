@@ -18,7 +18,7 @@
       @viewAnalysis="goToAnalysis"
       @toggleCompliance="complianceSidebarOpen = !complianceSidebarOpen"
     >
-      <ViewToggle v-model="viewMode" />
+      <ViewToggle v-model="viewMode" :hasBeliefsData="Object.keys(session.beliefs).length > 0" />
     </StatusStrip>
 
     <!-- Expandable scenario details -->
@@ -83,12 +83,21 @@
             v-else-if="viewMode === 'xray'"
             :moves="session.moves"
             :parties="session.parties"
+            :beliefs="session.beliefs"
+            :issues="session.issues"
           />
           <TimelineView
             v-else-if="viewMode === 'timeline'"
             :moves="session.moves"
             :parties="session.parties"
             :thinkingPartyId="session.thinkingPartyId"
+          />
+          <BeliefsView
+            v-else-if="viewMode === 'beliefs'"
+            :parties="session.parties"
+            :beliefs="session.beliefs"
+            :beliefHistory="session.beliefHistory"
+            :issues="session.issues"
           />
         </div>
 
@@ -114,6 +123,7 @@
       :issueStates="session.issueStates"
       :parties="session.parties"
       :agreement="session.agreement"
+      :beliefs="session.beliefs"
     />
 
     <!-- System Log (resizable) -->
@@ -177,6 +187,7 @@ import { getDemo } from '@/api/endpoints'
 // Chamber components
 import StatusStrip from '@/components/chamber/StatusStrip.vue'
 import ViewToggle from '@/components/chamber/ViewToggle.vue'
+import BeliefsView from '@/components/chamber/BeliefsView.vue'
 import Arena from '@/components/chamber/Arena.vue'
 import XRayView from '@/components/chamber/XRayView.vue'
 import TimelineView from '@/components/chamber/TimelineView.vue'

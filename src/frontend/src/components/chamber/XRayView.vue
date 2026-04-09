@@ -7,6 +7,11 @@
         {{ partyAName }}'s Mind
       </div>
       <div class="xray-col-body" ref="colARef">
+        <BeliefPanel
+          v-if="beliefA"
+          :belief="beliefA"
+          :issues="issues"
+        />
         <MoveCard
           v-for="m in partyAMoves"
           :key="m.id"
@@ -48,6 +53,11 @@
         {{ partyBName }}'s Mind
       </div>
       <div class="xray-col-body" ref="colBRef">
+        <BeliefPanel
+          v-if="beliefB"
+          :belief="beliefB"
+          :issues="issues"
+        />
         <MoveCard
           v-for="m in partyBMoves"
           :key="m.id"
@@ -65,11 +75,14 @@
 <script setup>
 import { computed, ref, watch, nextTick } from 'vue'
 import MoveCard from './MoveCard.vue'
+import BeliefPanel from './BeliefPanel.vue'
 import { PARTY_COLORS, PHASE_COLORS } from '@/types/protocol'
 
 const props = defineProps({
   moves: { type: Array, default: () => [] },
-  parties: { type: Array, default: () => [] }
+  parties: { type: Array, default: () => [] },
+  beliefs: { type: Object, default: () => ({}) },
+  issues: { type: Array, default: () => [] },
 })
 
 const colARef = ref(null)
@@ -85,6 +98,10 @@ const partyBColor = computed(() => PARTY_COLORS[1])
 
 const partyAMoves = computed(() => props.moves.filter(m => m.party_id === partyAId.value))
 const partyBMoves = computed(() => props.moves.filter(m => m.party_id === partyBId.value))
+
+// BCI beliefs: Party A's model of Party B, and vice versa
+const beliefA = computed(() => props.beliefs[`${partyAId.value}→${partyBId.value}`] || null)
+const beliefB = computed(() => props.beliefs[`${partyBId.value}→${partyAId.value}`] || null)
 
 // Public items: moves interleaved with phase break markers, each with a unique _key
 const publicItems = computed(() => {

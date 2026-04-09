@@ -341,6 +341,32 @@ async def _run_round(
         party_name = party.name
         await emit("move", _emit_move_event(neg, move, party_name))
 
+        # BCI update: all other parties observe this move's package
+        if move.package and hasattr(neg, '_engine_ref') and neg._engine_ref:
+            _engine = neg._engine_ref
+            if hasattr(_engine, 'bci_models') and _engine.bci_models:
+                for _other in neg.parties:
+                    if _other.id != party.id and _other.id in _engine.bci_models:
+                        _bci = _engine.bci_models[_other.id].get(party.id)
+                        if _bci:
+                            try:
+                                _bci.update(move.package.issue_values)
+                                _belief = _bci.to_belief_model()
+                                neg.private_states[_other.id].belief_models[party.id] = _belief
+                                await emit("belief_update", {
+                                    "observer_party_id": _other.id,
+                                    "target_party_id": party.id,
+                                    "round": neg.protocol.total_rounds,
+                                    "after_move_id": move.id,
+                                    "belief": _belief.model_dump(mode="json"),
+                                })
+                            except Exception:
+                                import logging as _bci_log
+                                _bci_log.getLogger(__name__).warning(
+                                    "BCI update failed for %s observing %s",
+                                    _other.id, party.id, exc_info=True,
+                                )
+
         # Early settlement: if all parties accepted the same package, stop immediately
         all_party_ids = {p.id for p in neg.parties}
         if neg.protocol.accepted_by >= all_party_ids:
@@ -820,6 +846,22 @@ class NegotiationEngine:
             advanced_mode = True
             self.compliance_engine = ComplianceEngine(state.compliance)
 
+        # BCI opponent models — one per (observer, target) pair
+        self.bci_models: dict[str, dict[str, "OpponentModel"]] = {}
+        try:
+            from .bci import OpponentModel as _OM
+            for party in state.parties:
+                self.bci_models[party.id] = {}
+                for other in state.parties:
+                    if other.id != party.id:
+                        self.bci_models[party.id][other.id] = _OM(
+                            issues=state.issues,
+                            opponent_id=other.id,
+                        )
+        except Exception:
+            import logging as _log
+            _log.getLogger(__name__).warning("BCI init failed, continuing without opponent models", exc_info=True)
+
         # Compile the graph
         self._graph = build_negotiation_graph(
             checkpointer=self.checkpointer,
@@ -921,6 +963,20 @@ class NegotiationEngine:
         # Run ALL parties in parallel
         import asyncio as _aio
         await _aio.gather(*[_generate_for_party(p) for p in self.state.parties])
+
+        # Rebuild BCI state from move history (handles session resume)
+        if self.bci_models and self.state.move_history:
+            for party_id, models in self.bci_models.items():
+                for target_id, model in models.items():
+                    target_bids = [
+                        m.package.issue_values for m in self.state.move_history
+                        if m.party_id == target_id and m.package
+                    ]
+                    if target_bids:
+                        try:
+                            model.rebuild_from_bids(target_bids)
+                        except Exception:
+                            pass  # Non-fatal
 
         # Attach engine reference so nodes can access llm, emit, validator
         # This is a lightweight ref — not serialized, not part of the state schema

@@ -565,6 +565,30 @@ async def main():
     critique = critique_negotiation(final_state, metrics)
 
     if args.output == "pretty":
+        # Print BCI opponent model report
+        _any_bci = False
+        for party in final_state.parties:
+            ps = final_state.private_states.get(party.id)
+            if ps and ps.belief_models:
+                for target_id, belief in ps.belief_models.items():
+                    if not _any_bci:
+                        print(f"\n{c('BCI OPPONENT MODELS', 'cyan')}")
+                        _any_bci = True
+                    target_name = next((p.name for p in final_state.parties if p.id == target_id), target_id)
+                    print(f"  {c(party.name, 'bold')} → model of {c(target_name, 'bold')}: "
+                          f"confidence={c(f'{belief.confidence:.0%}', 'cyan')}")
+                    if belief.estimated_priorities:
+                        sorted_p = sorted(belief.estimated_priorities.items(), key=lambda x: -x[1])
+                        for iid, w in sorted_p:
+                            issue_name = next((i.name for i in final_state.issues if i.id == iid or i.name == iid), iid)
+                            bar = '█' * int(w * 20) + '░' * (20 - int(w * 20))
+                            print(f"    {issue_name:20s} {w:.3f} {bar}")
+                    if belief.estimated_batna_utility is not None:
+                        print(f"    Est. BATNA utility: {belief.estimated_batna_utility:.3f}")
+                    print(f"    Evidence: {len(belief.evidence)} observations")
+        if not _any_bci:
+            print(f"\n{c('BCI', 'dim')}: No opponent models generated (no bids with packages observed)")
+
         # Print metrics report
         print(format_metrics_report(metrics, final_state))
 

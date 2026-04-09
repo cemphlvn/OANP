@@ -13,17 +13,26 @@
 </template>
 
 <script setup>
-defineProps({
-  modelValue: { type: String, default: 'arena' }
+import { computed } from 'vue'
+
+const props = defineProps({
+  modelValue: { type: String, default: 'arena' },
+  hasBeliefsData: { type: Boolean, default: false },
 })
 
 defineEmits(['update:modelValue'])
 
-const modes = [
-  { value: 'arena', label: 'Arena' },
-  { value: 'xray', label: 'X-Ray' },
-  { value: 'timeline', label: 'Timeline' }
-]
+const modes = computed(() => {
+  const base = [
+    { value: 'arena', label: 'Arena' },
+    { value: 'xray', label: 'X-Ray' },
+    { value: 'timeline', label: 'Timeline' },
+  ]
+  if (props.hasBeliefsData) {
+    base.push({ value: 'beliefs', label: 'Beliefs' })
+  }
+  return base
+})
 </script>
 
 <style scoped>
