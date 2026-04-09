@@ -14,8 +14,6 @@ from src.agents.bci import (
     ConditionalUpdater,
     InverseTransformResampler,
     OpponentModel,
-    _log_normalize,
-    _logsumexp,
 )
 from src.protocol.types import Issue
 

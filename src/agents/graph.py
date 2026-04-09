@@ -22,7 +22,7 @@ from __future__ import annotations
 
 import hashlib
 import json
-from typing import Any, Callable, Literal, Optional, TypedDict
+from typing import Any, Callable, Optional, TypedDict
 
 from langchain_core.language_models import BaseChatModel
 from langgraph.checkpoint.memory import InMemorySaver
@@ -847,7 +847,7 @@ class NegotiationEngine:
             self.compliance_engine = ComplianceEngine(state.compliance)
 
         # BCI opponent models — one per (observer, target) pair
-        self.bci_models: dict[str, dict[str, "OpponentModel"]] = {}
+        self.bci_models: dict[str, dict[str, Any]] = {}
         try:
             from .bci import OpponentModel as _OM
             for party in state.parties:

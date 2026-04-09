@@ -23,7 +23,6 @@ from .types import (
     AwardRecord,
     AwardType,
     ComplianceMetadata,
-    EscalationPolicy,
     EscalationTier,
     NegotiationMode,
     NegotiationState,
@@ -335,7 +334,7 @@ class ComplianceEngine:
     def _generate_reasons(self, state: NegotiationState) -> str:
         """Generate basic reasoning for the award based on negotiation history."""
         parts = []
-        parts.append(f"Negotiation conducted under OANP protocol v0.1.")
+        parts.append("Negotiation conducted under OANP protocol v0.1.")
         parts.append(f"Total rounds: {state.protocol.total_rounds}.")
         parts.append(f"Total moves: {state.protocol.total_moves}.")
         parts.append(f"Phases visited: {[h.get('phase', '') for h in state.protocol.phase_history]}.")
