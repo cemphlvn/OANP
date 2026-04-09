@@ -248,6 +248,7 @@ flowchart TD
 - `mediator.py` &mdash; configurable neutral facilitator (facilitative / evaluative / arbitrative)
 - `scorer.py` &mdash; LLM utility scorer with satisfaction anchors and pairwise BATNA comparison
 - `analyst.py` &mdash; post-hoc metrics (social welfare, Pareto efficiency, Nash product, integrative index)
+- `bci.py` &mdash; Bayesian opponent model ([Chang & Fujita 2026](https://doi.org/10.1007/s10458-026-09733-z)) — estimates opponent utility from observed bids using parametric interrelation
 - `validator.py` &mdash; structural safety layer preventing illegal moves and BATNA violations
 
 **Information boundaries** (`src/protocol/views.py`) enforce what each actor can see. This is structural, not a prompt instruction.
@@ -298,6 +299,7 @@ Key influences:
 - [x] LLM utility scorer with satisfaction anchors
 - [x] 12 scenarios from employment to diplomacy
 - [x] Configurable mediator (facilitative / evaluative / arbitrative)
+- [x] Bayesian opponent modeling (BCI) with real-time belief streaming
 - [ ] Simulation benchmarks across mediator configs, models, and domains
 - [ ] Knowledge graph memory (Graphiti/Neo4j wire-in for cross-session learning)
 - [ ] N-party negotiation with coalition formation
