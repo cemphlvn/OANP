@@ -1,0 +1,1826 @@
+{
+  "session_id": "neg_5389c1f81817",
+  "scenario_name": "Alex (Candidate) vs TechStartup Inc.",
+  "description": "Salary negotiation with BCI opponent modeling. agreement.",
+  "parties": [
+    {
+      "id": "candidate",
+      "name": "Alex (Candidate)",
+      "role": "candidate"
+    },
+    {
+      "id": "employer",
+      "name": "TechStartup Inc.",
+      "role": "employer"
+    }
+  ],
+  "issues": [
+    {
+      "id": "base_salary",
+      "name": "Base Salary",
+      "description": "",
+      "issue_type": "monetary",
+      "options": [],
+      "range": [
+        120000.0,
+        180000.0
+      ],
+      "is_divisible": true
+    },
+    {
+      "id": "equity_vesting",
+      "name": "Equity Package",
+      "description": "",
+      "issue_type": "categorical",
+      "options": [
+        "standard_4yr",
+        "accelerated_3yr",
+        "performance_based"
+      ],
+      "range": null,
+      "is_divisible": false
+    },
+    {
+      "id": "remote_work",
+      "name": "Remote Work Policy",
+      "description": "",
+      "issue_type": "categorical",
+      "options": [
+        "full_remote",
+        "hybrid_3_2",
+        "hybrid_2_3",
+        "onsite"
+      ],
+      "range": null,
+      "is_divisible": false
+    },
+    {
+      "id": "start_date",
+      "name": "Start Date",
+      "description": "",
+      "issue_type": "temporal",
+      "options": [],
+      "range": [
+        "2026-04-01",
+        "2026-06-01"
+      ],
+      "is_divisible": true
+    },
+    {
+      "id": "signing_bonus",
+      "name": "Signing Bonus",
+      "description": "",
+      "issue_type": "monetary",
+      "options": [],
+      "range": [
+        0.0,
+        30000.0
+      ],
+      "is_divisible": true
+    }
+  ],
+  "criteria": [
+    {
+      "id": "31372fbc",
+      "name": "Market Rate (Levels.fyi)",
+      "description": "",
+      "source": "market_data",
+      "applies_to": [
+        "base_salary"
+      ],
+      "reference_value": "$140k-$165k for L3 SWE in this metro area"
+    },
+    {
+      "id": "6d627fbe",
+      "name": "Standard Vesting Schedule",
+      "description": "",
+      "source": "industry_norm",
+      "applies_to": [
+        "equity_vesting"
+      ],
+      "reference_value": "4-year vest with 1-year cliff is industry standard"
+    },
+    {
+      "id": "8787ffdf",
+      "name": "Remote Work Trends",
+      "description": "",
+      "source": "market_data",
+      "applies_to": [
+        "remote_work"
+      ],
+      "reference_value": "65% of tech companies offer hybrid or full-remote in 2026"
+    }
+  ],
+  "outcome": "agreement",
+  "agreement": {
+    "id": "56224622",
+    "issue_values": {
+      "base_salary": "160000",
+      "equity_package": "standard_4yr",
+      "remote_work_policy": "hybrid_3_2",
+      "start_date": "2026-04-01",
+      "signing_bonus": "12500"
+    },
+    "rationale": "We are pleased to reach an agreement that aligns with our budgetary constraints, satisfies our requirement for in-person collaboration, and provides a competitive package for the candidate.",
+    "pareto_rank": null
+  },
+  "events": [
+    {
+      "type": "phase_change",
+      "data": {
+        "phase": "setup",
+        "round": 0,
+        "message": "Generating satisfaction anchors for utility scoring..."
+      },
+      "delay_ms": 500
+    },
+    {
+      "type": "setup_progress",
+      "data": {
+        "message": "Generating anchors for 2 parties (9 interests)...",
+        "parties": [
+          "candidate",
+          "employer"
+        ],
+        "total_interests": 9,
+        "completed_interests": 0
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "setup_progress",
+      "data": {
+        "message": "Generating anchors for Alex (Candidate) (4 interests)...",
+        "party_id": "candidate",
+        "party_name": "Alex (Candidate)",
+        "interest_count": 4
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "setup_progress",
+      "data": {
+        "message": "Generating anchors for TechStartup Inc. (5 interests)...",
+        "party_id": "employer",
+        "party_name": "TechStartup Inc.",
+        "interest_count": 5
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "employer",
+        "party_name": "TechStartup Inc.",
+        "interest_description": "Retain talent long-term with equity alignment",
+        "interest_type": "desire",
+        "anchor_count": 4,
+        "completed_interests": 1,
+        "total_interests": 9
+      },
+      "delay_ms": 2558
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "employer",
+        "party_name": "TechStartup Inc.",
+        "interest_description": "Stay within headcount budget for this quarter",
+        "interest_type": "need",
+        "anchor_count": 4,
+        "completed_interests": 2,
+        "total_interests": 9
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "candidate",
+        "party_name": "Alex (Candidate)",
+        "interest_description": "Work-life balance and flexibility for personal projects",
+        "interest_type": "need",
+        "anchor_count": 4,
+        "completed_interests": 3,
+        "total_interests": 9
+      },
+      "delay_ms": 204
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "candidate",
+        "party_name": "Alex (Candidate)",
+        "interest_description": "Fear of being lowballed relative to peers",
+        "interest_type": "fear",
+        "anchor_count": 4,
+        "completed_interests": 4,
+        "total_interests": 9
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "employer",
+        "party_name": "TechStartup Inc.",
+        "interest_description": "Fear of overpaying and setting a precedent for the team",
+        "interest_type": "fear",
+        "anchor_count": 4,
+        "completed_interests": 5,
+        "total_interests": 9
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "employer",
+        "party_name": "TechStartup Inc.",
+        "interest_description": "Fill the role before Q2 sprint planning",
+        "interest_type": "concern",
+        "anchor_count": 4,
+        "completed_interests": 6,
+        "total_interests": 9
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "candidate",
+        "party_name": "Alex (Candidate)",
+        "interest_description": "Start soon to avoid gap in employment",
+        "interest_type": "concern",
+        "anchor_count": 5,
+        "completed_interests": 7,
+        "total_interests": 9
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "candidate",
+        "party_name": "Alex (Candidate)",
+        "interest_description": "Maximize total compensation to match market rate",
+        "interest_type": "desire",
+        "anchor_count": 4,
+        "completed_interests": 8,
+        "total_interests": 9
+      },
+      "delay_ms": 408
+    },
+    {
+      "type": "anchors_generated",
+      "data": {
+        "party_id": "candidate",
+        "party_name": "Alex (Candidate)",
+        "anchor_count": 17,
+        "interests": [
+          {
+            "description": "Maximize total compensation to match market rate",
+            "interest_type": "desire",
+            "priority": 0.9,
+            "related_issues": [
+              "base_salary",
+              "equity_vesting",
+              "signing_bonus"
+            ],
+            "anchors": [
+              {
+                "condition": "base_salary <= 130000 AND signing_bonus <= 5000",
+                "score": 0.05,
+                "reason": "This is significantly below my BATNA and market expectations, representing a poor financial outcome."
+              },
+              {
+                "condition": "base_salary = 150000 AND signing_bonus = 5000 AND equity_vesting = standard_4yr",
+                "score": 0.35,
+                "reason": "This is slightly worse than my BATNA, making it a mediocre deal that doesn't provide enough incentive to switch."
+              },
+              {
+                "condition": "base_salary = 160000 AND signing_bonus = 10000 AND equity_vesting = standard_4yr",
+                "score": 0.65,
+                "reason": "This beats my BATNA on base salary and matches the signing bonus, providing a fair and acceptable compensation package."
+              },
+              {
+                "condition": "base_salary >= 170000 AND signing_bonus >= 20000 AND equity_vesting = accelerated_3yr",
+                "score": 0.95,
+                "reason": "This is an excellent outcome, significantly exceeding my BATNA in base salary, bonus, and equity liquidity."
+              }
+            ]
+          },
+          {
+            "description": "Work-life balance and flexibility for personal projects",
+            "interest_type": "need",
+            "priority": 0.8,
+            "related_issues": [
+              "remote_work"
+            ],
+            "anchors": [
+              {
+                "condition": "remote_work = onsite",
+                "score": 0.0,
+                "reason": "Complete lack of flexibility prevents any meaningful time allocation for personal projects."
+              },
+              {
+                "condition": "remote_work = hybrid_2_3",
+                "score": 0.35,
+                "reason": "Minimal flexibility provided, but still requires significant commute time and office presence."
+              },
+              {
+                "condition": "remote_work = hybrid_3_2",
+                "score": 0.65,
+                "reason": "Offers a balanced compromise that allows for some dedicated deep-work days at home."
+              },
+              {
+                "condition": "remote_work = full_remote",
+                "score": 1.0,
+                "reason": "Eliminating the commute and providing full autonomy is the ideal scenario for personal project management."
+              }
+            ]
+          },
+          {
+            "description": "Start soon to avoid gap in employment",
+            "interest_type": "concern",
+            "priority": 0.5,
+            "related_issues": [
+              "start_date"
+            ],
+            "anchors": [
+              {
+                "condition": "start_date >= 2026-05-25",
+                "score": 0.0,
+                "reason": "Starting at the end of the window creates an unacceptable gap in employment."
+              },
+              {
+                "condition": "start_date >= 2026-05-10 AND start_date < 2026-05-25",
+                "score": 0.35,
+                "reason": "This delay is problematic as it leaves a multi-week gap between roles."
+              },
+              {
+                "condition": "start_date >= 2026-04-20 AND start_date < 2026-05-10",
+                "score": 0.65,
+                "reason": "A moderate delay that is manageable but not ideal for financial continuity."
+              },
+              {
+                "condition": "start_date >= 2026-04-08 AND start_date < 2026-04-20",
+                "score": 0.85,
+                "reason": "A short transition period that aligns well with the desire to start quickly."
+              },
+              {
+                "condition": "start_date <= 2026-04-07",
+                "score": 1.0,
+                "reason": "Starting within the first week of the window eliminates any meaningful gap."
+              }
+            ]
+          },
+          {
+            "description": "Fear of being lowballed relative to peers",
+            "interest_type": "fear",
+            "priority": 0.6,
+            "related_issues": [
+              "base_salary"
+            ],
+            "anchors": [
+              {
+                "condition": "base_salary <= 130000",
+                "score": 0.0,
+                "reason": "A base salary significantly below the market BATNA indicates a severe lowball and fails to meet professional value expectations."
+              },
+              {
+                "condition": "base_salary > 130000 AND base_salary < 150000",
+                "score": 0.35,
+                "reason": "This range is below the BATNA of 155k, confirming the fear of being underpaid relative to industry standard offers."
+              },
+              {
+                "condition": "base_salary >= 155000 AND base_salary < 165000",
+                "score": 0.65,
+                "reason": "Matching or slightly exceeding the BATNA base salary provides parity and mitigates the fear of being lowballed."
+              },
+              {
+                "condition": "base_salary >= 175000",
+                "score": 1.0,
+                "reason": "A salary at the top of the range effectively eliminates the fear of being lowballed and provides a competitive advantage over peer offers."
+              }
+            ]
+          }
+        ]
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "anchor_progress",
+      "data": {
+        "party_id": "employer",
+        "party_name": "TechStartup Inc.",
+        "interest_description": "Team cohesion \u2014 some in-person collaboration is valuable",
+        "interest_type": "desire",
+        "anchor_count": 4,
+        "completed_interests": 9,
+        "total_interests": 9
+      },
+      "delay_ms": 2359
+    },
+    {
+      "type": "anchors_generated",
+      "data": {
+        "party_id": "employer",
+        "party_name": "TechStartup Inc.",
+        "anchor_count": 20,
+        "interests": [
+          {
+            "description": "Stay within headcount budget for this quarter",
+            "interest_type": "need",
+            "priority": 0.9,
+            "related_issues": [
+              "base_salary",
+              "signing_bonus"
+            ],
+            "anchors": [
+              {
+                "condition": "base_salary >= 170000 AND signing_bonus >= 25000",
+                "score": 0.05,
+                "reason": "This total compensation package significantly exceeds the budget allocation, making it a poor financial decision for the quarter."
+              },
+              {
+                "condition": "base_salary >= 155000 AND signing_bonus >= 15000",
+                "score": 0.35,
+                "reason": "The costs are on the higher end of the range, putting unnecessary strain on the quarterly headcount budget."
+              },
+              {
+                "condition": "base_salary >= 140000 AND signing_bonus >= 5000",
+                "score": 0.65,
+                "reason": "This is a balanced offer that remains well within the expected expenditure limits for the role."
+              },
+              {
+                "condition": "base_salary <= 130000 AND signing_bonus = 0",
+                "score": 0.95,
+                "reason": "This represents the most fiscally responsible outcome, preserving maximum budget for other departmental needs."
+              }
+            ]
+          },
+          {
+            "description": "Retain talent long-term with equity alignment",
+            "interest_type": "desire",
+            "priority": 0.7,
+            "related_issues": [
+              "equity_vesting"
+            ],
+            "anchors": [
+              {
+                "condition": "equity_vesting = standard_4yr",
+                "score": 0.2,
+                "reason": "Standard vesting offers the least incentive for immediate retention and lacks performance-based alignment."
+              },
+              {
+                "condition": "equity_vesting = accelerated_3yr",
+                "score": 0.5,
+                "reason": "Faster vesting increases the perceived value of the equity, though it encourages leaving sooner rather than later."
+              },
+              {
+                "condition": "equity_vesting = performance_based",
+                "score": 0.85,
+                "reason": "Aligns the employee's financial success directly with company goals, strongly encouraging long-term commitment."
+              },
+              {
+                "condition": "equity_vesting = performance_based AND base_salary <= 140000",
+                "score": 1.0,
+                "reason": "Best case scenario: high retention alignment via performance equity while maintaining a lower fixed cost base."
+              }
+            ]
+          },
+          {
+            "description": "Team cohesion \u2014 some in-person collaboration is valuable",
+            "interest_type": "desire",
+            "priority": 0.4,
+            "related_issues": [
+              "remote_work"
+            ],
+            "anchors": [
+              {
+                "condition": "remote_work = full_remote",
+                "score": 0.0,
+                "reason": "Complete lack of in-person collaboration fails to meet the desire for team cohesion entirely."
+              },
+              {
+                "condition": "remote_work = hybrid_2_3",
+                "score": 0.35,
+                "reason": "Minimal in-person time (2 days) provides a small amount of cohesion but remains heavily remote."
+              },
+              {
+                "condition": "remote_work = hybrid_3_2",
+                "score": 0.65,
+                "reason": "A balanced 3 days in-office provides solid opportunities for consistent team collaboration."
+              },
+              {
+                "condition": "remote_work = onsite",
+                "score": 1.0,
+                "reason": "Full-time onsite presence maximizes daily interaction and team cohesion."
+              }
+            ]
+          },
+          {
+            "description": "Fill the role before Q2 sprint planning",
+            "interest_type": "concern",
+            "priority": 0.6,
+            "related_issues": [
+              "start_date"
+            ],
+            "anchors": [
+              {
+                "condition": "start_date >= 2026-06-01",
+                "score": 0.0,
+                "reason": "This date falls at or after the Q2 sprint planning, failing to meet the critical timeline and matching the BATNA."
+              },
+              {
+                "condition": "start_date >= 2026-05-15 AND start_date < 2026-06-01",
+                "score": 0.35,
+                "reason": "This is late in the quarter, causing significant disruption to planned sprints, though technically before the June deadline."
+              },
+              {
+                "condition": "start_date >= 2026-05-01 AND start_date < 2026-05-15",
+                "score": 0.65,
+                "reason": "This allows for a partial integration into Q2 planning, providing a reasonable middle ground for the team."
+              },
+              {
+                "condition": "start_date <= 2026-04-15",
+                "score": 1.0,
+                "reason": "This provides ample time for onboarding before the Q2 sprint planning phase begins, ensuring full team capacity."
+              }
+            ]
+          },
+          {
+            "description": "Fear of overpaying and setting a precedent for the team",
+            "interest_type": "fear",
+            "priority": 0.5,
+            "related_issues": [
+              "base_salary"
+            ],
+            "anchors": [
+              {
+                "condition": "base_salary >= 175000",
+                "score": 0.0,
+                "reason": "Top-of-band salary creates a high-cost precedent and risks internal pay equity issues."
+              },
+              {
+                "condition": "base_salary >= 160000 AND base_salary < 175000",
+                "score": 0.35,
+                "reason": "Salary is significantly above market average, causing concern about budget sustainability."
+              },
+              {
+                "condition": "base_salary >= 140000 AND base_salary < 160000",
+                "score": 0.65,
+                "reason": "Salary is within the expected competitive range, minimizing risk of creating a negative precedent."
+              },
+              {
+                "condition": "base_salary < 140000",
+                "score": 1.0,
+                "reason": "Low base salary protects the company budget and ensures no problematic precedent is set."
+              }
+            ]
+          }
+        ]
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "phase_change",
+      "data": {
+        "phase": "discovery",
+        "round": 0,
+        "message": "Entering interest discovery phase"
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "b954fe40",
+        "timestamp": "2026-04-10T13:32:30.771907Z",
+        "party_id": "candidate",
+        "move_type": "disclose_interest",
+        "package": null,
+        "argument": null,
+        "disclosed_interest": {
+          "id": "536a3c7e",
+          "description": "I am looking for a competitive base salary that aligns with current market standards for my role, while ensuring the flexibility of a remote-friendly work environment to support my productivity and personal commitments.",
+          "interest_type": "desire",
+          "priority": 0.9,
+          "related_issues": [
+            "base_salary",
+            "remote_work"
+          ],
+          "disclosed": true,
+          "satisfaction_anchors": []
+        },
+        "references": [],
+        "reasoning": "Theory of Mind: Since this is the first turn, I have no information on the employer's specific interests. I am assuming they want to attract high-quality talent at a sustainable cost. My strategy is to open with a cooperative, transparent tone to build rapport. By disclosing my interest in base salary and remote work, I am setting the stage to discuss market-based compensation and flexibility, which are critical for me, while signaling that I am open to a collaborative negotiation. This disclosure is a 'warm' way to begin the dialogue without being overly positional.",
+        "phase": "discovery",
+        "round": 1,
+        "turn": 0,
+        "party_name": "Alex (Candidate)"
+      },
+      "delay_ms": 2556
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "e1603744",
+        "timestamp": "2026-04-10T13:32:32.817448Z",
+        "party_id": "employer",
+        "move_type": "disclose_interest",
+        "package": null,
+        "argument": null,
+        "disclosed_interest": {
+          "id": "de8552fa",
+          "description": "We are looking to build a long-term, high-performing team. We value equity alignment to ensure our team members share in our success, and while we offer flexibility, we believe in-person collaboration is crucial for team cohesion during our growth phase.",
+          "interest_type": "desire",
+          "priority": 0.8,
+          "related_issues": [
+            "equity_package",
+            "remote_work_policy"
+          ],
+          "disclosed": true,
+          "satisfaction_anchors": []
+        },
+        "references": [],
+        "reasoning": "Theory of Mind: Alex is signaling that salary and flexibility are their primary drivers. They likely want to maximize their immediate compensation and freedom. My strategy is to introduce the importance of equity and team cohesion early to anchor the conversation around long-term partnership rather than just transactional salary components. This sets the stage for a 'Total Compensation' discussion rather than just a salary negotiation.",
+        "phase": "discovery",
+        "round": 1,
+        "turn": 1,
+        "party_name": "TechStartup Inc."
+      },
+      "delay_ms": 2044
+    },
+    {
+      "type": "mediator_note",
+      "data": {
+        "id": "8f52c069",
+        "timestamp": "2026-04-10T13:32:35.015985Z",
+        "party_id": "mediator",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "1911239f",
+          "claim": "Both parties have begun the discovery phase by disclosing their underlying interests. This provides a foundation to move beyond initial positions. Since no specific offers have been exchanged yet, it is the appropriate time to clarify the shared ground before moving into the distributive phase of the negotiation.",
+          "grounds": [
+            "Both Alex and TechStartup Inc. have expressed a clear desire to reach a mutually beneficial long-term partnership, suggesting that both parties value stability and alignment over immediate, short-term gains."
+          ],
+          "criterion_id": null,
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": null,
+        "phase": "discovery",
+        "round": 1,
+        "turn": 2,
+        "party_name": "Mediator"
+      },
+      "delay_ms": 2198
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "e928ffd6",
+        "timestamp": "2026-04-10T13:32:37.769619Z",
+        "party_id": "candidate",
+        "move_type": "invoke_criterion",
+        "package": null,
+        "argument": {
+          "id": "182375e6",
+          "claim": "The base salary should be positioned at the upper end of the market range to reflect my experience and align with competitive industry standards.",
+          "grounds": [
+            "Current market data from Levels.fyi indicates an L3 SWE market range of $140k-$165k.",
+            "A salary that reflects this benchmark is essential for attracting and retaining top-tier talent in this competitive landscape."
+          ],
+          "criterion_id": "market_data",
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: TechStartup Inc. values long-term commitment and in-person collaboration, suggesting they are growth-oriented and potentially budget-conscious but invested in quality. They likely fear high turnover or lack of cultural fit. My strategic calculation is to ground the salary negotiation in objective data first to establish a professional, evidence-based tone. By citing the $140k-$165k market range, I show I am informed and reasonable, while setting the stage for a package that balances their desire for collaboration with my need for market-rate compensation.",
+        "phase": "discovery",
+        "round": 2,
+        "turn": 0,
+        "party_name": "Alex (Candidate)"
+      },
+      "delay_ms": 2753
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "539bfbf8",
+        "timestamp": "2026-04-10T13:32:40.394237Z",
+        "party_id": "employer",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "0158e26a",
+          "claim": "We agree that market data is the best way to determine a fair compensation package, and we aim to balance competitive pay with long-term equity participation.",
+          "grounds": [
+            "While we acknowledge the desire for the upper end of the market range, our budget is calibrated to ensure sustainable growth and parity across our engineering team.",
+            "A 4-year equity vesting schedule is the industry standard for aligning individual contribution with the company's long-term success.",
+            "We believe that a hybrid model provides the necessary balance between the candidate's need for flexibility and our organizational need for collaborative innovation."
+          ],
+          "criterion_id": "market_data",
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: Alex is signaling that they are prioritizing base salary and flexibility. They are likely concerned about being undervalued. My strategy is to validate the use of objective criteria (market data) to anchor the discussion toward the industry standard rather than just the 'upper end' of the range, while reinforcing our interest in long-term alignment through equity and collaboration.",
+        "phase": "discovery",
+        "round": 2,
+        "turn": 1,
+        "party_name": "TechStartup Inc."
+      },
+      "delay_ms": 2624
+    },
+    {
+      "type": "mediator_note",
+      "data": {
+        "id": "6e05c732",
+        "timestamp": "2026-04-10T13:32:42.256224Z",
+        "party_id": "mediator",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "46eac2fe",
+          "claim": "Both Alex and TechStartup Inc. have explicitly agreed to use market data as a foundational criterion for determining compensation. This consensus on the process is a significant step forward and provides a neutral framework for addressing the salary and equity components.",
+          "grounds": [
+            "Both parties are aligned in their commitment to using objective market data as the primary standard for evaluating compensation components, which helps depersonalize the negotiation.",
+            "The common interest in market data creates a bridge; TechStartup Inc.'s focus on long-term equity aligns with Alex's desire for competitive compensation, suggesting that a total package could be structured to satisfy both the immediate salary needs and long-term incentives."
+          ],
+          "criterion_id": null,
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": null,
+        "phase": "discovery",
+        "round": 2,
+        "turn": 2,
+        "party_name": "Mediator"
+      },
+      "delay_ms": 1861
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "3dc1c644",
+        "timestamp": "2026-04-10T13:32:44.643529Z",
+        "party_id": "candidate",
+        "move_type": "disclose_interest",
+        "package": null,
+        "argument": null,
+        "disclosed_interest": {
+          "id": "48f330d3",
+          "description": "I need to ensure that my start date is as early as possible to avoid a gap in my employment, which is a significant concern for me.",
+          "interest_type": "concern",
+          "priority": 0.5,
+          "related_issues": [
+            "start_date"
+          ],
+          "disclosed": true,
+          "satisfaction_anchors": []
+        },
+        "references": [],
+        "reasoning": "Theory of Mind: TechStartup Inc. values in-person collaboration and long-term commitment. They likely fear high turnover or lack of cultural fit. They are interested in equity alignment, which suggests they want to preserve cash flow while incentivizing performance. By disclosing my concern about the start date, I am layering in a new, low-cost issue for them while continuing to signal my interest in joining. This builds rapport and sets the stage for a comprehensive package deal later.",
+        "phase": "discovery",
+        "round": 3,
+        "turn": 0,
+        "party_name": "Alex (Candidate)"
+      },
+      "delay_ms": 2387
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "5b51bcdf",
+        "timestamp": "2026-04-10T13:32:47.632207Z",
+        "party_id": "employer",
+        "move_type": "propose",
+        "package": {
+          "id": "41acb9d7",
+          "issue_values": {
+            "base_salary": "152500",
+            "equity_package": "standard_4yr",
+            "remote_work_policy": "hybrid_3_2",
+            "start_date": "2026-04-01",
+            "signing_bonus": "5000"
+          },
+          "rationale": "This package balances the candidate's request for market-competitive salary and an early start date with our need for long-term equity alignment and hybrid collaboration. The base salary sits squarely in the middle of the L3 market range, and the hybrid 3-2 policy respects both the candidate's desire for flexibility and our need for in-person team cohesion.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: Alex is clearly motivated by financial security (market-rate salary), an early start date to avoid employment gaps, and flexible work conditions. They are likely concerned about being undervalued or having a long wait between jobs. My strategy is to meet their core needs (start date, competitive salary) while anchoring the equity and work policy in our preferred structure. By proposing a mid-range salary and a standard 4-year equity vest, I address their interest in competitiveness while protecting our budget and long-term retention goals. Offering a hybrid 3-2 model is a cooperative compromise that addresses their 'remote-friendly' interest while maintaining our 'in-person' requirement.",
+        "phase": "discovery",
+        "round": 3,
+        "turn": 1,
+        "party_name": "TechStartup Inc."
+      },
+      "delay_ms": 2988
+    },
+    {
+      "type": "belief_update",
+      "data": {
+        "observer_party_id": "candidate",
+        "target_party_id": "employer",
+        "round": 3,
+        "after_move_id": "5b51bcdf",
+        "belief": {
+          "target_party_id": "employer",
+          "estimated_interests": [
+            {
+              "issue_id": "start_date",
+              "description": "Values start_date highly, prefers 2026-04-01",
+              "estimated_weight": 0.2167685716697374,
+              "top_option": "2026-04-01"
+            },
+            {
+              "issue_id": "signing_bonus",
+              "description": "Values signing_bonus highly, prefers 6000",
+              "estimated_weight": 0.21212892086465115,
+              "top_option": "6000"
+            },
+            {
+              "issue_id": "equity_vesting",
+              "description": "Values equity_vesting highly, prefers accelerated_3yr",
+              "estimated_weight": 0.1938733355234391,
+              "top_option": "accelerated_3yr"
+            },
+            {
+              "issue_id": "remote_work",
+              "description": "Values remote_work highly, prefers hybrid_2_3",
+              "estimated_weight": 0.1938733355234391,
+              "top_option": "hybrid_2_3"
+            },
+            {
+              "issue_id": "base_salary",
+              "description": "Values base_salary highly, prefers 150000",
+              "estimated_weight": 0.18335583641873324,
+              "top_option": "150000"
+            }
+          ],
+          "estimated_batna_utility": null,
+          "estimated_priorities": {
+            "base_salary": 0.18335583641873324,
+            "equity_vesting": 0.1938733355234391,
+            "remote_work": 0.1938733355234391,
+            "start_date": 0.2167685716697374,
+            "signing_bonus": 0.21212892086465115
+          },
+          "confidence": 0.010582984927828887,
+          "evidence": [
+            "bid_0"
+          ]
+        }
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "mediator_note",
+      "data": {
+        "id": "b35f90eb",
+        "timestamp": "2026-04-10T13:32:49.967796Z",
+        "party_id": "mediator",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "8c8a45c3",
+          "claim": "Both parties have now engaged with the objective criteria\u2014market data\u2014which provides a clear pathway for evaluation. TechStartup Inc. has put a concrete offer on the table that sits within the agreed-upon market range. It is now important to invite Alex to respond to this offer by connecting it back to their stated interests, ensuring we remain in a collaborative, interest-based dialogue.",
+          "grounds": [
+            "Both parties have expressed a commitment to using objective market data to guide the compensation package, and both have demonstrated a willingness to engage in a comprehensive offer that covers salary, equity, and operational preferences.",
+            "There is potential to trade off between the signing bonus and the base salary, or to adjust the remote work policy in exchange for different equity structures, depending on what each party prioritizes most."
+          ],
+          "criterion_id": null,
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": null,
+        "phase": "discovery",
+        "round": 3,
+        "turn": 2,
+        "party_name": "Mediator"
+      },
+      "delay_ms": 2324
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "0213c870",
+        "timestamp": "2026-04-10T13:32:52.927377Z",
+        "party_id": "candidate",
+        "move_type": "propose",
+        "package": {
+          "id": "deef242a",
+          "issue_values": {
+            "base_salary": "162000",
+            "equity_package": "accelerated_3yr",
+            "remote_work_policy": "hybrid_2_3",
+            "start_date": "2026-04-01",
+            "signing_bonus": "15000"
+          },
+          "rationale": "This package aligns the base salary with the upper end of the market range ($140k-$165k), uses accelerated vesting to demonstrate my commitment to the company's long-term success, and balances the company's need for in-person collaboration with my interest in flexibility.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: TechStartup Inc. values long-term commitment and in-person collaboration, as evidenced by their preference for 'hybrid_3_2'. They are likely cost-conscious but willing to invest in talent they believe will stay. My move offers a higher base salary to match my experience, but pivots to 'accelerated_3yr' equity to show I am betting on their growth, which addresses their interest in 'equity alignment'. I am accepting their preferred start date to address their need for timely onboarding, while nudging for slightly more flexibility ('hybrid_2_3') and a higher signing bonus to bridge the gap toward my total compensation expectations.",
+        "phase": "discovery",
+        "round": 4,
+        "turn": 0,
+        "party_name": "Alex (Candidate)"
+      },
+      "delay_ms": 2959
+    },
+    {
+      "type": "belief_update",
+      "data": {
+        "observer_party_id": "employer",
+        "target_party_id": "candidate",
+        "round": 4,
+        "after_move_id": "0213c870",
+        "belief": {
+          "target_party_id": "candidate",
+          "estimated_interests": [
+            {
+              "issue_id": "start_date",
+              "description": "Values start_date highly, prefers 2026-04-01",
+              "estimated_weight": 0.22079350781171408,
+              "top_option": "2026-04-01"
+            },
+            {
+              "issue_id": "base_salary",
+              "description": "Values base_salary highly, prefers 162000",
+              "estimated_weight": 0.2084691721482539,
+              "top_option": "162000"
+            },
+            {
+              "issue_id": "equity_vesting",
+              "description": "Values equity_vesting highly, prefers accelerated_3yr",
+              "estimated_weight": 0.19747315531790055,
+              "top_option": "accelerated_3yr"
+            },
+            {
+              "issue_id": "remote_work",
+              "description": "Values remote_work highly, prefers hybrid_2_3",
+              "estimated_weight": 0.19747315531790055,
+              "top_option": "hybrid_2_3"
+            },
+            {
+              "issue_id": "signing_bonus",
+              "description": "Values signing_bonus highly, prefers 15000",
+              "estimated_weight": 0.1757910094042309,
+              "top_option": "15000"
+            }
+          ],
+          "estimated_batna_utility": null,
+          "estimated_priorities": {
+            "base_salary": 0.2084691721482539,
+            "equity_vesting": 0.19747315531790055,
+            "remote_work": 0.19747315531790055,
+            "start_date": 0.22079350781171408,
+            "signing_bonus": 0.1757910094042309
+          },
+          "confidence": 0.009191466150244664,
+          "evidence": [
+            "bid_0"
+          ]
+        }
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "8013b3f5",
+        "timestamp": "2026-04-10T13:32:56.017394Z",
+        "party_id": "employer",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "029c4baa",
+          "claim": "We believe a 4-year vesting schedule is the most appropriate structure for long-term alignment, and we must balance the salary increase with our budget constraints.",
+          "grounds": [
+            "The industry standard for equity vesting is 4 years, which ensures team members are invested in the company's long-term success rather than short-term gains.",
+            "While we recognize the candidate's experience, a base salary of $162,000 combined with a $15,000 signing bonus exceeds our budgetary model for this role when factoring in the total cost of employment.",
+            "Maintaining internal equity is critical to our team cohesion and organizational health, which prevents us from moving to the extreme upper end of the market range without clear performance-based justification."
+          ],
+          "criterion_id": "industry_norm",
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: Alex is pushing for maximum immediate compensation (salary and signing bonus) and faster liquidity (accelerated equity). They likely fear missing out on market value or being locked in too long. My strategy is to push back on the accelerated vesting and the high signing bonus while remaining warm. I will use the industry norm criterion to justify the 4-year vest and argue for a middle ground on salary to protect my budget. I am signaling that their proposal is currently outside my comfort zone but am inviting further discussion on the total package structure.",
+        "phase": "discovery",
+        "round": 4,
+        "turn": 1,
+        "party_name": "TechStartup Inc."
+      },
+      "delay_ms": 3085
+    },
+    {
+      "type": "mediator_note",
+      "data": {
+        "id": "3bb1bbd1",
+        "timestamp": "2026-04-10T13:32:58.520055Z",
+        "party_id": "mediator",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "a262fad2",
+          "claim": "Both parties are demonstrating a strong commitment to using objective market data as the basis for this negotiation. While they have different preferences on vesting structure and specific salary points, both are operating well within the market-competitive range of $140k-$165k. By acknowledging this shared reliance on external benchmarks, we can shift the conversation toward reconciling the differences in how they value long-term commitment versus immediate compensation.",
+          "grounds": [
+            "Both parties agree that market data is the appropriate standard for determining salary and that long-term alignment is a shared goal, even if they disagree on the specific mechanism (vesting schedule) to achieve it.",
+            "There is a potential trade-off between the base salary and the equity vesting schedule. Alex appears to value faster liquidity or compensation, while TechStartup Inc. prioritizes long-term retention via a standard 4-year schedule."
+          ],
+          "criterion_id": null,
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": null,
+        "phase": "discovery",
+        "round": 4,
+        "turn": 2,
+        "party_name": "Mediator"
+      },
+      "delay_ms": 2502
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "b08fd43d",
+        "timestamp": "2026-04-10T13:33:01.949945Z",
+        "party_id": "candidate",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "cd4e09b7",
+          "claim": "I am willing to accept the standard 4-year vesting schedule if we can adjust the base salary and signing bonus to ensure the total package remains competitive.",
+          "grounds": [
+            "I recognize your preference for long-term alignment through a 4-year vesting schedule, which is indeed an industry standard.",
+            "To bridge the gap between our positions, I am willing to move toward the standard vesting structure if we can settle on a base salary of $158,000 and a signing bonus of $20,000.",
+            "This adjustment maintains the total compensation closer to the upper market tier while respecting the company's equity policy."
+          ],
+          "criterion_id": "industry_norm",
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: TechStartup Inc. is focused on long-term retention and culture (in-person collaboration, 4-year vesting). They fear short-term hires or lack of commitment. They have shown willingness to offer competitive market-rate salary but are protective of their equity structure. My strategy is to concede on the equity structure (the 'standard_4yr' vesting) to build trust and show cooperation, while using that concession to anchor a higher base salary and signing bonus that meets my financial needs. This creates mutual gain by satisfying their structural requirement and my financial requirement.",
+        "phase": "discovery",
+        "round": 5,
+        "turn": 0,
+        "party_name": "Alex (Candidate)"
+      },
+      "delay_ms": 3429
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "06ddeafa",
+        "timestamp": "2026-04-10T13:33:04.644018Z",
+        "party_id": "employer",
+        "move_type": "propose",
+        "package": {
+          "id": "a5e983d4",
+          "issue_values": {
+            "base_salary": "158000",
+            "equity_package": "standard_4yr",
+            "remote_work_policy": "hybrid_3_2",
+            "start_date": "2026-04-01",
+            "signing_bonus": "10000"
+          },
+          "rationale": "I am increasing the base salary to acknowledge your experience and moving toward the upper end of the market range while keeping the signing bonus moderate. By maintaining the standard 4-year equity vesting and the 3-2 hybrid policy, we ensure long-term alignment and team cohesion, which are critical for our growth.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: Alex is signaling flexibility on equity (willing to accept standard vesting) if financial compensation increases. They are clearly motivated by maximizing immediate liquidity (base + signing bonus). My strategy is to meet them in the middle on the base salary to signal goodwill while holding firm on the 4-year vesting, which is vital for our long-term retention. The hybrid 3-2 policy is a compromise that honors their need for flexibility while maintaining our core interest in in-person collaboration. This package addresses their main financial concerns while protecting our organizational structure.",
+        "phase": "discovery",
+        "round": 5,
+        "turn": 1,
+        "party_name": "TechStartup Inc."
+      },
+      "delay_ms": 2694
+    },
+    {
+      "type": "belief_update",
+      "data": {
+        "observer_party_id": "candidate",
+        "target_party_id": "employer",
+        "round": 5,
+        "after_move_id": "06ddeafa",
+        "belief": {
+          "target_party_id": "employer",
+          "estimated_interests": [
+            {
+              "issue_id": "remote_work",
+              "description": "Values remote_work highly, prefers hybrid_2_3",
+              "estimated_weight": 0.28757875094738866,
+              "top_option": "hybrid_2_3"
+            },
+            {
+              "issue_id": "start_date",
+              "description": "Values start_date highly, prefers 2026-04-01",
+              "estimated_weight": 0.28376244697584996,
+              "top_option": "2026-04-01"
+            },
+            {
+              "issue_id": "equity_vesting",
+              "description": "Values equity_vesting highly, prefers accelerated_3yr",
+              "estimated_weight": 0.24038513214500748,
+              "top_option": "accelerated_3yr"
+            }
+          ],
+          "estimated_batna_utility": 0.7457322174837475,
+          "estimated_priorities": {
+            "base_salary": 0.09245582005577212,
+            "equity_vesting": 0.24038513214500748,
+            "remote_work": 0.28757875094738866,
+            "start_date": 0.28376244697584996,
+            "signing_bonus": 0.09581784987598196
+          },
+          "confidence": 0.09710370791896819,
+          "evidence": [
+            "bid_0",
+            "bid_1"
+          ]
+        }
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "mediator_note",
+      "data": {
+        "id": "e5af6e0f",
+        "timestamp": "2026-04-10T13:33:08.143075Z",
+        "party_id": "mediator",
+        "move_type": "propose",
+        "package": {
+          "id": "c4eb043c",
+          "issue_values": {
+            "base_salary": "160000",
+            "equity_package": "standard_4yr",
+            "remote_work_policy": "hybrid_3_2",
+            "start_date": "2026-04-01",
+            "signing_bonus": "12500"
+          },
+          "rationale": "This package bridges the final gap by meeting the candidate's desire for a higher base salary while maintaining the company's preferred 4-year vesting schedule and 3-2 hybrid policy. It positions the total compensation near the top of the agreed market range, balancing the candidate's interest in immediate financial value with the company's interest in long-term retention.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": null,
+        "phase": "discovery",
+        "round": 5,
+        "turn": 2,
+        "party_name": "Mediator"
+      },
+      "delay_ms": 3474
+    },
+    {
+      "type": "phase_change",
+      "data": {
+        "phase": "generation",
+        "round": 5,
+        "message": "Entering option generation phase \u2014 agents propose packages"
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "5e62a910",
+        "timestamp": "2026-04-10T13:33:11.516702Z",
+        "party_id": "candidate",
+        "move_type": "propose",
+        "package": {
+          "id": "41f671be",
+          "issue_values": {
+            "base_salary": "160000",
+            "equity_package": "standard_4yr",
+            "remote_work_policy": "hybrid_2_3",
+            "start_date": "2026-04-01",
+            "signing_bonus": "12500"
+          },
+          "rationale": "I am accepting the mediator's suggested base salary and signing bonus as a fair compromise within the market range. I am requesting the hybrid_2_3 policy to better accommodate my need for flexibility while still respecting the company's interest in in-person collaboration.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: TechStartup Inc. values long-term commitment (standard_4yr) and in-person collaboration (hybrid_3_2). They have shown flexibility on salary to secure talent. By accepting their preferred vesting and moving toward their salary offer, I am building trust. My goal is to secure the hybrid_2_3 policy, which provides slightly more flexibility for me without sacrificing the in-person collaboration they fear losing. This is a mutually beneficial trade-off.",
+        "phase": "generation",
+        "round": 6,
+        "turn": 0,
+        "party_name": "Alex (Candidate)"
+      },
+      "delay_ms": 3372
+    },
+    {
+      "type": "belief_update",
+      "data": {
+        "observer_party_id": "employer",
+        "target_party_id": "candidate",
+        "round": 6,
+        "after_move_id": "5e62a910",
+        "belief": {
+          "target_party_id": "candidate",
+          "estimated_interests": [
+            {
+              "issue_id": "base_salary",
+              "description": "Values base_salary highly, prefers 162000",
+              "estimated_weight": 0.2361495039878531,
+              "top_option": "162000"
+            },
+            {
+              "issue_id": "equity_vesting",
+              "description": "Values equity_vesting highly, prefers accelerated_3yr",
+              "estimated_weight": 0.22948571218776068,
+              "top_option": "accelerated_3yr"
+            },
+            {
+              "issue_id": "start_date",
+              "description": "Values start_date highly, prefers 2026-04-01",
+              "estimated_weight": 0.22851828005672944,
+              "top_option": "2026-04-01"
+            },
+            {
+              "issue_id": "remote_work",
+              "description": "Values remote_work highly, prefers hybrid_2_3",
+              "estimated_weight": 0.22526510130624183,
+              "top_option": "hybrid_2_3"
+            }
+          ],
+          "estimated_batna_utility": 0.8015734415272658,
+          "estimated_priorities": {
+            "base_salary": 0.2361495039878531,
+            "equity_vesting": 0.22948571218776068,
+            "remote_work": 0.22526510130624183,
+            "start_date": 0.22851828005672944,
+            "signing_bonus": 0.0805814024614149
+          },
+          "confidence": 0.08149312607513531,
+          "evidence": [
+            "bid_0",
+            "bid_1"
+          ]
+        }
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "fde3477a",
+        "timestamp": "2026-04-10T13:33:14.846672Z",
+        "party_id": "employer",
+        "move_type": "propose",
+        "package": {
+          "id": "067e78d4",
+          "issue_values": {
+            "base_salary": "160000",
+            "equity_package": "standard_4yr",
+            "remote_work_policy": "hybrid_3_2",
+            "start_date": "2026-04-01",
+            "signing_bonus": "12500"
+          },
+          "rationale": "We value hybrid_3_2 to ensure the team cohesion we discussed earlier, while meeting your requested financial terms. This maintains our culture of collaboration while respecting your need for flexibility.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: Alex is clearly focused on maximizing compensation while maintaining flexibility. They have accepted the financial terms (salary/bonus) proposed by the mediator, but are still pushing for more remote days (hybrid_2_3). My internal interest is team cohesion; hybrid_3_2 is a key lever for this. I will hold firm on the 3-2 policy because it is vital for our early-stage growth and team culture, while conceding to the financial terms which are within my budget and align with the market data we both cited. This package signals that I am listening to their financial needs but prioritizing the structure of the team.",
+        "phase": "generation",
+        "round": 6,
+        "turn": 1,
+        "party_name": "TechStartup Inc."
+      },
+      "delay_ms": 3302
+    },
+    {
+      "type": "belief_update",
+      "data": {
+        "observer_party_id": "candidate",
+        "target_party_id": "employer",
+        "round": 6,
+        "after_move_id": "fde3477a",
+        "belief": {
+          "target_party_id": "employer",
+          "estimated_interests": [
+            {
+              "issue_id": "remote_work",
+              "description": "Values remote_work highly, prefers hybrid_2_3",
+              "estimated_weight": 0.27472071621009636,
+              "top_option": "hybrid_2_3"
+            },
+            {
+              "issue_id": "start_date",
+              "description": "Values start_date highly, prefers 2026-04-01",
+              "estimated_weight": 0.2711032975940265,
+              "top_option": "2026-04-01"
+            },
+            {
+              "issue_id": "equity_vesting",
+              "description": "Values equity_vesting highly, prefers accelerated_3yr",
+              "estimated_weight": 0.2323488953234944,
+              "top_option": "accelerated_3yr"
+            }
+          ],
+          "estimated_batna_utility": 0.6627307754041095,
+          "estimated_priorities": {
+            "base_salary": 0.10692384955719166,
+            "equity_vesting": 0.2323488953234944,
+            "remote_work": 0.27472071621009636,
+            "start_date": 0.2711032975940265,
+            "signing_bonus": 0.11490324131519102
+          },
+          "confidence": 0.12666375998743298,
+          "evidence": [
+            "bid_0",
+            "bid_1",
+            "bid_2"
+          ]
+        }
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "mediator_note",
+      "data": {
+        "id": "c85f9573",
+        "timestamp": "2026-04-10T13:33:17.361597Z",
+        "party_id": "mediator",
+        "move_type": "argue",
+        "package": null,
+        "argument": {
+          "id": "36fdb6b8",
+          "claim": "Both parties have reached a consensus on the base salary ($160,000) and the signing bonus ($12,500), which are squarely within the competitive market range. The remaining point of contention is the remote work policy (hybrid 3-2 vs 2-3). Since the parties are in such close proximity, they are well-positioned to reach a final agreement.",
+          "grounds": [
+            "Both parties have successfully aligned on the monetary components of the offer, demonstrating a clear commitment to market-based compensation and a willingness to compromise.",
+            "The final decision point is the remote work schedule. The parties might consider if a phased approach or a specific team-based flexibility could bridge the small gap between the hybrid 3-2 and hybrid 2-3 models."
+          ],
+          "criterion_id": null,
+          "backing": null,
+          "targets": []
+        },
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": null,
+        "phase": "generation",
+        "round": 6,
+        "turn": 2,
+        "party_name": "Mediator"
+      },
+      "delay_ms": 2410
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "09045771",
+        "timestamp": "2026-04-10T13:33:20.229139Z",
+        "party_id": "candidate",
+        "move_type": "propose",
+        "package": {
+          "id": "bb6d4acd",
+          "issue_values": {
+            "base_salary": "160000",
+            "equity_package": "standard_4yr",
+            "remote_work_policy": "hybrid_2_3",
+            "start_date": "2026-04-01",
+            "signing_bonus": "12500"
+          },
+          "rationale": "I am proposing a hybrid 2:3 schedule because it provides me with the necessary flexibility to maintain productivity and personal projects while still ensuring I am in the office for 2 days a week to support the team cohesion that TechStartup Inc. values. This compromise respects your interest in in-person collaboration while honoring my need for balance.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: TechStartup Inc. values in-person collaboration for team cohesion, hence their preference for hybrid_3_2. They have already conceded on the money (salary and bonus), which shows they are willing to invest in me. My interest is in flexibility for my personal projects. Hybrid 2:3 is a middle ground that allows for more remote days than 3:2, which helps my work-life balance, while still maintaining a strong presence (2 days) for collaboration. By keeping all other terms identical to the agreed-upon points, I am signaling that this is the final hurdle to closing the deal.",
+        "phase": "generation",
+        "round": 7,
+        "turn": 0,
+        "party_name": "Alex (Candidate)"
+      },
+      "delay_ms": 2867
+    },
+    {
+      "type": "belief_update",
+      "data": {
+        "observer_party_id": "employer",
+        "target_party_id": "candidate",
+        "round": 7,
+        "after_move_id": "09045771",
+        "belief": {
+          "target_party_id": "candidate",
+          "estimated_interests": [
+            {
+              "issue_id": "base_salary",
+              "description": "Values base_salary highly, prefers 162000",
+              "estimated_weight": 0.2279492925228622,
+              "top_option": "162000"
+            },
+            {
+              "issue_id": "equity_vesting",
+              "description": "Values equity_vesting highly, prefers accelerated_3yr",
+              "estimated_weight": 0.22151689863382465,
+              "top_option": "accelerated_3yr"
+            },
+            {
+              "issue_id": "start_date",
+              "description": "Values start_date highly, prefers 2026-04-01",
+              "estimated_weight": 0.22058306025555816,
+              "top_option": "2026-04-01"
+            },
+            {
+              "issue_id": "remote_work",
+              "description": "Values remote_work highly, prefers hybrid_2_3",
+              "estimated_weight": 0.21744284703426675,
+              "top_option": "hybrid_2_3"
+            }
+          ],
+          "estimated_batna_utility": 0.7823867504560563,
+          "estimated_priorities": {
+            "base_salary": 0.2279492925228622,
+            "equity_vesting": 0.22151689863382465,
+            "remote_work": 0.21744284703426675,
+            "start_date": 0.22058306025555816,
+            "signing_bonus": 0.11250790155348814
+          },
+          "confidence": 0.10626550597434074,
+          "evidence": [
+            "bid_0",
+            "bid_1",
+            "bid_2"
+          ]
+        }
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "70363f37",
+        "timestamp": "2026-04-10T13:33:23.199250Z",
+        "party_id": "employer",
+        "move_type": "meso",
+        "package": {
+          "id": "a45851e7",
+          "issue_values": {
+            "base_salary": "160000",
+            "equity_package": "standard_4yr",
+            "remote_work_policy": "hybrid_3_2",
+            "start_date": "2026-04-01",
+            "signing_bonus": "12500"
+          },
+          "rationale": "We have found strong consensus on total compensation. Regarding the remote policy, we are willing to offer a performance-based review after 6 months to transition to a 2:3 hybrid schedule, provided we meet our team integration goals. This maintains our need for initial cohesion while addressing your desire for flexibility.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: Alex is focused on flexibility (2:3 hybrid) to maintain work-life balance. I am focused on team cohesion (3:2 hybrid). Since we have agreed on all other terms (salary, bonus, start date, equity), the remote policy is the final hurdle. My strategy is to propose a conditional compromise: maintain the 3:2 policy for the critical onboarding phase (first 6 months) and then allow a transition to 2:3 based on performance. This creates value by meeting their long-term need for flexibility while protecting my short-term need for integration.",
+        "phase": "generation",
+        "round": 7,
+        "turn": 1,
+        "party_name": "TechStartup Inc."
+      },
+      "delay_ms": 2955
+    },
+    {
+      "type": "belief_update",
+      "data": {
+        "observer_party_id": "candidate",
+        "target_party_id": "employer",
+        "round": 7,
+        "after_move_id": "70363f37",
+        "belief": {
+          "target_party_id": "employer",
+          "estimated_interests": [
+            {
+              "issue_id": "remote_work",
+              "description": "Values remote_work highly, prefers hybrid_2_3",
+              "estimated_weight": 0.2649940558387356,
+              "top_option": "hybrid_2_3"
+            },
+            {
+              "issue_id": "start_date",
+              "description": "Values start_date highly, prefers 2026-04-01",
+              "estimated_weight": 0.26150471421221694,
+              "top_option": "2026-04-01"
+            },
+            {
+              "issue_id": "equity_vesting",
+              "description": "Values equity_vesting highly, prefers accelerated_3yr",
+              "estimated_weight": 0.22412243601729434,
+              "top_option": "accelerated_3yr"
+            }
+          ],
+          "estimated_batna_utility": 0.6392663739605919,
+          "estimated_priorities": {
+            "base_salary": 0.13854377440652949,
+            "equity_vesting": 0.22412243601729434,
+            "remote_work": 0.2649940558387356,
+            "start_date": 0.26150471421221694,
+            "signing_bonus": 0.11083501952522358
+          },
+          "confidence": 0.14122787045943444,
+          "evidence": [
+            "bid_0",
+            "bid_1",
+            "bid_2",
+            "bid_3"
+          ]
+        }
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "mediator_note",
+      "data": {
+        "id": "5b08deed",
+        "timestamp": "2026-04-10T13:33:26.065867Z",
+        "party_id": "mediator",
+        "move_type": "propose",
+        "package": {
+          "id": "1bdfdfe8",
+          "issue_values": {
+            "base_salary": "160000",
+            "equity_package": "standard_4yr",
+            "remote_work_policy": "hybrid_2.5",
+            "start_date": "2026-04-01",
+            "signing_bonus": "12500"
+          },
+          "rationale": "Both parties have agreed on all financial components and the start date. The remaining gap is the remote work policy (3-2 vs 2-3). Since 65% of companies offer hybrid flexibility, I propose a compromise where the team remains onsite for 2.5 days on average, or alternatively, the parties could alternate between the two schedules on a monthly basis to test feasibility.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": null,
+        "phase": "generation",
+        "round": 7,
+        "turn": 2,
+        "party_name": "Mediator"
+      },
+      "delay_ms": 2850
+    },
+    {
+      "type": "phase_change",
+      "data": {
+        "phase": "bargaining",
+        "round": 7,
+        "message": "Entering bargaining phase \u2014 proposals and counterproposals"
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "78066a32",
+        "timestamp": "2026-04-10T13:33:28.522450Z",
+        "party_id": "candidate",
+        "move_type": "accept",
+        "package": {
+          "id": "5089b667",
+          "issue_values": {
+            "base_salary": "160000",
+            "equity_package": "standard_4yr",
+            "remote_work_policy": "hybrid_3_2",
+            "start_date": "2026-04-01",
+            "signing_bonus": "12500"
+          },
+          "rationale": "I recognize that TechStartup Inc. prioritizes in-person team cohesion and has made significant concessions on base salary and signing bonus to reach the upper end of the market range. While I preferred a 2:3 hybrid schedule, accepting the 3:2 policy acknowledges the importance of the team's collaborative culture while securing a strong, market-competitive compensation package that aligns with my needs.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Theory of Mind: TechStartup Inc. has been firm on the 3:2 hybrid policy because they genuinely believe it is necessary for team cohesion during their growth phase. They have already moved significantly on salary and bonus to meet my requirements. By accepting their preferred remote work policy, I am prioritizing the overall value of the compensation package and demonstrating cooperativeness to finalize the agreement. This move secures my primary financial goals and start date while respecting their core operational constraint.",
+        "phase": "bargaining",
+        "round": 8,
+        "turn": 0,
+        "party_name": "Alex (Candidate)"
+      },
+      "delay_ms": 4000
+    },
+    {
+      "type": "belief_update",
+      "data": {
+        "observer_party_id": "employer",
+        "target_party_id": "candidate",
+        "round": 8,
+        "after_move_id": "78066a32",
+        "belief": {
+          "target_party_id": "candidate",
+          "estimated_interests": [
+            {
+              "issue_id": "base_salary",
+              "description": "Values base_salary highly, prefers 162000",
+              "estimated_weight": 0.2279492925228622,
+              "top_option": "162000"
+            },
+            {
+              "issue_id": "equity_vesting",
+              "description": "Values equity_vesting highly, prefers accelerated_3yr",
+              "estimated_weight": 0.22151689863382465,
+              "top_option": "accelerated_3yr"
+            },
+            {
+              "issue_id": "start_date",
+              "description": "Values start_date highly, prefers 2026-04-01",
+              "estimated_weight": 0.22058306025555816,
+              "top_option": "2026-04-01"
+            },
+            {
+              "issue_id": "remote_work",
+              "description": "Values remote_work highly, prefers hybrid_2_3",
+              "estimated_weight": 0.21744284703426675,
+              "top_option": "hybrid_2_3"
+            }
+          ],
+          "estimated_batna_utility": 0.7823867504560563,
+          "estimated_priorities": {
+            "base_salary": 0.2279492925228622,
+            "equity_vesting": 0.22151689863382465,
+            "remote_work": 0.21744284703426675,
+            "start_date": 0.22058306025555816,
+            "signing_bonus": 0.11250790155348814
+          },
+          "confidence": 0.141687341299121,
+          "evidence": [
+            "bid_0",
+            "bid_1",
+            "bid_2",
+            "bid_3"
+          ]
+        }
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "move",
+      "data": {
+        "id": "01c6f6d1",
+        "timestamp": "2026-04-10T13:33:34.052821Z",
+        "party_id": "employer",
+        "move_type": "accept",
+        "package": {
+          "id": "56224622",
+          "issue_values": {
+            "base_salary": "160000",
+            "equity_package": "standard_4yr",
+            "remote_work_policy": "hybrid_3_2",
+            "start_date": "2026-04-01",
+            "signing_bonus": "12500"
+          },
+          "rationale": "We are pleased to reach an agreement that aligns with our budgetary constraints, satisfies our requirement for in-person collaboration, and provides a competitive package for the candidate.",
+          "pareto_rank": null
+        },
+        "argument": null,
+        "disclosed_interest": null,
+        "references": [],
+        "reasoning": "Alex has accepted the terms that align with our core interests: the compensation remains within our budget, the 4-year vesting schedule supports long-term retention, and the hybrid 3:2 policy maintains the team cohesion we value. Since the candidate has formally accepted these terms, I am concluding the negotiation by accepting their final proposal.",
+        "phase": "bargaining",
+        "round": 8,
+        "turn": 1,
+        "party_name": "TechStartup Inc."
+      },
+      "delay_ms": 4000
+    },
+    {
+      "type": "belief_update",
+      "data": {
+        "observer_party_id": "candidate",
+        "target_party_id": "employer",
+        "round": 8,
+        "after_move_id": "01c6f6d1",
+        "belief": {
+          "target_party_id": "employer",
+          "estimated_interests": [
+            {
+              "issue_id": "remote_work",
+              "description": "Values remote_work highly, prefers hybrid_2_3",
+              "estimated_weight": 0.2649940558387356,
+              "top_option": "hybrid_2_3"
+            },
+            {
+              "issue_id": "start_date",
+              "description": "Values start_date highly, prefers 2026-04-01",
+              "estimated_weight": 0.26150471421221694,
+              "top_option": "2026-04-01"
+            },
+            {
+              "issue_id": "equity_vesting",
+              "description": "Values equity_vesting highly, prefers accelerated_3yr",
+              "estimated_weight": 0.22412243601729434,
+              "top_option": "accelerated_3yr"
+            }
+          ],
+          "estimated_batna_utility": 0.6392663739605919,
+          "estimated_priorities": {
+            "base_salary": 0.13854377440652949,
+            "equity_vesting": 0.22412243601729434,
+            "remote_work": 0.2649940558387356,
+            "start_date": 0.26150471421221694,
+            "signing_bonus": 0.11083501952522358
+          },
+          "confidence": 0.1765348380742931,
+          "evidence": [
+            "bid_0",
+            "bid_1",
+            "bid_2",
+            "bid_3",
+            "bid_4"
+          ]
+        }
+      },
+      "delay_ms": 200
+    },
+    {
+      "type": "settlement",
+      "data": {
+        "agreement": {
+          "id": "56224622",
+          "issue_values": {
+            "base_salary": "160000",
+            "equity_package": "standard_4yr",
+            "remote_work_policy": "hybrid_3_2",
+            "start_date": "2026-04-01",
+            "signing_bonus": "12500"
+          },
+          "rationale": "We are pleased to reach an agreement that aligns with our budgetary constraints, satisfies our requirement for in-person collaboration, and provides a competitive package for the candidate.",
+          "pareto_rank": null
+        },
+        "total_rounds": 8,
+        "total_moves": 23,
+        "award": null
+      },
+      "delay_ms": 200
+    }
+  ],
+  "metrics": {
+    "outcome": "agreement",
+    "party_utilities": {
+      "candidate": 0.5,
+      "employer": 0.4516129032258064
+    },
+    "party_batna_surplus": {
+      "candidate": -0.15000000000000002,
+      "employer": 0.05161290322580636
+    },
+    "social_welfare": 0.9516129032258064,
+    "pareto_efficient": false,
+    "nash_product": 5.161290322580636e-05,
+    "integrative_index": 0.9062980030721965,
+    "total_rounds": 8,
+    "total_moves": 23,
+    "move_breakdown": {
+      "disclose_interest": 3,
+      "argue": 8,
+      "invoke_criterion": 1,
+      "propose": 8,
+      "meso": 1,
+      "accept": 2
+    },
+    "disclosure_rate": 0.3333333333333333,
+    "phases_visited": [
+      "discovery",
+      "generation",
+      "bargaining",
+      "settlement"
+    ],
+    "agreement": {
+      "id": "56224622",
+      "issue_values": {
+        "base_salary": "160000",
+        "equity_package": "standard_4yr",
+        "remote_work_policy": "hybrid_3_2",
+        "start_date": "2026-04-01",
+        "signing_bonus": "12500"
+      },
+      "rationale": "We are pleased to reach an agreement that aligns with our budgetary constraints, satisfies our requirement for in-person collaboration, and provides a competitive package for the candidate.",
+      "pareto_rank": null
+    }
+  },
+  "critique": []
+}
