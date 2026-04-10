@@ -105,12 +105,13 @@ const issueCards = computed(() => {
       } else gapPct = 50
     }
 
-    // BCI: get opponent weight for this issue (use first available belief)
+    // BCI: get opponent weight for this issue
+    // Show Party A's model of Party B (what does A think B cares about?)
     let oppWeight = null
     let oppConf = 0
-    const beliefKeys = Object.keys(props.beliefs)
-    if (beliefKeys.length > 0) {
-      const b = props.beliefs[beliefKeys[0]]
+    if (partyAId && partyBId) {
+      const bkey = `${partyAId}→${partyBId}`
+      const b = props.beliefs[bkey]
       if (b?.estimated_priorities && b.confidence >= 0.2) {
         oppWeight = b.estimated_priorities[issue.id] ?? b.estimated_priorities[issue.name] ?? null
         oppConf = b.confidence
