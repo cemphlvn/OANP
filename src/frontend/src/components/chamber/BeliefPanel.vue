@@ -1,5 +1,5 @@
 <template>
-  <div v-if="belief && belief.confidence >= 0.15" class="bp" :class="confClass">
+  <div v-if="belief && belief.confidence >= 0.005" class="bp" :class="confClass">
     <div class="bp-header" @click="collapsed = !collapsed">
       <span class="bp-title">OPPONENT MODEL</span>
       <span class="bp-conf">{{ (belief.confidence * 100).toFixed(0) }}%</span>
@@ -68,8 +68,8 @@ const sortedPriorities = computed(() => {
   font-size: 10px;
   transition: opacity 0.3s ease;
 }
-.bp-conf-low { opacity: 0.5; }
-.bp-conf-mid { opacity: 0.8; }
+.bp-conf-low { opacity: 0.7; }
+.bp-conf-mid { opacity: 0.85; }
 .bp-conf-high { opacity: 1.0; }
 
 .bp-header {

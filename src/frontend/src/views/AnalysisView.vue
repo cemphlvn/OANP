@@ -80,7 +80,7 @@
               <div class="an-card-title">Final Agreement</div>
               <div class="an-terms">
                 <div v-for="(val, key) in metrics.agreement.issue_values" :key="key" class="an-term">
-                  <span class="an-term-key">{{ key }}</span>
+                  <span class="an-term-key">{{ issueNames[key] || key }}</span>
                   <span class="an-term-val">{{ val }}</span>
                 </div>
               </div>
@@ -99,7 +99,36 @@
                   <div class="an-util-bar" :style="{ width: (util * 100) + '%', background: getPartyColor(partyId) }"></div>
                 </div>
                 <div class="an-util-meta" v-if="metrics.party_batna_surplus?.[partyId] != null">
-                  BATNA surplus: <strong>+{{ metrics.party_batna_surplus[partyId].toFixed(2) }}</strong>
+                  BATNA surplus: <strong :class="metrics.party_batna_surplus[partyId] >= 0 ? 'surplus-pos' : 'surplus-neg'">{{ metrics.party_batna_surplus[partyId] >= 0 ? '+' : '' }}{{ metrics.party_batna_surplus[partyId].toFixed(2) }}</strong>
+                </div>
+              </div>
+            </div>
+
+            <!-- BCI Opponent Models -->
+            <div v-if="hasOpponentModels" class="an-card an-card--bci">
+              <div class="an-card-title">Opponent Models <span class="an-card-subtitle">Bayesian Inference</span></div>
+              <div class="an-bci-columns">
+                <div v-for="col in bciColumns" :key="col.key" class="an-bci-col">
+                  <div class="an-bci-col-header">
+                    <span class="an-bci-dot" :style="{ background: getPartyColor(col.observerId) }"></span>
+                    {{ partyNames[col.observerId] || col.observerId }}'s estimate
+                  </div>
+                  <div class="an-bci-conf-row">
+                    <span class="an-bci-conf-val">{{ (col.belief.confidence * 100).toFixed(0) }}%</span>
+                    <div class="an-bci-conf-bar">
+                      <div class="an-bci-conf-fill" :style="{ width: (col.belief.confidence * 100) + '%' }"></div>
+                    </div>
+                  </div>
+                  <div v-for="item in col.sortedWeights" :key="item.id" class="an-bci-row">
+                    <span class="an-bci-issue">{{ item.name }}</span>
+                    <span class="an-bci-weight">{{ item.weight.toFixed(2) }}</span>
+                    <div class="an-bci-bar">
+                      <div class="an-bci-fill" :style="{ width: (item.weight * 100) + '%', background: getPartyColor(col.observerId) }"></div>
+                    </div>
+                  </div>
+                  <div v-if="col.belief.estimated_batna_utility != null" class="an-bci-batna">
+                    Est. BATNA: {{ col.belief.estimated_batna_utility.toFixed(3) }}
+                  </div>
                 </div>
               </div>
             </div>
@@ -163,7 +192,7 @@
 
         <!-- Navigate to Explore -->
         <div class="an-footer">
-          <button class="an-explore-btn" @click="$router.push({ name: 'Negotiate', params: { sessionId } })">
+          <button class="an-explore-btn" @click="$router.push({ name: 'Negotiate', params: { sessionId }, query: { demo: '1', completed: '1' } })">
             ← Back to Negotiation
           </button>
         </div>
@@ -221,6 +250,29 @@ const partyNames = computed(() => {
   const map = {}
   parties.value.forEach(p => { map[p.id] = p.name })
   return map
+})
+
+const issueNames = computed(() => {
+  const map = {}
+  issues.value.forEach(i => { map[i.id] = i.name; map[i.name] = i.name })
+  return map
+})
+
+const hasOpponentModels = computed(() => {
+  return metrics.value?.opponent_models && Object.keys(metrics.value.opponent_models).length > 0
+})
+
+const bciColumns = computed(() => {
+  if (!hasOpponentModels.value) return []
+  return Object.entries(metrics.value.opponent_models).map(([key, belief]) => {
+    const [observerId, targetId] = key.split('→')
+    const sortedWeights = belief.estimated_priorities
+      ? Object.entries(belief.estimated_priorities)
+          .map(([id, weight]) => ({ id, name: issueNames.value[id] || id, weight }))
+          .sort((a, b) => b.weight - a.weight)
+      : []
+    return { key, observerId, targetId, belief, sortedWeights }
+  })
 })
 
 function getPartyColor(partyId) {
@@ -377,11 +429,11 @@ onMounted(loadData)
 .an-outcome-bar.impasse { background: #FEF2F2; border: 1px solid #FECACA; }
 
 .an-outcome-badge {
-  font-family: var(--font-mono);
-  font-size: 13px;
+  font-family: var(--font-heading);
+  font-size: 18px;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 1px;
 }
 
 .an-outcome-bar.agreement .an-outcome-badge { color: #166534; }
@@ -481,7 +533,8 @@ onMounted(loadData)
   color: #999;
 }
 
-.an-util-meta strong { color: #22c55e; }
+.an-util-meta strong.surplus-pos { color: #22c55e; }
+.an-util-meta strong.surplus-neg { color: #ef4444; }
 
 /* Metrics Grid */
 .an-metrics-grid {
@@ -670,4 +723,111 @@ onMounted(loadData)
 .an-ps-val { font-family: var(--font-mono); font-size: 11px; font-weight: 600; }
 .an-ps-val.good { color: #22c55e; }
 .an-ps-val.warn { color: #f59e0b; }
+
+/* Premium card depth */
+.an-card {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+
+/* BCI Opponent Models Card */
+.an-card--bci .an-card-title {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.an-card-subtitle {
+  font-size: 9px;
+  font-weight: 500;
+  color: #BBB;
+  letter-spacing: 0.5px;
+}
+.an-bci-columns {
+  display: flex;
+  gap: 20px;
+}
+.an-bci-col {
+  flex: 1;
+  min-width: 0;
+}
+.an-bci-col-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 8px;
+}
+.an-bci-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.an-bci-conf-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.an-bci-conf-val {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 700;
+  min-width: 32px;
+}
+.an-bci-conf-bar {
+  flex: 1;
+  height: 3px;
+  background: #F0F0F0;
+  border-radius: 1.5px;
+  overflow: hidden;
+}
+.an-bci-conf-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 1.5px;
+}
+.an-bci-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 3px 0;
+}
+.an-bci-issue {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: #666;
+  min-width: 80px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.an-bci-weight {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  min-width: 32px;
+  text-align: right;
+}
+.an-bci-bar {
+  flex: 1;
+  height: 4px;
+  background: #F0F0F0;
+  border-radius: 2px;
+  overflow: hidden;
+}
+.an-bci-fill {
+  height: 100%;
+  border-radius: 2px;
+}
+.an-bci-batna {
+  margin-top: 8px;
+  padding-top: 6px;
+  border-top: 1px dashed #F0F0F0;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: #999;
+}
 </style>

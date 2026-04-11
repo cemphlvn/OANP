@@ -1,103 +1,84 @@
 <template>
   <div class="beliefs-view">
     <div class="bv-header">
-      <div class="bv-party-tabs">
-        <button
-          v-for="p in parties"
-          :key="p.id"
-          class="bv-tab"
-          :class="{ active: selectedParty === p.id }"
-          @click="selectedParty = p.id"
-        >{{ p.name }}</button>
-      </div>
-      <span class="bv-round">{{ beliefHistory.length }} updates</span>
+      <span class="bv-title">Opponent Models</span>
+      <span class="bv-count">{{ beliefHistory.length }} updates</span>
     </div>
 
-    <div v-if="currentBelief" class="bv-content">
-      <!-- Weight Evolution Chart -->
-      <div class="bv-section">
-        <div class="bv-section-title">Priority Evolution Over Rounds</div>
-        <div class="bv-chart" ref="chartRef">
-          <div v-if="historyForParty.length < 2" class="bv-chart-empty">
+    <div v-if="columns.length > 0" class="bv-columns" :class="{ 'bv-single': columns.length === 1 }">
+      <div v-for="col in columns" :key="col.key" class="bv-column">
+        <!-- Column header -->
+        <div class="bv-col-header">
+          <span class="bv-col-dot" :style="{ background: col.color }"></span>
+          <span>{{ col.observerName }}'s model of {{ col.targetName }}</span>
+        </div>
+
+        <!-- Chart -->
+        <div class="bv-chart">
+          <div v-if="col.history.length < 2" class="bv-chart-empty">
             Awaiting more data points...
           </div>
-          <svg v-else :width="chartWidth" :height="chartHeight">
-            <!-- Grid lines -->
+          <svg v-else :width="chartWidth" :height="180" class="bv-svg">
             <line v-for="y in yTicks" :key="'g'+y"
               :x1="pad" :x2="chartWidth - pad"
-              :y1="yScale(y)" :y2="yScale(y)"
+              :y1="yScale(y, 180)" :y2="yScale(y, 180)"
               stroke="#F0F0F0" stroke-width="1" />
-            <!-- Y axis labels -->
             <text v-for="y in yTicks" :key="'yl'+y"
-              :x="pad - 4" :y="yScale(y) + 3"
+              :x="pad - 4" :y="yScale(y, 180) + 3"
               text-anchor="end" fill="#BBB" font-size="9"
               font-family="JetBrains Mono, monospace">{{ y.toFixed(1) }}</text>
-            <!-- Lines per issue -->
-            <path v-for="(line, idx) in chartLines" :key="'l'+idx"
+            <path v-for="(line, idx) in col.chartLines" :key="'l'+idx"
               :d="line.path" fill="none"
               :stroke="line.color" stroke-width="2"
               stroke-linejoin="round" />
-            <!-- Legend -->
-            <g v-for="(line, idx) in chartLines" :key="'leg'+idx"
-              :transform="`translate(${pad + idx * 120}, ${chartHeight - 6})`">
-              <rect :fill="line.color" width="10" height="3" rx="1" />
-              <text x="14" y="3" fill="#666" font-size="9"
-                font-family="JetBrains Mono, monospace">{{ line.label }} ({{ line.lastVal.toFixed(2) }})</text>
-            </g>
           </svg>
-        </div>
-      </div>
-
-      <!-- Current Estimates Table -->
-      <div class="bv-section">
-        <div class="bv-section-title">Current Estimates (Confidence: {{ (currentBelief.confidence * 100).toFixed(0) }}%)</div>
-        <div class="bv-table">
-          <div class="bv-table-header">
-            <span class="bv-th">Issue</span>
-            <span class="bv-th">Weight</span>
-            <span class="bv-th">Bar</span>
-          </div>
-          <div
-            v-for="item in sortedWeights"
-            :key="item.id"
-            class="bv-table-row"
-          >
-            <span class="bv-td bv-td-issue">{{ item.name }}</span>
-            <span class="bv-td bv-td-weight">{{ item.weight.toFixed(3) }}</span>
-            <div class="bv-td bv-td-bar">
-              <div class="bv-weight-bar">
-                <div class="bv-weight-fill" :style="{ width: (item.weight * 100) + '%' }"></div>
-              </div>
+          <!-- Legend below chart -->
+          <div v-if="col.chartLines.length > 0" class="bv-legend">
+            <div v-for="(line, idx) in col.chartLines" :key="'leg'+idx" class="bv-legend-item">
+              <span class="bv-legend-dot" :style="{ background: line.color }"></span>
+              <span class="bv-legend-label">{{ line.label }}</span>
+              <span class="bv-legend-val">{{ line.lastVal.toFixed(2) }}</span>
             </div>
           </div>
         </div>
-      </div>
 
-      <!-- BATNA + Confidence -->
-      <div class="bv-section bv-meta-row">
-        <div v-if="currentBelief.estimated_batna_utility != null" class="bv-meta">
-          <span class="bv-meta-label">Est. BATNA Utility</span>
-          <span class="bv-meta-val">{{ currentBelief.estimated_batna_utility.toFixed(3) }}</span>
+        <!-- Weights table -->
+        <div class="bv-table">
+          <div class="bv-table-title">Current Estimates</div>
+          <div v-for="item in col.sortedWeights" :key="item.id" class="bv-table-row">
+            <span class="bv-td-issue">{{ item.name }}</span>
+            <span class="bv-td-weight">{{ item.weight.toFixed(3) }}</span>
+            <div class="bv-td-bar">
+              <div class="bv-td-fill" :style="{ width: (item.weight * 100) + '%', background: col.color }"></div>
+            </div>
+          </div>
         </div>
-        <div class="bv-meta">
-          <span class="bv-meta-label">Observations</span>
-          <span class="bv-meta-val">{{ currentBelief.evidence?.length || 0 }}</span>
-        </div>
-        <div class="bv-meta">
-          <span class="bv-meta-label">Confidence</span>
-          <span class="bv-meta-val">{{ (currentBelief.confidence * 100).toFixed(0) }}%</span>
+
+        <!-- Meta -->
+        <div class="bv-meta-row">
+          <div class="bv-meta">
+            <span class="bv-meta-label">Confidence</span>
+            <span class="bv-meta-val">{{ (col.belief.confidence * 100).toFixed(0) }}%</span>
+          </div>
+          <div v-if="col.belief.estimated_batna_utility != null" class="bv-meta">
+            <span class="bv-meta-label">Est. BATNA</span>
+            <span class="bv-meta-val">{{ col.belief.estimated_batna_utility.toFixed(2) }}</span>
+          </div>
+          <div class="bv-meta">
+            <span class="bv-meta-label">Observations</span>
+            <span class="bv-meta-val">{{ col.belief.evidence?.length || 0 }}</span>
+          </div>
         </div>
       </div>
     </div>
 
-    <div v-else class="bv-empty">
-      Select a party to view their opponent model
-    </div>
+    <div v-else class="bv-empty">No opponent model data yet</div>
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { computed } from 'vue'
+import { PARTY_COLORS } from '@/types/protocol'
 
 const props = defineProps({
   parties: { type: Array, default: () => [] },
@@ -106,66 +87,80 @@ const props = defineProps({
   issues: { type: Array, default: () => [] },
 })
 
-const selectedParty = ref(props.parties[0]?.id || null)
-const chartWidth = 600
-const chartHeight = 220
-const pad = 36
-const yTicks = [0.0, 0.2, 0.4, 0.6, 0.8, 1.0]
-
-// Issue colors — monochrome palette with accent for top issue
+const pad = 32
+const yTicks = [0.0, 0.25, 0.5, 0.75, 1.0]
 const issueColors = ['#000', '#666', '#999', '#BBB', '#DDD']
 
-const opponentId = computed(() => {
-  if (!selectedParty.value) return null
-  const other = props.parties.find(p => p.id !== selectedParty.value)
-  return other?.id || null
-})
+const chartWidth = computed(() => props.parties.length >= 2 ? 280 : 480)
 
-const currentBelief = computed(() => {
-  if (!selectedParty.value || !opponentId.value) return null
-  const key = `${selectedParty.value}→${opponentId.value}`
-  return props.beliefs[key] || null
-})
-
-const historyForParty = computed(() => {
-  if (!selectedParty.value || !opponentId.value) return []
-  return props.beliefHistory.filter(
-    h => h.observer_party_id === selectedParty.value && h.target_party_id === opponentId.value
-  )
-})
-
-const sortedWeights = computed(() => {
-  if (!currentBelief.value?.estimated_priorities) return []
-  return Object.entries(currentBelief.value.estimated_priorities)
-    .map(([id, weight]) => {
-      const issue = props.issues.find(i => i.id === id || i.name === id)
-      return { id, name: issue?.name || id, weight }
-    })
-    .sort((a, b) => b.weight - a.weight)
-})
-
-function yScale(val) {
-  return pad + (1 - val) * (chartHeight - pad * 2)
+function yScale(val, h) {
+  return pad + (1 - val) * (h - pad * 2)
 }
 
-const chartLines = computed(() => {
-  if (historyForParty.value.length < 2) return []
-  const issueIds = Object.keys(historyForParty.value[0]?.estimated_priorities || {})
-  const n = historyForParty.value.length
-  const xStep = (chartWidth - pad * 2) / Math.max(n - 1, 1)
+const columns = computed(() => {
+  const cols = []
+  for (let i = 0; i < props.parties.length; i++) {
+    for (let j = 0; j < props.parties.length; j++) {
+      if (i === j) continue
+      const obs = props.parties[i]
+      const tgt = props.parties[j]
+      const key = `${obs.id}→${tgt.id}`
+      const belief = props.beliefs[key]
+      if (!belief) continue
+
+      const history = props.beliefHistory.filter(
+        h => h.observer_party_id === obs.id && h.target_party_id === tgt.id
+      )
+
+      const sortedWeights = belief.estimated_priorities
+        ? Object.entries(belief.estimated_priorities)
+            .map(([id, weight]) => ({
+              id,
+              name: props.issues.find(x => x.id === id || x.name === id)?.name || id,
+              weight,
+            }))
+            .sort((a, b) => b.weight - a.weight)
+        : []
+
+      // Build chart lines
+      const chartLines = history.length >= 2
+        ? buildChartLines(history, sortedWeights)
+        : []
+
+      cols.push({
+        key,
+        observerId: obs.id,
+        targetId: tgt.id,
+        observerName: obs.name,
+        targetName: tgt.name,
+        color: PARTY_COLORS[i] || '#999',
+        belief,
+        history,
+        sortedWeights,
+        chartLines,
+      })
+    }
+  }
+  return cols
+})
+
+function buildChartLines(history, sortedWeights) {
+  if (!history.length || !history[0].estimated_priorities) return []
+  const issueIds = Object.keys(history[0].estimated_priorities)
+  const n = history.length
+  const w = chartWidth.value
+  const xStep = (w - pad * 2) / Math.max(n - 1, 1)
 
   return issueIds.map((iid, idx) => {
-    const issue = props.issues.find(i => i.id === iid || i.name === iid)
-    const points = historyForParty.value.map((h, t) => {
+    const issue = props.issues.find(x => x.id === iid || x.name === iid)
+    const points = history.map((h, t) => {
       const x = pad + t * xStep
-      const y = yScale(h.estimated_priorities?.[iid] || 0)
+      const y = yScale(h.estimated_priorities?.[iid] || 0, 180)
       return `${x},${y}`
     })
-    const lastVal = historyForParty.value[n - 1]?.estimated_priorities?.[iid] || 0
-    // Top-weight issue gets accent color
-    const color = idx === 0 && sortedWeights.value[0]?.id === iid
-      ? '#FF5722'
-      : (issueColors[idx] || '#CCC')
+    const lastVal = history[n - 1]?.estimated_priorities?.[iid] || 0
+    const isTop = sortedWeights[0]?.id === iid
+    const color = isTop ? '#FF5722' : (issueColors[idx] || '#CCC')
     return {
       path: 'M ' + points.join(' L '),
       color,
@@ -173,15 +168,15 @@ const chartLines = computed(() => {
       lastVal,
     }
   })
-})
+}
 </script>
 
 <style scoped>
 .beliefs-view {
   height: 100%;
-  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
   background: #FAFAFA;
-  font-family: 'JetBrains Mono', monospace;
 }
 
 .bv-header {
@@ -192,125 +187,167 @@ const chartLines = computed(() => {
   border-bottom: 1px solid var(--border);
   background: #FFF;
 }
-.bv-party-tabs { display: flex; gap: 4px; }
-.bv-tab {
-  border: 1px solid var(--border);
-  background: transparent;
-  padding: 4px 12px;
-  font-size: 11px;
-  font-weight: 600;
-  border-radius: 4px;
-  cursor: pointer;
-  color: #999;
+.bv-title {
   font-family: var(--font-heading);
-}
-.bv-tab.active { background: #000; color: #FFF; border-color: #000; }
-.bv-round { font-size: 10px; color: #BBB; }
-
-.bv-content { padding: 20px; }
-
-.bv-section {
-  margin-bottom: 24px;
-}
-.bv-section-title {
-  font-size: 10px;
+  font-size: 13px;
   font-weight: 700;
-  color: #999;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 12px;
+  letter-spacing: 0.5px;
+}
+.bv-count {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: #BBB;
 }
 
+.bv-columns {
+  display: flex;
+  gap: 16px;
+  padding: 20px;
+  flex: 1;
+  overflow-y: auto;
+}
+.bv-single { justify-content: center; }
+.bv-column {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.bv-single .bv-column { max-width: 520px; }
+
+.bv-col-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-heading);
+  font-size: 12px;
+  font-weight: 600;
+}
+.bv-col-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+/* Chart */
 .bv-chart {
   background: #FFF;
   border: 1px solid var(--border);
-  border-radius: 6px;
-  padding: 16px;
-  min-height: 200px;
+  border-radius: 8px;
+  padding: 12px;
 }
 .bv-chart-empty {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 180px;
+  height: 120px;
   color: #CCC;
+  font-family: var(--font-mono);
   font-size: 11px;
 }
+.bv-svg { display: block; }
 
+.bv-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+  padding-top: 8px;
+  border-top: 1px solid #F0F0F0;
+  margin-top: 8px;
+}
+.bv-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+}
+.bv-legend-dot { width: 6px; height: 3px; border-radius: 1px; }
+.bv-legend-label { color: #666; }
+.bv-legend-val { color: #000; font-weight: 600; }
+
+/* Table */
 .bv-table {
   background: #FFF;
   border: 1px solid var(--border);
-  border-radius: 6px;
-  overflow: hidden;
+  border-radius: 8px;
+  padding: 12px;
 }
-.bv-table-header {
-  display: flex;
-  padding: 8px 12px;
-  background: #F9F9F9;
-  border-bottom: 1px solid var(--border);
-}
-.bv-th {
+.bv-table-title {
+  font-family: var(--font-mono);
   font-size: 9px;
   font-weight: 700;
-  color: #BBB;
+  color: #999;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
 }
 .bv-table-row {
   display: flex;
-  padding: 6px 12px;
-  border-bottom: 1px solid #F5F5F5;
   align-items: center;
+  gap: 8px;
+  padding: 3px 0;
 }
-.bv-table-row:last-child { border-bottom: none; }
-.bv-td { font-size: 11px; }
-.bv-td-issue { flex: 1; color: #555; }
-.bv-td-weight { width: 60px; text-align: right; font-weight: 600; color: #000; }
-.bv-td-bar { flex: 1; padding-left: 12px; }
-.bv-weight-bar {
+.bv-td-issue {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: #555;
+  min-width: 70px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.bv-td-weight {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  min-width: 36px;
+  text-align: right;
+}
+.bv-td-bar {
+  flex: 1;
   height: 4px;
   background: #F0F0F0;
   border-radius: 2px;
   overflow: hidden;
 }
-.bv-weight-fill {
+.bv-td-fill {
   height: 100%;
-  background: #FF5722;
   border-radius: 2px;
   transition: width 0.6s ease;
 }
 
+/* Meta */
 .bv-meta-row {
   display: flex;
-  gap: 24px;
+  gap: 8px;
 }
 .bv-meta {
+  flex: 1;
   background: #FFF;
   border: 1px solid var(--border);
-  border-radius: 6px;
-  padding: 12px 16px;
-  flex: 1;
+  border-radius: 8px;
+  padding: 8px 10px;
 }
 .bv-meta-label {
   display: block;
-  font-size: 9px;
+  font-family: var(--font-mono);
+  font-size: 8px;
   color: #BBB;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  margin-bottom: 4px;
+  margin-bottom: 2px;
 }
 .bv-meta-val {
-  font-size: 18px;
+  font-family: var(--font-mono);
+  font-size: 14px;
   font-weight: 700;
-  color: #000;
 }
 
 .bv-empty {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 300px;
+  flex: 1;
   color: #CCC;
+  font-family: var(--font-mono);
   font-size: 12px;
 }
 </style>

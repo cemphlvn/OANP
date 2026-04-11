@@ -112,7 +112,7 @@ const issueCards = computed(() => {
     if (partyAId && partyBId) {
       const bkey = `${partyAId}→${partyBId}`
       const b = props.beliefs[bkey]
-      if (b?.estimated_priorities && b.confidence >= 0.2) {
+      if (b?.estimated_priorities && b.confidence >= 0.005) {
         oppWeight = b.estimated_priorities[issue.id] ?? b.estimated_priorities[issue.name] ?? null
         oppConf = b.confidence
       }
@@ -265,8 +265,8 @@ const issueCards = computed(() => {
   margin-top: 4px;
   transition: opacity 0.3s ease;
 }
-.it-bci-conf-low { opacity: 0.35; }
-.it-bci-conf-mid { opacity: 0.7; }
+.it-bci-conf-low { opacity: 0.7; }
+.it-bci-conf-mid { opacity: 0.85; }
 .it-bci-conf-high { opacity: 1.0; }
 
 .it-bci-label {

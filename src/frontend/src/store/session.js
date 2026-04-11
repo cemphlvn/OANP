@@ -346,7 +346,8 @@ export function createSessionStore() {
    * Feeds pre-recorded events into the store with realistic timing.
    */
   let replayTimers = []
-  let replaySpeed = 1 // 1x, 2x, 4x
+  let replaySpeed = 1
+  let _replayEvents = null  // cached for speed changes
 
   function loadDemo(demo) {
     // Set initial state from demo data
@@ -368,6 +369,7 @@ export function createSessionStore() {
 
   function startReplay(events, speed = 1) {
     replaySpeed = speed
+    if (!_replayEvents) _replayEvents = events  // cache original full list
     stopReplay()
 
     addLog('system', `Replay started (${speed}x speed)`)
@@ -392,6 +394,23 @@ export function createSessionStore() {
 
   function setReplaySpeed(speed) {
     replaySpeed = speed
+    // If replay is running, restart at new speed with remaining events
+    if (replayTimers.length > 0 && _replayEvents) {
+      stopReplay()
+      // Find how many events already played (approximate from move count)
+      const totalMoves = state.moves.length
+      let eventsPlayed = 0
+      let movesSeen = 0
+      for (const e of _replayEvents) {
+        eventsPlayed++
+        if (e.type === 'move' || e.type === 'mediator_note') movesSeen++
+        if (movesSeen >= totalMoves) break
+      }
+      const remaining = _replayEvents.slice(eventsPlayed)
+      if (remaining.length > 0) {
+        startReplay(remaining, speed)
+      }
+    }
   }
 
   function disconnectWs() {
@@ -428,6 +447,7 @@ export function createSessionStore() {
     sendStart,
     sendHumanMove,
     disconnectWs,
+    handleEvent,
     loadDemo,
     startReplay,
     stopReplay,

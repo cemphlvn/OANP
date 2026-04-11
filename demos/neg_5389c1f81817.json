@@ -1,7 +1,7 @@
 {
   "session_id": "neg_5389c1f81817",
-  "scenario_name": "Alex (Candidate) vs TechStartup Inc.",
-  "description": "Salary negotiation with BCI opponent modeling. agreement.",
+  "scenario_name": "Alex vs TechStartup (BCI)",
+  "description": "Salary negotiation with Bayesian opponent modeling. 9 BCI updates. agreement.",
   "parties": [
     {
       "id": "candidate",

@@ -35,6 +35,15 @@
         <div class="ss-convergence-fill" :style="{ width: convergence + '%' }"></div>
       </div>
       <span class="ss-convergence-pct">{{ convergence }}%</span>
+      <!-- Demo speed control -->
+      <div v-if="isDemoMode && !outcome" class="ss-speed">
+        <button
+          v-for="s in [1, 2, 5]" :key="s"
+          class="ss-speed-btn"
+          :class="{ active: currentSpeed === s }"
+          @click="$emit('setSpeed', s)"
+        >{{ s }}x</button>
+      </div>
       <!-- Compliance sidebar toggle (advanced mode) -->
       <button
         v-if="isAdvancedMode"
@@ -67,6 +76,8 @@ const props = defineProps({
   totalIssues: { type: Number, default: 0 },
   convergence: { type: Number, default: 0 },
   outcome: { type: String, default: null },
+  isDemoMode: { type: Boolean, default: false },
+  currentSpeed: { type: Number, default: 1 },
   // Advanced mode props
   isAdvancedMode: { type: Boolean, default: false },
   escalationTier: { type: String, default: null },
@@ -75,7 +86,7 @@ const props = defineProps({
   stagnationDetected: { type: Boolean, default: false },
 })
 
-defineEmits(['viewAnalysis', 'toggleCompliance'])
+defineEmits(['viewAnalysis', 'toggleCompliance', 'setSpeed'])
 
 const phaseColor = computed(() => PHASE_COLORS[props.phase] || '#999')
 const tierColor = computed(() => TIER_COLORS[props.escalationTier] || '#999')
@@ -151,6 +162,32 @@ const deadlineUrgency = computed(() => {
 }
 
 .ss-convergence-pct { font-family: var(--font-mono); font-size: 11px; font-weight: 700; min-width: 30px; }
+
+.ss-speed {
+  display: flex;
+  gap: 2px;
+  background: #F0F0F0;
+  padding: 2px;
+  border-radius: 4px;
+  margin-left: 8px;
+}
+.ss-speed-btn {
+  border: none;
+  background: transparent;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  color: #999;
+  padding: 2px 8px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.ss-speed-btn.active {
+  background: #FFF;
+  color: #000;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+}
+.ss-speed-btn:hover:not(.active) { color: #666; }
 
 .ss-analysis-btn {
   background: #000;

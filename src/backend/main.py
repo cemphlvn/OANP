@@ -131,22 +131,38 @@ async def get_session(session_id: str):
     from ..protocol.views import StateView
 
     state = store.get(session_id)
-    if not state:
-        return {"error": "Session not found"}
+    if state:
+        return StateView.for_frontend(state)
 
-    return StateView.for_frontend(state)
+    # Fall back to demo cache
+    if session_id in _demo_cache:
+        demo = _demo_cache[session_id]
+        return {
+            "session_id": session_id,
+            "parties": demo.get("parties", []),
+            "issues": demo.get("issues", []),
+            "criteria": demo.get("criteria", []),
+            "outcome": demo.get("outcome"),
+            "agreement": demo.get("agreement"),
+        }
+
+    return {"error": "Session not found"}
 
 
 @app.get("/api/sessions/{session_id}/moves")
 async def get_moves(session_id: str):
     """Get the move history for a session."""
     state = store.get(session_id)
-    if not state:
-        return {"error": "Session not found"}
+    if state:
+        return {"moves": [m.model_dump() for m in state.move_history]}
 
-    return {
-        "moves": [m.model_dump() for m in state.move_history],
-    }
+    # Fall back to demo cache — extract moves from events
+    if session_id in _demo_cache:
+        demo = _demo_cache[session_id]
+        moves = [e["data"] for e in demo.get("events", []) if e["type"] in ("move", "mediator_note")]
+        return {"moves": moves}
+
+    return {"error": "Session not found"}
 
 
 @app.get("/api/scenarios")
@@ -385,7 +401,18 @@ async def get_analysis(session_id: str):
     if session_id in _demo_cache:
         demo = _demo_cache[session_id]
         if demo.get("metrics"):
-            return {**demo["metrics"], "critique": demo.get("critique", [])}
+            # Extract BCI opponent models from belief_update events
+            opponent_models = {}
+            for event in demo.get("events", []):
+                if event.get("type") == "belief_update":
+                    d = event["data"]
+                    key = f"{d['observer_party_id']}→{d['target_party_id']}"
+                    opponent_models[key] = d["belief"]
+            return {
+                **demo["metrics"],
+                "critique": demo.get("critique", []),
+                "opponent_models": opponent_models,
+            }
 
     from ..agents.analyst import analyze_negotiation
 
@@ -411,6 +438,11 @@ async def get_analysis(session_id: str):
         "phases_visited": metrics.phases_visited,
         "agreement": metrics.agreement,
         "critique": critique,
+        "opponent_models": {
+            f"{pid}→{tid}": belief.model_dump(mode="json") if hasattr(belief, "model_dump") else belief
+            for pid, ps in state.private_states.items()
+            for tid, belief in ps.belief_models.items()
+        },
     }
 
 

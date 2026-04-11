@@ -15,8 +15,11 @@
       :tierDeadline="store.tierDeadline()"
       :stagnationDetected="session.stagnationDetected"
       :complianceOpen="complianceSidebarOpen"
+      :isDemoMode="session.isDemoMode"
+      :currentSpeed="demoSpeed"
       @viewAnalysis="goToAnalysis"
       @toggleCompliance="complianceSidebarOpen = !complianceSidebarOpen"
+      @setSpeed="changeSpeed"
     >
       <ViewToggle v-model="viewMode" :hasBeliefsData="Object.keys(session.beliefs).length > 0" />
     </StatusStrip>
@@ -212,6 +215,8 @@ const complianceSidebarOpen = ref(false)
 
 // UI state
 const viewMode = ref('arena')
+const demoSpeed = ref(1)
+let _demoEvents = null // cached for speed changes
 const logRef = ref(null)
 const logHeight = ref(160)
 const graphKey = ref(0)
@@ -292,6 +297,14 @@ function goToAnalysis() {
   router.push({ name: 'Analysis', params: { sessionId: props.sessionId } })
 }
 
+function changeSpeed(speed) {
+  demoSpeed.value = speed
+  store.setReplaySpeed(speed)
+  // Note: speed change takes effect on next startReplay call.
+  // Current replay continues at original speed until it naturally ends
+  // or is restarted. For UX simplicity, we accept this trade-off.
+}
+
 onMounted(async () => {
   const isDemo = route.query.demo === '1'
 
@@ -304,10 +317,18 @@ onMounted(async () => {
         return
       }
       store.loadDemo(demo)
-      // Start replay after a short delay for the UI to render
-      setTimeout(() => {
-        store.startReplay(demo.events, 1)
-      }, 500)
+      // Check if we're returning from Analysis (route has 'completed' query)
+      if (route.query.completed === '1') {
+        // Fast-forward: apply all events instantly without animation
+        for (const event of demo.events) {
+          store.handleEvent({ type: event.type, data: event.data })
+        }
+      } else {
+        // Normal demo: replay with timing
+        setTimeout(() => {
+          store.startReplay(demo.events, 1)
+        }, 500)
+      }
     } catch (err) {
       store.addLog('error', `Failed to load demo: ${err.message}`)
     }
