@@ -459,3 +459,22 @@ export function createSessionStore() {
 
 /** Injection key for provide/inject */
 export const SESSION_KEY = Symbol('oanp-session')
+
+/**
+ * Session store cache — keyed by sessionId.
+ * Prevents state loss when navigating between Negotiate ↔ Analysis.
+ * When the same sessionId is requested, the existing store (with all
+ * accumulated moves, beliefs, outcome) is returned instead of a blank one.
+ */
+const _storeCache = new Map()
+
+export function getOrCreateSessionStore(sessionId) {
+  if (sessionId && _storeCache.has(sessionId)) {
+    return _storeCache.get(sessionId)
+  }
+  const store = createSessionStore()
+  if (sessionId) {
+    _storeCache.set(sessionId, store)
+  }
+  return store
+}

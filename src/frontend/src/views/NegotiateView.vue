@@ -184,7 +184,7 @@
 <script setup>
 import { ref, computed, watch, onMounted, onUnmounted, provide, nextTick } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import { createSessionStore, SESSION_KEY } from '@/store/session'
+import { getOrCreateSessionStore, SESSION_KEY } from '@/store/session'
 import { getDemo } from '@/api/endpoints'
 
 // Chamber components
@@ -207,8 +207,8 @@ const props = defineProps({ sessionId: String })
 const router = useRouter()
 const route = useRoute()
 
-// Session store
-const store = createSessionStore()
+// Session store — cached per sessionId so navigation doesn't destroy state
+const store = getOrCreateSessionStore(props.sessionId)
 provide(SESSION_KEY, store)
 const { state: session } = store
 const complianceSidebarOpen = ref(false)
@@ -306,6 +306,11 @@ function changeSpeed(speed) {
 }
 
 onMounted(async () => {
+  // If the store already has data (returning from Analysis), do nothing — state is preserved
+  if (session.moves.length > 0 || session.outcome) {
+    return
+  }
+
   const isDemo = route.query.demo === '1'
 
   if (isDemo) {
@@ -317,18 +322,9 @@ onMounted(async () => {
         return
       }
       store.loadDemo(demo)
-      // Check if we're returning from Analysis (route has 'completed' query)
-      if (route.query.completed === '1') {
-        // Fast-forward: apply all events instantly without animation
-        for (const event of demo.events) {
-          store.handleEvent({ type: event.type, data: event.data })
-        }
-      } else {
-        // Normal demo: replay with timing
-        setTimeout(() => {
-          store.startReplay(demo.events, 1)
-        }, 500)
-      }
+      setTimeout(() => {
+        store.startReplay(demo.events, 1)
+      }, 500)
     } catch (err) {
       store.addLog('error', `Failed to load demo: ${err.message}`)
     }

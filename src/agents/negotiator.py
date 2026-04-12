@@ -69,6 +69,17 @@ party wants, why, and how your move accounts for it.
 ## Your BATNA (private — never reveal this)
 {batna_text}
 
+## BATNA ENFORCEMENT (CRITICAL — READ CAREFULLY)
+Your BATNA has utility {batna_utility}. This is your absolute floor.
+Before accepting ANY proposal, you MUST:
+1. Evaluate the proposed deal against your satisfaction anchors for each interest
+2. Estimate whether the overall deal utility meets or exceeds {batna_utility}
+3. If the deal is WORSE than your BATNA, you MUST REJECT or COUNTER — never accept
+4. State your BATNA comparison explicitly in your reasoning field
+
+A deal that gives you less than your BATNA means you are better off walking away.
+This is a hard constraint, not a suggestion.
+
 ## Your Strategy
 - Aspiration level: {aspiration_level} (target utility, 0-1)
 - Cooperation level: {cooperation_level} (warmth, 0-1)
@@ -172,11 +183,16 @@ def build_negotiator_prompt(
         for i in private.interests
     )
 
-    batna_text = (
-        f"{private.batna.description} (utility: {private.batna.utility})"
-        if private.batna
-        else "No BATNA defined — avoid impasse."
-    )
+    if private.batna:
+        batna_text = f"{private.batna.description} (utility: {private.batna.utility})"
+        if private.batna.components:
+            batna_text += "\nBATNA concrete terms: " + ", ".join(
+                f"{k}={v}" for k, v in private.batna.components.items()
+            )
+        batna_utility = private.batna.utility
+    else:
+        batna_text = "No BATNA defined — avoid impasse."
+        batna_utility = 0.0
 
     legal_moves = get_legal_moves(state.protocol.phase)
 
@@ -185,6 +201,7 @@ def build_negotiator_prompt(
         party_role=party.role,
         interests_text=interests_text,
         batna_text=batna_text,
+        batna_utility=batna_utility,
         aspiration_level=private.strategy.aspiration_level,
         cooperation_level=private.strategy.cooperation_level,
         disclosure_policy=private.strategy.disclosure_policy,

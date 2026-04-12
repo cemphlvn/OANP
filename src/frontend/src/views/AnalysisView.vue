@@ -1,204 +1,161 @@
 <template>
   <div class="analysis-view">
-    <!-- Status Strip -->
     <StatusStrip
-      :phase="metrics?.outcome === 'agreement' ? 'settlement' : metrics?.outcome === 'impasse' ? 'impasse' : 'setup'"
+      :phase="metrics ? (metrics.outcome === 'agreement' ? 'settlement' : metrics.outcome === 'impasse' ? 'impasse' : 'setup') : 'setup'"
       :round="metrics?.total_rounds || 0"
       :moveCount="metrics?.total_moves || 0"
       :resolvedCount="metrics?.agreement ? Object.keys(metrics.agreement.issue_values || {}).length : 0"
       :totalIssues="issues.length"
       :convergence="metrics?.outcome === 'agreement' ? 100 : 0"
       :outcome="metrics?.outcome"
+      :isAdvancedMode="!!compliance"
+      :escalationTier="compliance?.current_tier"
     >
       <div class="analysis-nav">
         <button class="an-btn" :class="{ active: tab === 'report' }" @click="tab = 'report'">Report</button>
         <button class="an-btn" :class="{ active: tab === 'timeline' }" @click="tab = 'timeline'">Timeline</button>
-        <template v-if="compliance">
-          <button class="an-btn" :class="{ active: tab === 'compliance' }" @click="tab = 'compliance'">Compliance</button>
-          <button class="an-btn" :class="{ active: tab === 'award' }" @click="tab = 'award'">Award</button>
-        </template>
+        <button v-if="compliance" class="an-btn" :class="{ active: tab === 'compliance' }" @click="tab = 'compliance'">Compliance</button>
+        <button v-if="award" class="an-btn" :class="{ active: tab === 'award' }" @click="tab = 'award'">Award</button>
       </div>
     </StatusStrip>
 
-    <!-- Main content -->
-    <div class="an-main">
-      <!-- Loading -->
-      <div v-if="!metrics && !loadError" class="an-loading">
-        <div class="an-loading-spinner"></div>
-        <span>Loading analysis...</span>
-      </div>
+    <div class="an-main" v-if="metrics">
+      <!-- ==================== REPORT TAB ==================== -->
+      <div v-if="tab === 'report'" class="an-report">
 
-      <!-- Error -->
-      <div v-else-if="loadError" class="an-error">
-        <span class="an-error-title">Failed to load analysis</span>
-        <span class="an-error-msg">{{ loadError }}</span>
-        <button class="an-retry" @click="loadData">Retry</button>
-      </div>
-
-      <!-- Report Tab -->
-      <div v-else-if="tab === 'report'" class="an-report">
-        <!-- Outcome Header -->
-        <div class="an-outcome-bar" :class="metrics.outcome">
-          <span class="an-outcome-badge">{{ metrics.outcome === 'agreement' ? 'Agreement Reached' : 'Impasse' }}</span>
-          <span class="an-outcome-stats">{{ metrics.total_rounds }} rounds · {{ metrics.total_moves }} moves · {{ (metrics.disclosure_rate * 100).toFixed(0) }}% disclosed</span>
+        <!-- 1. VERDICT -->
+        <div class="an-verdict" :class="metrics.outcome">
+          <div class="an-verdict-text">{{ metrics.outcome === 'agreement' ? 'Agreement Reached' : 'Impasse' }}</div>
+          <div class="an-verdict-stats">
+            {{ metrics.total_rounds }} rounds · {{ metrics.total_moves }} moves · {{ (metrics.disclosure_rate * 100).toFixed(0) }}% disclosed
+          </div>
         </div>
 
-        <!-- Procedural summary (advanced mode) -->
-        <div v-if="compliance" class="an-procedural-summary">
-          <div class="an-ps-label">PROCEDURAL SUMMARY</div>
-          <div class="an-ps-grid">
-            <div class="an-ps-item" v-if="compliance.institution">
-              <span class="an-ps-key">Framework</span>
-              <span class="an-ps-val">{{ compliance.institution.framework?.toUpperCase() }} {{ compliance.institution.procedure }}</span>
+        <div class="an-sep"></div>
+
+        <!-- 2. AGREEMENT TERMS -->
+        <div v-if="metrics.agreement" class="an-terms-section">
+          <div class="an-section-label">Agreement</div>
+          <div class="an-terms-doc">
+            <div v-for="(val, key) in metrics.agreement.issue_values" :key="key" class="an-term-row">
+              <span class="an-term-key">{{ issueNames[key] || key }}</span>
+              <span class="an-term-dots"></span>
+              <span class="an-term-val">{{ formatValue(key, val) }}</span>
             </div>
-            <div class="an-ps-item" v-if="compliance.institution?.seat">
-              <span class="an-ps-key">Seat</span>
-              <span class="an-ps-val">{{ compliance.institution.seat }}</span>
+          </div>
+        </div>
+        <div v-else class="an-no-agreement">No agreement reached</div>
+
+        <div class="an-sep"></div>
+
+        <!-- 3. PARTY COLUMNS -->
+        <div class="an-parties">
+          <div v-for="(partyId, idx) in partyIds" :key="partyId" class="an-party-col">
+            <!-- Party name -->
+            <div class="an-party-name" :style="{ color: getPartyColor(partyId) }">
+              {{ partyNames[partyId] || partyId }}
             </div>
-            <div class="an-ps-item">
-              <span class="an-ps-key">Final Tier</span>
-              <span class="an-ps-val">{{ compliance.current_tier?.toUpperCase() }}</span>
+
+            <!-- Utility score -->
+            <div class="an-party-utility">{{ (metrics.party_utilities?.[partyId] || 0).toFixed(2) }}</div>
+            <div class="an-party-bar-track">
+              <div class="an-party-bar-fill" :style="{
+                width: ((metrics.party_utilities?.[partyId] || 0) * 100) + '%',
+                background: getPartyColor(partyId)
+              }"></div>
             </div>
-            <div class="an-ps-item">
-              <span class="an-ps-key">Due Process</span>
-              <span class="an-ps-val" :class="(compliance.due_process_violations?.length || 0) === 0 ? 'good' : 'warn'">
-                {{ (compliance.due_process_violations?.length || 0) === 0 ? 'No violations' : compliance.due_process_violations.length + ' issues' }}
+
+            <!-- BATNA surplus + interest satisfaction -->
+            <div class="an-party-meta">
+              <span :class="(metrics.party_batna_surplus?.[partyId] || 0) >= 0 ? 'pos' : 'neg'">
+                BATNA {{ (metrics.party_batna_surplus?.[partyId] || 0) >= 0 ? '+' : '' }}{{ (metrics.party_batna_surplus?.[partyId] || 0).toFixed(2) }}
+              </span>
+              <span v-if="metrics.party_interest_satisfaction?.[partyId]" class="dim">
+                · Interests {{ (metrics.party_interest_satisfaction[partyId] * 100).toFixed(0) }}%
               </span>
             </div>
-            <div class="an-ps-item" v-if="award">
-              <span class="an-ps-key">Award Type</span>
-              <span class="an-ps-val">{{ award.award_type?.replace('_', ' ').toUpperCase() }}</span>
-            </div>
+
+            <!-- BCI: What they thought -->
+            <template v-if="partyBci(partyId)">
+              <div class="an-party-divider"></div>
+              <div class="an-bci-label">Opponent Model <span class="an-bci-conf">{{ (partyBci(partyId).confidence * 100).toFixed(0) }}%</span></div>
+              <div v-for="item in partyBciWeights(partyId)" :key="item.id" class="an-bci-row">
+                <span class="an-bci-issue">{{ item.name }}</span>
+                <div class="an-bci-bar">
+                  <div class="an-bci-fill" :style="{ width: (item.weight * 100) + '%', opacity: 0.3 + item.weight * 0.7 }"></div>
+                </div>
+                <span class="an-bci-weight">{{ item.weight.toFixed(2) }}</span>
+              </div>
+              <div v-if="partyBci(partyId).estimated_batna_utility != null" class="an-bci-batna">
+                Est. BATNA {{ partyBci(partyId).estimated_batna_utility.toFixed(2) }}
+              </div>
+            </template>
           </div>
         </div>
 
-        <div class="an-grid">
-          <!-- Left: Agreement + Utilities -->
-          <div class="an-col">
-            <!-- Agreement Terms -->
-            <div v-if="metrics.agreement" class="an-card">
-              <div class="an-card-title">Final Agreement</div>
-              <div class="an-terms">
-                <div v-for="(val, key) in metrics.agreement.issue_values" :key="key" class="an-term">
-                  <span class="an-term-key">{{ issueNames[key] || key }}</span>
-                  <span class="an-term-val">{{ val }}</span>
-                </div>
-              </div>
-            </div>
+        <div class="an-sep"></div>
 
-            <!-- Party Utilities -->
-            <div class="an-card">
-              <div class="an-card-title">Party Utilities</div>
-              <div v-for="(util, partyId) in metrics.party_utilities" :key="partyId" class="an-util-row">
-                <div class="an-util-header">
-                  <span class="an-util-dot" :style="{ background: getPartyColor(partyId) }"></span>
-                  <span class="an-util-name">{{ partyNames[partyId] || partyId }}</span>
-                  <span class="an-util-score">{{ util.toFixed(2) }}</span>
-                </div>
-                <div class="an-util-bar-wrap">
-                  <div class="an-util-bar" :style="{ width: (util * 100) + '%', background: getPartyColor(partyId) }"></div>
-                </div>
-                <div class="an-util-meta" v-if="metrics.party_batna_surplus?.[partyId] != null">
-                  BATNA surplus: <strong :class="metrics.party_batna_surplus[partyId] >= 0 ? 'surplus-pos' : 'surplus-neg'">{{ metrics.party_batna_surplus[partyId] >= 0 ? '+' : '' }}{{ metrics.party_batna_surplus[partyId].toFixed(2) }}</strong>
-                </div>
-              </div>
-            </div>
-
-            <!-- BCI Opponent Models -->
-            <div v-if="hasOpponentModels" class="an-card an-card--bci">
-              <div class="an-card-title">Opponent Models <span class="an-card-subtitle">Bayesian Inference</span></div>
-              <div class="an-bci-columns">
-                <div v-for="col in bciColumns" :key="col.key" class="an-bci-col">
-                  <div class="an-bci-col-header">
-                    <span class="an-bci-dot" :style="{ background: getPartyColor(col.observerId) }"></span>
-                    {{ partyNames[col.observerId] || col.observerId }}'s estimate
-                  </div>
-                  <div class="an-bci-conf-row">
-                    <span class="an-bci-conf-val">{{ (col.belief.confidence * 100).toFixed(0) }}%</span>
-                    <div class="an-bci-conf-bar">
-                      <div class="an-bci-conf-fill" :style="{ width: (col.belief.confidence * 100) + '%' }"></div>
-                    </div>
-                  </div>
-                  <div v-for="item in col.sortedWeights" :key="item.id" class="an-bci-row">
-                    <span class="an-bci-issue">{{ item.name }}</span>
-                    <span class="an-bci-weight">{{ item.weight.toFixed(2) }}</span>
-                    <div class="an-bci-bar">
-                      <div class="an-bci-fill" :style="{ width: (item.weight * 100) + '%', background: getPartyColor(col.observerId) }"></div>
-                    </div>
-                  </div>
-                  <div v-if="col.belief.estimated_batna_utility != null" class="an-bci-batna">
-                    Est. BATNA: {{ col.belief.estimated_batna_utility.toFixed(3) }}
-                  </div>
-                </div>
-              </div>
-            </div>
+        <!-- 4. SHARED METRICS -->
+        <div class="an-shared-metrics">
+          <div class="an-sm-item">
+            <span class="an-sm-val">{{ metrics.social_welfare?.toFixed(2) }}</span>
+            <span class="an-sm-label">Social Welfare</span>
           </div>
-
-          <!-- Right: Metrics + Process + Critique -->
-          <div class="an-col">
-            <!-- Efficiency Metrics -->
-            <div class="an-card">
-              <div class="an-card-title">Efficiency Metrics</div>
-              <div class="an-metrics-grid">
-                <div class="an-metric">
-                  <span class="an-metric-val">{{ metrics.social_welfare?.toFixed(2) }}</span>
-                  <span class="an-metric-lbl">Social Welfare</span>
-                </div>
-                <div class="an-metric">
-                  <span class="an-metric-val">{{ metrics.nash_product?.toFixed(3) }}</span>
-                  <span class="an-metric-lbl">Nash Product</span>
-                </div>
-                <div class="an-metric">
-                  <span class="an-metric-val">{{ metrics.integrative_index?.toFixed(2) }}</span>
-                  <span class="an-metric-lbl">Integrative Index</span>
-                </div>
-                <div class="an-metric">
-                  <span class="an-metric-val" :class="metrics.pareto_efficient ? 'yes' : 'no'">{{ metrics.pareto_efficient ? 'Yes' : 'No' }}</span>
-                  <span class="an-metric-lbl">Pareto Efficient</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Move Breakdown -->
-            <div class="an-card">
-              <div class="an-card-title">Move Breakdown</div>
-              <div class="an-breakdown">
-                <div v-for="(count, moveType) in metrics.move_breakdown" :key="moveType" class="an-bd-row">
-                  <span class="an-bd-badge" :style="{ background: MOVE_COLORS[moveType] || '#999' }">{{ MOVE_LABELS[moveType] || moveType }}</span>
-                  <span class="an-bd-bar-wrap">
-                    <span class="an-bd-bar" :style="{ width: (count / metrics.total_moves * 100) + '%', background: MOVE_COLORS[moveType] || '#999' }"></span>
-                  </span>
-                  <span class="an-bd-count">{{ count }}</span>
-                </div>
-              </div>
-              <div v-if="metrics.phases_visited?.length" class="an-phases">
-                <span class="an-phases-label">PHASES VISITED</span>
-                <div class="an-phase-tags">
-                  <span v-for="p in metrics.phases_visited" :key="p" class="an-phase-tag" :style="{ borderColor: PHASE_COLORS[p], color: PHASE_COLORS[p] }">{{ p }}</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Critique -->
-            <div v-if="metrics.critique?.length" class="an-card">
-              <div class="an-card-title">Critique</div>
-              <div v-for="(issue, idx) in metrics.critique" :key="idx" class="an-critique-item">
-                <span class="an-crit-badge" :class="issue.severity">{{ issue.severity }}</span>
-                <span class="an-crit-desc">{{ issue.description }}</span>
-              </div>
-            </div>
+          <div class="an-sm-item">
+            <span class="an-sm-val">{{ metrics.nash_product?.toFixed(4) }}</span>
+            <span class="an-sm-label">Nash Product</span>
+          </div>
+          <div class="an-sm-item">
+            <span class="an-sm-val">{{ metrics.integrative_index?.toFixed(2) }}</span>
+            <span class="an-sm-label">Integrative Index</span>
+          </div>
+          <div class="an-sm-item">
+            <span class="an-sm-val">{{ metrics.pareto_efficient ? '✓' : '—' }}</span>
+            <span class="an-sm-label">Pareto Efficient</span>
           </div>
         </div>
 
-        <!-- Navigate to Explore -->
+        <div class="an-sep"></div>
+
+        <!-- 5. PROCESS (stacked bar) -->
+        <div class="an-process">
+          <div class="an-section-label">Process</div>
+          <div class="an-stacked-bar">
+            <div
+              v-for="(count, moveType) in metrics.move_breakdown"
+              :key="moveType"
+              class="an-stacked-seg"
+              :style="{ flex: count, background: segColor(moveType) }"
+              :title="`${MOVE_LABELS[moveType] || moveType}: ${count}`"
+            ></div>
+          </div>
+          <div class="an-process-legend">
+            <span v-for="(count, moveType) in metrics.move_breakdown" :key="moveType" class="an-proc-item">
+              <span class="an-proc-dot" :style="{ background: segColor(moveType) }"></span>
+              {{ MOVE_LABELS[moveType] || moveType }} {{ count }}
+            </span>
+          </div>
+        </div>
+
+        <!-- 6. CRITIQUE -->
+        <div v-if="metrics.critique?.length" class="an-critique-section">
+          <div class="an-sep"></div>
+          <div v-for="(issue, idx) in metrics.critique" :key="idx" class="an-crit-row">
+            <span class="an-crit-dot" :style="{ background: critColor(issue.severity) }"></span>
+            <span class="an-crit-sev" :style="{ color: critColor(issue.severity) }">{{ issue.severity }}</span>
+            <span class="an-crit-desc">{{ issue.description }}</span>
+          </div>
+        </div>
+
+        <!-- Footer -->
         <div class="an-footer">
-          <button class="an-explore-btn" @click="$router.push({ name: 'Negotiate', params: { sessionId }, query: { demo: '1', completed: '1' } })">
+          <button class="an-back-btn" @click="$router.push({ name: 'Negotiate', params: { sessionId }, query: { demo: '1' } })">
             ← Back to Negotiation
           </button>
         </div>
       </div>
 
-      <!-- Timeline Tab -->
+      <!-- ==================== TIMELINE TAB ==================== -->
       <TimelineView
         v-else-if="tab === 'timeline'"
         :moves="moves"
@@ -206,7 +163,7 @@
         :showAllReasoning="true"
       />
 
-      <!-- Compliance Tab (advanced mode) -->
+      <!-- ==================== COMPLIANCE TAB ==================== -->
       <ComplianceAudit
         v-else-if="tab === 'compliance' && compliance"
         :compliance="compliance"
@@ -215,12 +172,23 @@
         :parties="parties"
       />
 
-      <!-- Award Tab (advanced mode) -->
+      <!-- ==================== AWARD TAB ==================== -->
       <AwardDocument
         v-else-if="tab === 'award' && award"
         :award="award"
         :formattedText="awardFormattedText"
       />
+    </div>
+
+    <!-- Loading / Error -->
+    <div v-else-if="loadError" class="an-error">
+      <span class="an-error-title">Failed to load analysis</span>
+      <span class="an-error-msg">{{ loadError }}</span>
+      <button class="an-retry" @click="loadData">Retry</button>
+    </div>
+    <div v-else class="an-loading">
+      <div class="an-loading-spinner"></div>
+      Loading analysis...
     </div>
   </div>
 </template>
@@ -228,7 +196,7 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { getSession, getAnalysis, getMoves, getCompliance } from '@/api/endpoints'
-import { PHASE_COLORS, MOVE_LABELS, MOVE_COLORS, PARTY_COLORS } from '@/types/protocol'
+import { MOVE_LABELS, PARTY_COLORS } from '@/types/protocol'
 import StatusStrip from '@/components/chamber/StatusStrip.vue'
 import TimelineView from '@/components/chamber/TimelineView.vue'
 import ComplianceAudit from '@/components/chamber/ComplianceAudit.vue'
@@ -252,32 +220,62 @@ const partyNames = computed(() => {
   return map
 })
 
+const partyIds = computed(() => parties.value.map(p => p.id))
+
 const issueNames = computed(() => {
   const map = {}
   issues.value.forEach(i => { map[i.id] = i.name; map[i.name] = i.name })
   return map
 })
 
-const hasOpponentModels = computed(() => {
-  return metrics.value?.opponent_models && Object.keys(metrics.value.opponent_models).length > 0
-})
-
-const bciColumns = computed(() => {
-  if (!hasOpponentModels.value) return []
-  return Object.entries(metrics.value.opponent_models).map(([key, belief]) => {
-    const [observerId, targetId] = key.split('→')
-    const sortedWeights = belief.estimated_priorities
-      ? Object.entries(belief.estimated_priorities)
-          .map(([id, weight]) => ({ id, name: issueNames.value[id] || id, weight }))
-          .sort((a, b) => b.weight - a.weight)
-      : []
-    return { key, observerId, targetId, belief, sortedWeights }
-  })
-})
-
 function getPartyColor(partyId) {
   const idx = parties.value.findIndex(p => p.id === partyId)
   return idx >= 0 ? PARTY_COLORS[idx] : '#999'
+}
+
+// BCI helpers
+function partyBci(partyId) {
+  if (!metrics.value?.opponent_models) return null
+  // Find this party's model of the other party
+  const key = Object.keys(metrics.value.opponent_models).find(k => k.startsWith(partyId + '→'))
+  return key ? metrics.value.opponent_models[key] : null
+}
+
+function partyBciWeights(partyId) {
+  const bci = partyBci(partyId)
+  if (!bci?.estimated_priorities) return []
+  return Object.entries(bci.estimated_priorities)
+    .map(([id, weight]) => ({ id, name: issueNames.value[id] || id, weight }))
+    .sort((a, b) => b.weight - a.weight)
+}
+
+// Value formatting
+function formatValue(key, val) {
+  if (!val) return val
+  const s = String(val)
+  // Monetary: add $ and commas
+  if (/^\d{4,}$/.test(s)) {
+    return '$' + Number(s).toLocaleString()
+  }
+  // Underscore to spaces, title case
+  if (s.includes('_')) {
+    return s.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase())
+  }
+  return s
+}
+
+// Process bar colors — monochrome scale with accent for accept
+const SEG_COLORS = {
+  propose: '#000', counter: '#333', argue: '#666',
+  disclose_interest: '#999', invoke_criterion: '#AAA',
+  accept: '#FF5722', reject: '#ef4444', meso: '#444',
+  invoke_batna: '#CCC', request_mediation: '#DDD',
+}
+function segColor(moveType) { return SEG_COLORS[moveType] || '#CCC' }
+
+// Critique colors
+function critColor(severity) {
+  return { high: '#ef4444', medium: '#f59e0b', low: '#999', info: '#3b82f6' }[severity] || '#CCC'
 }
 
 async function loadData() {
@@ -296,7 +294,6 @@ async function loadData() {
     moves.value = movesData?.moves || sessionData.move_history || []
     metrics.value = analysisData
 
-    // Load compliance data if advanced mode
     if (sessionData.compliance?.mode === 'advanced') {
       try {
         const complianceData = await getCompliance(props.sessionId)
@@ -322,494 +319,190 @@ onMounted(loadData)
   display: flex;
   flex-direction: column;
   background: #FFF;
-  overflow: hidden;
-  font-family: var(--font-heading);
+  font-family: var(--font-body);
 }
 
-.an-main {
-  flex: 1;
-  overflow-y: auto;
-}
+.an-main { flex: 1; overflow-y: auto; }
 
-/* Nav tabs in StatusStrip */
-.analysis-nav {
-  display: flex;
-  background: #F5F5F5;
-  padding: 3px;
-  border-radius: 6px;
-  gap: 3px;
-}
-
-.an-btn {
-  border: none;
-  background: transparent;
-  padding: 5px 14px;
-  font-size: 11px;
-  font-weight: 600;
-  color: #999;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: all 0.15s;
-}
-
-.an-btn.active {
-  background: #FFF;
-  color: #000;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-}
-
-/* Loading */
-.an-loading {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 300px;
-  gap: 16px;
-  color: #999;
-  font-family: var(--font-mono);
-  font-size: 13px;
-}
-
-.an-loading-spinner {
-  width: 24px;
-  height: 24px;
-  border: 3px solid #EEE;
-  border-top-color: var(--accent);
-  border-radius: 50%;
-  animation: an-spin 0.8s linear infinite;
-}
-
-@keyframes an-spin { to { transform: rotate(360deg); } }
-
-/* Error */
-.an-error {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 300px;
-  gap: 12px;
-}
-
-.an-error-title { font-weight: 600; color: #C62828; }
-.an-error-msg { font-family: var(--font-mono); font-size: 12px; color: #999; }
-
-.an-retry {
-  background: #000;
-  color: #FFF;
-  border: none;
-  padding: 8px 20px;
-  font-family: var(--font-mono);
-  font-size: 12px;
-  cursor: pointer;
-  border-radius: 4px;
-}
-
-.an-retry:hover { background: var(--accent); }
-
-/* Report */
 .an-report {
-  padding: 24px;
-  max-width: 1100px;
+  max-width: 720px;
   margin: 0 auto;
+  padding: 0 24px 48px;
 }
 
-/* Outcome Bar */
-.an-outcome-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px 20px;
-  border-radius: 8px;
-  margin-bottom: 24px;
+/* Navigation */
+.analysis-nav { display: flex; background: #F5F5F5; padding: 3px; border-radius: 6px; gap: 3px; }
+.an-btn {
+  border: none; background: transparent; padding: 5px 14px;
+  font-size: 11px; font-weight: 600; color: #999; border-radius: 4px;
+  cursor: pointer; font-family: var(--font-heading); transition: all 0.15s;
 }
+.an-btn.active { background: #FFF; color: #000; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+.an-btn:hover:not(.active) { color: #666; }
 
-.an-outcome-bar.agreement { background: #F0FDF4; border: 1px solid #BBF7D0; }
-.an-outcome-bar.impasse { background: #FEF2F2; border: 1px solid #FECACA; }
-
-.an-outcome-badge {
+/* 1. VERDICT */
+.an-verdict {
+  text-align: center;
+  padding: 48px 0 40px;
+}
+.an-verdict-text {
   font-family: var(--font-heading);
-  font-size: 18px;
+  font-size: 24px;
   font-weight: 700;
+  letter-spacing: 2px;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  color: #000;
 }
-
-.an-outcome-bar.agreement .an-outcome-badge { color: #166534; }
-.an-outcome-bar.impasse .an-outcome-badge { color: #991B1B; }
-
-.an-outcome-stats {
+.an-verdict.impasse .an-verdict-text { color: #ef4444; }
+.an-verdict-stats {
   font-family: var(--font-mono);
   font-size: 11px;
-  color: #888;
-}
-
-/* Grid */
-.an-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-}
-
-@media (max-width: 800px) {
-  .an-grid { grid-template-columns: 1fr; }
-}
-
-.an-col {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-/* Cards */
-.an-card {
-  background: #FFF;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 20px;
-}
-
-.an-card-title {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 700;
   color: #999;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 16px;
+  margin-top: 8px;
 }
 
-/* Agreement Terms */
-.an-terms { }
-
-.an-term {
-  display: flex;
-  justify-content: space-between;
-  padding: 8px 0;
-  border-bottom: 1px solid #F0F0F0;
-  font-size: 13px;
-}
-
-.an-term:last-child { border-bottom: none; }
-.an-term-key { color: #666; }
-.an-term-val { font-family: var(--font-mono); font-weight: 600; }
-
-/* Utility */
-.an-util-row {
-  margin-bottom: 16px;
-}
-
-.an-util-row:last-child { margin-bottom: 0; }
-
-.an-util-header {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 6px;
-}
-
-.an-util-dot { width: 10px; height: 10px; border-radius: 50%; }
-.an-util-name { font-weight: 600; font-size: 13px; flex: 1; }
-.an-util-score { font-family: var(--font-mono); font-size: 18px; font-weight: 700; }
-
-.an-util-bar-wrap {
-  height: 6px;
+/* Separator */
+.an-sep {
+  height: 1px;
   background: #F0F0F0;
-  border-radius: 3px;
-  overflow: hidden;
-  margin-bottom: 4px;
+  margin: 0 60px;
 }
+@media (max-width: 600px) { .an-sep { margin: 0 20px; } }
 
-.an-util-bar {
-  height: 100%;
-  border-radius: 3px;
-  transition: width 0.6s ease;
-}
-
-.an-util-meta {
+/* 2. AGREEMENT TERMS */
+.an-terms-section { padding: 32px 0; }
+.an-section-label {
   font-family: var(--font-mono);
   font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #BBB;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.an-terms-doc {
+  max-width: 400px;
+  margin: 0 auto;
+}
+.an-term-row {
+  display: flex;
+  align-items: baseline;
+  padding: 6px 0;
+}
+.an-term-key {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: #666;
+  white-space: nowrap;
+}
+.an-term-dots {
+  flex: 1;
+  border-bottom: 1px dotted #E0E0E0;
+  margin: 0 8px;
+  min-width: 20px;
+  position: relative;
+  top: -3px;
+}
+.an-term-val {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  color: #000;
+  white-space: nowrap;
+}
+.an-no-agreement {
+  text-align: center;
+  padding: 32px 0;
+  font-family: var(--font-mono);
+  font-size: 13px;
   color: #999;
 }
 
-.an-util-meta strong.surplus-pos { color: #22c55e; }
-.an-util-meta strong.surplus-neg { color: #ef4444; }
-
-/* Metrics Grid */
-.an-metrics-grid {
+/* 3. PARTY COLUMNS */
+.an-parties {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  gap: 48px;
+  padding: 32px 0;
 }
-
-.an-metric {
-  text-align: center;
-  padding: 14px;
-  background: #F9F9F9;
-  border-radius: 6px;
+@media (max-width: 600px) {
+  .an-parties { grid-template-columns: 1fr; gap: 32px; }
 }
+.an-party-col { min-width: 0; }
 
-.an-metric-val {
-  display: block;
-  font-family: var(--font-mono);
-  font-size: 20px;
+.an-party-name {
+  font-family: var(--font-heading);
+  font-size: 11px;
   font-weight: 700;
-  margin-bottom: 4px;
-}
-
-.an-metric-val.yes { color: #22c55e; }
-.an-metric-val.no { color: #ef4444; }
-
-.an-metric-lbl {
-  font-size: 9px;
-  color: #999;
+  letter-spacing: 1px;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+  opacity: 0.7;
 }
-
-/* Move Breakdown */
-.an-breakdown { margin-bottom: 12px; }
-
-.an-bd-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+.an-party-utility {
+  font-family: var(--font-mono);
+  font-size: 36px;
+  font-weight: 700;
+  color: #000;
+  line-height: 1;
   margin-bottom: 6px;
 }
-
-.an-bd-badge {
-  font-family: var(--font-mono);
-  font-size: 8px;
-  font-weight: 700;
-  color: #FFF;
-  padding: 2px 6px;
-  border-radius: 3px;
-  min-width: 70px;
-  text-align: center;
-  text-transform: uppercase;
-}
-
-.an-bd-bar-wrap {
-  flex: 1;
+.an-party-bar-track {
   height: 4px;
   background: #F0F0F0;
   border-radius: 2px;
+  margin-bottom: 8px;
   overflow: hidden;
 }
-
-.an-bd-bar {
+.an-party-bar-fill {
   height: 100%;
   border-radius: 2px;
+  transition: width 0.6s ease;
 }
-
-.an-bd-count {
+.an-party-meta {
   font-family: var(--font-mono);
-  font-size: 12px;
-  font-weight: 600;
-  min-width: 20px;
-  text-align: right;
-}
-
-/* Phases */
-.an-phases { margin-top: 12px; }
-
-.an-phases-label {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  font-weight: 700;
-  color: #BBB;
-  letter-spacing: 1px;
-  margin-bottom: 8px;
-  display: block;
-}
-
-.an-phase-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-
-.an-phase-tag {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  font-weight: 600;
-  padding: 3px 8px;
-  border: 1px solid;
-  border-radius: 3px;
-  text-transform: uppercase;
-}
-
-/* Critique */
-.an-critique-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  padding: 8px 0;
-  border-bottom: 1px solid #F5F5F5;
-  font-size: 12px;
-}
-
-.an-critique-item:last-child { border-bottom: none; }
-
-.an-crit-badge {
-  font-family: var(--font-mono);
-  font-size: 8px;
-  font-weight: 700;
-  text-transform: uppercase;
-  padding: 2px 6px;
-  border-radius: 2px;
-  min-width: 40px;
-  text-align: center;
-  flex-shrink: 0;
-}
-
-.an-crit-badge.high { background: #FFEBEE; color: #C62828; }
-.an-crit-badge.medium { background: #FFF3E0; color: #E65100; }
-.an-crit-badge.low { background: #F5F5F5; color: #666; }
-.an-crit-badge.info { background: #E3F2FD; color: #1565C0; }
-
-.an-crit-desc { color: #444; line-height: 1.5; }
-
-/* Footer */
-.an-footer {
-  margin-top: 24px;
-  padding-top: 20px;
-  border-top: 1px solid var(--border);
-  display: flex;
-  gap: 12px;
-}
-
-.an-explore-btn {
-  background: none;
-  border: 1px solid var(--border);
-  padding: 10px 20px;
-  font-family: var(--font-mono);
-  font-size: 12px;
-  font-weight: 600;
-  cursor: pointer;
-  border-radius: 4px;
-  color: #666;
-  transition: all 0.15s;
-}
-
-.an-explore-btn:hover { border-color: #999; color: #333; }
-
-/* Procedural Summary (advanced mode) */
-.an-procedural-summary {
-  background: #F9F9F9;
-  border: 1px solid #EEE;
-  padding: 16px 20px;
-  margin-bottom: 20px;
-}
-
-.an-ps-label {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  font-weight: 600;
-  color: #AAA;
-  letter-spacing: 1px;
-  margin-bottom: 10px;
-}
-
-.an-ps-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 8px;
-}
-
-.an-ps-item { display: flex; justify-content: space-between; gap: 12px; }
-.an-ps-key { font-family: var(--font-mono); font-size: 11px; color: #999; }
-.an-ps-val { font-family: var(--font-mono); font-size: 11px; font-weight: 600; }
-.an-ps-val.good { color: #22c55e; }
-.an-ps-val.warn { color: #f59e0b; }
-
-/* Premium card depth */
-.an-card {
-  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
-}
-
-/* BCI Opponent Models Card */
-.an-card--bci .an-card-title {
-  display: flex;
-  align-items: baseline;
-  gap: 8px;
-}
-.an-card-subtitle {
-  font-size: 9px;
-  font-weight: 500;
-  color: #BBB;
-  letter-spacing: 0.5px;
-}
-.an-bci-columns {
-  display: flex;
-  gap: 20px;
-}
-.an-bci-col {
-  flex: 1;
-  min-width: 0;
-}
-.an-bci-col-header {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-family: var(--font-heading);
   font-size: 11px;
-  font-weight: 600;
-  color: #555;
+  color: #999;
+}
+.an-party-meta .pos { color: #22c55e; }
+.an-party-meta .neg { color: #ef4444; }
+.an-party-meta .dim { color: #BBB; }
+
+/* BCI in party columns */
+.an-party-divider {
+  margin: 16px 0;
+  border-top: 1px solid #F0F0F0;
+}
+.an-bci-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #CCC;
   margin-bottom: 8px;
 }
-.an-bci-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-.an-bci-conf-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 10px;
-}
-.an-bci-conf-val {
-  font-family: var(--font-mono);
-  font-size: 14px;
-  font-weight: 700;
-  min-width: 32px;
-}
-.an-bci-conf-bar {
-  flex: 1;
-  height: 3px;
-  background: #F0F0F0;
-  border-radius: 1.5px;
-  overflow: hidden;
-}
-.an-bci-conf-fill {
-  height: 100%;
-  background: var(--accent);
-  border-radius: 1.5px;
+.an-bci-conf {
+  font-weight: 600;
+  color: #999;
+  text-transform: none;
+  letter-spacing: 0;
 }
 .an-bci-row {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 3px 0;
+  gap: 6px;
+  padding: 2px 0;
 }
 .an-bci-issue {
   font-family: var(--font-mono);
   font-size: 10px;
   color: #666;
-  min-width: 80px;
+  min-width: 70px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-.an-bci-weight {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  font-weight: 600;
-  min-width: 32px;
-  text-align: right;
 }
 .an-bci-bar {
   flex: 1;
@@ -820,14 +513,142 @@ onMounted(loadData)
 }
 .an-bci-fill {
   height: 100%;
+  background: #000;
   border-radius: 2px;
 }
+.an-bci-weight {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  min-width: 28px;
+  text-align: right;
+}
 .an-bci-batna {
-  margin-top: 8px;
-  padding-top: 6px;
-  border-top: 1px dashed #F0F0F0;
+  margin-top: 6px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: #CCC;
+}
+
+/* 4. SHARED METRICS */
+.an-shared-metrics {
+  display: flex;
+  justify-content: space-between;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 24px 0;
+}
+.an-sm-item { text-align: center; }
+.an-sm-val {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 700;
+  color: #000;
+  margin-bottom: 2px;
+}
+.an-sm-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: #999;
+  letter-spacing: 0.5px;
+}
+
+/* 5. PROCESS */
+.an-process { padding: 24px 0; }
+.an-stacked-bar {
+  display: flex;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  gap: 1px;
+  margin-bottom: 10px;
+}
+.an-stacked-seg {
+  transition: flex 0.6s ease;
+  min-width: 2px;
+}
+.an-process-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
   font-family: var(--font-mono);
   font-size: 10px;
   color: #999;
 }
+.an-proc-item { display: flex; align-items: center; gap: 4px; }
+.an-proc-dot { width: 6px; height: 6px; border-radius: 1px; }
+
+/* 6. CRITIQUE */
+.an-critique-section { padding: 24px 0; }
+.an-crit-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 6px 0;
+}
+.an-crit-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  margin-top: 5px;
+  flex-shrink: 0;
+}
+.an-crit-sev {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 600;
+  min-width: 48px;
+}
+.an-crit-desc {
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: #444;
+  line-height: 1.6;
+}
+
+/* Footer */
+.an-footer {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+.an-back-btn {
+  background: none;
+  border: 1px solid var(--border);
+  padding: 10px 20px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  color: #666;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.an-back-btn:hover { border-color: #999; color: #333; }
+
+/* Loading / Error */
+.an-loading {
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; height: 300px; gap: 16px; color: #999;
+  font-family: var(--font-mono); font-size: 12px;
+}
+.an-loading-spinner {
+  width: 24px; height: 24px; border: 3px solid #F0F0F0;
+  border-top-color: var(--accent); border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.an-error {
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; height: 300px; gap: 12px;
+}
+.an-error-title { font-weight: 600; color: #C62828; }
+.an-error-msg { font-family: var(--font-mono); font-size: 12px; color: #999; }
+.an-retry {
+  background: #000; color: #FFF; border: none; padding: 8px 20px;
+  border-radius: 4px; cursor: pointer; font-family: var(--font-mono);
+}
+.an-retry:hover { background: var(--accent); }
 </style>

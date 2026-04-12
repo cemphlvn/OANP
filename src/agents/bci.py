@@ -317,14 +317,15 @@ class StepwiseConcessionLikelihood:
         return u_prev - u_t
 
     def _log_likelihood_from_delta(self, delta: float) -> float:
-        """Gaussian log-likelihood on concession delta."""
-        if delta <= -self.gamma:
-            # Non-concession (utility increased) — low but nonzero likelihood
-            return max(-delta**2 / (2 * self.sigma**2), self._log_floor)
+        """Gaussian log-likelihood on concession delta (Eq. 10).
+
+        Positive delta = opponent conceded (their utility decreased).
+        Negative delta = opponent improved (their utility increased, also informative).
+        """
         if abs(delta) < self.gamma:
-            # Minor concession or no change — flat (high) likelihood
+            # Very small change — not informative enough
             return 0.0
-        # Normal concession — Gaussian centered at 0
+        # Gaussian centered at 0: larger magnitude = less likely = more discriminative
         return max(-delta**2 / (2 * self.sigma**2), self._log_floor)
 
     def weight_log_likelihoods(
@@ -588,7 +589,9 @@ class OpponentModel:
         # Determine previous bid for concession computation
         bid_prev = self._concession_baseline
 
-        # Non-monotonic detection: if utility increased, reset baseline
+        # Non-monotonic detection: if opponent's estimated utility increased
+        # significantly, they may have retracted a concession. Reset baseline.
+        # Note: small increases are normal noise and should be tolerated.
         if bid_prev is not None:
             weights = self.hs.estimated_weights()
             evals = [self.hs.estimated_evals(iid) for iid in self.codec.issue_ids]
@@ -625,24 +628,21 @@ class OpponentModel:
         - The specific option they chose → likely high evaluation
         This breaks the uniform symmetry that prevents learning.
         """
-        # 1. Seed weight priors: extreme bid values suggest high weight
-        # For monetary/temporal: distance from center (0.5) indicates importance
-        # For categorical: distance from center option indicates importance
-        # BUT we need to handle that categorical index 0 is NOT inherently extreme
+        # 1. Seed weight priors: mild extremity-based bias.
+        # Issues where opponent bid far from center get slight weight boost.
+        # Very mild — the conditional updater does the real differentiation.
         for i, iid in enumerate(self.codec.issue_ids):
             c = self.codec._codecs[iid]
             if c.issue_type == "categorical":
-                # For categorical, extremity is less meaningful — all options are equidistant
-                # Use a milder bias: just note which option they chose
                 ext = 0.2  # mild default for categoricals
             else:
-                # For monetary/temporal, distance from center = how ambitious the bid is
                 ext = abs(bid_encoded[i] - 0.5) * 2
-            bias = 1.0 + ext * 2.0
-            boosted = self.hs.w_log_alpha[i] + np.log(
-                np.where(self.hs.w_grid > 0.3, bias, 1.0 / max(bias, 0.01))
-            )
-            self.hs.w_log_alpha[i] = _log_normalize(boosted)
+            if ext > 0.1:
+                bias = 1.0 + ext * 2.0
+                boosted = self.hs.w_log_alpha[i] + np.log(
+                    np.where(self.hs.w_grid > 0.3, bias, 1.0 / max(bias, 0.01))
+                )
+                self.hs.w_log_alpha[i] = _log_normalize(boosted)
 
         # 2. Seed eval priors: the chosen option gets higher evaluation
         for i, iid in enumerate(self.codec.issue_ids):
